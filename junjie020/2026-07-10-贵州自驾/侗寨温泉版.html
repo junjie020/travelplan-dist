@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏔️ 贵州侗寨温泉10日游 - TravelAssist</title>
+<script src="https://webapi.amap.com/maps?v=2.0&key=1de2dd2347beaacdce43e934dab38015&plugin=AMap.Driving"></script>
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   base.css — 基础样式（变量、重置、全局、组件样式）
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root{--d1:#e74c3c;--d2:#3498db;--d3:#2ecc71;--d4:#f39c12;--d5:#9b59b6;--d6:#1abc9c;--d7:#e67e22;--d8:#e91e63;--d9:#00bcd4;--d10:#795548;--eco:#27ae60;--comf:#2980b9;--lux:#8e44ad;--hot:#e67e22;--bg:#f5f6fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+
+.header{background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;padding:32px;text-align:center}
+.header h1{font-size:2rem;margin-bottom:8px;letter-spacing:2px}
+.header .meta{font-size:.95rem;opacity:.9;display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+
+.tips{padding:16px 32px;background:#fffbf0;border-bottom:1px solid #f0e0a0;font-size:.88rem;color:#856404;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.weather-toggle{display:block;margin:0 auto;padding:6px 18px;background:#f0f4f8;border:1px solid #d0d8e0;border-radius:6px;font-size:.82rem;cursor:pointer;color:#0d3b66;transition:background .2s}.weather-toggle:hover{background:#e0e8f0}
+.weather-strip{padding:18px 32px;background:#f0f4f8;display:none;flex-wrap:wrap;gap:10px;justify-content:center}
+.wcard{flex:1;min-width:88px;max-width:115px;text-align:center;padding:8px;background:#fff;border-radius:8px;font-size:.78rem}
+.wcard .wc{font-weight:700}.wcard .wt{font-size:1rem;color:#e67e22;margin:2px 0}.wcard .wd{font-size:.7rem;color:var(--muted)}
+
+.day-card{border:1px solid #e8e8e8;border-radius:12px;padding:20px;margin-bottom:18px;border-left:5px solid #ccc;background:#fafbfc}
+.day-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.06)}
+.day-card h3{font-size:1.1rem;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:color .15s;user-select:none}
+.day-card h3:hover{color:#0d3b66}
+.day-card h3 .dd{font-size:.82rem;color:var(--muted);font-weight:400}
+.day-card h3 .pin{font-size:.85rem;opacity:.5;transition:opacity .15s}
+.day-card h3:hover .pin{opacity:1}
+.day-card .drive-badge{font-size:.82rem;color:#e67e22;font-weight:600;background:#fff3e0;padding:2px 10px;border-radius:4px;white-space:nowrap}
+.day-card .route{font-size:.84rem;color:var(--muted);margin:6px 0;padding:4px 10px;background:#eee;border-radius:4px;display:inline-block}
+.day-card .timing{display:flex;gap:24px;font-size:.84rem;color:var(--muted);margin:4px 0}
+.day-card .timing strong{color:var(--text)}
+.day-card .day-weather{font-size:.82rem;color:#856404;margin:4px 0;padding:3px 10px;background:#fef9e7;border-radius:4px;display:inline-block}
+.day-card h4{font-size:.92rem;color:#0d3b66;margin:12px 0 4px;border-bottom:1px solid #e0e0e0;padding-bottom:4px}
+.day-card .province{font-size:.75rem;color:var(--muted);font-weight:400}
+.day-card .city-desc,.day-card .spot-desc{font-size:.87rem;color:var(--text);margin:6px 0}
+.day-card .city-photo,.day-card .spot-photo{width:100%;border-radius:8px;margin:8px 0 6px;object-fit:cover;display:block;background:#f0f2f5;aspect-ratio:16/9;max-height:200px}
+.day-card .food-list{font-size:.85rem;margin:4px 0;display:flex;flex-wrap:wrap;gap:4px 8px}
+.day-card .food-list .fd{background:#fffbf0;padding:2px 8px;border-radius:4px}
+.day-card .food-list .hi{color:#e74c3c;font-weight:700}
+.day-card .shop-list{font-size:.82rem;color:#555;margin:4px 0;list-style:none;padding-left:0}
+.day-card .shop-list li{margin:2px 0}
+.day-card .shop-list .sn{font-weight:600;color:var(--text)}
+.day-card .score-row{margin-top:10px;padding:5px 12px;background:#fef9e7;border-radius:6px;font-size:.84rem;color:#856404}
+.day-card .score-row strong{color:#f39c12;font-size:.95rem}
+.day-card .hotel-line{font-size:.82rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px dotted #e0e0e0;cursor:pointer;transition:color .15s}
+.day-card .hotel-line:hover{color:#0d3b66}
+.day-card .tip{font-size:.82rem;color:#856404;background:#fffbf0;padding:4px 10px;border-radius:4px;margin-top:8px}
+.alt-spot{margin-top:8px;padding:8px 12px;background:#f0f4ff;border-radius:6px;border:1px dashed #90b4e0;font-size:.82rem}
+.alt-spot .alt-tag{display:inline-block;background:#5b9bd5;color:#fff;padding:1px 8px;border-radius:3px;font-size:.7rem;font-weight:600;margin-right:6px}
+.alt-spot .alt-name{font-weight:600;color:#0d3b66}
+.alt-spot .alt-desc{color:var(--muted);font-size:.8rem;margin-top:2px}
+
+.badge{display:inline-block;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:600;color:#fff;vertical-align:middle}
+.badge.eco{background:var(--eco)}.badge.comf{background:var(--comf)}.badge.lux{background:var(--lux)}.badge.hot{background:var(--hot)}
+.badge.must{background:#e74c3c;font-size:.68rem;padding:1px 6px}
+.badge.a5{background:#f39c12}.badge.a4{background:#2980b9}.badge.wh{background:#8e44ad;font-size:.65rem}
+
+.legend{position:absolute;bottom:24px;right:12px;z-index:1000;text-align:right}
+.legend-toggle{width:30px;height:30px;background:#0d3b66;color:#fff;border:none;border-radius:50%;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.legend-toggle.open{transform:rotate(90deg)}
+.legend-body{max-height:0;overflow:hidden;transition:max-height .35s ease;background:rgba(255,255,255,.94);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.12);margin-top:6px}
+.legend-body.open{max-height:300px;padding:10px 14px}
+.legend .item{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:.8rem}
+.legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+.legend .line{width:18px;height:2px;display:inline-block;flex-shrink:0}
+.nav-btn{display:block;width:100%;margin-top:10px;padding:8px 12px;background:#0d3b66;color:#fff;border:none;border-radius:6px;font-size:.78rem;cursor:pointer;text-align:center;transition:background .2s}
+.nav-btn:hover{background:#1a5276}
+.nav-btn.loading{background:#999;cursor:default}
+
+.food-section{padding:24px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.food-section h2{text-align:center;margin-bottom:16px;font-size:1.2rem}
+.food-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.food-card{flex:1;min-width:170px;max-width:230px;padding:14px;background:#fafbfc;border-radius:8px;border:1px solid #eee}
+.food-card .fcity{font-weight:700;margin-bottom:6px;color:#0d3b66;font-size:.92rem}
+.food-card .fdish{font-size:.83rem}.food-card .fdish .hi{color:#e74c3c;font-weight:600}
+
+.budget{padding:28px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.budget h2{text-align:center;margin-bottom:20px;font-size:1.3rem}
+.budget-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.budget-card{flex:1;min-width:170px;max-width:250px;border-radius:12px;padding:20px 16px;text-align:center;border:2px solid #e8e8e8;background:#fafbfc}
+.budget-card h3{margin-bottom:12px}.budget-card .price{font-size:1.5rem;font-weight:700;margin-bottom:14px}
+.budget-card.economic{border-color:var(--eco)}.budget-card.economic .price{color:var(--eco)}
+.budget-card.comfort{border-color:var(--comf)}.budget-card.comfort .price{color:var(--comf)}
+.budget-card.luxury{border-color:var(--lux)}.budget-card.luxury .price{color:var(--lux)}
+.budget-card ul{list-style:none;font-size:.86rem;color:var(--muted);text-align:left;padding:0 8px}
+.budget-card li{padding:3px 0;display:flex;justify-content:space-between}
+
+.scoring-section{padding:28px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.scoring-section h2{text-align:center;margin-bottom:8px;font-size:1.3rem}
+.scoring-intro{text-align:center;color:var(--muted);margin-bottom:24px;font-size:.9rem}
+.scoring-section h3{font-size:1.05rem;margin:24px 0 10px}
+.method-table,.full-scores{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:20px}
+.method-table th,.full-scores th{background:#0d3b66;color:#fff;padding:8px 6px;font-weight:600;text-align:center}
+.method-table td,.full-scores td{padding:5px 4px;text-align:center;border-bottom:1px solid #eee}
+.full-scores tbody tr:hover{background:#f5f6fa}
+.full-scores .sc{font-weight:700;color:#f39c12;font-size:.88rem}
+.full-scores tr.must{background:#fff3cd}.full-scores tr.sel{background:#e8f8f0}.full-scores tr.skip{opacity:.5}
+
+.summary{padding:28px 32px;background:var(--card);border-top:2px solid #0d3b66}
+.summary h2{text-align:center;font-size:1.2rem;margin-bottom:18px;color:#0d3b66}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.sca{background:#f8fafc;border-radius:10px;padding:16px;border:1px solid #e8e8e8}
+.sca .ico{font-size:1.3rem;margin-bottom:2px}
+.sca .big{font-size:1.7rem;font-weight:800;color:#0d3b66}
+.sca .lbl{font-size:.78rem;color:var(--muted);margin-top:4px}
+.sca.w2{grid-column:span 2}
+.sca .dl{font-size:.82rem;margin-top:6px}
+.sca .dl span{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #e8e8e8}
+.sca .dl .hv{font-weight:600;color:#e74c3c}.sca .dl .gv{font-weight:600}
+.bars{display:flex;gap:3px;align-items:flex-end;height:44px;margin-top:6px}
+.bars .b{flex:1;border-radius:2px 2px 0 0;min-width:8px;position:relative}
+.bars .b .bl{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--muted);white-space:nowrap}
+.bars .b.ov{background:#e74c3c}.bars .b.el{background:#f39c12}.bars .b.nm{background:#27ae60}.bars .b.zz{background:#ddd}
+.bleg{display:flex;gap:14px;font-size:.68rem;color:var(--muted);margin-top:8px}
+.bleg span{display:flex;align-items:center;gap:3px}
+.bleg .sw{width:8px;height:8px;border-radius:2px;display:inline-block}
+
+/* ── 攻略卡片 ── */
+.guide-box{margin:8px 0;border:1px solid #e0e0e0;border-radius:6px;overflow:hidden}
+.guide-header{cursor:pointer;padding:8px 12px;background:#f0f7ff;font-size:.82rem;font-weight:600;color:#2980b9;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.guide-header:hover{background:#e3f0fc}
+.guide-toggle{font-size:.7rem;transition:transform .2s}
+.guide-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.guide-body.open{max-height:2000px}
+.guide-body.open+.guide-header .guide-toggle,
+.guide-header:has(+.guide-body.open) .guide-toggle{transform:rotate(180deg)}
+.guide-item{padding:6px 12px;font-size:.78rem;line-height:1.55;border-bottom:1px dotted #eee;color:#555}
+.guide-item:last-child{border-bottom:none}
+.guide-label{display:inline-block;min-width:72px;font-weight:600;color:#333;margin-right:4px}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   desktop.css — 桌面端布局（左右分栏、resize handle、地图收起）
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.main{display:flex;height:calc(100vh - 195px);justify-content:center}
+.map-panel{flex:2 1 400px;min-width:400px;position:relative;height:100%;border:3px solid #0d3b66;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.1)}
+#map{width:100%;height:100%}
+.resize-handle{width:8px;min-width:8px;background:#e8e8e8;cursor:col-resize;transition:background .2s;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:100}
+.resize-handle:hover,.resize-handle.active{background:#0d3b66}
+.resize-handle::after{content:'';width:2px;height:40px;background:#bbb;border-radius:1px;transition:background .2s}
+.resize-handle:hover::after,.resize-handle.active::after{background:#fff}
+.table-panel{flex:1 1 480px;min-width:280px;max-width:1024px;height:100%;overflow-y:auto;padding:20px;background:var(--card);border-left:1px solid #e0e0e0}
+.map-collapse-bar{display:none;height:56px;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;font-size:.88rem;cursor:pointer;gap:8px;letter-spacing:1px}
+.map-toggle-btn{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:1002;background:rgba(13,59,102,.85);color:#fff;border:none;border-radius:20px;padding:5px 18px;font-size:.78rem;cursor:pointer;display:none;letter-spacing:1px;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:background .2s}
+.map-toggle-btn:hover{background:rgba(13,59,102,1)}
+
+/* 桌面端地图完全收起 */
+.map-panel.collapsed-desktop{width:0!important;min-width:0!important;flex:none!important;border:none!important;border-radius:0!important;overflow:hidden;box-shadow:none!important}
+.map-panel.collapsed-desktop #map{display:none}
+.map-panel.collapsed-desktop .legend{display:none}
+.map-panel.collapsed-desktop .map-toggle-btn{display:none}
+/* 收起时 resize handle 变宽，作为展开按钮 */
+.resize-handle.expanded-handle{width:36px;min-width:36px;cursor:pointer;background:linear-gradient(135deg,#0d3b66,#1a5276);border-radius:8px 0 0 8px;flex-direction:column;gap:4px}
+.resize-handle.expanded-handle::after{width:0;height:0}
+.resize-handle.expanded-handle:hover{background:linear-gradient(135deg,#1a5276,#2980b9)}
+.resize-handle .expand-icon{display:none;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:1px;white-space:nowrap;writing-mode:vertical-rl;text-orientation:mixed;user-select:none}
+.resize-handle .collapse-icon{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:.7rem;cursor:pointer;background:rgba(13,59,102,.65);border:none;border-radius:50%;width:20px;height:20px;line-height:20px;text-align:center;padding:0;transition:background .2s;z-index:102}
+.resize-handle:hover .collapse-icon,.resize-handle.active .collapse-icon{display:block}
+.resize-handle .collapse-icon:hover{background:rgba(13,59,102,1)}
+.resize-handle.expanded-handle .collapse-icon{display:none!important}
+.resize-handle.expanded-handle .expand-icon{display:block}
+
+/* ── Bottom two-column layout ── */
+.bottom-sections{display:flex;gap:0;padding:0;max-width:1400px;margin:0 auto}
+.bottom-col{flex:1;min-width:0}
+.bottom-left{border-right:1px solid #e0e0e0}
+.bottom-col .food-section,
+.bottom-col .budget,
+.bottom-col .scoring-section,
+.bottom-col .summary{padding:24px 28px;border-top:none}
+.bottom-col .food-section{border-top:2px solid #e0e0e0}
+.bottom-col .scoring-section{border-top:2px solid #e0e0e0}
+.bottom-col .food-section h2,
+.bottom-col .budget h2,
+.bottom-col .scoring-section h2{font-size:1.15rem}
+/* Summary inside column: shrink grid to fit narrower space */
+.bottom-col .summary .sg{grid-template-columns:repeat(2,1fr)}
+.bottom-col .summary .sca.w2{grid-column:span 2}
+.bottom-col .summary .sca .big{font-size:1.3rem}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   tablet.css — 平板适配 + 横屏手机适配
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet / iPad ── */
+@media(max-width:1024px){
+  .main{height:calc(100vh - 180px)}
+  .table-panel{flex-basis:380px;min-width:300px;max-width:1024px}
+  .map-panel{flex:2 1 300px;min-width:300px}
+  .header{padding:24px 16px}.header h1{font-size:1.5rem}
+  .bottom-col .food-section,.bottom-col .budget,.bottom-col .scoring-section{padding:18px 16px}
+  .bottom-col .budget-grid{flex-direction:column;align-items:center}
+  .bottom-col .budget-card{max-width:100%;width:100%}
+}
+
+/* ── 横屏手机: 左右分栏 (类似PC) ── */
+@media(max-width:900px) and (orientation:landscape){
+  .main{height:calc(100vh - 140px)}
+  .table-panel{flex-basis:300px;min-width:260px;max-width:1024px;padding:14px 12px}
+  .map-panel{border-radius:8px;border-width:3px;min-width:250px}
+  .header{padding:12px 14px}.header h1{font-size:1.2rem}.header .meta{gap:8px;font-size:.78rem}
+  .tips{padding:8px 14px;font-size:.76rem}
+  .day-card .city-photo,.day-card .spot-photo{max-height:150px;aspect-ratio:16/9}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   mobile.css — 竖屏手机 + 小屏手机适配
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 竖屏手机: 单列 + sticky 地图 ── */
+@media(max-width:767px) and (orientation:portrait){
+  .resize-handle{display:none}
+  .sg{grid-template-columns:repeat(2,1fr)}.sca.w2{grid-column:span 2}
+  /* 行程总览：手机竖屏改为单列 */
+  .bottom-col .summary .sg{grid-template-columns:1fr}
+  .bottom-col .summary .sca.w2{grid-column:span 1}
+  .main{display:block;height:auto}
+  .map-panel{position:sticky;top:0;z-index:100;height:42vh;max-height:380px;width:100%;border-radius:0;border-width:0 0 3px 0;box-shadow:0 4px 20px rgba(0,0,0,.15);transition:height .3s ease,max-height .3s ease}
+  .map-panel.collapsed{height:56px!important;max-height:56px!important}
+  .map-panel.collapsed #map{display:none}
+  .map-panel.collapsed .map-collapse-bar{display:flex}
+  .map-panel.collapsed .map-toggle-btn{display:none}
+  .map-panel.collapsed .legend{display:none}
+  .map-toggle-btn{display:block}
+  #map{height:100%;min-height:250px}
+  .table-panel{width:100%;height:auto;max-height:none;border-left:none;border-top:1px solid #e0e0e0;padding:16px 10px}
+  .header{padding:16px 12px}.header h1{font-size:1.2rem}.header .meta{gap:10px;font-size:.8rem}
+  .tips{padding:12px 14px;font-size:.8rem}
+  .weather-strip{padding:12px 14px;gap:6px}
+  .budget,.scoring-section,.summary,.food-section{padding:16px 12px}.budget-card{min-width:140px;padding:14px 10px}
+  .bottom-sections{flex-direction:column}
+  .bottom-left{border-right:none;border-bottom:1px solid #e0e0e0}
+  .bottom-col .food-section,.bottom-col .budget,.bottom-col .scoring-section{padding:16px 12px}
+  .full-scores{font-size:.68rem;overflow-x:auto;display:block}.full-scores th,.full-scores td{padding:3px 2px}
+  .day-card .city-photo,.day-card .spot-photo{max-height:160px;aspect-ratio:4/3}
+}
+
+/* ── 小屏手机竖屏 ── */
+@media(max-width:480px) and (orientation:portrait){
+  .sg{grid-template-columns:1fr}.sca.w2{grid-column:span 1}
+  .bottom-col .summary .sg{grid-template-columns:1fr}
+  .bottom-col .summary .sca.w2{grid-column:span 1}
+  .map-panel{height:38vh;max-height:300px}
+  .budget-grid{flex-direction:column;align-items:center}.budget-card{max-width:100%;width:100%}
+  .table-panel{padding:12px 6px}
+  .day-card .city-photo,.day-card .spot-photo{max-height:130px}
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🏔️ 贵州侗寨温泉10日游</h1>
+  <div class="meta">
+    <span>📅 2026.7.10 — 7.19</span>
+    <span>👥 10人（3老+4中+3小）</span>
+    <span>🚗 2车自驾 · 总程 3,454km</span>
+    <span>🏷️ 喀斯特 × 天文 × 红色 × 侗寨 × 温泉</span>
+  </div>
+</div>
+
+<div class="tips">
+  总行程约3,454公里 · 日均驾车4-5小时 · D8最长6h需注意 · 山区道路弯多控制车速 · 部分路段加油站较少提前加满
+</div>
+
+<button class="weather-toggle" id="weatherToggle" onclick="toggleWeather()">🌤️ 沿途天气</button>
+<div class="weather-strip" id="weatherStrip">
+  <div class="wcard"><div class="wc">广州</div><div class="wt">28-35°C</div><div class="wd">闷热多雨</div></div>
+<div class="wcard"><div class="wc">柳州</div><div class="wt">28-34°C</div><div class="wd">湿热·雷阵雨</div></div>
+<div class="wcard"><div class="wc">荔波</div><div class="wt">25-31°C</div><div class="wd">山区凉爽·午后阵雨</div></div>
+<div class="wcard"><div class="wc">平塘</div><div class="wt">24-30°C</div><div class="wd">高原台地·较干燥</div></div>
+<div class="wcard"><div class="wc">织金</div><div class="wt">22-28°C</div><div class="wd">乌蒙山区·凉爽</div></div>
+<div class="wcard"><div class="wc">贵阳</div><div class="wt">22-28°C</div><div class="wd">避暑之都·夜间微凉</div></div>
+<div class="wcard"><div class="wc">遵义</div><div class="wt">24-30°C</div><div class="wd">黔北多云</div></div>
+<div class="wcard"><div class="wc">赤水</div><div class="wt">24-32°C</div><div class="wd">湿热多云</div></div>
+<div class="wcard"><div class="wc">思南</div><div class="wt">26-32°C</div><div class="wd">乌江河谷·闷热</div></div>
+<div class="wcard"><div class="wc">肇兴</div><div class="wt">26-32°C</div><div class="wd">桂北山区·潮湿</div></div>
+<div class="wcard"><div class="wc">贺州</div><div class="wt">26-33°C</div><div class="wd">温泉区·湿热</div></div>
+</div>
+
+<div class="main">
+  <div class="map-panel">
+    <div id="map"></div>
+    <button class="map-toggle-btn" onclick="toggleMapCollapse()" title="收起地图">▲ 收起</button>
+    <div class="map-collapse-bar" onclick="toggleMapCollapse()">📍 点击展开地图 · 行程路线总览</div>
+    <div class="legend">
+      <button class="legend-toggle" id="legendToggle" onclick="toggleLegend()">▶</button>
+      <div class="legend-body" id="legendBody">
+        <div class="item"><span class="dot" style="background:#e74c3c"></span>住宿</div>
+        <div class="item"><span class="dot" style="background:#2ecc71"></span>景点</div>
+        <div class="item"><span class="dot" style="background:#f39c12"></span>起终点</div>
+        <div class="item"><span class="line" style="background:#aaa;height:2.5px;opacity:.6"></span>路线</div>
+        <button class="nav-btn" id="navBtn" onclick="loadRoutes()">🗺️ 加载导航路线</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="resize-handle" id="resizeHandle" title="拖动调整地图大小 · 双击切换">
+              <span class="expand-icon">&#9654; 展开地图</span>
+              <button class="collapse-icon" onclick="toggleMapFullCollapse()" title="收起地图">&#9664;</button>
+            </div>
+
+  <div class="table-panel">
+    <!-- ═══════ D1 ═══════ -->
+<div class="day-card" id="d1" style="border-left-color:#e74c3c">
+  <h3 onclick="showDayRoute(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 启程入桂 <span class="pin">📍</span> <span class="dd">7/10 周五</span></h3>
+  <span class="drive-badge">🚗 5h10min · 499km</span>
+  <div class="route">广州荔湾 → 柳州窑埠古镇</div>
+  <div class="timing"><span>🕐 出发 <strong>13:00</strong></span> <span>🕐 到达 <strong>18:10</strong></span></div>
+  <div class="day-weather">🌤️ 28-35°C · 闷热</div>
+  <h4>🏙️ 柳州 <span class="province">（广西·桂中）</span></h4>
+  <div class="city-desc">柳州，广西第二大城市，别称龙城。柳江蜿蜒穿城而过，市区山环水绕。唐代文学家<strong>柳宗元</strong>曾被贬至此任柳州刺史，世称'柳柳州'，在此留下大量诗文佳作；体操王子<strong>李宁</strong>亦生于柳州。这里是螺蛳粉的发源地，傍晚沿柳江漫步，看两岸灯火倒映江面，是柳州最惬意的打开方式。</div>
+  <h4>🔵 柳州窑埠古镇 </h4>
+  <div class="spot-desc">窑埠古镇位于柳江东岸，是柳州市重点打造的仿古商业街区。古镇以明清风格建筑为主，夜晚灯火璀璨，是柳州夜生活的核心区域。古镇内汇聚众多柳州特色美食店铺，尤其以螺蛳粉、鸭脚煲等地道风味闻名。建议傍晚至夜间游览，沿江步道散步赏景最为惬意，适合家庭漫步品尝美食。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥螺蛳粉</span></span><span class="fd">鸭脚煲</span><span class="fd">柳州酸</span><span class="fd">炒螺蛳</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">聚宝螺蛳粉</span>（五星步行街） — 30年老字号，柳州螺蛳粉发源地之一，排队王 · 大众点评必吃榜</li>
+    <li>🏠 <span class="sn">阿柠檬鸭脚煲</span>（窑埠古镇旁） — 螺蛳鸭脚煲一绝，本地人深夜食堂 · 大众点评</li>
+    <li>🏠 <span class="sn">小柒螺蛳粉</span>（城中区） — 汤头浓郁，本地人排队王 · 大众点评</li>
+  </ul>
+  <div class="tip">💡 D1为13:00出发（用户指定），确保18:00前到达柳州</div>
+  <div class="tip">💡 窑埠古镇夜景最漂亮，建议晚餐后散步</div>
+  <div class="score-row">⭐ 柳州窑埠古镇 <strong>6.25</strong></div>
+  <div class="hotel-line" onclick="focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 柳州 · <span class="badge eco">经济型</span> · 纯赶路，干净即可</div>
+</div>
+
+<!-- ═══════ D2 ═══════ -->
+<div class="day-card" id="d2" style="border-left-color:#3498db">
+  <h3 onclick="showDayRoute(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 绿宝石探秘 <span class="pin">📍</span> <span class="dd">7/11 周六</span></h3>
+  <span class="drive-badge">🚗 4h14min · 310km</span>
+  <div class="route">柳州 → 荔波小七孔</div>
+  <div class="timing"><span>🕐 出发 <strong>9:00</strong></span> <span>🕐 到达 <strong>13:14</strong></span></div>
+  <div class="day-weather">🌤️ 25-31°C · 午后阵雨</div>
+  <h4>🏙️ 荔波 <span class="province">（贵州·黔南）</span></h4>
+  <div class="city-desc">荔波位于贵州黔南布依族苗族自治州，被誉为'地球腰带上的绿宝石'。2007年与云南石林、重庆武隆共同入选世界自然遗产'中国南方喀斯特'，是贵州第一个世界自然遗产地。中共一大代表<strong>邓恩铭</strong>——中国共产党创始人之一，水族人，生于荔波。森林覆盖率超70%，多民族聚居，喀斯特水景冠绝全国。</div>
+  <h4>🟢 小七孔 <span class="badge a5">5A</span> <span class="badge must">世界遗产</span></h4>
+  <div class="spot-desc">荔波小七孔是国家5A级景区，被誉为'地球腰带上的绿宝石'。景区融山、水、林、洞、湖泊和瀑布为一体，秀美幽静。卧龙潭湛蓝水色宛如仙境，68级跌水瀑布全国罕见，水上森林可亲水嬉戏，拉雅瀑布水雾迷蒙。门票120元/人+观光车40元/人，建议西门进东门出全程下坡，节省体力，非常适合老小同行。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g2_1802854629').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g2_1802854629">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>6-8小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>亲子家庭满分;老人友好（观光车代步，可选择性下车）</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>西进东出：卧龙潭→鸳鸯湖(划船)→翠谷瀑布→水上森林→68级跌水瀑布(徒步1.6km)→小七孔古桥，全程下坡最省力</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>卧龙潭蓝绿湖水如翡翠最出片;鸳鸯湖划船探秘水上迷宫;68级跌水瀑布群世界罕见;小七孔古桥清晨无人时最美;翠谷瀑布可踩水玩水</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>旺季排队久需提前在「一码游贵州」预约;穿防滑鞋+备用凉鞋（玩水会湿脚）;景区补给少自带水和零食;鸳鸯湖划船需额外付费</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>7:30开门就进或11:30后错峰（旅行团用餐时间）;住东门附近梦柳布依风情小镇;门票2天有效含观光车170元;带替换衣物玩水会湿;防滑运动鞋必备</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥酸汤鱼</span></span><span class="fd"><span class="hi">🔥樟江豆花烤鱼</span></span><span class="fd">荔波烤猪</span><span class="fd">水族糯米饭</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">樟江烤鱼城</span>（荔波古镇内） — 烤猪+豆花烤鱼双绝，游客必打卡 · 大众点评</li>
+    <li>🏠 <span class="sn">陆家酸汤鱼</span>（县城） — 地道苗家酸汤，本地人认可 · 大众点评</li>
+  </ul>
+  <div class="tip">💡 小七孔西门进东门出全程下坡，节省体力</div>
+  <div class="tip">💡 景区内午餐选择有限，建议自备干粮</div>
+  <div class="tip">💡 暑期人多，建议尽早入园</div>
+  <div class="score-row">⭐ 小七孔 <strong>7.35</strong></div>
+  <div class="hotel-line" onclick="focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 荔波 · <span class="badge comf">舒适型</span> · 游览核心区，住县城方便</div>
+</div>
+
+<!-- ═══════ D3 ═══════ -->
+<div class="day-card" id="d3" style="border-left-color:#2ecc71">
+  <h3 onclick="showDayRoute(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 仰望苍穹 <span class="pin">📍</span> <span class="dd">7/12 周日</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 3h9min · 230km</span>
+  <div class="route">荔波 → 大七孔 → FAST天眼 → 平塘</div>
+  <div class="timing"><span>🕐 出发 <strong>9:00</strong></span> <span>🕐 到达 <strong>12:09</strong></span></div>
+  <div class="day-weather">🌤️ 24-30°C · 多云</div>
+  <h4>🏙️ 平塘 <span class="province">（贵州·黔南）</span></h4>
+  <div class="city-desc">平塘县克度镇因FAST天眼从默默无闻的黔南小镇蜕变为'天文之都'。地处贵州高原台地，海拔约1000米，空气洁净干燥，是射电望远镜选址的理想之地。<strong>南仁东</strong>——FAST总工程师兼首席科学家，在平塘奉献22年，被誉为'天眼之父'。镇区建设了天文小镇、星际家园等科普设施，是亲子研学游的热门目的地。</div>
+  <h4>🟢 大七孔 <span class="badge a5">5A</span></h4>
+  <div class="spot-desc">大七孔景区以原始森林、峡谷和伏流为特色。天生桥高约80米、宽约100米，气势恢宏，是亚洲最大的天然石拱桥之一。恐怖峡谷壁立千仞，惊险刺激。相比小七孔的秀美，大七孔更显雄奇壮丽，游览约需2小时，体力消耗较小，适合老人游览。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g3_1538950258').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g3_1538950258">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>老人友好（可全程乘船）;亲子适中;体力要求低</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>东门进→乘船游览天生桥（推荐老人小孩坐船）→步行栈道→恐怖峡→全程约1.5小时</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>天生桥高约60米天然石拱东方凯旋门;恐怖峡两岸绝壁夹峙河水深绿;乘船穿行峡谷视角独特;栈道平缓体力要求低</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>景区较小半天足够不要安排一整天;乘船需单独购票20元/人;峡谷内光线暗拍照需调高ISO;与大七孔相比小七孔更值得花时间</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>下午到达荔波当天安排大七孔热身刚好;乘船建议坐右侧靠窗位置拍照好;大七孔+小七孔联票更划算;与大七孔互补风格一刚一柔</div>
+    </div>
+  </div>
+  <h4>🟢 FAST天眼 <span class="badge must">必去</span> <span class="badge a4">4A</span></h4>
+  <div class="spot-desc">FAST——500米口径球面射电望远镜，世界最大单口径射电望远镜，相当于30个足球场大小。位于平塘县克度镇天然喀斯特洼坑中，由南仁东先生主导建设，历时22年。景区内禁止携带手机、智能手表等电子设备，需寄存后乘坐摆渡车进入参观。门票140元/人（含摆渡车），是亲子研学的绝佳目的地。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g3_1038776322').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g3_1038776322">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>4-5小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>亲子教育价值极高（小学生以上最佳）;老人登台阶量力而行可只逛体验馆;不适合婴幼儿（台阶太多）</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>游客中心→摆渡车（约30min）→登山台阶789级（约20min）→观景台俯瞰FAST→天文体验馆→南仁东纪念馆→全程约4-5小时</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>500米口径球面射电望远镜世界最大最灵敏;观景台俯瞰大锅震撼感极强;天文体验馆互动装置小孩可动手操作;南仁东纪念馆感人至深22年奉献故事</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>禁止携带任何电子设备！方圆5公里电磁波宁静区;入口有寄存柜建议带现金（不能手机支付）;789级台阶约20分钟老人需量力而行;观景台风大戴帽子会飞走;胶片相机可租但数量有限</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>提前在公众号预约门票;带现金！带现金！带现金！;建议上午去光线好拍照佳;天文体验馆和纪念馆在游客中心旁边先看后看都可;夏天山顶晒做好防晒</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd">独山盐酸菜</span><span class="fd">豆花面</span><span class="fd">平塘牛肉粉</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">平塘天文小镇餐饮区</span>（克度镇天文小镇） — 集中在FAST游客中心附近，选择有限但方便 · 高德指南</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">花江峡谷大桥</span>（安顺关岭）
+    <div class="alt-desc">世界第一高桥，桥面至水面高度625米，入选《时代》2026全球100佳。FAST→大桥约3.5h车程。</div>
+  </div>
+  <div class="tip">💡 FAST天眼禁止携带手机等电子设备，需寄存</div>
+  <div class="tip">💡 大七孔游览约2小时，FAST约3小时，注意时间分配</div>
+  <div class="score-row">⭐ 大七孔 <strong>6.85</strong> · FAST天眼 <strong>6.45</strong></div>
+  <div class="hotel-line" onclick="focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 平塘 · <span class="badge comf">舒适型</span> · 天文小镇民宿</div>
+</div>
+
+<!-- ═══════ D4 ═══════ -->
+<div class="day-card" id="d4" style="border-left-color:#f39c12">
+  <h3 onclick="showDayRoute(3)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 4 — 洞天仙境 <span class="pin">📍</span> <span class="dd">7/13 周一</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 3h37min · 288km</span>
+  <div class="route">平塘 → 织金洞</div>
+  <div class="timing"><span>🕐 出发 <strong>9:00</strong></span> <span>🕐 到达 <strong>12:37</strong></span></div>
+  <div class="day-weather">🌤️ 22-28°C · 凉爽</div>
+  <h4>🏙️ 织金 <span class="province">（贵州·毕节）</span></h4>
+  <div class="city-desc">织金县位于贵州毕节市乌蒙山区，因织金洞而闻名于世，素有'黄山归来不看岳，织金洞外无洞天'之美誉。晚清名臣<strong>丁宝桢</strong>——织金人，宫保鸡丁的命名者，曾任山东巡抚、四川总督，以智斩安德海、治理黄河而闻名。县城不大，夏日凉爽，是避暑佳地。</div>
+  <h4>🟢 织金洞 <span class="badge must">中国最美溶洞</span> <span class="badge a4">4A</span></h4>
+  <div class="spot-desc">织金洞被誉为'中国最美溶洞'、'岩溶博物馆'。洞内面积70多万平方米，分为迎宾厅、讲经堂等12个大厅，钟乳石千姿百态。洞内常年恒温16°C，夏季游览需带外套。门票140元/人，游览约需2-3小时，洞内灯光秀美轮美奂，体力要求适中，适合全家游览。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g4_1280506853').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g4_1280506853">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>体力好的中青年（台阶较多）;不适合腿脚不便的老人;亲子需看孩子体力;摄影爱好者天堂</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>入口→迎客厅→广寒宫（洞内最大厅高150米跨度175米）→银雨树（高17米方解石晶花全球唯一）→霸王盔（巨型石笋）→全程6.6km步行约2-3小时</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>银雨树高17米方解石晶花全球仅此一处;霸王盔巨型石笋形似古代头盔;广寒宫洞内最宏大厅可容万人;洞内恒温16°C冬暖夏凉;溶洞之王黄山归来不看岳织金洞外无洞天</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>全程6.6km步行台阶多老人体力是考验;洞内虽恒温但湿度大地面湿滑;拍照光线暗需大光圈镜头或脚架;景区出口离入口远需乘摆渡车返回;洞内无卫生间中途无法上厕所</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>洞内恒温16°C带薄外套;穿防滑鞋地面潮湿;老人如体力不支可不去直达贵阳休息;与黄果树贵阳形成三角线顺路;上午去人少下午团多</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd">织金发粑</span><span class="fd">织金荞凉粉</span><span class="fd">织金酸汤粉</span></div>
+  <div class="tip">💡 织金洞内恒温16°C，夏季务必带外套</div>
+  <div class="tip">💡 洞内台阶较多，穿防滑鞋</div>
+  <div class="tip">💡 周边吃饭选择有限，建议在县城解决</div>
+  <div class="score-row">⭐ 织金洞 <strong>6.50</strong></div>
+  <div class="hotel-line" onclick="focusHotel(3)" title="🗺️ 点击查看地图位置">🏨 织金 · <span class="badge eco">经济型</span> · 过路一晚，干净即可</div>
+</div>
+
+<!-- ═══════ D5 ═══════ -->
+<div class="day-card" id="d5" style="border-left-color:#9b59b6">
+  <h3 onclick="showDayRoute(4)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 5 — 转折之城 <span class="pin">📍</span> <span class="dd">7/14 周二</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 3h35min · 258km</span>
+  <div class="route">织金 → 贵阳省博 → 遵义</div>
+  <div class="timing"><span>🕐 出发 <strong>9:00</strong></span> <span>🕐 到达 <strong>14:26</strong></span></div>
+  <div class="day-weather">🌤️ 24-30°C · 多云</div>
+  <h4>🏙️ 遵义 <span class="province">（贵州·黔北）</span></h4>
+  <div class="city-desc">遵义，贵州第二大城市，中国革命历史上的'转折之城'。1935年遵义会议在此召开，<strong>毛泽东</strong>由此确立领导地位。清代'西南大儒'<strong>郑珍</strong>——晚清宋诗派代表，亦为遵义人。城市依山而建，湘江河穿城而过。遵义羊肉粉是与贵阳肠旺面齐名的贵州早餐代表，豆花面亦独具特色。</div>
+  <h4>🟢 贵州省博物馆 <span class="badge rest">免费</span></h4>
+  <div class="spot-desc">贵州省博物馆位于贵阳市观山湖区，馆藏贵州龙化石、古生物化石，展现贵州2亿年前的海洋世界。藏品涵盖古生物、民族文物、历史文物三大类，其中贵州龙化石、苗族服饰最为珍贵。免费参观但需提前预约，馆内互动性强，适合亲子游览，建议游览时间1.5-2小时。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g5_1229806745').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g5_1229806745">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;亲子教育价值高;文化爱好者必去;免费开放成本低</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>序厅→古生物化石厅（贵州龙化石镇馆之宝）→民族文物厅（苗族银饰·布依族刺绣·侗族建筑）→临时展厅→全程约2-3小时</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>贵州龙化石三叠纪海生爬行动物镇馆之宝;民族展厅18个世居民族银饰刺绣服饰系统展示;建筑本身设计灵感来自喀斯特山峰是风景;免费开放需预约</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>周一闭馆！周一闭馆！;旺季需提前3-5天在公众号预约;展厅较大走完全程需一定体力;讲解器数量有限建议早去;拍照禁止闪光灯</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>周一闭馆务必避开;提前在「贵州省博物馆」公众号预约;建议上午去人少安静;与青岩古镇串联上午省博下午古镇;有免费存包柜轻装游览</div>
+    </div>
+  </div>
+  <h4>🔴 遵义会议会址 <span class="badge must">红色</span> <span class="badge a4">4A</span></h4>
+  <div class="spot-desc">遵义会议会址位于遵义市红花岗区，是1935年红军长征途中召开的遵义会议旧址，中国革命伟大转折点。会址为民国建筑风格的两层砖木结构楼房，现为全国重点文物保护单位。门票免费，建议游览时间1-2小时，适合全家人了解革命历史，是爱国主义教育的重要基地。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥肠旺面</span></span><span class="fd"><span class="hi">🔥丝娃娃</span></span><span class="fd"><span class="hi">🔥花溪牛肉粉</span></span><span class="fd">豆腐圆子</span><span class="fd"><span class="hi">🔥遵义羊肉粉</span></span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">南门口肠旺面</span>（贵阳大十字） — 贵阳肠旺面天花板，排队王，营业至凌晨 · 大众点评必吃榜</li>
+    <li>🏠 <span class="sn">花溪飞碗牛肉粉</span>（贵阳花溪区） — 汤清味浓，花溪本地人首推 · 大众点评必吃榜</li>
+    <li>🏠 <span class="sn">刘二妈米皮</span>（遵义市区） — 遵义名小吃，米皮薄韧，辣子香浓 · 大众点评必吃榜</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">青岩古镇</span>（贵阳花溪）
+    <div class="alt-desc">贵州四大古镇之一，600年历史，距市区40分钟车程，卤猪脚闻名。</div>
+  </div>
+  <div class="tip">💡 贵州省博物馆需提前免费预约</div>
+  <div class="tip">💡 织金→贵阳约1.5h，贵阳省博游览约2h，贵阳→遵义约2h</div>
+  <div class="tip">💡 午餐在贵阳解决，推荐肠旺面或丝娃娃</div>
+  <div class="score-row">⭐ 贵州省博物馆 <strong>7.65</strong> · 遵义会议会址 <strong>7.05</strong></div>
+  <div class="hotel-line" onclick="focusHotel(4)" title="🗺️ 点击查看地图位置">🏨 遵义 · 🌟 <span class="badge lux">豪华型</span> · 时间充裕，住舒适些</div>
+</div>
+
+<!-- ═══════ D6 ═══════ -->
+<div class="day-card" id="d6" style="border-left-color:#1abc9c">
+  <h3 onclick="showDayRoute(5)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 6 — 地心赤水 <span class="pin">📍</span> <span class="dd">7/15 周三</span></h3>
+  <span class="drive-badge">🚗 4h28min · 330km</span>
+  <div class="route">遵义 → 双河洞 → 四渡赤水 → 赤水</div>
+  <div class="timing"><span>🕐 出发 <strong>9:00</strong></span> <span>🕐 到达 <strong>14:44</strong></span></div>
+  <div class="day-weather">🌤️ 24-32°C · 多云</div>
+  <h4>🏙️ 赤水 <span class="province">（贵州·遵义）</span></h4>
+  <div class="city-desc">赤水位于贵州北部，赤水河畔，以丹霞地貌世界自然遗产闻名。<strong>毛泽东</strong>曾率领中央红军在此上演四渡赤水的军事奇迹，丙安古镇是当时的重要渡口。赤水大瀑布是中国丹霞第一瀑，高76米宽80米。赤水晒醋、竹筒饭、腊肉等地道美食令人难忘，是一座集自然奇观与红色历史于一身的小城。</div>
+  <h4>🟢 双河洞 <span class="badge must">亚洲最长</span></h4>
+  <div class="spot-desc">双河洞位于遵义市绥阳县，是亚洲最长洞穴，已探明长度257公里。洞内有地下河、天坑、溶洞等多种喀斯特地貌，被誉为'喀斯特王国'。门票120元/人，洞内景观层次丰富，地下河游船体验尤为独特。游览约需2-3小时，洞内温度较低，建议带外套。</div>
+  <h4>🔴 四渡赤水纪念馆 <span class="badge must">红色</span></h4>
+  <div class="spot-desc">四渡赤水纪念馆位于习水县土城镇，纪念红军长征中四渡赤水光辉战役。纪念馆通过丰富的实物、图片和多媒体展示，生动再现了毛泽东指挥红军四次渡过赤水河的战斗历程。土城古镇保存完好，可感受红色文化与古镇风情。门票免费，游览约1小时。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd">赤水晒醋</span><span class="fd">竹筒饭</span><span class="fd">豆花面</span><span class="fd">赤水腊肉</span></div>
+  <div class="tip">💡 双河洞内温度较低，建议带外套</div>
+  <div class="tip">💡 土城古镇与四渡赤水纪念馆相邻，可一并游览</div>
+  <div class="tip">💡 赤水晚餐推荐竹筒饭和腊肉</div>
+  <div class="score-row">⭐ 双河洞 <strong>6.20</strong> · 四渡赤水纪念馆 <strong>5.80</strong></div>
+  <div class="hotel-line" onclick="focusHotel(5)" title="🗺️ 点击查看地图位置">🏨 赤水 · <span class="badge comf">舒适型</span> · 赤水市区酒店</div>
+</div>
+
+<!-- ═══════ D7 ═══════ -->
+<div class="day-card" id="d7" style="border-left-color:#e67e22">
+  <h3 onclick="showDayRoute(6)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 7 — 瀑布渡口 <span class="pin">📍</span> <span class="dd">7/16 周四</span></h3>
+  <span class="drive-badge">🚗 4h4min · 389km</span>
+  <div class="route">赤水（大瀑布+丙安）→ 思南</div>
+  <div class="timing"><span>🕐 出发 <strong>9:00</strong></span> <span>🕐 到达 <strong>13:04</strong></span></div>
+  <div class="day-weather">🌤️ 24-32°C · 多云</div>
+  <h4>🏙️ 思南 <span class="province">（贵州·铜仁）</span></h4>
+  <div class="city-desc">思南县位于贵州铜仁市，乌江穿城而过，素有'黔中首郡'之称，是贵州历史文化名城。明代著名理学家<strong>李渭</strong>——思南人，师从王阳明弟子，是贵州王门心学的重要代表人物。思南花甜粑、绿豆粉、乌江鱼等地方美食独具特色。县城依山傍水，乌江画廊景色秀丽。</div>
+  <h4>🟢 赤水大瀑布 <span class="badge must">丹霞</span> <span class="badge a5">世界遗产</span></h4>
+  <div class="spot-desc">赤水大瀑布高76米、宽80米，是中国丹霞地貌上最大的瀑布，气势磅礴。瀑布飞流直下，水雾弥漫数十米外可感凉意。景区内还有中洞瀑布、美人梳瀑布等多处景观，游览约需2-3小时。门票80元/人，夏季水量充沛，是最佳观赏季节，适合全家人游览。</div>
+  <h4>🔴 丙安古镇 <span class="badge must">红色</span></h4>
+  <div class="spot-desc">丙安古镇建于赤水河畔陡峭危岩之上，是红军四渡赤水时的重要渡口。古镇保存完好，石板街道、吊脚楼古色古香。长征时期，毛泽东、周恩来等曾在镇上宿营。古镇不大，游览约需1小时，适合顺路停留，感受红色历史文化。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd">思南花甜粑</span><span class="fd">绿豆粉</span><span class="fd">乌江鱼</span></div>
+  <div class="tip">💡 赤水大瀑布夏季水量充沛，水雾大，建议带雨衣</div>
+  <div class="tip">💡 丙安古镇游览约1小时，顺路停留即可</div>
+  <div class="tip">💡 赤水→思南车程约4h，注意中途休息</div>
+  <div class="score-row">⭐ 赤水大瀑布 <strong>6.70</strong> · 丙安古镇 <strong>5.85</strong></div>
+  <div class="hotel-line" onclick="focusHotel(6)" title="🗺️ 点击查看地图位置">🏨 思南 · <span class="badge eco">经济型</span> · 过路一晚</div>
+</div>
+
+<!-- ═══════ D8 ═══════ -->
+<div class="day-card" id="d8" style="border-left-color:#e91e63">
+  <h3 onclick="showDayRoute(7)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 8 — 世遗侗寨 <span class="pin">📍</span> <span class="dd">7/17 周五</span></h3>
+  <span class="drive-badge">🚗 6h · 350km</span>
+  <div class="route">思南 → 梵净山 → 肇兴侗寨</div>
+  <div class="timing"><span>🕐 出发 <strong>9:00</strong></span> <span>🕐 到达 <strong>21:00</strong></span></div>
+  <div class="day-weather">🌤️ 22-28°C · 午后阵雨</div>
+  <h4>🏙️ 肇兴侗寨 <span class="province">（贵州·黔东南）</span></h4>
+  <div class="city-desc">肇兴侗寨位于贵州黎平县，是全国最大的侗族村寨，素有'侗乡第一寨'之美誉。寨中五座鼓楼、五座花桥、五座戏台，分属五个房族，展现侗族建筑精髓。侗族大歌被列入世界非物质文化遗产。清乾隆年间侗族起义领袖<strong>吴金银</strong>曾率桂北侗民反抗压迫。2005年被《中国国家地理》评为'中国最美的六大乡村古镇'之一。</div>
+  <h4>🟢 梵净山 <span class="badge a5">世界遗产</span> <span class="badge a5">5A</span></h4>
+  <div class="spot-desc">梵净山是武陵山脉主峰，海拔2572米，2018年入选世界自然遗产。拥有6500万年生态孤岛效应，保存大量珍稀动植物，黔金丝猴为唯一栖息地。蘑菇石和红云金顶是标志性景观。门票100元/人+往返索道140元/人，建议网上提前预约。老人可选择乘索道至半山，仅登蘑菇石区域，体力消耗可控。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g8_995227108').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g8_995227108">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>5-7小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>体力好的中青年;登山爱好者;不适合老人和小孩;不适合腿脚不便者</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>景区大门→观光车→索道上山→蘑菇石→老金顶（体力挑战）→红云金顶（需预约登顶）→索道下山→全程约5-7小时</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>蘑菇石梵净山标志性奇石;红云金顶孤峰耸立云海之上;云海日出如仙境;万米睡佛天然山形奇观;世界自然遗产+5A双料王</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>门票需提前3-7天抢！每天限流8000人;红云金顶需单独预约登顶名额;索道排队可能1-2小时;山上天气变脸极快早上晴下午雨;体力要求极高不适合老人小孩</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>旺季门票提前3-7天抢;7点前到景区门口排队;红云金顶登顶单独预约;带雨衣山上天气变脸极快;住江口县城比景区门口便宜很多</div>
+    </div>
+  </div>
+  <h4>🟢 肇兴侗寨 <span class="badge must">中国最美乡村</span></h4>
+  <div class="spot-desc">肇兴侗寨是全国最大的侗族村寨，有'侗乡第一寨'之誉。寨中五座鼓楼代表五个房族，夜晚灯火亮起温暖动人。侗族大歌绕梁三日，风雨桥下溪水潺潺。寨内客栈均保留吊脚楼风格。建议傍晚抵达后沿主街漫步，听鼓楼下老人对歌，品尝侗族油茶、酸鱼等地道美食。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥侗族油茶</span></span><span class="fd"><span class="hi">🔥酸鱼</span></span><span class="fd">酸肉</span><span class="fd">糯米饭</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">程阳桥侗家食府</span>（程阳八寨景区内） — 油茶+酸鱼地道，景区内最正宗 · 大众点评</li>
+    <li>🏠 <span class="sn">三江鼓楼美食街</span>（三江县城） — 集中侗族特色餐饮，选择多 · 高德指南</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">镇远古镇</span>（黔东南镇远）
+    <div class="alt-desc">两千年历史的军事重镇，舞阳河S形穿城，梵净山→镇远约1.5h，可替代肇兴。</div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">西江千户苗寨</span>（黔东南雷山）
+    <div class="alt-desc">世界最大苗族村寨，万家灯火如繁星，远距主环线，需增加1天。</div>
+  </div>
+  <div class="tip">💡 梵净山需提前网上预约门票+索道票</div>
+  <div class="tip">💡 梵净山到肇兴车程约6h，建议15:00前下山</div>
+  <div class="tip">💡 老人如体力不足可选乘索道至半山，不登顶</div>
+  <div class="score-row">⭐ 梵净山 <strong>6.30</strong> · 肇兴侗寨 <strong>6.90</strong></div>
+  <div class="hotel-line" onclick="focusHotel(7)" title="🗺️ 点击查看地图位置">🏨 肇兴侗寨 · <span class="badge comf">舒适型</span> · 侗寨特色吊脚楼客栈</div>
+</div>
+
+<!-- ═══════ D9 ═══════ -->
+<div class="day-card" id="d9" style="border-left-color:#00bcd4">
+  <h3 onclick="showDayRoute(8)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 9 — 温泉收官 <span class="pin">📍</span> <span class="dd">7/18 周六</span></h3>
+  <span class="drive-badge">🚗 5h · 400km</span>
+  <div class="route">肇兴侗寨 → 贺州西溪温泉</div>
+  <div class="timing"><span>🕐 出发 <strong>14:00</strong></span> <span>🕐 到达 <strong>19:00</strong></span></div>
+  <div class="day-weather">🌤️ 26-32°C · 多云</div>
+  <h4>🏙️ 贺州 <span class="province">（广西·桂东）</span></h4>
+  <div class="city-desc">贺州位于广西东北部，毗邻广东，是广西通往粤港澳大湾区的东大门。有'中国温泉之城'称号，西溪温泉为华南最大森林温泉度假村。现代文学家<strong>郭沫若</strong>曾题咏贺州山水，留下动人诗篇。贺州还是中国长寿之乡，百岁老人比例居全国前列。黄田扣肉、信都三黄鸡、客家酿豆腐是必尝美食。</div>
+  <h4>🏘️ 肇兴侗寨晨景 <span class="badge must">侗族大歌</span></h4>
+  <div class="spot-desc">清晨的肇兴侗寨游客稀少，鼓楼炊烟袅袅，侗族大歌从鼓楼传出，绕梁三日。建议早起沿着石板路穿行五个房族区域，看妇女在风雨桥下浣洗，听老人鼓楼下对歌。寨门口的观景台可拍摄全景晨雾。上午花2-3小时深度体验侗族日常生活，是全程最珍贵的文化记忆。</div>
+  <h4>♨️ 贺州西溪温泉 <span class="badge lux">森林温泉</span></h4>
+  <div class="spot-desc">贺州西溪森林温泉度假村位于八步区南乡镇，是华南最大的森林温泉度假村。温泉为天然地热自流泉水，温度高达86.5°C，富含偏硅酸等多种有益矿物质。度假村集温泉养生、富氧森林、秘境探奇于一体，设有多个露天泡池、水上乐园和住宿区。夜幕降临后在森林泡池中仰望星空，洗去9天旅途疲惫。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥黄田扣肉</span></span><span class="fd">信都三黄鸡</span><span class="fd">客家酿豆腐</span><span class="fd">钟山油茶</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">黄田扣肉店</span>（贺州市区） — 扣肉入口即化，贺州第一名菜 · 大众点评</li>
+    <li>🏠 <span class="sn">西溪温泉度假区餐厅</span>（西溪温泉度假区内） — 不用出园，方便省心，品质有保障 · 高德指南</li>
+  </ul>
+  <div class="tip">💡 肇兴清晨逛侗寨最为惬意，游客稀少</div>
+  <div class="tip">💡 西溪温泉需自备泳衣，度假区内餐厅品质优良</div>
+  <div class="tip">💡 5h车程较长，建议中途在桂林附近休息区停靠</div>
+  <div class="score-row">⭐ 贺州西溪温泉 <strong>6.90</strong></div>
+  <div class="hotel-line" onclick="focusHotel(8)" title="🗺️ 点击查看地图位置">🏨 贺州 · 🌟 <span class="badge lux">豪华型</span> · 西溪温泉度假酒店</div>
+</div>
+
+<!-- ═══════ D10 ═══════ -->
+<div class="day-card" id="d10" style="border-left-color:#795548">
+  <h3 onclick="showDayRoute(9)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 10 — 归途返粤 <span class="pin">📍</span> <span class="dd">7/19 周日</span></h3>
+  <span class="drive-badge">🚗 3h · 255km</span>
+  <div class="route">贺州西溪温泉 → 广州</div>
+  <div class="timing"><span>🕐 出发 <strong>11:00</strong></span> <span>🕐 到达 <strong>14:00</strong></span></div>
+  <div class="day-weather">🌤️ 28-35°C · 闷热</div>
+  <h4>🏙️ 贺州 <span class="province">（广西·桂东）</span></h4>
+  <div class="city-desc">贺州位于广西东北部，毗邻广东清远，是广西通往粤港澳大湾区的东大门。盛产优质温泉，西溪温泉为华南最大森林温泉度假村。现代文学家<strong>郭沫若</strong>曾题咏贺州山水盛赞其秀丽。贺州还是中国长寿之乡，长寿老人比例居全国前列，其秘诀与当地山泉水、有机食材密切相关。</div>
+  <h4>♨️ 西溪温泉上午 <span class="badge rest">放松</span></h4>
+  <div class="spot-desc">最后半天尽情享受西溪森林温泉的设施。清晨的温泉池人少水清，可以在森林泡池中放松身心，或带孩子在水上乐园玩耍。度假村内早餐丰富，包含贺州当地特色。建议11:00前退房，在度假村用午餐后再出发返程。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd">黄田扣肉</span><span class="fd">贺州酿菜</span></div>
+  <div class="tip">💡 西溪温泉→广州实际约255km/3h（高德API实测），轻松返程</div>
+  <div class="tip">💡 建议上午泡温泉后度假村午餐，下午返程</div>
+</div>
+  </div>
+</div>
+
+<div class="bottom-sections">
+  <div class="bottom-col bottom-left">
+    <div class="food-section">
+      <h2>🍜 沿途美食总览（10城 · 60+道特色菜）</h2>
+      <div class="food-grid">
+        <div class="food-card"><div class="fcity">柳州</div><div class="fdish">🔥螺蛳粉 · 鸭脚煲 · 柳州酸 · 炒螺蛳 · 融安滤粉</div></div>
+<div class="food-card"><div class="fcity">荔波</div><div class="fdish">🔥酸汤鱼 · 🔥樟江豆花烤鱼 · 荔波烤猪 · 水族糯米饭 · 荔波米粉</div></div>
+<div class="food-card"><div class="fcity">平塘</div><div class="fdish">独山盐酸菜 · 豆花面 · 平塘牛肉粉 · 糯米饭</div></div>
+<div class="food-card"><div class="fcity">织金</div><div class="fdish">织金发粑 · 织金荞凉粉 · 织金酸汤粉</div></div>
+<div class="food-card"><div class="fcity">贵阳</div><div class="fdish">🔥肠旺面 · 🔥丝娃娃 · 🔥花溪牛肉粉 · 青岩卤猪脚 · 豆腐圆子 · 糕粑稀饭</div></div>
+<div class="food-card"><div class="fcity">遵义</div><div class="fdish">🔥遵义羊肉粉 · 豆花面 · 遵义鸡蛋糕 · 乌江鱼 · 桐梓方竹笋</div></div>
+<div class="food-card"><div class="fcity">赤水</div><div class="fdish">赤水晒醋 · 竹筒饭 · 赤水腊肉 · 豆花面 · 桶桶烧</div></div>
+<div class="food-card"><div class="fcity">思南</div><div class="fdish">花甜粑 · 绿豆粉 · 乌江鱼</div></div>
+<div class="food-card"><div class="fcity">肇兴</div><div class="fdish">🔥侗族油茶 · 🔥酸鱼 · 酸肉 · 糯米饭 · 侗族腊肉 · 竹筒鸡</div></div>
+<div class="food-card"><div class="fcity">贺州</div><div class="fdish">🔥黄田扣肉 · 信都三黄鸡 · 客家酿豆腐 · 钟山油茶 · 马蹄</div></div>
+      </div>
+    </div>
+
+    <div class="budget">
+      <h2>💰 预算参考（10人 · 4间房 · 2辆车）</h2>
+      <div class="budget-grid">
+        <div class="budget-card economic">
+          <h3>🟢 经济</h3>
+          <div class="price">¥28,000</div>
+          <ul></ul>
+        </div>
+        <div class="budget-card comfort">
+          <h3>🔵 舒适</h3>
+          <div class="price">¥40,000</div>
+          <ul></ul>
+        </div>
+        <div class="budget-card luxury">
+          <h3>🟣 豪华</h3>
+          <div class="price">¥55,000</div>
+          <ul></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+  <h2>📊 行程总览</h2>
+  <div class="sg">
+    <div class="sca"><div class="ico">🎫</div><div class="big">16</div><div class="lbl">景点总数</div><div class="dl"><span><span>5A 级</span><span class="hv">4个</span></span><span><span>4A 级</span><span class="gv">3个</span></span><span><span>特殊/未评级</span><span class="gv">9个</span></span></div></div>
+    <div class="sca"><div class="ico">🚗</div><div class="big">40.0h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">3,309km</span></span><span><span>平均（10天）</span><span class="gv">4.0h/天</span></span><span><span>平均（驾驶日8天）</span><span class="gv">4.0h/天</span></span><span><span>停驶日</span><span class="gv">—</span></span></div></div>
+    <div class="sca"><div class="ico">⚠️</div><div class="big">6.0h</div><div class="lbl">单日最大驾驶</div><div class="dl"><span><span>最长日</span><span class="hv">D8（6.0h）</span></span><span><span>弹性日(&gt;3h)</span><span class="gv">6天（D1/D2/D6/D7/D8/D9）</span></span><span><span>超5h天数</span><span class="hv">1天（D8 6.0h）</span></span><span><span>最短驾驶日</span><span class="gv">D3（3.0h本地）</span></span></div></div>
+    <div class="sca"><div class="ico">🏨</div><div class="big">9</div><div class="lbl">过夜城市</div><div class="dl"><span><span>🌟 豪华</span><span class="gv" style="color:#8e44ad">2晚（遵义、贺州）</span></span><span><span>🏨 舒适</span><span class="gv">4晚（荔波、平塘、赤水、肇兴侗寨）</span></span><span><span>🏠 经济</span><span class="gv">3晚（柳州、织金、思南）</span></span><span><span>♨️ 温泉</span><span class="gv">—</span></span></div></div>
+    <div class="sca w2">
+      <div class="ico">📊 逐日驾驶时长（小时）</div>
+      <div class="bars">
+        <div class="b ov" style="height:83%"><span class="bl">D1 5h10</span></div>
+        <div class="b el" style="height:67%"><span class="bl">D2 4h14</span></div>
+        <div class="b nm" style="height:50%"><span class="bl">D3 3h09</span></div>
+        <div class="b el" style="height:50%"><span class="bl">D4 3h37</span></div>
+        <div class="b el" style="height:50%"><span class="bl">D5 3h35</span></div>
+        <div class="b el" style="height:67%"><span class="bl">D6 4h28</span></div>
+        <div class="b el" style="height:67%"><span class="bl">D7 4h04</span></div>
+        <div class="b ov" style="height:100%"><span class="bl">D8 6h</span></div>
+        <div class="b ov" style="height:83%"><span class="bl">D9 5h</span></div>
+        <div class="b ov" style="height:50%"><span class="bl">D10 3h</span></div>
+      </div>
+      <div class="bleg"><span><span class="sw" style="background:#e74c3c"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:#f39c12"></span>弹性 &gt;3h</span><span><span class="sw" style="background:#27ae60"></span>正常 ≤3h</span><span><span class="sw" style="background:#ddd"></span>停驶</span></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">高德地图 REST API 实测驾驶数据 · 生成日期 2026-06-30</div>
+</div>
+  </div>
+
+  <div class="bottom-col bottom-right">
+    <div class="scoring-section">
+  <h2>⭐ 景点评分体系</h2>
+  <h3>评分维度与权重</h3>
+  <table class="method-table">
+    <thead><tr><th>维度</th><th>权重</th><th>评分标准</th></tr></thead>
+    <tbody>
+      <tr><td>🏅 美誉度</td><td><strong>30%</strong></td><td>官方评级（5A/4A）、携程/大众点评口碑、世界遗产认定</td></tr>
+      <tr><td>🎮 可玩性</td><td><strong>25%</strong></td><td>亲子友好、老人友好、互动参与感</td></tr>
+      <tr><td>🍜 美食吸引度</td><td><strong>20%</strong></td><td>所在城市特色美食丰富度</td></tr>
+      <tr><td>👥 人流量</td><td><strong>15%</strong></td><td>暑期拥挤程度——人越少分越高（反向计分）</td></tr>
+      <tr><td>🏨 住宿豪华度</td><td><strong>5%</strong></td><td>所在城市豪华/五星级酒店选择丰富度</td></tr>
+      <tr><td>📍 抵达距离</td><td><strong>5%</strong></td><td>离开主环线的绕路成本——顺路高分</td></tr>
+    </tbody>
+  </table>
+  <h3>20个候选景点完整评分</h3>
+  <table class="full-scores">
+    <thead>
+      <tr><th>#</th><th>景点</th><th>位置</th><th>等级</th><th>美誉30%</th><th>人流15%</th><th>可玩25%</th><th>住宿5%</th><th>距离5%</th><th>美食20%</th><th>总分</th><th>状态</th></tr>
+    </thead>
+    <tbody>
+      <tr class="sel"><td>1</td><td>贵州省博物馆</td><td>贵阳</td><td>免费</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">7.65</td><td>✅ D5</td></tr>
+      <tr class="sel"><td>2</td><td>小七孔</td><td>荔波</td><td>5A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">7.35</td><td>✅ D2</td></tr>
+      <tr class="sel"><td>3</td><td>遵义会议会址</td><td>遵义</td><td>4A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">7.05</td><td>✅ D5</td></tr>
+      <tr class="skip"><td>4</td><td>黄果树瀑布</td><td>安顺</td><td>5A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.95</td><td>备选</td></tr>
+      <tr class="sel"><td>5</td><td>肇兴侗寨</td><td>黎平</td><td>4A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.9</td><td>✅ D8-D9</td></tr>
+      <tr class="sel"><td>6</td><td>贺州西溪温泉</td><td>贺州</td><td>—</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.9</td><td>✅ D9</td></tr>
+      <tr class="sel"><td>7</td><td>大七孔</td><td>荔波</td><td>5A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.85</td><td>✅ D3</td></tr>
+      <tr class="skip"><td>8</td><td>花江峡谷大桥</td><td>关岭</td><td>—</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.75</td><td>备选</td></tr>
+      <tr class="sel"><td>9</td><td>赤水大瀑布</td><td>赤水</td><td>世界遗产</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.7</td><td>✅ D7</td></tr>
+      <tr class="skip"><td>10</td><td>龙宫景区</td><td>安顺</td><td>5A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.7</td><td>备选</td></tr>
+      <tr class="skip"><td>11</td><td>青岩古镇</td><td>贵阳</td><td>5A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.6</td><td>备选</td></tr>
+      <tr class="sel"><td>12</td><td>织金洞</td><td>织金</td><td>4A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.5</td><td>✅ D4</td></tr>
+      <tr class="sel"><td>13</td><td>FAST天眼</td><td>平塘</td><td>4A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.45</td><td>✅ D3</td></tr>
+      <tr class="sel"><td>14</td><td>梵净山</td><td>铜仁</td><td>5A/世界遗产</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.3</td><td>✅ D8</td></tr>
+      <tr class="sel"><td>15</td><td>柳州窑埠古镇</td><td>柳州</td><td>免费</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.25</td><td>✅ D1</td></tr>
+      <tr class="sel"><td>16</td><td>双河洞</td><td>绥阳</td><td>亚洲最长</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.2</td><td>✅ D6</td></tr>
+      <tr class="skip"><td>17</td><td>西江千户苗寨</td><td>雷山</td><td>5A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">6.1</td><td>备选</td></tr>
+      <tr class="sel"><td>18</td><td>丙安古镇</td><td>赤水</td><td>红色</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">5.85</td><td>✅ D7</td></tr>
+      <tr class="sel"><td>19</td><td>四渡赤水纪念馆</td><td>习水</td><td>红色</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">5.8</td><td>✅ D6</td></tr>
+      <tr class="skip"><td>20</td><td>镇远古镇</td><td>镇远</td><td>5A</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="sc">5.65</td><td>备选</td></tr>
+    </tbody>
+  </table>
+</div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-core.js — 地图初始化、全局变量、标记、InfoWindow、天气/图例交互
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
+const K='9f853e26c1ef1d449260b4ad9a4de5c8';
+var D=[{h:[109.41,24.33],hl:"柳州（经济型）",hi:{"c": "柳州", "lv": "经济型", "n": "纯赶路，干净即可"},s:[],r:[[113.26, 23.13], [109.41, 24.33]]},{h:[107.88,25.25],hl:"荔波（舒适型）",hi:{"c": "荔波", "lv": "舒适型", "n": "游览核心区，住县城方便"},s:[{"p": [107.85, 25.22], "l": "小七孔景区"}],r:[[109.41, 24.33], [107.88, 25.25]]},{h:[106.88,25.58],hl:"平塘（舒适型）",hi:{"c": "平塘", "lv": "舒适型", "n": "天文小镇民宿"},s:[{"p": [107.86, 25.23], "l": "大七孔景区"}, {"p": [106.85, 25.65], "l": "FAST天眼"}],r:[[107.88, 25.25], [106.85, 25.65]]},{h:[105.73,26.68],hl:"织金（舒适型）",hi:{"c": "织金", "lv": "经济型", "n": "过路一晚，干净即可"},s:[{"p": [105.78, 26.63], "l": "织金洞"}],r:[[106.88, 25.58], [105.78, 26.63]]},{h:[106.93,27.73],hl:"遵义（舒适型）",hi:{"c": "遵义", "lv": "豪华型", "n": "时间充裕，住舒适些"},s:[{"p": [106.63, 26.65], "l": "贵州省博物馆"}, {"p": [106.93, 27.73], "l": "遵义会议会址"}],r:[[105.73, 26.68], [106.63, 26.65], [106.93, 27.73]]},{h:[105.68,28.58],hl:"赤水（舒适型）",hi:{"c": "赤水", "lv": "舒适型", "n": "赤水市区酒店"},s:[{"p": [107.13, 28.13], "l": "双河洞"}, {"p": [106.05, 28.32], "l": "四渡赤水纪念馆"}],r:[[106.93, 27.73], [107.13, 28.13], [105.68, 28.58]]},{h:[108.25,27.93],hl:"思南（舒适型）",hi:{"c": "思南", "lv": "经济型", "n": "过路一晚"},s:[{"p": [105.72, 28.55], "l": "赤水大瀑布"}, {"p": [105.65, 28.53], "l": "丙安古镇"}],r:[[105.68, 28.58], [108.25, 27.93]]},{h:[109.2,25.92],hl:"肇兴（舒适型）",hi:{"c": "肇兴侗寨", "lv": "舒适型", "n": "侗寨特色吊脚楼客栈"},s:[{"p": [108.68, 27.93], "l": "梵净山"}, {"p": [109.2, 25.92], "l": "肇兴侗寨"}],r:[[108.25, 27.93], [108.68, 27.93], [109.2, 25.92]]},{h:[111.55,24.42],hl:"西溪温泉度假酒店",hi:{"c": "贺州", "lv": "豪华型", "n": "西溪温泉度假酒店"},s:[{"p": [111.55, 24.42], "l": "西溪温泉"}],r:[[109.2, 25.92], [111.55, 24.42]]},{h:[0,0],hl:"D10 返程",hi:{"c": "", "lv": "", "n": ""},s:[{"p": [113.26, 23.13], "l": "广州"}],r:[[111.55, 24.42], [113.26, 23.13]]}];
+
+document.getElementById('weatherStrip').style.display='none';
+
+var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
+var A=[],H=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+new AMap.Marker({position:[113.26,23.13],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
+A.push([113.26,23.13]);
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
+new AMap.Marker({position:[113.26,23.13],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="var el=document.getElementById(\'d'+(n+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
+function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
+function toggleWeather(){var b=document.getElementById("weatherStrip");if(b.style.display==="none"){b.style.display="flex";document.getElementById("weatherToggle").textContent="🌤️ 收起天气"}else{b.style.display="none";document.getElementById("weatherToggle").textContent="🌤️ 沿途天气"}}
+function dayBounds(n){var d=D[n];if(!d)return null;var pts=[],i;if(d.r)for(i=0;i<d.r.length;i++)pts.push(d.r[i]);if(d.h)pts.push(d.h);(d.s||[]).forEach(function(s){pts.push(s.p)});if(!pts.length)return null;var sw=[pts[0][0],pts[0][1]],ne=[pts[0][0],pts[0][1]];pts.forEach(function(p){if(p[0]<sw[0])sw[0]=p[0];if(p[1]<sw[1])sw[1]=p[1];if(p[0]>ne[0])ne[0]=p[0];if(p[1]>ne[1])ne[1]=p[1]});return new AMap.Bounds([sw[0],sw[1]],[ne[0],ne[1]])}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-routes.js — 路线加载、focusDay、批量导航路线
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+function focusDay(n){
+  if(W){W.close();W=null}
+  Z=0;
+  expandMapIfCollapsed();
+  var b=document.getElementById('navBtn');
+  if(b){
+    b.textContent='🗺️ 加载全部路线';
+    b.className='nav-btn';
+    b.onclick=function(){loadRoutes()}
+  }
+  var mp=document.querySelector('.map-panel');
+  if(mp&&mp.classList.contains('collapsed')){
+    mp.classList.remove('collapsed');
+    var tbtn=document.querySelector('.map-toggle-btn');
+    if(tbtn)tbtn.textContent='▲ 收起';
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
+  }
+  if(n===lastDay&&routeCache[n]){
+    var bd=dayBounds(n);
+    if(bd)map.setBounds(bd,false,[60,60,60,60]);
+    return
+  }
+  clearRoutes();
+  lastDay=n;
+  var d=D[n];
+  if(!d||!d.r||d.r.length<2){
+    var bd2=dayBounds(n);
+    if(bd2)map.setBounds(bd2,false,[60,60,60,60]);
+    return
+  }
+  if(routeCache[n]){
+    routeCache[n].forEach(function(pl){pl.setMap(map);R.push(pl)});
+    var bd3=dayBounds(n);
+    if(bd3)map.setBounds(bd3,false,[60,60,60,60]);
+    return
+  }
+  var c=C[n%C.length];
+  var o=d.r[0][0]+','+d.r[0][1],e=d.r[d.r.length-1][0]+','+d.r[d.r.length-1][1],w='';
+  if(d.r.length>2){var a=[];for(var j=1;j<d.r.length-1;j++)a.push(d.r[j][0]+','+d.r[j][1]);w='&waypoints='+a.join('|')}
+  fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl);routeCache[n]=[pl];var bd4=dayBounds(n);if(bd4)map.setBounds(bd4,false,[60,60,60,60])}})
+}
+
+function showDayRoute(n){focusDay(n)}
+
+function P(){
+  var i=0;
+  function n(){
+    if(i>=D.length){
+      if(!Z&&A.length>0)map.setFitView(null,false,[60,60,60,60]);
+      var b=document.getElementById('navBtn');
+      if(b){b.textContent='✅ 导航已加载';b.className='nav-btn';b.onclick=null}
+      return
+    }
+    var d=D[i],c=C[i%C.length];
+    if(d.r&&d.r.length>=2){
+      var o=d.r[0][0]+','+d.r[0][1],e=d.r[d.r.length-1][0]+','+d.r[d.r.length-1][1],w='';
+      if(d.r.length>2){var a=[];for(var j=1;j<d.r.length-1;j++)a.push(d.r[j][0]+','+d.r[j][1]);w='&waypoints='+a.join('|')}
+      fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl)}i++;setTimeout(n,200)}).catch(function(){i++;setTimeout(n,200)})
+    }else{i++;n()}
+  }
+  n()
+}
+
+function loadRoutes(){
+  clearRoutes();
+  Z=0;
+  var b=document.getElementById('navBtn');
+  if(b){b.textContent='⏳ 加载中...';b.className='nav-btn loading';b.onclick=null}
+  P();
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-resize.js — 桌面端拖拽调整地图大小、完全收起/展开地图
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+(function(){
+  var rh=document.getElementById('resizeHandle');if(!rh)return;
+  var mn=document.querySelector('.main');
+  var mp=document.querySelector('.map-panel');
+  var rs=false;
+  var savedPct=60;
+  function isCollapsed(){return mp.classList.contains('collapsed-desktop')}
+  function setPct(p){
+    mp.style.flex='none';mp.style.width=p+'%';
+    requestAnimationFrame(function(){map.resize()});
+  }
+  // 拖拽结束后适配地图视野
+  function fitAfterResize(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        map.setFitView(null,false,[60,60,60,60]);
+      });
+    });
+  }
+  // 展开后适配（需要等待 display:none → block + 宽度恢复的完整 reflow）
+  function fitAfterExpand(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        map.resize();
+        map.setFitView(null,false,[60,60,60,60]);
+      });
+    });
+  }
+  // 拖拽调整大小（收起状态不响应拖拽）
+  rh.addEventListener('mousedown',function(e){
+    if(isCollapsed()||rh.classList.contains('expanded-handle'))return;
+    rs=true;rh.classList.add('active');
+    document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();
+  });
+  rh.addEventListener('touchstart',function(e){
+    if(isCollapsed()||rh.classList.contains('expanded-handle'))return;
+    rs=true;rh.classList.add('active');
+    document.body.style.userSelect='none';e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!rs)return;
+    var r=mn.getBoundingClientRect();var x=e.clientX-r.left;
+    var p=Math.round(x/r.width*100);
+    if(p<25)p=25;if(p>85)p=85;
+    savedPct=p;setPct(p);
+  });
+  document.addEventListener('touchmove',function(e){
+    if(!rs)return;
+    var r=mn.getBoundingClientRect();var x=e.touches[0].clientX-r.left;
+    var p=Math.round(x/r.width*100);
+    if(p<25)p=25;if(p>85)p=85;
+    savedPct=p;setPct(p);
+  });
+  document.addEventListener('mouseup',function(){
+    if(!rs)return;rs=false;
+    rh.classList.remove('active');document.body.style.cursor='';document.body.style.userSelect='';
+    fitAfterResize();
+  });
+  document.addEventListener('touchend',function(){
+    if(!rs)return;rs=false;
+    rh.classList.remove('active');document.body.style.userSelect='';
+    fitAfterResize();
+  });
+  // 双击手柄切换（收起状态下双击=展开）
+  rh.addEventListener('dblclick',function(){
+    if(isCollapsed()){expandMap();return;}
+    var w=mp.style.width;var p=w?parseFloat(w):60;
+    p=(p<40?60:30);savedPct=p;setPct(p);
+    fitAfterResize();
+  });
+  // 点击展开手柄（收起时点击展开）
+  rh.addEventListener('click',function(e){
+    if(rh.classList.contains('expanded-handle')&&!e.target.closest('.collapse-icon')){
+      expandMap();
+    }
+  });
+  // 收起/展开地图（全局函数）
+  window.toggleMapFullCollapse=function(){
+    if(isCollapsed()){expandMap();}
+    else{collapseMap();}
+  };
+  function collapseMap(){
+    var w=mp.style.width;savedPct=w?parseFloat(w):60;
+    mp.style.flex='';mp.style.width='';
+    mp.classList.add('collapsed-desktop');
+    rh.classList.add('expanded-handle');
+    rh.title='点击展开地图';
+  }
+  function expandMap(){
+    mp.classList.remove('collapsed-desktop');
+    rh.classList.remove('expanded-handle');
+    rh.title='拖动调整地图大小 · 双击切换';
+    setPct(savedPct);
+    fitAfterExpand();
+  }
+  // 外部调用：如果地图收起则展开（供 focusDay 使用）
+  window.expandMapIfCollapsed=function(){
+    if(isCollapsed())expandMap();
+  };
+})();
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   mobile-scroll.js — 移动端地图收起/展开 + 滚动自动折叠/展开
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+function toggleMapCollapse(){
+  var mp=document.querySelector('.map-panel');
+  var btn=document.querySelector('.map-toggle-btn');
+  mp.classList.toggle('collapsed');
+  if(mp.classList.contains('collapsed')){
+    if(btn)btn.textContent='▼ 展开';
+  }else{
+    if(btn)btn.textContent='▲ 收起';
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
+  }
+}
+
+</script>
+</body>
+</html>
