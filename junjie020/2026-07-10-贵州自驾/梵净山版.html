@@ -19,6 +19,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 .header .meta{font-size:.95rem;opacity:.9;display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
 
 .tips{padding:16px 32px;background:#fffbf0;border-bottom:1px solid #f0e0a0;font-size:.88rem;color:#856404;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.summary-tips{margin-top:16px;padding:12px 20px;background:#fffbf0;border:1px solid #f0e0a0;border-radius:8px;font-size:.84rem;color:#856404;text-align:center;line-height:1.6}
 .weather-toggle{display:block;margin:0 auto;padding:6px 18px;background:#f0f4f8;border:1px solid #d0d8e0;border-radius:6px;font-size:.82rem;cursor:pointer;color:#0d3b66;transition:background .2s}.weather-toggle:hover{background:#e0e8f0}
 .weather-strip{padding:18px 32px;background:#f0f4f8;display:none;flex-wrap:wrap;gap:10px;justify-content:center}
 .wcard{flex:1;min-width:88px;max-width:115px;text-align:center;padding:8px;background:#fff;border-radius:8px;font-size:.78rem}
@@ -149,6 +150,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 
 .summary{padding:28px 32px;background:var(--card);border-top:2px solid #0d3b66}
 .summary h2{text-align:center;font-size:1.2rem;margin-bottom:18px;color:#0d3b66}
+.trip-overview-card{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-bottom:18px;padding:14px 20px;background:linear-gradient(135deg,#f0f4f8,#e8f0f8);border-radius:10px;border:1px solid #d0dce8;font-size:.88rem;color:#2c3e50}
+.tov-item{display:flex;align-items:center;gap:4px}
 .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .sca{background:#f8fafc;border-radius:10px;padding:16px;border:1px solid #e8e8e8}
 .sca .ico{font-size:1.3rem;margin-bottom:2px}
@@ -402,13 +405,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <div class="meta">
     <span>📅 2026.7.10 — 7.19</span>
     <span>👥 10人（3老+4中+3小）</span>
-    <span>🚗 2车自驾 · 总程 2,839km</span>
-    <span>🏷️ 梵净山 × 遵义 × 赤水丹霞 × 织金洞 × 侗乡 × 温泉</span>
   </div>
-</div>
-
-<div class="tips">
-  💡 首末日≤6h · 普通日≤3h · 弹性日≤6h（≤2天>5h）· 🛰️ 高德API实测 · 🧥 贵阳夜间22°C带薄外套 · ⛰️ 梵净山暑期需早起排队
 </div>
 
 <button class="weather-toggle" id="weatherToggle" onclick="toggleWeather()">🌤️ 沿途天气</button>
@@ -494,10 +491,10 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <h4>🔵 梵净山 <span class="badge a5">5A</span> <span class="badge wh">世界遗产</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">梵净山是武陵山脉主峰（2572m），2018年入选世界自然遗产。核心看点：<strong>蘑菇石</strong>——高约10米的奇特风化岩柱，亿万年风雨雕琢而成，是梵净山标志；<strong>红云金顶</strong>——海拔2336米，垂直高差94米，需手脚并用攀铁链登顶，顶上两座小庙隔峡谷相望；<strong>老金顶</strong>——海拔2494米视野最开阔处。这里是黔金丝猴唯一栖息地（全球仅存~800只）。建议乘索道至万宝岩后步行游览，全程6-8h。暑期需7:30前排队入园，体力要求高，小孩需评估。老人可只到蘑菇石观景台（索道+短途步行）。</div>
   <div class="guide-box">
-    <div class="guide-header" onclick="document.getElementById('g3_583742294').classList.toggle('open')">
+    <div class="guide-header" onclick="document.getElementById('g3_855908361').classList.toggle('open')">
       📝 游玩攻略 <span class="guide-toggle">▼</span>
     </div>
-    <div class="guide-body" id="g3_583742294">
+    <div class="guide-body" id="g3_855908361">
       <div class="guide-item"><span class="guide-label">⏱️ 时长</span>5-7小时</div>
       <div class="guide-item"><span class="guide-label">👥 适合</span>体力好的中青年;登山爱好者;不适合老人和小孩;不适合腿脚不便者</div>
       <div class="guide-item"><span class="guide-label">🗺️ 路线</span>景区大门→观光车→索道上山→蘑菇石→老金顶（体力挑战）→红云金顶（需预约登顶）→索道下山→全程约5-7小时。世界自然遗产+5A双料王。</div>
@@ -575,10 +572,10 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <h4>🔵 织金洞 <span class="badge a5">5A</span> <span class="badge wh">世界地质公园</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">织金洞是中国最美洞穴之首，已探明12.1公里，开放游览6.6公里。核心看点：<strong>银雨树</strong>——高17米的方解石晶花，全球仅此一处，是织金洞镇洞之宝；<strong>霸王盔</strong>——巨型石笋形似古代头盔；<strong>广寒宫</strong>——洞内最宏大的大厅，高150米、跨度175米，可容万人。洞内恒温16°C，冬暖夏凉。全程步行约2-3小时，台阶较多。老人如体力不支可选择不去，直接驾车至贵阳休息游玩。</div>
   <div class="guide-box">
-    <div class="guide-header" onclick="document.getElementById('g6_1457818151').classList.toggle('open')">
+    <div class="guide-header" onclick="document.getElementById('g6_45511051').classList.toggle('open')">
       📝 游玩攻略 <span class="guide-toggle">▼</span>
     </div>
-    <div class="guide-body" id="g6_1457818151">
+    <div class="guide-body" id="g6_45511051">
       <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
       <div class="guide-item"><span class="guide-label">👥 适合</span>体力好的中青年（台阶较多）;不适合腿脚不便的老人;亲子需看孩子体力;摄影爱好者天堂</div>
       <div class="guide-item"><span class="guide-label">🗺️ 路线</span>入口→迎客厅→广寒宫（洞内最大厅高150米跨度175米可容万人）→银雨树（高17米方解石晶花全球唯一）→霸王盔（巨型石笋）→全程6.6km步行约2-3小时。织金洞被称为溶洞之王，「黄山归来不看岳，织金洞外无洞天」。</div>
@@ -609,10 +606,10 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <h4>🟢 贵州省博物馆 </h4>
   <div class="spot-desc">国家一级博物馆，以古生物化石和民族文物见长。镇馆之宝：<strong>贵州龙化石</strong>——三叠纪海生爬行动物，是研究古海洋生态的重要标本。民族展厅系统展示了苗族、布依族、侗族等18个世居民族的银饰、刺绣、服饰和建筑文化。建筑设计灵感来自贵州喀斯特山峰，本身就是一道风景。免费开放（需预约），游览约2-3小时。</div>
   <div class="guide-box">
-    <div class="guide-header" onclick="document.getElementById('g7_1248413798').classList.toggle('open')">
+    <div class="guide-header" onclick="document.getElementById('g7_161879365').classList.toggle('open')">
       📝 游玩攻略 <span class="guide-toggle">▼</span>
     </div>
-    <div class="guide-body" id="g7_1248413798">
+    <div class="guide-body" id="g7_161879365">
       <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
       <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;亲子教育价值高;文化爱好者必去;免费开放成本低</div>
       <div class="guide-item"><span class="guide-label">🗺️ 路线</span>序厅→古生物化石厅（贵州龙化石镇馆之宝）→民族文物厅（苗族银饰·布依族刺绣·侗族建筑）→临时展厅→全程约2-3小时。建筑设计灵感来自贵州喀斯特山峰，本身就是一道风景。</div>
@@ -624,10 +621,10 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <h4>🟢 青岩古镇 <span class="badge a5">5A</span></h4>
   <div class="spot-desc">始建于明洪武十一年（1378年），距今600余年。古镇依山而建，城墙蜿蜒山脊，城内保存明清石板街道、寺庙、牌坊。核心看点：<strong>定广门</strong>——古城正门；<strong>背街</strong>——青石板古巷，电影《寻枪》取景地；<strong>赵状元府</strong>——贵州第一位状元赵以炯故居。距贵阳市区约40分钟车程。逛完古镇不可错过一碗热气腾腾的卤猪脚。</div>
   <div class="guide-box">
-    <div class="guide-header" onclick="document.getElementById('g7_112617465').classList.toggle('open')">
+    <div class="guide-header" onclick="document.getElementById('g7_1584341157').classList.toggle('open')">
       📝 游玩攻略 <span class="guide-toggle">▼</span>
     </div>
-    <div class="guide-body" id="g7_112617465">
+    <div class="guide-body" id="g7_1584341157">
       <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
       <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜（城墙可选爬）;老人可逛主街+吃猪脚;亲子逛逛吃吃轻松愉快</div>
       <div class="guide-item"><span class="guide-label">🗺️ 路线</span>定广门（古城正门）→背街（青石板古巷寻枪取景地）→赵状元府（贵州第一位状元赵以炯故居）→古城墙→文昌阁→全程约2-3小时。始建于明洪武十一年（1378年），距今600余年。</div>
@@ -663,13 +660,13 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
     <li>🏠 <span class="sn">三江鼓楼美食街</span>（县城） — 集中侗族特色餐饮 · 高德指南</li>
   </ul>
   <div class="alt-spot">
-    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g8_1408859379').classList.toggle('open')" title="📝 点击展开游玩攻略">龙里油画大草原</span>（黔南龙里，⭐4.0）
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g8_493789799').classList.toggle('open')" title="📝 点击展开游玩攻略">龙里油画大草原</span>（黔南龙里，⭐4.0）
     <div class="alt-desc">高山台地草场，海拔1500-1700m，万亩草甸+白色风车群如宫崎骏画风。缆车、3D玻璃桥、滑草、骑马，亲子友好。贵阳东63km/0.9h，顺路仅绕行+11km，游玩1.5h后全程高速约18:30到三江。</div>
     <div class="guide-box">
-      <div class="guide-header" onclick="document.getElementById('g8_1408859379').classList.toggle('open')">
+      <div class="guide-header" onclick="document.getElementById('g8_493789799').classList.toggle('open')">
         📝 游玩攻略 <span class="guide-toggle">▼</span>
       </div>
-      <div class="guide-body" id="g8_1408859379">
+      <div class="guide-body" id="g8_493789799">
         <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1.5-2小时</div>
         <div class="guide-item"><span class="guide-label">👥 适合</span>亲子家庭满分;情侣出片好去处;老人可坐缆车赏景;不适合雨天前往</div>
         <div class="guide-item"><span class="guide-label">🗺️ 路线</span>游客中心→缆车上山→高山台地草场（万亩草甸+白色风车群）→3D玻璃桥→滑草→骑马→全程约1.5-2小时。海拔1500-1700m，夏季凉爽避暑。</div>
@@ -684,13 +681,13 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
     <div class="alt-desc">7月紫色马鞭草全盛期，800亩花海+风车+日落，"贵阳普罗旺斯"。贵阳南72km/1.4h。后半程G321国道沿都柳江→榕江→从江→三江，侗寨走廊风景绝美。游玩1.5h后约18:40到三江。</div>
   </div>
   <div class="alt-spot">
-    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g8_1361080204').classList.toggle('open')" title="📝 点击展开游玩攻略">程阳风雨桥</span>（三江，⭐6.00）
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g8_995119596').classList.toggle('open')" title="📝 点击展开游玩攻略">程阳风雨桥</span>（三江，⭐6.00）
     <div class="alt-desc">如走高速直达（15:40到），可趁下午光线好先去程阳八寨。建于1912年，与赵州桥、泸定桥并称世界四大历史名桥，全木质榫卯结构。16:00-18:00游览2h足够。如走备选A/B则跳过，D9上午再去。</div>
     <div class="guide-box">
-      <div class="guide-header" onclick="document.getElementById('g8_1361080204').classList.toggle('open')">
+      <div class="guide-header" onclick="document.getElementById('g8_995119596').classList.toggle('open')">
         📝 游玩攻略 <span class="guide-toggle">▼</span>
       </div>
-      <div class="guide-body" id="g8_1361080204">
+      <div class="guide-body" id="g8_995119596">
         <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-2.5小时</div>
         <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;文化爱好者;摄影爱好者;体力要求低</div>
         <div class="guide-item"><span class="guide-label">🗺️ 路线</span>程阳八寨大门→程阳风雨桥（世界四大历史名桥）→马鞍寨鼓楼→岩寨→平寨→全程约2-2.5小时。建于1912年，与赵州桥、泸定桥并称世界四大历史名桥，全木质榫卯结构不用一钉一铆。</div>
@@ -717,10 +714,10 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <h4>♨️ 西溪温泉 <span class="badge must">必去</span></h4>
   <div class="spot-desc">西溪温泉度假区拥有室内外泡池60余个，依山而建，泡池掩映于树林与溪流之间，日式园林风格。泉水为偏硅酸型医疗热矿泉，富含多种矿物质。配套温泉酒店、SPA、餐饮等设施，适合全家老少放松休整。连续赶路9天后，泡一池温泉洗去旅途疲惫，是行程最完美的收官。上午到达后可先午餐再办理入住，下午尽情享受温泉。</div>
   <div class="guide-box">
-    <div class="guide-header" onclick="document.getElementById('g9_1147242880').classList.toggle('open')">
+    <div class="guide-header" onclick="document.getElementById('g9_1662762546').classList.toggle('open')">
       📝 游玩攻略 <span class="guide-toggle">▼</span>
     </div>
-    <div class="guide-body" id="g9_1147242880">
+    <div class="guide-body" id="g9_1662762546">
       <div class="guide-item"><span class="guide-label">⏱️ 时长</span>半天至一天</div>
       <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;老人泡温泉对关节好;亲子玩水好去处;情侣度假氛围满分</div>
       <div class="guide-item"><span class="guide-label">🗺️ 路线</span>办理入住→换浴袍→山林泡池区（60余个泡池依山而建）→无边泳池（面朝山谷拍照）→晚餐（度假区内）→夜泡看星空→SPA。全程半天至一天。泉水为偏硅酸型医疗热矿泉，水温常年52-60°C。</div>
@@ -736,13 +733,13 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
     <li>🏠 <span class="sn">西溪温泉度假区餐厅</span>（园内） — 不出园方便省心 · 高德指南</li>
   </ul>
   <div class="alt-spot">
-    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g9_1361080204').classList.toggle('open')" title="📝 点击展开游玩攻略">程阳风雨桥</span>（三江，距县城30min，⭐6.00）
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g9_995119596').classList.toggle('open')" title="📝 点击展开游玩攻略">程阳风雨桥</span>（三江，距县城30min，⭐6.00）
     <div class="alt-desc">D8未去则D9上午补上。建于1912年，与赵州桥、泸定桥并称"世界四大历史名桥"，全木质榫卯结构不用一钉一铆。桥上有五座塔式桥亭，程阳八寨还有7座鼓楼可逛。09:00-11:30游览2.5h，晨光穿透桥亭木格极适合拍照。如D8已去，可睡到自然醒直接出发去贺州。</div>
     <div class="guide-box">
-      <div class="guide-header" onclick="document.getElementById('g9_1361080204').classList.toggle('open')">
+      <div class="guide-header" onclick="document.getElementById('g9_995119596').classList.toggle('open')">
         📝 游玩攻略 <span class="guide-toggle">▼</span>
       </div>
-      <div class="guide-body" id="g9_1361080204">
+      <div class="guide-body" id="g9_995119596">
         <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-2.5小时</div>
         <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;文化爱好者;摄影爱好者;体力要求低</div>
         <div class="guide-item"><span class="guide-label">🗺️ 路线</span>程阳八寨大门→程阳风雨桥（世界四大历史名桥）→马鞍寨鼓楼→岩寨→平寨→全程约2-2.5小时。建于1912年，与赵州桥、泸定桥并称世界四大历史名桥，全木质榫卯结构不用一钉一铆。</div>
@@ -911,6 +908,10 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 
     <div class="summary" id="toc-summary">
   <h2>📊 行程总览</h2>
+  <div class="trip-overview-card">
+    <div class="tov-item">🚗 2车自驾 · 总程 2,839km</div>
+    <div class="tov-item">🏷️ 梵净山 × 遵义 × 赤水丹霞 × 织金洞 × 侗乡 × 温泉</div>
+  </div>
   <div class="sg">
     <div class="sca"><div class="ico">🎫</div><div class="big">10</div><div class="lbl">景点总数</div><div class="dl"><span><span>5A 级</span><span class="hv">4个</span></span><span><span>4A 级</span><span class="gv">4个</span></span><span><span>特殊/未评级</span><span class="gv">2个</span></span></div></div>
     <div class="sca"><div class="ico">🚗</div><div class="big">34.4h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">2,839km</span></span><span><span>平均（10天）</span><span class="gv">3.4h/天</span></span><span><span>平均（驾驶日8天）</span><span class="gv">4.3h/天</span></span><span><span>停驶日</span><span class="gv">D3 · D7（2天）</span></span></div></div>
@@ -934,6 +935,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
     </div>
   </div>
   <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">高德地图 REST API 实测驾驶数据 · 生成日期 2026-06-30</div>
+  <div class="summary-tips">💡 首末日≤6h · 普通日≤3h · 弹性日≤6h（≤2天&gt;5h）· 🛰️ 高德API实测 · 🧥 贵阳夜间22°C带薄外套 · ⛰️ 梵净山暑期需早起排队</div>
 </div>
 
     <div class="budget" id="toc-budget">
@@ -979,8 +981,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
       <tr><th>#</th><th>景点</th><th>位置</th><th>等级</th><th>美誉30%</th><th>人流15%</th><th>可玩25%</th><th>住宿5%</th><th>距离5%</th><th>美食20%</th><th>总分</th><th>状态</th></tr>
     </thead>
     <tbody>
-      <tr class="sel"><td>1</td><td class="spot-clickable" onclick="document.getElementById('sg_287992950').classList.toggle('open')">贵阳省博 📖</td><td>贵阳</td><td>—</td><td>7</td><td>8</td><td>7</td><td>9</td><td>6</td><td>9</td><td class="sc">7.6</td><td>✅ D7</td></tr>
-      <tr class="score-guide-row" id="sg_287992950">
+      <tr class="sel"><td>1</td><td class="spot-clickable" onclick="document.getElementById('sg_1565903207').classList.toggle('open')">贵阳省博 📖</td><td>贵阳</td><td>—</td><td>7</td><td>8</td><td>7</td><td>9</td><td>6</td><td>9</td><td class="sc">7.6</td><td>✅ D7</td></tr>
+      <tr class="score-guide-row" id="sg_1565903207">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
@@ -993,8 +995,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>2</td><td class="spot-clickable" onclick="document.getElementById('sg_442069969').classList.toggle('open')">小七孔 📖</td><td>荔波</td><td>5A</td><td>9</td><td>3</td><td>9</td><td>3</td><td>7</td><td>6</td><td class="sc">7.1</td><td>❌ 本线不经</td></tr>
-      <tr class="score-guide-row" id="sg_442069969">
+      <tr class="skip"><td>2</td><td class="spot-clickable" onclick="document.getElementById('sg_2016289785').classList.toggle('open')">小七孔 📖</td><td>荔波</td><td>5A</td><td>9</td><td>3</td><td>9</td><td>3</td><td>7</td><td>6</td><td class="sc">7.1</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_2016289785">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>6-8小时</div>
@@ -1007,8 +1009,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>3</td><td class="spot-clickable" onclick="document.getElementById('sg_1706701909').classList.toggle('open')">龙宫 📖</td><td>安顺</td><td>5A</td><td>7</td><td>6</td><td>8</td><td>6</td><td>4</td><td>7</td><td class="sc">6.95</td><td>❌ 本线不经</td></tr>
-      <tr class="score-guide-row" id="sg_1706701909">
+      <tr class="skip"><td>3</td><td class="spot-clickable" onclick="document.getElementById('sg_418075821').classList.toggle('open')">龙宫 📖</td><td>安顺</td><td>5A</td><td>7</td><td>6</td><td>8</td><td>6</td><td>4</td><td>7</td><td class="sc">6.95</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_418075821">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
@@ -1021,8 +1023,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="sel"><td>4</td><td class="spot-clickable" onclick="document.getElementById('sg_112617465').classList.toggle('open')">青岩古镇 📖</td><td>贵阳</td><td>5A</td><td>7</td><td>5</td><td>6</td><td>9</td><td>8</td><td>8</td><td class="sc">6.8</td><td>✅ D7</td></tr>
-      <tr class="score-guide-row" id="sg_112617465">
+      <tr class="sel"><td>4</td><td class="spot-clickable" onclick="document.getElementById('sg_1584341157').classList.toggle('open')">青岩古镇 📖</td><td>贵阳</td><td>5A</td><td>7</td><td>5</td><td>6</td><td>9</td><td>8</td><td>8</td><td class="sc">6.8</td><td>✅ D7</td></tr>
+      <tr class="score-guide-row" id="sg_1584341157">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
@@ -1035,8 +1037,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>5</td><td class="spot-clickable" onclick="document.getElementById('sg_2102697692').classList.toggle('open')">黄果树瀑布 📖</td><td>安顺</td><td>5A</td><td>10</td><td>2</td><td>7</td><td>6</td><td>5</td><td>7</td><td class="sc">6.7</td><td>❌ 本线不经</td></tr>
-      <tr class="score-guide-row" id="sg_2102697692">
+      <tr class="skip"><td>5</td><td class="spot-clickable" onclick="document.getElementById('sg_2077091945').classList.toggle('open')">黄果树瀑布 📖</td><td>安顺</td><td>5A</td><td>10</td><td>2</td><td>7</td><td>6</td><td>5</td><td>7</td><td class="sc">6.7</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_2077091945">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>5-7小时</div>
@@ -1049,8 +1051,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>6</td><td class="spot-clickable" onclick="document.getElementById('sg_1997850636').classList.toggle('open')">FAST天眼 📖</td><td>平塘</td><td>—</td><td>8</td><td>7</td><td>8</td><td>2</td><td>6</td><td>4</td><td class="sc">6.65</td><td>❌ 本线不经</td></tr>
-      <tr class="score-guide-row" id="sg_1997850636">
+      <tr class="skip"><td>6</td><td class="spot-clickable" onclick="document.getElementById('sg_390968409').classList.toggle('open')">FAST天眼 📖</td><td>平塘</td><td>—</td><td>8</td><td>7</td><td>8</td><td>2</td><td>6</td><td>4</td><td class="sc">6.65</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_390968409">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>4-5小时</div>
@@ -1063,8 +1065,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>7</td><td class="spot-clickable" onclick="document.getElementById('sg_1010127962').classList.toggle('open')">大七孔 📖</td><td>荔波</td><td>5A</td><td>7</td><td>7</td><td>7</td><td>3</td><td>7</td><td>6</td><td class="sc">6.6</td><td>❌ 本线不经</td></tr>
-      <tr class="score-guide-row" id="sg_1010127962">
+      <tr class="skip"><td>7</td><td class="spot-clickable" onclick="document.getElementById('sg_380827954').classList.toggle('open')">大七孔 📖</td><td>荔波</td><td>5A</td><td>7</td><td>7</td><td>7</td><td>3</td><td>7</td><td>6</td><td class="sc">6.6</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_380827954">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
@@ -1077,8 +1079,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>8</td><td class="spot-clickable" onclick="document.getElementById('sg_708812050').classList.toggle('open')">万峰林 📖</td><td>兴义</td><td>5A</td><td>8</td><td>7</td><td>7</td><td>5</td><td>2</td><td>6</td><td class="sc">6.6</td><td>❌ 偏远</td></tr>
-      <tr class="score-guide-row" id="sg_708812050">
+      <tr class="skip"><td>8</td><td class="spot-clickable" onclick="document.getElementById('sg_273312703').classList.toggle('open')">万峰林 📖</td><td>兴义</td><td>5A</td><td>8</td><td>7</td><td>7</td><td>5</td><td>2</td><td>6</td><td class="sc">6.6</td><td>❌ 偏远</td></tr>
+      <tr class="score-guide-row" id="sg_273312703">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>3-5小时</div>
@@ -1091,8 +1093,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>9</td><td class="spot-clickable" onclick="document.getElementById('sg_1188084050').classList.toggle('open')">西江苗寨 📖</td><td>雷山</td><td>5A</td><td>9</td><td>2</td><td>7</td><td>3</td><td>3</td><td>7</td><td class="sc">6.3</td><td>❌ 暑期爆满</td></tr>
-      <tr class="score-guide-row" id="sg_1188084050">
+      <tr class="skip"><td>9</td><td class="spot-clickable" onclick="document.getElementById('sg_310814546').classList.toggle('open')">西江苗寨 📖</td><td>雷山</td><td>5A</td><td>9</td><td>2</td><td>7</td><td>3</td><td>3</td><td>7</td><td class="sc">6.3</td><td>❌ 暑期爆满</td></tr>
+      <tr class="score-guide-row" id="sg_310814546">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>4-6小时</div>
@@ -1106,8 +1108,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
         </td>
       </tr>
       <tr class="sel"><td>10</td><td>遵义会议会址</td><td>遵义</td><td>4A</td><td>8</td><td>6</td><td>5</td><td>6</td><td>4</td><td>6</td><td class="sc">6.25</td><td>✅ D4</td></tr>
-      <tr class="skip"><td>11</td><td class="spot-clickable" onclick="document.getElementById('sg_938808566').classList.toggle('open')">花江大桥 📖</td><td>关岭</td><td>—</td><td>7</td><td>8</td><td>7</td><td>3</td><td>4</td><td>4</td><td class="sc">6.2</td><td>❌ 本线不经</td></tr>
-      <tr class="score-guide-row" id="sg_938808566">
+      <tr class="skip"><td>11</td><td class="spot-clickable" onclick="document.getElementById('sg_133796327').classList.toggle('open')">花江大桥 📖</td><td>关岭</td><td>—</td><td>7</td><td>8</td><td>7</td><td>3</td><td>4</td><td>4</td><td class="sc">6.2</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_133796327">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1-2小时</div>
@@ -1120,8 +1122,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="must"><td>12</td><td class="spot-clickable" onclick="document.getElementById('sg_1457818151').classList.toggle('open')">织金洞 📖</td><td>织金</td><td>5A</td><td>8</td><td>7</td><td>5</td><td>2</td><td>4</td><td>5</td><td class="sc">6.15</td><td>✅ D6必去</td></tr>
-      <tr class="score-guide-row" id="sg_1457818151">
+      <tr class="must"><td>12</td><td class="spot-clickable" onclick="document.getElementById('sg_45511051').classList.toggle('open')">织金洞 📖</td><td>织金</td><td>5A</td><td>8</td><td>7</td><td>5</td><td>2</td><td>4</td><td>5</td><td class="sc">6.15</td><td>✅ D6必去</td></tr>
+      <tr class="score-guide-row" id="sg_45511051">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
@@ -1135,8 +1137,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
         </td>
       </tr>
       <tr class="sel"><td>13</td><td>赤水大瀑布</td><td>赤水</td><td>5A</td><td>8</td><td>7</td><td>6</td><td>3</td><td>2</td><td>5</td><td class="sc">6.1</td><td>✅ D5</td></tr>
-      <tr class="skip"><td>14</td><td class="spot-clickable" onclick="document.getElementById('sg_897797818').classList.toggle('open')">马岭河 📖</td><td>兴义</td><td>5A</td><td>7</td><td>7</td><td>6</td><td>5</td><td>2</td><td>6</td><td class="sc">6.05</td><td>❌ 偏远</td></tr>
-      <tr class="score-guide-row" id="sg_897797818">
+      <tr class="skip"><td>14</td><td class="spot-clickable" onclick="document.getElementById('sg_855682777').classList.toggle('open')">马岭河 📖</td><td>兴义</td><td>5A</td><td>7</td><td>7</td><td>6</td><td>5</td><td>2</td><td>6</td><td class="sc">6.05</td><td>❌ 偏远</td></tr>
+      <tr class="score-guide-row" id="sg_855682777">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
@@ -1150,8 +1152,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
         </td>
       </tr>
       <tr class="skip"><td>15</td><td>茂兰</td><td>荔波</td><td>—</td><td>7</td><td>9</td><td>5</td><td>2</td><td>7</td><td>5</td><td class="sc">6.05</td><td>❌ 本线不经</td></tr>
-      <tr class="sel"><td>16</td><td class="spot-clickable" onclick="document.getElementById('sg_1361080204').classList.toggle('open')">程阳风雨桥 📖</td><td>三江</td><td>4A</td><td>7</td><td>6</td><td>6</td><td>2</td><td>7</td><td>5</td><td class="sc">6</td><td>✅ D8-D9</td></tr>
-      <tr class="score-guide-row" id="sg_1361080204">
+      <tr class="sel"><td>16</td><td class="spot-clickable" onclick="document.getElementById('sg_995119596').classList.toggle('open')">程阳风雨桥 📖</td><td>三江</td><td>4A</td><td>7</td><td>6</td><td>6</td><td>2</td><td>7</td><td>5</td><td class="sc">6</td><td>✅ D8-D9</td></tr>
+      <tr class="score-guide-row" id="sg_995119596">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-2.5小时</div>
@@ -1164,8 +1166,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>17</td><td class="spot-clickable" onclick="document.getElementById('sg_1097583911').classList.toggle('open')">肇兴侗寨 📖</td><td>黎平</td><td>4A</td><td>7</td><td>7</td><td>6</td><td>2</td><td>3</td><td>6</td><td class="sc">6</td><td>❌ 绕路</td></tr>
-      <tr class="score-guide-row" id="sg_1097583911">
+      <tr class="skip"><td>17</td><td class="spot-clickable" onclick="document.getElementById('sg_487940480').classList.toggle('open')">肇兴侗寨 📖</td><td>黎平</td><td>4A</td><td>7</td><td>7</td><td>6</td><td>2</td><td>3</td><td>6</td><td class="sc">6</td><td>❌ 绕路</td></tr>
+      <tr class="score-guide-row" id="sg_487940480">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>4-6小时</div>
@@ -1178,8 +1180,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="must"><td>18</td><td class="spot-clickable" onclick="document.getElementById('sg_583742294').classList.toggle('open')">梵净山 📖</td><td>铜仁</td><td>5A</td><td>10</td><td>4</td><td>4</td><td>4</td><td>2</td><td>5</td><td class="sc">6</td><td>✅ D3必去</td></tr>
-      <tr class="score-guide-row" id="sg_583742294">
+      <tr class="must"><td>18</td><td class="spot-clickable" onclick="document.getElementById('sg_855908361').classList.toggle('open')">梵净山 📖</td><td>铜仁</td><td>5A</td><td>10</td><td>4</td><td>4</td><td>4</td><td>2</td><td>5</td><td class="sc">6</td><td>✅ D3必去</td></tr>
+      <tr class="score-guide-row" id="sg_855908361">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>5-7小时</div>
@@ -1192,8 +1194,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>19</td><td class="spot-clickable" onclick="document.getElementById('sg_574138150').classList.toggle('open')">双河洞 📖</td><td>遵义</td><td>4A</td><td>7</td><td>8</td><td>6</td><td>3</td><td>3</td><td>4</td><td class="sc">5.85</td><td>❌ 绕路</td></tr>
-      <tr class="score-guide-row" id="sg_574138150">
+      <tr class="skip"><td>19</td><td class="spot-clickable" onclick="document.getElementById('sg_1140727202').classList.toggle('open')">双河洞 📖</td><td>遵义</td><td>4A</td><td>7</td><td>8</td><td>6</td><td>3</td><td>3</td><td>4</td><td class="sc">5.85</td><td>❌ 绕路</td></tr>
+      <tr class="score-guide-row" id="sg_1140727202">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>3-4小时</div>
@@ -1206,8 +1208,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
           </div>
         </td>
       </tr>
-      <tr class="skip"><td>20</td><td class="spot-clickable" onclick="document.getElementById('sg_739988197').classList.toggle('open')">镇远古镇 📖</td><td>黔东南</td><td>5A</td><td>7</td><td>4</td><td>6</td><td>4</td><td>3</td><td>6</td><td class="sc">5.8</td><td>❌ 绕路</td></tr>
-      <tr class="score-guide-row" id="sg_739988197">
+      <tr class="skip"><td>20</td><td class="spot-clickable" onclick="document.getElementById('sg_515643898').classList.toggle('open')">镇远古镇 📖</td><td>黔东南</td><td>5A</td><td>7</td><td>4</td><td>6</td><td>4</td><td>3</td><td>6</td><td class="sc">5.8</td><td>❌ 绕路</td></tr>
+      <tr class="score-guide-row" id="sg_515643898">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>3-5小时</div>
@@ -1256,10 +1258,11 @@ document.getElementById('weatherStrip').style.display='none';
 
 var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
 var A=[],H=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
-new AMap.Marker({position:[113.237378,23.065823],map:map,title:'起点',content:'<div style="transform:translate(-50%,-100%);background:#f39c12;color:#fff;padding:3px 10px;border-radius:4px;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)">🚩 出发</div>',offset:new AMap.Pixel(0,-8)});
+var HI='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><circle cx="8" cy="8" r="7" fill="%23e74c3c" stroke="white" stroke-width="2"/></svg>',SI='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><circle cx="8" cy="8" r="7" fill="%232ecc71" stroke="white" stroke-width="2"/></svg>',OI='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><circle cx="8" cy="8" r="7" fill="%23f39c12" stroke="white" stroke-width="2"/></svg>';
+new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
 A.push([113.237378,23.065823]);
-var posIdx={},DIRS=[{x:0,y:-6},{x:34,y:-6},{x:-34,y:-6},{x:0,y:18}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({position:d.h,map:map,title:'D'+(i+1),content:'<div style="transform:translate(-50%,-100%);background:#e74c3c;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)">🏨 '+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({position:s.p,map:map,title:s.l,content:'<div style="transform:translate(-50%,-100%);background:#2ecc71;color:#fff;padding:3px 8px;border-radius:4px;font-size:11px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)">📍 '+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
-new AMap.Marker({position:[113.237378,23.065823],map:map,title:'终点',content:'<div style="transform:translate(-50%,-100%);background:#f39c12;color:#fff;padding:3px 10px;border-radius:4px;font-size:13px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.35)">🏁 到家</div>',offset:new AMap.Pixel(0,-8)});
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
+new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
 function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="var el=document.getElementById(\'d'+(n+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
 function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
 function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
