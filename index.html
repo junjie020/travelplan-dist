@@ -5,115 +5,189 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TravelAssist · 行程索引（9个方案）</title>
 <style>
-:root{--bg:#f5f6fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--accent:#0d3b66}
+:root{--bg:#f5f6fa;--text:#2c3e50;--muted:#7f8c8d;--muted2:#b0b8c1;--accent:#0d3b66;--hover-bg:#f0f4f8;--line:#dce3ea}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;max-width:960px;margin:0 auto;padding:20px}
 .header{background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;padding:32px;text-align:center;border-radius:12px;margin-bottom:24px}
 .header h1{font-size:1.8rem;margin-bottom:6px;letter-spacing:2px}
 .header .sub{font-size:.88rem;opacity:.85}
-.account-section{margin-bottom:28px}
-.account-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--accent)}
-.account-avatar{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700}
-.account-name{font-size:1.3rem;font-weight:700;color:var(--accent)}
-.account-count{font-size:.82rem;color:var(--muted)}
-.trip-group{margin-bottom:16px;margin-left:12px}
-.trip-title{font-size:1.05rem;font-weight:600;color:#555;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.trip-title .trip-date{color:var(--accent);font-size:.88rem}
-.version-list{display:flex;flex-wrap:wrap;gap:8px;margin-left:16px}
-.version-card{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid #e0e0e0;border-radius:8px;padding:8px 14px;transition:box-shadow .15s,border-color .15s;text-decoration:none;color:var(--text)}
-.version-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.08);border-color:var(--accent)}
-.version-card .v-icon{font-size:1rem}
-.version-card .v-name{font-weight:600;font-size:.88rem}
-.version-card .v-title{font-size:.76rem;color:var(--muted);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* ---- Tree ---- */
+.tree{padding-left:8px}
+.tree-node{position:relative}
+.tree-node.account{margin-bottom:20px}
+.tree-row{display:flex;align-items:center;gap:6px;padding:3px 8px;border-radius:6px;white-space:nowrap}
+.tree-row:hover{background:var(--hover-bg)}
+.tree-row a{text-decoration:none;color:inherit;display:flex;align-items:center;gap:6px;overflow:hidden}
+.tree-row a:hover .v-name{text-decoration:underline}
+
+.account-toggle{font-size:1rem;cursor:pointer;width:18px;text-align:center;flex-shrink:0;user-select:none;color:var(--muted)}
+.account-icon{font-size:1.1rem;flex-shrink:0}
+.account-name{font-size:1.2rem;font-weight:700;color:var(--accent)}
+.account-count{font-size:.8rem;color:var(--muted2)}
+
+.trip-toggle{font-size:.85rem;cursor:pointer;width:16px;text-align:center;flex-shrink:0;user-select:none;color:var(--muted)}
+.trip-icon{font-size:.95rem;flex-shrink:0}
+.trip-label{font-weight:600;color:#4a5568;font-size:.95rem}
+.trip-count{font-size:.76rem;color:var(--muted2)}
+
+.v-icon{font-size:.85rem;flex-shrink:0}
+.v-name{font-weight:600;font-size:.87rem;flex-shrink:0}
+.v-title{font-size:.8rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis}
+.v-time{font-size:.74rem;color:var(--muted2);flex-shrink:0;margin-left:auto}
+
+.children{margin-left:22px;border-left:1px solid var(--line)}
+.children.collapsed{display:none}
+
 .footer{text-align:center;margin-top:32px;padding:16px;color:var(--muted);font-size:.78rem;border-top:1px solid #e0e0e0}
 .empty{text-align:center;padding:60px 20px;color:var(--muted);font-size:1rem}
 .empty .big{font-size:3rem;margin-bottom:12px}
+
+@media(max-width:640px){
+  .v-title{max-width:140px}
+  .v-time{display:none}
+}
 </style>
+<script>
+function toggle(el) {
+  var children = el.parentElement.querySelector('.children');
+  if (children) {
+    children.classList.toggle('collapsed');
+    el.textContent = children.classList.contains('collapsed') ? '▶' : '▼';
+  }
+}
+</script>
 </head>
 <body>
 <div class="header">
 <h1>🗺️ TravelAssist · 行程索引</h1>
-<div class="sub">共 9 个出行方案 · 更新于 2026-07-04 11:59</div>
+<div class="sub">共 9 个出行方案 · 更新于 2026-07-05 10:20</div>
 </div>
-<div class="account-section">
-<div class="account-header">
-<div class="account-avatar">J</div>
-<div class="account-name">jingli</div>
-<div class="account-count">1 个方案</div>
+<div class="tree">
+<div class="tree-node account">
+<div class="tree-row">
+<span class="account-toggle" onclick="toggle(this)">▼</span>
+<span class="account-icon">📁</span>
+<span class="account-name">jingli</span>
+<span class="account-count">1个方案</span>
 </div>
-<div class="trip-group">
-<div class="trip-title">
-<span class="trip-date">📅 2026-07-08</span>
-<span>河池</span>
-<span style="font-size:.78rem;color:var(--muted)">1版本</span>
+<div class="children">
+<div class="tree-node trip">
+<div class="tree-row">
+<span class="trip-toggle" onclick="toggle(this)">▼</span>
+<span class="trip-icon">📅</span>
+<span class="trip-label">2026-07-08 · 河池</span>
+<span class="trip-count">1个版本</span>
 </div>
-<div class="version-list">
-<a class="version-card" href="jingli/2026-07-08-河池/河池版.html">
+<div class="children">
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="jingli/2026-07-08-河池/河池版.html">
 <span class="v-icon">📄</span>
 <span class="v-name">河池版</span>
 <span class="v-title" title="🏔️ 河池5日自驾 — 金城江·南丹·宜州">🏔️ 河池5日自驾 — 金城江·南丹·宜州</span>
 </a>
+<span class="v-time">2026-07-04 10:29</span>
 </div>
 </div>
 </div>
-<div class="account-section">
-<div class="account-header">
-<div class="account-avatar">J</div>
-<div class="account-name">junjie020</div>
-<div class="account-count">8 个方案</div>
 </div>
-<div class="trip-group">
-<div class="trip-title">
-<span class="trip-date">📅 2026-07-10</span>
-<span>贵州自驾</span>
-<span style="font-size:.78rem;color:var(--muted)">8版本</span>
 </div>
-<div class="version-list">
-<a class="version-card" href="junjie020/2026-07-10-贵州自驾/三江版.html">
-<span class="v-icon">📄</span>
-<span class="v-name">三江版</span>
-<span class="v-title" title="🏔️ 贵州10天自驾 — 三江版">🏔️ 贵州10天自驾 — 三江版</span>
-</a>
-<a class="version-card" href="junjie020/2026-07-10-贵州自驾/侗寨温泉版.html">
-<span class="v-icon">📄</span>
-<span class="v-name">侗寨温泉版</span>
-<span class="v-title" title="🏔️ 贵州侗寨温泉10日游">🏔️ 贵州侗寨温泉10日游</span>
-</a>
-<a class="version-card" href="junjie020/2026-07-10-贵州自驾/初版.html">
-<span class="v-icon">📄</span>
-<span class="v-name">初版</span>
-<span class="v-title" title="🏔️ 贵州·湖南·广西自驾10日游">🏔️ 贵州·湖南·广西自驾10日游</span>
-</a>
-<a class="version-card" href="junjie020/2026-07-10-贵州自驾/暴雨备选.html">
-<span class="v-icon">🔄</span>
-<span class="v-name">暴雨备选</span>
-<span class="v-title" title="🌧️ 贵州10天自驾 — 暴雨备选版">🌧️ 贵州10天自驾 — 暴雨备选版</span>
-</a>
-<a class="version-card" href="junjie020/2026-07-10-贵州自驾/梵净山版.html">
-<span class="v-icon">📄</span>
-<span class="v-name">梵净山版</span>
-<span class="v-title" title="🏔️ 贵州10天自驾 — 梵净山版">🏔️ 贵州10天自驾 — 梵净山版</span>
-</a>
-<a class="version-card" href="junjie020/2026-07-10-贵州自驾/花江版.html">
-<span class="v-icon">📄</span>
-<span class="v-name">花江版</span>
-<span class="v-title" title="🏔️ 贵州10天自驾 — 花江版（小七孔关闭备选）">🏔️ 贵州10天自驾 — 花江版（小七孔关闭备选）</span>
-</a>
-<a class="version-card" href="junjie020/2026-07-10-贵州自驾/逆时针版.html">
-<span class="v-icon">📄</span>
-<span class="v-name">逆时针版</span>
-<span class="v-title" title="🔄 贵州10天自驾 — 逆时针版">🔄 贵州10天自驾 — 逆时针版</span>
-</a>
-<a class="version-card" href="junjie020/2026-07-10-贵州自驾/黄果树版.html">
+<div class="tree-node account">
+<div class="tree-row">
+<span class="account-toggle" onclick="toggle(this)">▼</span>
+<span class="account-icon">📁</span>
+<span class="account-name">junjie020</span>
+<span class="account-count">8个方案</span>
+</div>
+<div class="children">
+<div class="tree-node trip">
+<div class="tree-row">
+<span class="trip-toggle" onclick="toggle(this)">▼</span>
+<span class="trip-icon">📅</span>
+<span class="trip-label">2026-07-10 · 贵州自驾</span>
+<span class="trip-count">8个版本</span>
+</div>
+<div class="children">
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="junjie020/2026-07-10-贵州自驾/黄果树版.html">
 <span class="v-icon">📄</span>
 <span class="v-name">黄果树版</span>
 <span class="v-title" title="🏔️ 贵州10天自驾 — 黄果树版">🏔️ 贵州10天自驾 — 黄果树版</span>
 </a>
+<span class="v-time">2026-07-05 10:11</span>
+</div>
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="junjie020/2026-07-10-贵州自驾/花江版.html">
+<span class="v-icon">📄</span>
+<span class="v-name">花江版</span>
+<span class="v-title" title="🏔️ 贵州10天自驾 — 花江版（小七孔关闭备选）">🏔️ 贵州10天自驾 — 花江版（小七孔关闭备选）</span>
+</a>
+<span class="v-time">2026-07-04 10:29</span>
+</div>
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="junjie020/2026-07-10-贵州自驾/梵净山版.html">
+<span class="v-icon">📄</span>
+<span class="v-name">梵净山版</span>
+<span class="v-title" title="🏔️ 贵州10天自驾 — 梵净山版">🏔️ 贵州10天自驾 — 梵净山版</span>
+</a>
+<span class="v-time">2026-07-04 10:29</span>
+</div>
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="junjie020/2026-07-10-贵州自驾/初版.html">
+<span class="v-icon">📄</span>
+<span class="v-name">初版</span>
+<span class="v-title" title="🏔️ 贵州·湖南·广西自驾10日游">🏔️ 贵州·湖南·广西自驾10日游</span>
+</a>
+<span class="v-time">2026-07-04 10:29</span>
+</div>
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="junjie020/2026-07-10-贵州自驾/侗寨温泉版.html">
+<span class="v-icon">📄</span>
+<span class="v-name">侗寨温泉版</span>
+<span class="v-title" title="🏔️ 贵州侗寨温泉10日游">🏔️ 贵州侗寨温泉10日游</span>
+</a>
+<span class="v-time">2026-07-04 10:29</span>
+</div>
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="junjie020/2026-07-10-贵州自驾/三江版.html">
+<span class="v-icon">📄</span>
+<span class="v-name">三江版</span>
+<span class="v-title" title="🏔️ 贵州10天自驾 — 三江版">🏔️ 贵州10天自驾 — 三江版</span>
+</a>
+<span class="v-time">2026-07-04 10:29</span>
+</div>
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="junjie020/2026-07-10-贵州自驾/逆时针版.html">
+<span class="v-icon">📄</span>
+<span class="v-name">逆时针版</span>
+<span class="v-title" title="🔄 贵州10天自驾 — 逆时针版">🔄 贵州10天自驾 — 逆时针版</span>
+</a>
+<span class="v-time">2026-07-04 10:29</span>
+</div>
+<div class="tree-row leaf">
+<span style="width:16px;flex-shrink:0"></span>
+<a href="junjie020/2026-07-10-贵州自驾/暴雨备选.html">
+<span class="v-icon">🔄</span>
+<span class="v-name">暴雨备选</span>
+<span class="v-title" title="🌧️ 贵州10天自驾 — 暴雨备选版">🌧️ 贵州10天自驾 — 暴雨备选版</span>
+</a>
+<span class="v-time">2026-07-04 10:29</span>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div class="footer">
-Generated by TravelAssist html-publish · 2026-07-04 11:59
+Generated by TravelAssist html-publish · 2026-07-05 10:20
 </div>
 </body>
 </html>
