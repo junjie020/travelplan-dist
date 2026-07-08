@@ -745,6 +745,56 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
 </div>
 
+  </div>
+
+  <div class="bottom-col bottom-right">
+    <div class="scoring-section" id="toc-scoring">
+  <h2>⭐ 景点评分体系</h2>
+  <h3>评分维度与权重</h3>
+  <table class="method-table">
+    <thead><tr><th>维度</th><th>权重</th><th>评分标准</th></tr></thead>
+    <tbody>
+      <tr><td>🏅 美誉度</td><td><strong>30%</strong></td><td>官方评级（5A/4A）、携程/大众点评口碑</td></tr>
+      <tr><td>🎮 可玩性</td><td><strong>25%</strong></td><td>亲子友好、体力要求、互动参与感·玩水/探洞权重高</td></tr>
+      <tr><td>🍜 美食吸引度</td><td><strong>20%</strong></td><td>所在城市特色美食丰富度与口碑</td></tr>
+      <tr><td>👥 人流量</td><td><strong>15%</strong></td><td>暑期拥挤程度——人越少分越高（反向计分）</td></tr>
+      <tr><td>🏨 住宿豪华度</td><td><strong>5%</strong></td><td>所在城市豪华/五星级酒店选择丰富度</td></tr>
+      <tr><td>📍 抵达距离</td><td><strong>5%</strong></td><td>离金城江大本营的距离——越近分越高</td></tr>
+    </tbody>
+  </table>
+  <h3>10个候选景点完整评分 <span style="font-weight:400;font-size:.78rem;color:var(--muted)">（点击景点名展开攻略）</span></h3>
+  <table class="full-scores" id="candidates-table">
+    <thead>
+      <tr><th>#</th><th>景点</th><th>位置</th><th>等级</th><th>美誉30%</th><th>人流15%</th><th>可玩25%</th><th>住宿5%</th><th>距离5%</th><th>美食20%</th><th>总分</th><th>状态</th></tr>
+    </thead>
+    <tbody>
+      <tr class="must"><td>1</td><td class="spot-clickable" onclick="document.getElementById('sg_592373959').classList.toggle('open')">西溪温泉 📖</td><td>贺州</td><td>4A</td><td>7</td><td>7</td><td>8</td><td>9</td><td>8</td><td>6</td><td class="sc">7.2</td><td>✅ D4-D5</td></tr>
+      <tr class="score-guide-row" id="sg_592373959">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>半天至一天</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;老人泡温泉对关节好;亲子玩水好去处;情侣度假氛围满分</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>办理入住→换浴袍→山林泡池区（60余个泡池依山而建）→无边泳池（面朝山谷拍照）→晚餐（度假区内）→夜泡看星空→SPA。全程半天至一天。泉水为偏硅酸型医疗热矿泉，水温常年52-60°C。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>依山而建日式园林风格泡池掩映树林溪流间;偏硅酸型医疗热矿泉对皮肤关节有养护;无边泳池面朝山谷拍照绝佳;夜泡看星空体验极佳;60余个泡池选择丰富</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>暑期温泉紧俏务必提前1-2周预订;周末人超级多工作日体验好很多;温泉泡太久会头晕每次不超15分钟;园区餐饮价格偏高;部分泡池水温较高小孩需注意</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>提前1-2周预订暑期紧俏;带泳衣+浴袍（房间有提供）;温泉酒店通常含早+无限次泡泉;到达后先办理入住再泡温泉，晚餐在度假区内享用;泡完温泉多喝水补充水分</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信3|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="must"><td>2</td><td>环江牛角寨瀑布群</td><td>环江</td><td>—</td><td>5</td><td>8</td><td>9</td><td>2</td><td>7</td><td>5</td><td class="sc">6.4</td><td>✅ D3 必去</td></tr>
+      <tr class="sel"><td>3</td><td>罗城棉花天坑</td><td>罗城</td><td>4A</td><td>6</td><td>7</td><td>7</td><td>2</td><td>7</td><td>5</td><td class="sc">6.05</td><td>✅ D4</td></tr>
+      <tr class="sel"><td>4</td><td>河池小三峡</td><td>金城江</td><td>—</td><td>6</td><td>7</td><td>6</td><td>3</td><td>9</td><td>5</td><td class="sc">5.95</td><td>✅ D2</td></tr>
+      <tr class="sel"><td>5</td><td>龙江第一湾</td><td>金城江</td><td>—</td><td>5</td><td>8</td><td>5</td><td>2</td><td>8</td><td>5</td><td class="sc">5.4</td><td>🔷 备选D2</td></tr>
+      <tr class="skip"><td>6</td><td>洞天酒海</td><td>南丹</td><td>4A</td><td>7</td><td>7</td><td>4</td><td>3</td><td>6</td><td>5</td><td class="sc">5.85</td><td>❌ 人文品酒类·不符合偏好</td></tr>
+      <tr class="skip"><td>7</td><td>歌娅思谷</td><td>南丹</td><td>4A</td><td>6</td><td>8</td><td>5</td><td>3</td><td>5</td><td>5</td><td class="sc">5.8</td><td>❌ 民俗人文类·不符合偏好</td></tr>
+      <tr class="skip"><td>8</td><td>刘三姐故里</td><td>宜州</td><td>4A</td><td>6</td><td>7</td><td>5</td><td>3</td><td>6</td><td>5</td><td class="sc">5.7</td><td>❌ 人文观光类·不符合偏好</td></tr>
+      <tr class="skip"><td>9</td><td>都安吞榜天窗</td><td>都安</td><td>—</td><td>7</td><td>5</td><td>9</td><td>2</td><td>4</td><td>4</td><td class="sc">6.3</td><td>❌ 距金城江1.7h太远</td></tr>
+      <tr class="skip"><td>10</td><td>凤山三门海</td><td>凤山</td><td>4A</td><td>8</td><td>6</td><td>8</td><td>2</td><td>2</td><td>4</td><td class="sc">6.35</td><td>❌ 距金城江2.5h太远</td></tr>
+    </tbody>
+  </table>
+</div>
+
     <div class="summary" id="toc-summary">
   <h2>📊 行程总览</h2>
   <div class="trip-overview-card">
@@ -771,56 +821,6 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">🛰️ 驾驶数据：高德地图 REST API 实测 · 📅 生成日期：2026-07-03 · 👥 12人（7成人+5儿童）· 🚗 3车自驾 · 🌊 玩水溯溪×探洞主题</div>
   <div class="summary-tips">💡 首日无限制 · 普通日≤3h · 🛰️ 高德API实测 · 🧥 天坑洞内凉带薄外套 · 📱 3车12人对讲机沟通 · 🩱 玩水日备泳衣+溯溪鞋</div>
 </div>
-
-  </div>
-
-  <div class="bottom-col bottom-right">
-    <div class="scoring-section" id="toc-scoring">
-  <h2>⭐ 景点评分体系</h2>
-  <h3>评分维度与权重</h3>
-  <table class="method-table">
-    <thead><tr><th>维度</th><th>权重</th><th>评分标准</th></tr></thead>
-    <tbody>
-      <tr><td>🏅 美誉度</td><td><strong>30%</strong></td><td>官方评级（5A/4A）、携程/大众点评口碑</td></tr>
-      <tr><td>🎮 可玩性</td><td><strong>25%</strong></td><td>亲子友好、体力要求、互动参与感·玩水/探洞权重高</td></tr>
-      <tr><td>🍜 美食吸引度</td><td><strong>20%</strong></td><td>所在城市特色美食丰富度与口碑</td></tr>
-      <tr><td>👥 人流量</td><td><strong>15%</strong></td><td>暑期拥挤程度——人越少分越高（反向计分）</td></tr>
-      <tr><td>🏨 住宿豪华度</td><td><strong>5%</strong></td><td>所在城市豪华/五星级酒店选择丰富度</td></tr>
-      <tr><td>📍 抵达距离</td><td><strong>5%</strong></td><td>离金城江大本营的距离——越近分越高</td></tr>
-    </tbody>
-  </table>
-  <h3>10个候选景点完整评分 <span style="font-weight:400;font-size:.78rem;color:var(--muted)">（点击景点名展开攻略）</span></h3>
-  <table class="full-scores" id="candidates-table">
-    <thead>
-      <tr><th>#</th><th>景点</th><th>位置</th><th>等级</th><th>美誉30%</th><th>人流15%</th><th>可玩25%</th><th>住宿5%</th><th>距离5%</th><th>美食20%</th><th>总分</th><th>状态</th></tr>
-    </thead>
-    <tbody>
-      <tr class="must"><td>1</td><td class="spot-clickable" onclick="document.getElementById('sg_858898343').classList.toggle('open')">西溪温泉 📖</td><td>贺州</td><td>4A</td><td>7</td><td>7</td><td>8</td><td>9</td><td>8</td><td>6</td><td class="sc">7.2</td><td>✅ D4-D5</td></tr>
-      <tr class="score-guide-row" id="sg_858898343">
-        <td colspan="12">
-          <div class="guide-box">
-            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>半天至一天</div>
-            <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;老人泡温泉对关节好;亲子玩水好去处;情侣度假氛围满分</div>
-            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>办理入住→换浴袍→山林泡池区（60余个泡池依山而建）→无边泳池（面朝山谷拍照）→晚餐（度假区内）→夜泡看星空→SPA。全程半天至一天。泉水为偏硅酸型医疗热矿泉，水温常年52-60°C。</div>
-            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>依山而建日式园林风格泡池掩映树林溪流间;偏硅酸型医疗热矿泉对皮肤关节有养护;无边泳池面朝山谷拍照绝佳;夜泡看星空体验极佳;60余个泡池选择丰富</div>
-            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>暑期温泉紧俏务必提前1-2周预订;周末人超级多工作日体验好很多;温泉泡太久会头晕每次不超15分钟;园区餐饮价格偏高;部分泡池水温较高小孩需注意</div>
-            <div class="guide-item"><span class="guide-label">💡 贴士</span>提前1-2周预订暑期紧俏;带泳衣+浴袍（房间有提供）;温泉酒店通常含早+无限次泡泉;到达后先办理入住再泡温泉，晚餐在度假区内享用;泡完温泉多喝水补充水分</div>
-            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信3|分歧0|待验证0|时效OK</div>
-          </div>
-        </td>
-      </tr>
-      <tr class="must"><td>2</td><td>环江牛角寨瀑布群</td><td>环江</td><td>—</td><td>5</td><td>8</td><td>9</td><td>2</td><td>7</td><td>5</td><td class="sc">6.4</td><td>✅ D3 必去</td></tr>
-      <tr class="sel"><td>3</td><td>罗城棉花天坑</td><td>罗城</td><td>4A</td><td>6</td><td>7</td><td>7</td><td>2</td><td>7</td><td>5</td><td class="sc">6.05</td><td>✅ D4</td></tr>
-      <tr class="sel"><td>4</td><td>河池小三峡</td><td>金城江</td><td>—</td><td>6</td><td>7</td><td>6</td><td>3</td><td>9</td><td>5</td><td class="sc">5.95</td><td>✅ D2</td></tr>
-      <tr class="sel"><td>5</td><td>龙江第一湾</td><td>金城江</td><td>—</td><td>5</td><td>8</td><td>5</td><td>2</td><td>8</td><td>5</td><td class="sc">5.4</td><td>🔷 备选D2</td></tr>
-      <tr class="skip"><td>6</td><td>洞天酒海</td><td>南丹</td><td>4A</td><td>7</td><td>7</td><td>4</td><td>3</td><td>6</td><td>5</td><td class="sc">5.85</td><td>❌ 人文品酒类·不符合偏好</td></tr>
-      <tr class="skip"><td>7</td><td>歌娅思谷</td><td>南丹</td><td>4A</td><td>6</td><td>8</td><td>5</td><td>3</td><td>5</td><td>5</td><td class="sc">5.8</td><td>❌ 民俗人文类·不符合偏好</td></tr>
-      <tr class="skip"><td>8</td><td>刘三姐故里</td><td>宜州</td><td>4A</td><td>6</td><td>7</td><td>5</td><td>3</td><td>6</td><td>5</td><td class="sc">5.7</td><td>❌ 人文观光类·不符合偏好</td></tr>
-      <tr class="skip"><td>9</td><td>都安吞榜天窗</td><td>都安</td><td>—</td><td>7</td><td>5</td><td>9</td><td>2</td><td>4</td><td>4</td><td class="sc">6.3</td><td>❌ 距金城江1.7h太远</td></tr>
-      <tr class="skip"><td>10</td><td>凤山三门海</td><td>凤山</td><td>4A</td><td>8</td><td>6</td><td>8</td><td>2</td><td>2</td><td>4</td><td class="sc">6.35</td><td>❌ 距金城江2.5h太远</td></tr>
-    </tbody>
-  </table>
-</div>
   </div>
 </div>
 
@@ -835,8 +835,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
     <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 美食总览</a>
     <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">5</span>💰 费用统计</a>
     <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">6</span>📋 预约指南</a>
-    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">7</span>📊 行程总览</a>
-    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">8</span>⭐ 评分体系</a>
+    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">7</span>⭐ 评分体系</a>
+    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">8</span>📊 行程总览</a>
   </div>
 </div>
 
