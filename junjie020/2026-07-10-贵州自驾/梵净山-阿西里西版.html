@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏔️ 贵州10天自驾 — 梵净山-阿西里西版 - TravelAssist</title>
+<script src="https://webapi.amap.com/maps?v=2.0&key=1de2dd2347beaacdce43e934dab38015&plugin=AMap.Driving"></script>
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   base.css — 基础样式（变量、重置、全局、组件样式）
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root{--d1:#e74c3c;--d2:#3498db;--d3:#2ecc71;--d4:#f39c12;--d5:#9b59b6;--d6:#1abc9c;--d7:#e67e22;--d8:#e91e63;--d9:#00bcd4;--d10:#795548;--eco:#27ae60;--comf:#2980b9;--lux:#8e44ad;--hot:#e67e22;--bg:#f5f6fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+
+.header{background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;padding:32px;text-align:center}
+.header h1{font-size:2rem;margin-bottom:8px;letter-spacing:2px}
+.header .meta{font-size:.95rem;opacity:.9;display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+
+.tips{padding:16px 32px;background:#fffbf0;border-bottom:1px solid #f0e0a0;font-size:.88rem;color:#856404;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.summary-tips{margin-top:16px;padding:12px 20px;background:#fffbf0;border:1px solid #f0e0a0;border-radius:8px;font-size:.84rem;color:#856404;text-align:center;line-height:1.6}
+.weather-toggle{display:block;margin:0 auto;padding:6px 18px;background:#f0f4f8;border:1px solid #d0d8e0;border-radius:6px;font-size:.82rem;cursor:pointer;color:#0d3b66;transition:background .2s}.weather-toggle:hover{background:#e0e8f0}
+.weather-strip{padding:18px 32px;background:#f0f4f8;display:none;flex-wrap:wrap;gap:10px;justify-content:center}
+.wcard{flex:1;min-width:88px;max-width:115px;text-align:center;padding:8px;background:#fff;border-radius:8px;font-size:.78rem}
+.wcard .wc{font-weight:700}.wcard .wt{font-size:1rem;color:#e67e22;margin:2px 0}.wcard .wd{font-size:.7rem;color:var(--muted)}
+
+.day-card{border:1px solid #e8e8e8;border-radius:12px;padding:20px;margin-bottom:18px;border-left:5px solid #ccc;background:#fafbfc}
+.day-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.06)}
+.day-card h3{font-size:1.1rem;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:color .15s;user-select:none}
+.day-card h3:hover{color:#0d3b66}
+.day-card h3 .dd{font-size:.82rem;color:var(--muted);font-weight:400}
+.day-card h3 .pin{font-size:.85rem;opacity:.5;transition:opacity .15s}
+.day-card h3:hover .pin{opacity:1}
+.day-card .drive-badge{font-size:.82rem;color:#e67e22;font-weight:600;background:#fff3e0;padding:2px 10px;border-radius:4px;white-space:nowrap}
+.day-card .route{font-size:.84rem;color:var(--muted);margin:6px 0;padding:4px 10px;background:#eee;border-radius:4px;display:inline-block}
+.day-card .timing{display:flex;gap:24px;font-size:.84rem;color:var(--muted);margin:4px 0}
+.day-card .timing strong{color:var(--text)}
+.day-card .day-weather{font-size:.82rem;color:#856404;margin:4px 0;padding:3px 10px;background:#fef9e7;border-radius:4px;display:inline-block}
+.day-card h4{font-size:.92rem;color:#0d3b66;margin:12px 0 4px;border-bottom:1px solid #e0e0e0;padding-bottom:4px}
+.day-card .province{font-size:.75rem;color:var(--muted);font-weight:400}
+.day-card .city-desc,.day-card .spot-desc{font-size:.87rem;color:var(--text);margin:6px 0}
+.day-card .city-photo,.day-card .spot-photo{width:100%;border-radius:8px;margin:8px 0 6px;object-fit:cover;display:block;background:#f0f2f5;aspect-ratio:16/9;max-height:200px}
+.day-card .food-list{font-size:.85rem;margin:4px 0;display:flex;flex-wrap:wrap;gap:4px 8px}
+.day-card .food-list .fd{background:#fffbf0;padding:2px 8px;border-radius:4px}
+.day-card .food-list .hi{color:#e74c3c;font-weight:700}
+.day-card .shop-list{font-size:.82rem;color:#555;margin:4px 0;list-style:none;padding-left:0}
+.day-card .shop-list li{margin:2px 0}
+.day-card .shop-list .sn{font-weight:600;color:var(--text)}
+.day-card .score-row{margin-top:10px;padding:5px 12px;background:#fef9e7;border-radius:6px;font-size:.84rem;color:#856404}
+.day-card .score-row strong{color:#f39c12;font-size:.95rem}
+.day-card .hotel-line{font-size:.82rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px dotted #e0e0e0;cursor:pointer;transition:color .15s}
+.day-card .hotel-line:hover{color:#0d3b66}
+.day-card .tip{font-size:.82rem;color:#856404;background:#fffbf0;padding:4px 10px;border-radius:4px;margin-top:8px}
+.alt-spot{margin-top:8px;padding:8px 12px;background:#f0f4ff;border-radius:6px;border:1px dashed #90b4e0;font-size:.82rem}
+.alt-spot .alt-tag{display:inline-block;background:#5b9bd5;color:#fff;padding:1px 8px;border-radius:3px;font-size:.7rem;font-weight:600;margin-right:6px}
+.alt-spot .alt-name{font-weight:600;color:#0d3b66}
+.alt-spot .alt-desc{color:var(--muted);font-size:.8rem;margin-top:2px}
+
+.badge{display:inline-block;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:600;color:#fff;vertical-align:middle}
+.badge.eco{background:var(--eco)}.badge.comf{background:var(--comf)}.badge.lux{background:var(--lux)}.badge.hot{background:var(--hot)}
+.badge.must{background:#e74c3c;font-size:.68rem;padding:1px 6px}
+.badge.a5{background:#f39c12}.badge.a4{background:#2980b9}.badge.wh{background:#8e44ad;font-size:.65rem}
+
+.legend{position:absolute;bottom:24px;right:12px;z-index:1000;text-align:right}
+.legend-toggle{width:30px;height:30px;background:#0d3b66;color:#fff;border:none;border-radius:50%;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.legend-toggle.open{transform:rotate(90deg)}
+.legend-body{max-height:0;overflow:hidden;transition:max-height .35s ease;background:rgba(255,255,255,.94);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.12);margin-top:6px}
+.legend-body.open{max-height:300px;padding:10px 14px}
+.legend .item{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:.8rem}
+.legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+.legend .line{width:18px;height:2px;display:inline-block;flex-shrink:0}
+.nav-btn{display:block;width:100%;margin-top:10px;padding:8px 12px;background:#0d3b66;color:#fff;border:none;border-radius:6px;font-size:.78rem;cursor:pointer;text-align:center;transition:background .2s}
+.nav-btn:hover{background:#1a5276}
+.nav-btn.loading{background:#999;cursor:default}
+
+.food-section{padding:24px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.food-section h2{text-align:center;margin-bottom:16px;font-size:1.2rem}
+.food-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.food-card{flex:1;min-width:170px;max-width:230px;padding:14px;background:#fafbfc;border-radius:8px;border:1px solid #eee}
+.food-card .fcity{font-weight:700;margin-bottom:6px;color:#0d3b66;font-size:.92rem}
+.food-card .fdish{font-size:.83rem}.food-card .fdish .hi{color:#e74c3c;font-weight:600}
+
+.budget{padding:28px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.budget h2{text-align:center;margin-bottom:20px;font-size:1.3rem}
+.budget-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.budget-card{flex:1;min-width:170px;max-width:250px;border-radius:12px;padding:20px 16px;text-align:center;border:2px solid #e8e8e8;background:#fafbfc}
+.budget-card h3{margin-bottom:12px}.budget-card .price{font-size:1.5rem;font-weight:700;margin-bottom:14px}
+.budget-card.economic{border-color:var(--eco)}.budget-card.economic .price{color:var(--eco)}
+.budget-card.comfort{border-color:var(--comf)}.budget-card.comfort .price{color:var(--comf)}
+.budget-card.luxury{border-color:var(--lux)}.budget-card.luxury .price{color:var(--lux)}
+.budget-card ul{list-style:none;font-size:.86rem;color:var(--muted);text-align:left;padding:0 8px}
+.budget-card li{padding:3px 0;display:flex;justify-content:space-between}
+
+/* ── 费用统计 ── */
+.expense-section{padding:28px 32px;background:var(--card);border-top:2px solid #e67e22}
+.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.2rem;color:#e67e22}
+.expense-empty{text-align:center;padding:30px 20px;color:var(--muted)}
+.expense-empty p{font-size:.88rem;margin-bottom:8px}
+.expense-hint{font-size:.76rem !important;color:#aaa}
+.expense-table-wrap{overflow-x:auto}
+.expense-table{width:100%;border-collapse:collapse;font-size:.84rem}
+.expense-table th{background:#e67e22;color:#fff;padding:8px 10px;font-weight:600;text-align:center;white-space:nowrap}
+.expense-table td{padding:6px 10px;text-align:center;border-bottom:1px solid #eee}
+.expense-table tbody tr:hover{background:#fef9f0}
+.expense-table td.ed{font-weight:600;color:#0d3b66;white-space:nowrap}
+.expense-table td.et{font-weight:700;color:#e67e22}
+.expense-table td.en{text-align:left;min-width:10em;max-width:18em;font-size:.78rem;color:var(--muted)}
+.en-inner{overflow:hidden;line-height:1.5;max-height:3em;word-wrap:break-word}
+.en-inner.expanded{max-height:none;overflow:visible}
+.en-inner.en-no-trunc{max-height:none;overflow:visible}
+.expense-table tfoot tr.expense-total-row{background:#fdf2e9;border-top:2px solid #e67e22}
+.expense-table tfoot td{font-size:.88rem;padding:10px}
+.expense-table tfoot strong{color:#c0392b}
+
+/* ── 费用行可点击展开 ── */
+.expense-row{cursor:pointer;transition:background .15s;user-select:none}
+.expense-row:hover{background:#fef3e5 !important}
+.expense-row .ed .exp-arrow{font-size:.6rem;color:#ccc;display:inline-block;transition:transform .25s;margin-left:4px}
+.expense-row-no-detail{cursor:default}
+.expense-row-no-detail:hover{background:inherit !important}
+.expense-detail{display:none}
+.expense-detail.open{display:table-row}
+.expense-detail td{padding:0 !important;background:linear-gradient(135deg,#fdf6ee,#fafbfc);border-bottom:2px solid #e67e22}
+.expense-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 16px}
+.eb-item{font-size:.8rem;padding:8px 12px;background:#fff;border-radius:6px;border:1px solid #eee;line-height:1.6}
+.eb-item .eb-label{font-weight:700;color:#0d3b66;font-size:.8rem;margin-bottom:4px;display:block;padding-bottom:4px;border-bottom:1px dotted #e0e0e0}
+.eb-item .eb-sub{display:block;font-size:.76rem;color:#555;padding:2px 0}
+.eb-item .eb-sub em{font-style:normal;font-weight:600;color:#333}
+
+/* ── 交通费用汇总卡片 ── */
+.expense-transport-summary{margin-top:18px;background:#f8fafc;border-radius:10px;padding:16px 20px;border:1px solid #e0e0e0}
+.ets-title{font-weight:700;font-size:.9rem;color:#0d3b66;margin-bottom:12px;text-align:center}
+.ets-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.ets-card{flex:1;min-width:200px;max-width:320px;background:#fff;border-radius:8px;padding:12px 16px;border:1px solid #e0e0e0}
+.ets-card-title{font-weight:700;font-size:.82rem;color:#e67e22;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #f0e0a0}
+.ets-items{display:flex;flex-direction:column;gap:3px}
+.ets-items span{font-size:.8rem;color:#555;display:flex;justify-content:space-between}
+.ets-items .ets-total{font-weight:700;color:#c0392b;border-top:1px dotted #e0e0e0;padding-top:4px;margin-top:2px}
+.ets-footer{text-align:center;font-size:.84rem;color:#555;margin-top:12px;padding-top:10px;border-top:1px solid #e0e0e0}
+.ets-footer strong{color:#c0392b;font-size:.92rem}
+
+.scoring-section{padding:28px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.scoring-section h2{text-align:center;margin-bottom:8px;font-size:1.3rem}
+.scoring-intro{text-align:center;color:var(--muted);margin-bottom:24px;font-size:.9rem}
+.scoring-section h3{font-size:1.05rem;margin:24px 0 10px}
+.method-table,.full-scores{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:20px}
+.method-table th,.full-scores th{background:#0d3b66;color:#fff;padding:8px 6px;font-weight:600;text-align:center}
+.method-table td,.full-scores td{padding:5px 4px;text-align:center;border-bottom:1px solid #eee}
+.full-scores tbody tr:hover{background:#f5f6fa}
+.full-scores .sc{font-weight:700;color:#f39c12;font-size:.88rem}
+.full-scores tr.must{background:#fff3cd}.full-scores tr.sel{background:#e8f8f0}.full-scores tr.skip{opacity:.5}
+
+.summary{padding:28px 32px;background:var(--card);border-top:2px solid #0d3b66}
+.summary h2{text-align:center;font-size:1.2rem;margin-bottom:18px;color:#0d3b66}
+.trip-overview-card{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-bottom:18px;padding:14px 20px;background:linear-gradient(135deg,#f0f4f8,#e8f0f8);border-radius:10px;border:1px solid #d0dce8;font-size:.88rem;color:#2c3e50}
+.tov-item{display:flex;align-items:center;gap:4px}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.sca{background:#f8fafc;border-radius:10px;padding:16px;border:1px solid #e8e8e8}
+.sca .ico{font-size:1.3rem;margin-bottom:2px}
+.sca .big{font-size:1.7rem;font-weight:800;color:#0d3b66}
+.sca .lbl{font-size:.78rem;color:var(--muted);margin-top:4px}
+.sca.w2{grid-column:span 2}
+.sca .dl{font-size:.82rem;margin-top:6px}
+.sca .dl span{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #e8e8e8}
+.sca .dl .hv{font-weight:600;color:#e74c3c}.sca .dl .gv{font-weight:600}
+.bars{display:flex;gap:3px;align-items:flex-end;height:44px;margin-top:6px}
+.bars .b{flex:1;border-radius:2px 2px 0 0;min-width:8px;position:relative}
+.bars .b .bl{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--muted);white-space:nowrap}
+.bars .b.ov{background:#e74c3c}.bars .b.el{background:#f39c12}.bars .b.nm{background:#27ae60}.bars .b.zz{background:#ddd}
+.bleg{display:flex;gap:14px;font-size:.68rem;color:var(--muted);margin-top:8px}
+.bleg span{display:flex;align-items:center;gap:3px}
+.bleg .sw{width:8px;height:8px;border-radius:2px;display:inline-block}
+
+/* ── 攻略卡片 ── */
+.guide-box{margin:8px 0;border:1px solid #e0e0e0;border-radius:6px;overflow:hidden}
+.guide-header{cursor:pointer;padding:8px 12px;background:#f0f7ff;font-size:.82rem;font-weight:600;color:#2980b9;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.guide-header:hover{background:#e3f0fc}
+.guide-toggle{font-size:.7rem;transition:transform .2s}
+.guide-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.guide-body.open{max-height:2000px}
+.guide-body.open+.guide-header .guide-toggle,
+.guide-header:has(+.guide-body.open) .guide-toggle{transform:rotate(180deg)}
+.guide-item{padding:6px 12px;font-size:.78rem;line-height:1.55;border-bottom:1px dotted #eee;color:#555}
+.guide-item:last-child{border-bottom:none}
+
+/* ── 评分表可点击景点 + 展开攻略行 ── */
+.spot-clickable{cursor:pointer;color:#2980b9;font-weight:600;transition:color .15s}
+.spot-clickable:hover{color:#e74c3c;text-decoration:underline}
+.score-guide-row{display:none}.score-guide-row.open{display:table-row}
+.score-guide-row td{padding:0 !important;text-align:left !important;background:#f8fafe;border-bottom:2px solid #cde}
+.score-guide-row .guide-box{margin:4px 8px;border-left:3px solid #2980b9}
+
+/* ── 美食卡片（可折叠）── */
+.food-card{flex:1;min-width:200px;max-width:280px;background:#fafbfc;border-radius:8px;border:1px solid #eee;display:flex;flex-direction:column;overflow:hidden}
+.food-card-hdr{padding:12px 14px;cursor:default;transition:background .15s}
+.food-card.food-has-detail .food-card-hdr{cursor:pointer;user-select:none}
+.food-card.food-has-detail .food-card-hdr:hover{background:#f0f7ff}
+.food-card .fcity{font-weight:700;color:#0d3b66;font-size:.92rem;display:flex;justify-content:space-between;align-items:center}
+.food-expand-icon{font-size:.65rem;color:#999;transition:transform .2s}
+.food-card.open .food-expand-icon{transform:rotate(180deg)}
+.food-card .food-dishes{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:6px}
+.food-card .fd{font-size:.76rem;background:#fff;padding:2px 7px;border-radius:3px;border:1px solid #e8e8e8}
+.food-card .fd .hi{color:#e74c3c;font-weight:600}
+.food-card-body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 14px}
+.food-card.open .food-card-body{max-height:600px;padding:0 14px 12px}
+.food-shops,.food-hotel,.food-notes{margin-top:6px}
+.food-shops-title,.food-hotel-title{font-size:.74rem;font-weight:700;color:#555;margin-bottom:3px}
+.food-shop-item{font-size:.7rem;color:#666;line-height:1.5;padding:2px 0;border-bottom:1px dotted #f0f0f0}
+.food-shop-item strong{color:#333}
+.food-hotel-info{font-size:.74rem;color:#555}
+.food-notes{font-size:.7rem;color:#888;line-height:1.45;font-style:italic}
+.guide-label{display:inline-block;min-width:72px;font-weight:600;color:#333;margin-right:4px}
+
+/* ── reservation section ── */
+.reservation-section{padding:24px 28px;background:var(--card);border-top:2px solid #e74c3c}
+.reservation-section h2{text-align:center;margin-bottom:8px;font-size:1.15rem;color:#c0392b}
+.reservation-section h3{font-size:1.05rem;margin:20px 0 10px}
+.reserve-urgent{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin:12px 0 18px;font-size:.88rem;color:#856404;line-height:1.6}
+.reserve-timeline{margin:16px 0 20px}
+.reserve-timeline-strip{display:flex;flex-wrap:wrap;gap:10px}
+.reserve-tl-item{display:flex;align-items:center;gap:8px;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:8px 14px;font-size:.82rem}
+.reserve-tl-item .tl-date{font-weight:700;color:#e74c3c;white-space:nowrap}
+.reserve-tl-item .tl-action{background:#e74c3c;color:#fff;padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:600}
+.reserve-tl-item .tl-name{color:#333}
+.reserve-cards{display:flex;flex-direction:column;gap:12px}
+.reserve-card{border-radius:10px;border:2px solid #e0e0e0;overflow:hidden;transition:border-color .2s}
+.reserve-card.must{border-color:#e74c3c}
+.reserve-card.opt{border-color:#f39c12}
+.reserve-card-hdr{cursor:pointer;padding:14px 18px;background:#fafbfc;transition:background .15s;user-select:none}
+.reserve-card-hdr:hover{background:#f0f7ff}
+.reserve-card.must .reserve-card-hdr{background:#fef5f5}
+.reserve-card.opt .reserve-card-hdr{background:#fffdf5}
+.reserve-card-title{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.reserve-badge{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.reserve-badge.must{background:#e74c3c;color:#fff}
+.reserve-badge.opt{background:#f39c12;color:#fff}
+.reserve-name{font-size:1rem;font-weight:700;color:#0d3b66}
+.reserve-confidence{font-size:.72rem;padding:2px 8px;border-radius:4px;background:#e8f5e9;color:#2e7d32;margin-left:auto}
+.reserve-card-summary{display:flex;align-items:center;gap:14px;font-size:.82rem;color:#555;flex-wrap:wrap}
+.reserve-toggle{font-size:.65rem;color:#999;margin-left:auto;transition:transform .2s}
+.reserve-card-body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 18px;background:#fff}
+.reserve-card-body.open{max-height:800px;padding:12px 18px}
+.reserve-info-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.reserve-info-item{display:flex;flex-direction:column;gap:2px;padding:8px 12px;background:#f8f9fa;border-radius:6px}
+.ri-label{font-size:.72rem;font-weight:700;color:#666}
+.ri-value{font-size:.82rem;color:#333;line-height:1.5}
+.reserve-tips{font-size:.82rem;color:#666;line-height:1.6;margin-top:10px;padding:8px 12px;background:#f0f7ff;border-radius:6px}
+
+/* ── 目录浮标（Floating TOC）── */
+.toc-float{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.toc-btn{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;border:none;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 16px rgba(13,59,102,.3);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;line-height:1}
+.toc-btn:hover{transform:scale(1.08);box-shadow:0 6px 22px rgba(13,59,102,.45)}
+.toc-panel{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .25s;opacity:0;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);width:210px;display:flex;flex-direction:column}
+.toc-panel.open{max-height:520px;opacity:1;overflow-y:auto}
+.toc-title{padding:12px 16px;font-weight:700;font-size:.88rem;color:#0d3b66;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;border-radius:12px 12px 0 0;z-index:1}
+.toc-item{padding:10px 16px;font-size:.82rem;color:#444;text-decoration:none;border-bottom:1px solid #f8f8f8;transition:background .15s,color .15s,padding-left .2s;display:block;cursor:pointer;line-height:1.5}
+.toc-item:hover{background:#f0f7ff;color:#0d3b66;padding-left:22px}
+.toc-item:last-child{border-bottom:none;border-radius:0 0 12px 12px}
+.toc-item .toc-num{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;background:#f0f4f8;border-radius:4px;font-size:.7rem;margin-right:6px;color:#888}
+/* 移动端 */
+@media(max-width:767px){
+  .toc-float{bottom:16px;right:12px}
+  .toc-btn{width:40px;height:40px;border-radius:10px;font-size:1.1rem}
+  .toc-panel{width:185px}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   desktop.css — 桌面端布局（左右分栏、resize handle、地图收起）
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.main{display:flex;height:calc(100vh - 195px);justify-content:center}
+.map-panel{flex:2 1 400px;min-width:400px;position:relative;height:100%;border:3px solid #0d3b66;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.1)}
+#map{width:100%;height:100%}
+.resize-handle{width:8px;min-width:8px;background:#e8e8e8;cursor:col-resize;transition:background .2s;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:100}
+.resize-handle:hover,.resize-handle.active{background:#0d3b66}
+.resize-handle::after{content:'';width:2px;height:40px;background:#bbb;border-radius:1px;transition:background .2s}
+.resize-handle:hover::after,.resize-handle.active::after{background:#fff}
+.table-panel{flex:1 1 480px;min-width:280px;max-width:1024px;height:100%;overflow-y:auto;padding:20px;background:var(--card);border-left:1px solid #e0e0e0}
+.map-collapse-bar{display:none;height:56px;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;font-size:.88rem;cursor:pointer;gap:8px;letter-spacing:1px}
+.map-toggle-btn{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:1002;background:rgba(13,59,102,.85);color:#fff;border:none;border-radius:20px;padding:5px 18px;font-size:.78rem;cursor:pointer;display:none;letter-spacing:1px;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:background .2s}
+.map-toggle-btn:hover{background:rgba(13,59,102,1)}
+
+/* 桌面端地图完全收起 */
+.map-panel.collapsed-desktop{width:0!important;min-width:0!important;flex:none!important;border:none!important;border-radius:0!important;overflow:hidden;box-shadow:none!important}
+.map-panel.collapsed-desktop #map{display:none}
+.map-panel.collapsed-desktop .legend{display:none}
+.map-panel.collapsed-desktop .map-toggle-btn{display:none}
+/* 收起时 resize handle 变宽，作为展开按钮 */
+.resize-handle.expanded-handle{width:36px;min-width:36px;cursor:pointer;background:linear-gradient(135deg,#0d3b66,#1a5276);border-radius:8px 0 0 8px;flex-direction:column;gap:4px}
+.resize-handle.expanded-handle::after{width:0;height:0}
+.resize-handle.expanded-handle:hover{background:linear-gradient(135deg,#1a5276,#2980b9)}
+.resize-handle .expand-icon{display:none;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:1px;white-space:nowrap;writing-mode:vertical-rl;text-orientation:mixed;user-select:none}
+.resize-handle .collapse-icon{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:.7rem;cursor:pointer;background:rgba(13,59,102,.65);border:none;border-radius:50%;width:20px;height:20px;line-height:20px;text-align:center;padding:0;transition:background .2s;z-index:102}
+.resize-handle:hover .collapse-icon,.resize-handle.active .collapse-icon{display:block}
+.resize-handle .collapse-icon:hover{background:rgba(13,59,102,1)}
+.resize-handle.expanded-handle .collapse-icon{display:none!important}
+.resize-handle.expanded-handle .expand-icon{display:block}
+
+/* ── Bottom two-column layout ── */
+.bottom-sections{display:flex;gap:0;padding:0;max-width:1400px;margin:0 auto}
+.bottom-col{flex:1;min-width:0}
+.bottom-left{border-right:1px solid #e0e0e0}
+.bottom-col .food-section,
+.bottom-col .budget,
+.bottom-col .scoring-section,
+.bottom-col .summary{padding:24px 28px;border-top:none}
+.bottom-col .food-section{border-top:2px solid #e0e0e0}
+.bottom-col .scoring-section{border-top:2px solid #e0e0e0}
+.bottom-col .food-section h2,
+.bottom-col .budget h2,
+.bottom-col .scoring-section h2{font-size:1.15rem}
+/* Summary inside column: shrink grid to fit narrower space */
+.bottom-col .summary .sg{grid-template-columns:repeat(2,1fr)}
+.bottom-col .summary .sca.w2{grid-column:span 2}
+.bottom-col .summary .sca .big{font-size:1.3rem}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   tablet.css — 平板适配 + 横屏手机适配
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet / iPad ── */
+@media(max-width:1024px){
+  .main{height:calc(100vh - 180px)}
+  .table-panel{flex-basis:380px;min-width:300px;max-width:1024px}
+  .map-panel{flex:2 1 300px;min-width:300px}
+  .header{padding:24px 16px}.header h1{font-size:1.5rem}
+  .bottom-col .food-section,.bottom-col .budget,.bottom-col .scoring-section{padding:18px 16px}
+  .bottom-col .budget-grid{flex-direction:column;align-items:center}
+  .bottom-col .budget-card{max-width:100%;width:100%}
+}
+
+/* ── 横屏手机: 左右分栏 (类似PC) ── */
+@media(max-width:900px) and (orientation:landscape){
+  .main{height:calc(100vh - 140px)}
+  .table-panel{flex-basis:300px;min-width:260px;max-width:1024px;padding:14px 12px}
+  .map-panel{border-radius:8px;border-width:3px;min-width:250px}
+  .header{padding:12px 14px}.header h1{font-size:1.2rem}.header .meta{gap:8px;font-size:.78rem}
+  .tips{padding:8px 14px;font-size:.76rem}
+  .day-card .city-photo,.day-card .spot-photo{max-height:150px;aspect-ratio:16/9}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   mobile.css — 竖屏手机 + 小屏手机适配
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 竖屏手机: 单列 + sticky 地图 ── */
+@media(max-width:767px) and (orientation:portrait){
+  .resize-handle{display:none}
+  .sg{grid-template-columns:repeat(2,1fr)}.sca.w2{grid-column:span 2}
+  /* 行程总览：手机竖屏改为单列 */
+  .bottom-col .summary .sg{grid-template-columns:1fr}
+  .bottom-col .summary .sca.w2{grid-column:span 1}
+  .main{display:block;height:auto}
+  .map-panel{position:sticky;top:0;z-index:100;height:42vh;max-height:380px;width:100%;border-radius:0;border-width:0 0 3px 0;box-shadow:0 4px 20px rgba(0,0,0,.15);transition:height .3s ease,max-height .3s ease}
+  .map-panel.collapsed{height:56px!important;max-height:56px!important}
+  .map-panel.collapsed #map{display:none}
+  .map-panel.collapsed .map-collapse-bar{display:flex}
+  .map-panel.collapsed .map-toggle-btn{display:none}
+  .map-panel.collapsed .legend{display:none}
+  .map-toggle-btn{display:block}
+  #map{height:100%;min-height:250px}
+  .table-panel{width:100%;height:auto;max-height:none;border-left:none;border-top:1px solid #e0e0e0;padding:16px 10px}
+  .header{padding:16px 12px}.header h1{font-size:1.2rem}.header .meta{gap:10px;font-size:.8rem}
+  .tips{padding:12px 14px;font-size:.8rem}
+  .weather-strip{padding:12px 14px;gap:6px}
+  .budget,.scoring-section,.summary,.food-section{padding:16px 12px}.budget-card{min-width:140px;padding:14px 10px}
+  .bottom-sections{flex-direction:column}
+  .bottom-left{border-right:none;border-bottom:1px solid #e0e0e0}
+  .bottom-col .food-section,.bottom-col .budget,.bottom-col .scoring-section{padding:16px 12px}
+  .full-scores{font-size:.68rem;overflow-x:auto;display:block}.full-scores th,.full-scores td{padding:3px 2px}
+  .day-card .city-photo,.day-card .spot-photo{max-height:160px;aspect-ratio:4/3}
+}
+
+/* ── 小屏手机竖屏 ── */
+@media(max-width:480px) and (orientation:portrait){
+  .sg{grid-template-columns:1fr}.sca.w2{grid-column:span 1}
+  .bottom-col .summary .sg{grid-template-columns:1fr}
+  .bottom-col .summary .sca.w2{grid-column:span 1}
+  .map-panel{height:38vh;max-height:300px}
+  .budget-grid{flex-direction:column;align-items:center}.budget-card{max-width:100%;width:100%}
+  .table-panel{padding:12px 6px}
+  .day-card .city-photo,.day-card .spot-photo{max-height:130px}
+}
+
+/* ── reservation section mobile ── */
+@media(max-width:767px){
+  .reservation-section{padding:16px 12px}
+  .reservation-section h2{font-size:1.1rem}
+  .reserve-info-grid{grid-template-columns:1fr}
+  .reserve-card-hdr{padding:12px}
+  .reserve-card-summary{gap:8px;font-size:.78rem}
+  .reserve-timeline-strip{flex-direction:column;gap:6px}
+  /* expense mobile */
+  .expense-breakdown{grid-template-columns:1fr}
+  .expense-section{padding:16px 12px}
+  .expense-table td.en{min-width:8em;max-width:14em;font-size:.74rem}
+.en-inner{font-size:.74rem}
+  .ets-grid{flex-direction:column;align-items:center}
+  .ets-card{max-width:100%;width:100%}
+}
+
+</style>
+</head>
+<body>
+
+<div class="header" id="toc-top">
+  <h1>🏔️ 贵州10天自驾 — 梵净山-阿西里西版</h1>
+  <div class="meta">
+    <span>📅 2026.7.10 — 7.19</span>
+    <span>👥 10人（3老+4中+3小）</span>
+  </div>
+</div>
+
+<button class="weather-toggle" id="weatherToggle" onclick="toggleWeather()">🌤️ 沿途天气</button>
+<div class="weather-strip" id="weatherStrip">
+  <div class="wcard"><div class="wc">广州</div><div class="wt">28-35°C</div><div class="wd">闷热多雨</div></div>
+<div class="wcard"><div class="wc">永州</div><div class="wt">28-34°C</div><div class="wd">湘南·湿热</div></div>
+<div class="wcard"><div class="wc">江口</div><div class="wt">22-28°C</div><div class="wd">武陵山区·凉爽</div></div>
+<div class="wcard"><div class="wc">遵义</div><div class="wt">22-28°C</div><div class="wd">黔北·凉爽</div></div>
+<div class="wcard"><div class="wc">赤水</div><div class="wt">25-33°C</div><div class="wd">河谷·湿热</div></div>
+<div class="wcard"><div class="wc">织金</div><div class="wt">22-28°C</div><div class="wd">乌蒙山区·凉爽</div></div>
+<div class="wcard"><div class="wc">贵阳</div><div class="wt">22-28°C</div><div class="wd">避暑之都·微凉</div></div>
+<div class="wcard"><div class="wc">三江</div><div class="wt">26-32°C</div><div class="wd">桂北·潮湿</div></div>
+<div class="wcard"><div class="wc">贺州</div><div class="wt">26-33°C</div><div class="wd">温泉区·湿热</div></div>
+</div>
+
+<div class="main">
+  <div class="map-panel">
+    <div id="map"></div>
+    <button class="map-toggle-btn" onclick="toggleMapCollapse()" title="收起地图">▲ 收起</button>
+    <div class="map-collapse-bar" onclick="toggleMapCollapse()">📍 点击展开地图 · 行程路线总览</div>
+    <div class="legend">
+      <button class="legend-toggle" id="legendToggle" onclick="toggleLegend()">▶</button>
+      <div class="legend-body" id="legendBody">
+        <div class="item"><span class="dot" style="background:#e74c3c"></span>住宿</div>
+        <div class="item"><span class="dot" style="background:#2ecc71"></span>景点</div>
+        <div class="item"><span class="dot" style="background:#f39c12"></span>起终点</div>
+        <div class="item"><span class="line" style="background:#aaa;height:2.5px;opacity:.6"></span>路线</div>
+        <button class="nav-btn" id="navBtn" onclick="loadRoutes()">🗺️ 加载导航路线</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="resize-handle" id="resizeHandle" title="拖动调整地图大小 · 双击切换">
+              <span class="expand-icon">&#9654; 展开地图</span>
+              <button class="collapse-icon" onclick="toggleMapFullCollapse()" title="收起地图">&#9664;</button>
+            </div>
+
+  <div class="table-panel" id="toc-days">
+    <!-- ═══════ D1 ═══════ -->
+<div class="day-card" id="d1" style="border-left-color:#e74c3c">
+  <h3 onclick="showDayRoute(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 启程入湘 <span class="pin">📍</span> <span class="dd">7/10 周五</span></h3>
+  <span class="drive-badge">🚗 5.4h · 465km</span>
+  <div class="route">广州荔湾 → 永州</div>
+  <div class="timing"><span>🕐 出发 <strong>13:00</strong></span> <span>🕐 到达 <strong>18:30</strong></span></div>
+  <div class="day-weather">🌤 广州 28-35°C → 永州 28-34°C · 湘南湿热</div>
+  <h4>🏙️ 永州 <span class="province">（湖南·湘南）</span></h4>
+  <div class="city-desc">永州位于湖南南部湘江上游，是国家历史文化名城。唐代文学家<strong>柳宗元</strong>被贬至此任司马十年，留下《永州八记》《捕蛇者说》等千古名篇。永州还是草圣<strong>怀素</strong>的故乡，其狂草书法影响千年。城市依潇湘二水而建，柳子庙为全国重点文物保护单位，内存韩愈文、苏轼书、颂柳宗元事的"三绝碑"。永州血鸭、东安鸡是湘菜代表，酸辣鲜香一绝。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 永州血鸭</span></span><span class="fd">东安鸡</span><span class="fd">永州喝螺</span><span class="fd">宁远酿豆腐</span><span class="fd">祁阳米粉</span><span class="fd">零陵板鸭</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">老东安鸡馆</span>（零陵区） — 东安鸡正宗做法酸辣鲜香 · 大众点评</li>
+    <li>🏠 <span class="sn">永州血鸭馆</span>（冷水滩区） — 永州血鸭老字号本地人力荐 · 本地人推荐</li>
+  </ul>
+  <div class="tip">💡 纯过夜不必逛景点。永州血鸭和东安鸡一定要尝，湘菜经典代表。住经济型酒店省预算。</div>
+  <div class="hotel-line" onclick="focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 永州 · <span class="badge eco">经济型</span> · 祁阳七星宿民宿·亲子房×2(507)+大床房×1(414)·已订✅</div>
+</div>
+
+<!-- ═══════ D2 ═══════ -->
+<div class="day-card" id="d2" style="border-left-color:#3498db">
+  <h3 onclick="showDayRoute(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 潇湘访古·入黔 <span class="pin">📍</span> <span class="dd">7/11 周六</span></h3>
+  <span class="drive-badge">🚗 4.7h · 416km</span>
+  <div class="route">永州 → 江口</div>
+  <div class="timing"><span>🕐 出发 <strong>13:00</strong></span> <span>🕐 到达 <strong>17:40</strong></span></div>
+  <div class="day-weather">🌤 28-34°C → 22-28°C · 武陵山区凉爽</div>
+  <h4>🏙️ 梵净山 <span class="province">（贵州·铜仁）</span></h4>
+  <div class="city-desc">梵净山是武陵山脉主峰，海拔2572米，2018年入选世界自然遗产。这里是<strong>黔金丝猴</strong>的唯一栖息地——全球仅存约800只，比大熊猫还稀有。6500万年的生态孤岛效应保存了大量第三纪孑遗动植物。标志性的<strong>蘑菇石</strong>和<strong>红云金顶</strong>是贵州旅游的标志性景观，金顶之上两座小庙隔峡谷相望，云海翻涌时如仙境临世。江口县是梵净山东大门，夏季凉爽宜人。</div>
+  <h4>🟢 柳子庙 <span class="badge a4">4A</span></h4>
+  <div class="spot-desc">柳子庙始建于北宋至和二年（1055年），为纪念唐代文学家<strong>柳宗元</strong>而建。庙内珍藏"<strong>三绝碑</strong>"——韩愈撰文、苏轼书丹、颂柳宗元事迹，堪称中国书法史上绝无仅有的合璧之作，为国家一级文物。庙前临潇水，后倚西山，占地面积约2000平方米，红墙黛瓦古朴庄重。庙内还有历代碑刻30余通，记录着历代对柳宗元的追思。游览约1小时，体力要求低，老人友好。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g2_1889917772').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g2_1889917772">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1-1.5小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>全年龄段友好（体力要求低·平地为主）;文学爱好者必去（柳宗元《永州八记》原型地）;亲子教育价值高（唐宋八大家+书法艺术）;老人友好（无需爬台阶）</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>永州市区→柳子街→柳子庙（30-60min）→愚溪沿溪漫步→小石潭遗址→全程1-1.5h。柳子庙+柳子街+愚溪组成柳宗元文化旅游区，紧凑步行可达，体力要求低。D2上午游览2-3h含零陵古城。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>三绝碑（荔子碑）——韩愈撰文、苏轼书丹、颂柳宗元事，中国书法史绝无仅有;柳子庙始建于北宋至和二年（1055年），红墙黛瓦古朴庄重;柳子街青石板路千米，明清民居保存完好;愚溪沿岸小石潭遗址即《小石潭记》原型地</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>景区不大1h可逛完不宜专程绕路;部分碑刻风化严重需仔细辨认;柳子街商业化程度低餐饮选择少建议市区用餐;雨天石板路滑穿防滑鞋</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>门票约20-25元·65岁以上免票;8:00-18:00开放（夏季）;永州站打车约30分钟可达;与零陵古城步行串联无需动车;建议上午游览下午赶路</div>
+    </div>
+  </div>
+  <h4>🟢 零陵古城 <span class="badge a4">4A</span></h4>
+  <div class="spot-desc">零陵是永州古称，自西汉置郡已有2000余年建城史。古城依潇湘二水而建，保留明清街巷格局。<strong>柳子街</strong>青石板路面蜿蜒千米，两侧明清民居保存完好，是柳宗元笔下"永州之野"最原真的注脚。核心看点：<strong>零陵楼</strong>巍峨古城门、<strong>文武双庙</strong>并立奇观、<strong>霞客渡</strong>古浮桥。漫步街巷，感受湘南古城慢时光。游览约1-1.5小时。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g2_170550549').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g2_170550549">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1-1.5小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>全年龄段友好（平地散步）;与柳子庙串联游览完美半日;适合作为长途驾驶中途的文化休息站;老人友好·亲子可讲三国张飞取零陵故事</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>柳子庙步行5分钟→零陵楼古城门→文武双庙→霞客渡古浮桥→柳子街→全程1-1.5h。零陵是永州古称，自西汉置郡2000余年建城史。古城依潇湘二水而建，保留明清街巷格局。与柳子庙串联游览，上午2-3h全部搞定。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>零陵楼巍峨古城门地标打卡;文武双庙并立全国罕见（文庙+武庙相邻）;霞客渡古浮桥横跨潇水徐霞客曾渡;柳子街青石板路明清民居原生态;潇湘夜雨是潇湘八景之一意境悠远</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>古城非完整城墙式古城而是街巷格局期待不要太高;核心精华在柳子街+零陵楼+浮桥2h足够;餐饮集中在零陵楼周边柳子街选择少;不要买街边古玩假货多</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>免费开放（古城区域）;与柳子庙步行5分钟无缝衔接;游览1-1.5h后午餐+继续赶路;永州血鸭和东安鸡在零陵区吃最正宗</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 铜仁锅巴粉</span></span><span class="fd">江口米豆腐</span><span class="fd">社饭</span><span class="fd">酸扎鱼</span><span class="fd">棉菜粑</span></div>
+  <div class="tip">💡 上午柳子庙+零陵古城2-3h足够，12点前吃午饭。永州→江口全程高速，途经邵阳、怀化。到江口后早点休息为明天爬山储能。</div>
+  <div class="hotel-line" onclick="focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 江口 · <span class="badge comf">舒适型</span> · 九月秋宿民宿(梵净山景区店) · 连住2晚（已订✅）</div>
+</div>
+
+<!-- ═══════ D3 ═══════ -->
+<div class="day-card" id="d3" style="border-left-color:#2ecc71">
+  <h3 onclick="showDayRoute(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 梵净之巅 <span class="pin">📍</span> <span class="dd">7/12 周日</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 0 — 全天登山</span>
+  <div class="route">江口（全天停留）</div>
+  <div class="day-weather">🌤 22-28°C · 山区凉爽 · 午后偶阵雨</div>
+  <h4>🔵 梵净山 <span class="badge a5">5A</span> <span class="badge wh">世界遗产</span> <span class="badge must">必去</span> <span class="badge reserve">需预约</span></h4>
+  <div class="spot-desc">梵净山是武陵山脉主峰（2572m），2018年入选世界自然遗产。核心看点：<strong>蘑菇石</strong>——高约10米的奇特风化岩柱，亿万年风雨雕琢而成，是梵净山标志；<strong>红云金顶</strong>——海拔2336米，垂直高差94米，需手脚并用攀铁链登顶，顶上两座小庙隔峡谷相望；<strong>老金顶</strong>——海拔2494米视野最开阔处。这里是黔金丝猴唯一栖息地（全球仅存~800只）。建议乘索道至万宝岩后步行游览，全程6-8h。暑期需7:30前排队入园，体力要求高，小孩需评估。老人可只到蘑菇石观景台（索道+短途步行）。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g3_16306183').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g3_16306183">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>5-7小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>体力好的中青年;登山爱好者;不适合老人和小孩;不适合腿脚不便者</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>景区大门→观光车→索道上山→蘑菇石→老金顶（体力挑战）→红云金顶（需预约登顶）→索道下山→全程约5-7小时。世界自然遗产+5A双料王。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>蘑菇石梵净山标志性奇石;红云金顶孤峰耸立云海之上;云海日出如仙境;万米睡佛天然山形奇观</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>门票需提前3-7天抢！每天限流8000人;红云金顶需单独预约登顶名额;索道排队可能1-2小时;山上天气变脸极快早上晴下午雨;体力要求极高不适合老人小孩</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>旺季门票提前3-7天抢;7点前到景区门口排队;红云金顶登顶单独预约;带雨衣山上天气变脸极快;住江口县城比景区门口便宜很多</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd">锅巴粉</span><span class="fd">米豆腐</span><span class="fd">社饭</span><span class="fd">酸扎鱼</span><span class="fd">烤鱼</span><span class="fd">糯米饭</span><span class="fd">腊肉</span></div>
+  <div class="tip">💡 暑期梵净山务必7:30前到景区门口排队！索道票提前在公众号购买。山顶温差大带外套。全程6-8h体力消耗大，带足水和干粮。下山后泡脚放松。</div>
+  <div class="score-row">⭐ 梵净山 <strong>6.00</strong> — 5A+世界遗产，武陵山脉主峰</div>
+  <div class="hotel-line" onclick="focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 江口 · <span class="badge comf">舒适型</span> · 九月秋宿民宿(梵净山景区店) · 连住2晚（已订✅）</div>
+</div>
+
+<!-- ═══════ D4 ═══════ -->
+<div class="day-card" id="d4" style="border-left-color:#f39c12">
+  <h3 onclick="showDayRoute(3)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 4 — 转折之城 <span class="pin">📍</span> <span class="dd">7/13 周一</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 2.5h · 222km</span>
+  <div class="route">江口 → 遵义</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>11:30</strong></span></div>
+  <div class="day-weather">🌤 22-28°C · 黔北凉爽</div>
+  <h4>🏙️ 遵义 <span class="province">（贵州·黔北）</span></h4>
+  <div class="city-desc">遵义是贵州第二大城市，中国革命历史上的转折之城。1935年<strong>毛泽东</strong>等在遵义会议上确立领导地位，中国革命由此走向胜利。清代西南大儒<strong>郑珍</strong>也是遵义人，其诗文影响深远。城市依山而建，湘江河穿城而过，遵义会议会址为全国重点文物保护单位。遵义的羊肉粉是与贵阳肠旺面齐名的贵州早餐代表，捞沙巷是本地人最爱的美食街。</div>
+  <h4>🔴 红军山烈士陵园 <span class="badge free">免费</span></h4>
+  <div class="spot-desc">红军山烈士陵园紧邻遵义会议会址，步行5分钟即达。陵园坐落于凤凰山麓，319级台阶拾级而上，山顶可俯瞰遵义老城全景。核心看点：<strong>红军烈士纪念碑</strong>——邓小平题写碑名；<strong>红军坟</strong>——红军卫生员龙思泉牺牲处，当地百姓尊为"红军菩萨"；<strong>邓萍雕像</strong>——红三军团参谋长牺牲地。游览约30-60分钟，体力要求低，庄严肃穆适合全家缅怀。免费开放无需预约。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g4_981038730').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g4_981038730">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1-1.5小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>全年龄段（台阶可选爬）;红色教育价值极高（长征历史活教材）;老人可只到纪念碑平台（约200级即达核心区）;亲子可讲红军卫生员故事</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>遵义会议会址步行5分钟→红军街→红军山正门→攀登316级台阶→红军烈士纪念碑（邓小平题字）→邓萍烈士墓→红军坟（卫生员铜像）→英烈墙→凤凰楼观景台（俯瞰遵义全景·5元）→全程1-1.5h。紧邻会址免费开放，D4下午自然串联游览。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>红军烈士纪念碑邓小平题写"红军烈士永垂不朽";红军坟+卫生员铜像最令人动容——龙思泉为百姓治病掉队牺牲，百姓尊为"红军菩萨";邓萍墓——红三军团参谋长年仅27岁牺牲，长征中最高级别阵亡将领之一;英烈墙镌刻3000+烈士姓名;凤凰楼登顶俯瞰遵义老城全景5元超值</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>316级台阶老人需量力而行（可只到纪念碑不登凤凰楼）;陵园内保持肃静不可攀爬纪念碑;凤凰楼单独收费5元需现金;夏天爬台阶注意防晒补水</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>免费开放·08:30-17:00;从遵义会议会址步行5分钟即达;与红军街串联游览形成完整红色半日;建议上午会址下午红军山傍晚捞沙巷;凤凰楼5元现金俯瞰全景很值</div>
+    </div>
+  </div>
+  <h4>🔴 遵义会议会址 <span class="badge a4">4A</span> <span class="badge reserve">需预约</span></h4>
+  <div class="spot-desc">遵义会议会址原为黔军师长柏辉章私邸，建于1932年，中西合璧二层小楼。1935年1月15-17日，<strong>遵义会议</strong>在此召开，确立了毛泽东在红军和中共中央的领导地位，被称为"<strong>中国革命的历史转折点</strong>"。会址内陈列着会议室原貌、参会者蜡像和大量历史文献。配套的<strong>遵义会议纪念馆</strong>系统展示了长征全过程，馆藏丰富。游览约1.5-2h，室内为主不受天气影响。免费开放需预约。<strong>7/13正常开放</strong>（已确认暑期周一不休馆），周边<strong>红军街</strong>和<strong>红军山</strong>可一并游览。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 遵义羊肉粉</span></span><span class="fd">豆花面</span><span class="fd">遵义鸡蛋糕</span><span class="fd">乌江鱼</span><span class="fd">桐梓方竹笋</span><span class="fd">虾子辣椒</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">刘二妈米皮</span>（遵义市区） — 遵义名小吃米皮薄韧辣子香浓 · 大众点评必吃榜</li>
+    <li>🏠 <span class="sn">遵义羊肉粉馆</span>（捞沙巷） — 羊肉粉汤头浓郁 · 本地人推荐</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g4_446354217').classList.toggle('open')" title="📝 点击展开游玩攻略">飞龙湖（飞龙寨）</span>（余庆县（梵净山→遵义中途向南绕行~40km））
+    <div class="alt-desc">4A景区，乌江上的"高原千岛湖"。999米龙形长廊+34个孤岛星罗棋布+游船快艇。门票45元+游船80元。游玩2-3h。游船赏湖光山色轻松不费腿，D3梵净山下来后恢复日首选。</div>
+    <div class="guide-box">
+      <div class="guide-header" onclick="document.getElementById('g4_446354217').classList.toggle('open')">
+        📝 游玩攻略 <span class="guide-toggle">▼</span>
+      </div>
+      <div class="guide-body" id="g4_446354217">
+        <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+        <div class="guide-item"><span class="guide-label">👥 适合</span>亲子家庭友好（卡丁车+游船小孩喜欢）;D3梵净山后恢复日首选（轻松不费腿）;摄影爱好者（龙形长廊+千岛湖）;不适合纯追求服务的游客</div>
+        <div class="guide-item"><span class="guide-label">🗺️ 路线</span>余庆县→飞龙寨景区中门→天下第一飞龙长廊（999m龙形地标·必打卡）→龙王阁（5层高阁俯瞰湖区全景）→游船码头→乘船游湖（34个孤岛·乌江小三峡）→卡丁车/快艇（可选）→全程2-3h。梵净山→遵义中途可向南绕行~40km到达。</div>
+        <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>天下第一飞龙长廊999m龙形建筑拍照出片;龙王阁登高俯瞰千岛湖区碧绿如玉;游船穿行喀斯特峡谷感受乌江画廊;卡丁车+快艇+低空飞行体验丰富;湖区23°C避暑凉爽夏季最佳</div>
+        <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>景区内餐饮极少自带水和食物;游船下午15:00前搭乘过时可能停运;低空飞行需提前预约不便宜;位置偏不自驾交通不便;部分设施维护一般期待不要太高</div>
+        <div class="guide-item"><span class="guide-label">💡 贴士</span>门票45元+游船80元·抖音团购更便宜;导航"飞龙湖景区中门"停车10元/天;穿防滑运动鞋临湖栈道湿滑;自带食物景区餐饮少;快艇到马尾水瀑布游船不到需注意</div>
+      </div>
+    </div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g4_143946993').classList.toggle('open')" title="📝 点击展开游玩攻略">凤冈茶海之心</span>（凤冈永安镇（杭瑞高速沿线·几乎不绕路））
+    <div class="alt-desc">4A景区&lt;strong&gt;免费&lt;/strong&gt;！10万亩生态茶园，森林覆盖率85%+。仙人岭观景台俯瞰茶海+玻璃吊桥+采茶制茶体验。杭瑞高速顺路，绕行极少。游玩2-3h。茶园散步轻松悠闲，适合全家休整。</div>
+    <div class="guide-box">
+      <div class="guide-header" onclick="document.getElementById('g4_143946993').classList.toggle('open')">
+        📝 游玩攻略 <span class="guide-toggle">▼</span>
+      </div>
+      <div class="guide-body" id="g4_143946993">
+        <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+        <div class="guide-item"><span class="guide-label">👥 适合</span>老人友好（观景台+茶庄品茶·体力要求低）;亲子友好（采茶体验+茶园骑行）;全家休整日首选（顺路+免费+轻松）;摄影爱好者（茶园+风车+晨雾）</div>
+        <div class="guide-item"><span class="guide-label">🗺️ 路线</span>凤冈永安镇田坝村→游客中心→仙人岭观景台（俯瞰万亩茶园·核心C位）→玻璃吊桥→茶圣广场→采茶制茶体验（各茶庄另收费）→茶区骑行→全程2-3h。杭瑞高速永兴出口下，梵净山→遵义顺路几乎不绕。</div>
+        <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>仙人岭登顶万亩茶园"绿浪翻滚"如指纹铺展;玻璃吊桥悬空茶园上空刺激出片;10万亩生态茶园森林覆盖率85%天然氧吧;采茶制茶体验+品锌硒茶文化沉浸;免费入园性价比极高</div>
+        <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>采茶体验需提前联系茶厂非随时开放;观光步道部分泥土路雨天湿滑;茶园内餐饮少需自带或下山吃;不要随意采摘茶树需在指定区域;玻璃吊桥另收费约30-50元</div>
+        <div class="guide-item"><span class="guide-label">💡 贴士</span>景区免费入园·采茶体验另收费约50元;自驾导航"凤冈茶海之心游客中心";杭瑞高速永兴出口下沿X364到田坝;绿茶/红茶以锌硒茶最出名可买伴手礼;凤冈黄饺+酸鲊肉+油茶汤是当地特色</div>
+      </div>
+    </div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g4_1253718418').classList.toggle('open')" title="📝 点击展开游玩攻略">海龙屯</span>（遵义汇川区（距遵义市区~40min））
+    <div class="alt-desc">&lt;strong&gt;世界文化遗产&lt;/strong&gt;！播州杨氏土司725年统治中心，中国保存最完整的中世纪军事城堡。三十六步天梯+飞龙关/飞虎关等九关防御体系+新王宫遗址。门票65元（含摆渡车）。游玩3-4h。需爬天梯体力消耗中等，分量够重但D3梵净山后可能较累。</div>
+    <div class="guide-box">
+      <div class="guide-header" onclick="document.getElementById('g4_1253718418').classList.toggle('open')">
+        📝 游玩攻略 <span class="guide-toggle">▼</span>
+      </div>
+      <div class="guide-body" id="g4_1253718418">
+        <div class="guide-item"><span class="guide-label">⏱️ 时长</span>3-4小时</div>
+        <div class="guide-item"><span class="guide-label">👥 适合</span>历史军事爱好者必去（世界遗产+土司文化）;中青年体力好者（天梯攀爬）;不适合D3梵净山后腿软的人;老人小孩不建议走全程（天梯太陡）;不耐热的夏天午后暴晒注意</div>
+        <div class="guide-item"><span class="guide-label">🗺️ 路线</span>遵义市区→海龙屯（40min/20km）→游客中心→观光车（35元·必买·省2h徒步）→碾房湾→铜柱关→铁柱关→三十六步天梯（45°陡坡·手脚并用·核心震撼）→飞龙关→朝天关→新王宫遗址→返程→全程3-4h。世界文化遗产，播州杨氏土司725年军事城堡。</div>
+        <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>三十六步天梯45°陡坡52m长手脚并用攀爬震撼;飞龙关"飞龙关"三字末代土司杨应龙手书;新王宫遗址2万㎡宫殿基址感受土司王朝;九关防御体系中国保存最完整中世纪军事城堡;世界文化遗产分量足贵州唯一</div>
+        <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>石阶常年返潮雨天像抹了油必须穿防滑登山鞋;山上基本无餐饮自带水和干粮;D3梵净山后膝盖可能吃不消体力消耗大;部分游客评价"100元不值"（需对历史感兴趣）;观光车35元必买否则多徒步2h</div>
+        <div class="guide-item"><span class="guide-label">💡 贴士</span>门票65元+观光车35元=100元;自驾导航"海龙屯景区"市区40min即达;穿防滑登山鞋+带登山杖·别穿平底鞋;夏天带足水山上无补给;8:30开门建议第一批进避开正午暴晒;下山后遵义羊肉粉补充体力</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip">💡 梵净山下来腿软正常，今天只开2.5h轻松过渡。遵义会议会址免费需预约（暑期周一正常开放），游览1.5-2h后步行至隔壁红军山（免费30min）俯瞰遵义全景。沿途可选停靠：①飞龙湖（余庆·绕行~40km·游船2-3h）②凤冈茶海之心（免费·顺路·茶园2-3h）③海龙屯（世界遗产·天梯3-4h）。红军街在会址旁可顺路逛。捞沙巷美食街傍晚最热闹，羊肉粉和豆花面不可错过。</div>
+  <div class="score-row">⭐ 遵义会议会址 <strong>6.25</strong> — 革命圣地，历史转折</div>
+  <div class="hotel-line" onclick="focusHotel(3)" title="🗺️ 点击查看地图位置">🏨 遵义 · <span class="badge comf">舒适型</span> · 遵义贵州饭店（已订✅）· 2间大床房(1.8m)+2间双床房 · ¥500/间</div>
+</div>
+
+<!-- ═══════ D5 ═══════ -->
+<div class="day-card" id="d5" style="border-left-color:#9b59b6">
+  <h3 onclick="showDayRoute(4)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 5 — 丹霞赤水 <span class="pin">📍</span> <span class="dd">7/14 周二</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 ~4.2h · ~335km</span>
+  <div class="route">遵义 → 赤水 → 仁怀（茅台镇）</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>13:00(赤水) · 17:00(仁怀)</strong></span></div>
+  <div class="day-weather">🌤 22-28°C → 25-33°C · 河谷渐热</div>
+  <h4>🏙️ 赤水 <span class="province">（贵州·遵义）</span></h4>
+  <div class="city-desc">赤水市位于贵州西北部，与四川泸州隔赤水河相望。这里是世界自然遗产<strong>中国丹霞</strong>的重要组成部分，赤水丹霞大瀑布高76米宽80米，是中国丹霞地貌区最大瀑布。1935年红军<strong>四渡赤水</strong>战役在此上演——赤水河不仅是上游茅台的"美酒河"，更是一条"英雄河"。赤水还是中国十大竹乡之一，漫山楠竹林海与红色丹霞绝壁交相辉映，构成独一无二的绿竹红岩景观。</div>
+  <h4>🟢 娄山关 <span class="badge a4">4A</span> <span class="badge reserve">需预约</span></h4>
+  <div class="spot-desc">娄山关是黔北第一关，自古为兵家必争之地。海拔1576米，关口险峻，<strong>"雄关漫道真如铁，而今迈步从头越"</strong>——毛泽东《忆秦娥·娄山关》即在此创作。1935年红军在此取得长征以来首次大胜仗——<strong>娄山关大捷</strong>。景区含：诗词碑、纪念碑、战斗遗址陈列馆、玻璃栈道观景台。在遵义→赤水的顺路上，距遵义北约40km（0.5h车程），不绕路。游览约1-1.5h。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g5_609867833').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g5_609867833">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1-1.5小时（快速精华版）</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>老人友好（观光车直达西风台步行少）;亲子教育价值高（红色历史+毛主席诗词）;全年龄段适合;顺路打卡不额外绕路</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>遵义出发40km/0.5h→游客中心→观光车（50元/人必坐）→西风台（核心20min）→诗词碑（10min）→纪念碑（10min）→观光车返回→全程1-1.5h。快速精华版适合顺路打卡，观光车代步老人友好。D5在遵义→赤水顺路上不绕路。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>西风台海拔1779m最高点360°俯瞰群山，毛主席"苍山如海残阳如血"出处;诗词碑396块大理石嵌成毛主席手迹;红军战斗纪念碑双尖顶巨柱;长空桥悬空铁索桥脚下百米深谷;《娄山关大捷》实景演出真枪实弹（11:30/14:00各一场）</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>别错过西风台是核心景观最高点;观光车50元必坐山路太长步行不现实;陈列馆周一闭馆别跑空;别坐黑车到不了西风台;《娄山关大捷》演出炮声极大带小孩备耳塞</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>免费需在"一码游贵州"实名预约;观光车50元/人必买;山顶风大比山脚低3-5°C带薄外套;遵义出发约40km/0.5h;游览1-1.5h后继续赶往赤水;演出票价108-198元如时间充裕可看14:00场</div>
+    </div>
+  </div>
+  <h4>🔵 赤水大瀑布 <span class="badge a5">5A</span> <span class="badge wh">世界遗产</span> <span class="badge reserve">需预约</span></h4>
+  <div class="spot-desc">赤水丹霞大瀑布高76米、宽80米，是中国丹霞地貌区<strong>最大的瀑布</strong>，也是仅次于黄果树的贵州第二大瀑布。瀑布从红色丹霞绝壁上倾泻而下，水雾弥漫如巨龙吐息，阳光下常见彩虹横跨瀑面。景区含：<strong>大瀑布</strong>（核心）、<strong>中洞瀑布</strong>（美人梳）、<strong>燕子岩</strong>（丹霞+瀑布组合）。全程栈道步行约3-4h，有观光车可代步部分路段。建议下午游览光线正好，人少不晒。与黄果树瀑布风格迥异——赤水是丹霞配飞瀑，红岩绿水的视觉冲击独一无二。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g5_357051613').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g5_357051613">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>老人可选电梯上下（单程20元省力）;亲子友好水帘洞穿越小孩最爱;中青年可全程步行体验完整;不适合穿高跟鞋者</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>赤水市区→景区大门（20min）→观光车（20元/人）→步行或电梯→大瀑布观景台→水帘洞穿越→美人梳瀑布→全程2-3h。推荐下午15:00后入园光线好人少不晒。老人可选电梯上下（单程20元省力神器）。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>高76米宽80米丹霞第一瀑比黄果树主瀑还高8米;水帘洞穿越瀑布背后极致体验水雾扑面;晴天上午10点常见双彩虹;丹霞红岩配白练飞瀑视觉冲击独一无二;人少景美体验远好于黄果树</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>穿防滑鞋丹霞石阶遇水极滑禁穿高跟鞋凉鞋;自带雨衣景区卖30元质量差;手机防水袋必备靠近瀑布必湿;旺季8:30开门就进避开10点后人流高峰;慎买景区野生天麻真品需到正规药材市场</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>门票80元+观光车20元;4-10月丰水期最佳水量最大;下午15:00后光线好游客少;带替换衣物靠近瀑布会湿身;赤水豆花和筒筒笋是当地特色必尝</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 赤水豆花</span></span><span class="fd">筒筒笋</span><span class="fd">赤水腊肉</span><span class="fd">竹荪</span><span class="fd">赤水河鱼</span><span class="fd">黑竹笋</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">赤水豆花庄</span>（赤水市区） — 豆花嫩滑蘸水一绝 · 本地人推荐</li>
+    <li>🏠 <span class="sn">竹乡人家</span>（赤水市区） — 筒筒笋+腊肉地道赤水味 · 大众点评</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">遵义会议会址</span>（遵义市区（D5出发前可顺路二刷））
+    <div class="alt-desc">免费需预约。如D4未去或意犹未尽，D5上午出发前可顺路补游（就在市区不绕路）。9:00-10:30游览1.5h后约10:30出发去赤水（驾驶2.7h约13:00到达）。讲解员80元/场。</div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g5_1967697868').classList.toggle('open')" title="📝 点击展开游玩攻略">四洞沟</span>（赤水大同镇）
+    <div class="alt-desc">四个梯级瀑布群配丹霞竹林，万竹之园美誉，适合体力一般者替代大瀑布（步行2h）。距赤水市区15km。</div>
+    <div class="guide-box">
+      <div class="guide-header" onclick="document.getElementById('g5_1967697868').classList.toggle('open')">
+        📝 游玩攻略 <span class="guide-toggle">▼</span>
+      </div>
+      <div class="guide-body" id="g5_1967697868">
+        <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+        <div class="guide-item"><span class="guide-label">👥 适合</span>体力一般者友好（下坡路线·观光车代步）;老人可选观光车+重点看四洞白龙潭;亲子友好竹林+瀑布+玩水;不适合穿高跟鞋/凉鞋者</div>
+        <div class="guide-item"><span class="guide-label">🗺️ 路线</span>赤水市区→大同镇（15km/20min）→景区大门→观光车至三洞→步行依次游览四洞白龙潭（60m最高最壮观）→三洞飞蛙崖（蛙形巨石奇观）→二洞月亮潭（弯月银梳温婉）→一洞水帘洞（穿行瀑布后方）→全程2-3h。推荐乘观光车到最高处再往下走（下坡省力）。万竹之园美誉，竹林+丹霞+瀑布组合与赤水大瀑布风格互补。</div>
+        <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>四洞白龙潭高60m群瀑之最气势恢宏;一洞水帘洞可穿行瀑布后方体验独特;飞蛙崖顶有蛙形巨石"蛇蛙戏水"奇景;万竹之园楠竹林海配丹霞红岩视觉独特;人少清幽体验好于赤水大瀑布</div>
+        <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>丹霞石阶遇水极滑穿防滑鞋;水帘洞穿行必湿身带雨衣+替换衣物;景区4km河道全程步行体力要求中等;观光车只到三洞最后一洞需步行;竹林蚊虫多带驱蚊液</div>
+        <div class="guide-item"><span class="guide-label">💡 贴士</span>门票75-85元+观光车20元;4-10月丰水期最佳;上午人少光线好;与赤水大瀑布风格互补可选其一;赤水豆花和筒筒笋是当地特色</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip">💡 娄山关在遵义→赤水顺路上（遵义北约40km/0.5h），免费需预约，观光车50元/人必坐，快速游览1-1.5h（西风台+诗词碑+纪念碑）。赤水大瀑布下午光线好游客少，建议15:00后入园。带雨衣！瀑布水雾极大。老人可选电梯上下（单程20元）。游玩结束后驾车回仁怀约1.5h/110km，晚上住仁怀醉美大道希尔顿欢朋。</div>
+  <div class="score-row">⭐ 赤水大瀑布 <strong>6.10</strong> — 丹霞第一瀑</div>
+  <div class="hotel-line" onclick="focusHotel(4)" title="🗺️ 点击查看地图位置">🏨 仁怀（茅台镇） · <span class="badge comf">舒适型</span> · 仁怀醉美大道希尔顿欢朋酒店（已订✅）· 3间双床房(1.35m)+1间大床房(1.8m) · ¥300/间</div>
+</div>
+
+<!-- ═══════ D6 ═══════ -->
+<div class="day-card" id="d6" style="border-left-color:#1abc9c">
+  <h3 onclick="showDayRoute(5)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 6 — 草原牧歌·地下宫殿 <span class="pin">📍</span> <span class="dd">7/15 周三</span></h3>
+  <span class="drive-badge">🚗 ~7.6h · ~599km</span>
+  <div class="route">仁怀（茅台镇） → 阿西里西大草原 → 织金洞 → 贵阳大成精舍</div>
+  <div class="timing"><span>🕐 出发 <strong>08:30</strong></span> <span>🕐 到达 <strong>11:48(阿西里西) · 13:50出发 · 16:20(织金) · 20:38(大成精舍)</strong></span></div>
+  <div class="day-weather">🌤 赫章 20-26°C · 海拔2300m → 织金 22-28°C → 贵阳 22-28°C</div>
+  <h4>🏙️ 织金 <span class="province">（贵州·毕节）</span></h4>
+  <div class="city-desc">织金县地处乌蒙山区，因织金洞而闻名天下。这里是晚清名臣<strong>丁宝桢</strong>的故乡——宫保鸡丁正是以他的官衔"太子少保"命名。织金洞被称为"溶洞之王"，地质学界有言："黄山归来不看岳，织金洞外无洞天"。D6上午先到的<strong>赫章阿西里西大草原</strong>则是南方罕见的高山草原，彝语意为"我们的好朋友"，<strong>彝族铃铛舞</strong>为国家级非遗。一天之内从草原牧歌到地下宫殿，是贵州地貌多样性的极致缩影。</div>
+  <h4>🟢 阿西里西大草原 <span class="badge a4">4A</span> <span class="badge reserve">需预约</span></h4>
+  <div class="spot-desc">阿西里西大草原位于赫章县南部，平均海拔2300米，是南方罕见的高山草原景观。核心体验：<strong>二台坡波浪路</strong>——自驾穿越起伏草甸如海上冲浪，是景区标志性体验；<strong>万峰林观景台</strong>——俯瞰十万大山如绿色海洋；<strong>彝族风情</strong>——铃铛舞（国家级非遗）、火把节、彝家坨坨肉。夏季平均20-26°C，凉爽宜人。建议自驾进景区，随走随停拍照。游览约2小时，全年龄段友好，老人小孩可在平坦草甸区活动。距织金洞约2.5h车程。</div>
+  <h4>🔵 织金洞 <span class="badge a5">5A</span> <span class="badge wh">世界地质公园</span> <span class="badge must">必去</span> <span class="badge reserve">需预约</span></h4>
+  <div class="spot-desc">织金洞是中国最美洞穴之首，已探明12.1公里，开放游览6.6公里。核心看点：<strong>银雨树</strong>——高17米的方解石晶花，全球仅此一处，是织金洞镇洞之宝；<strong>霸王盔</strong>——巨型石笋形似古代头盔；<strong>广寒宫</strong>——洞内最宏大的大厅，高150米、跨度175米，可容万人。洞内恒温16°C，冬暖夏凉。全程步行约2-3小时，台阶较多。老人如体力不支可选择不去，直接驾车至仁怀休息游玩。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g6_211301705').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g6_211301705">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>体力好的中青年（台阶较多）;不适合腿脚不便的老人;亲子需看孩子体力;摄影爱好者天堂</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>入口→迎客厅→广寒宫（洞内最大厅高150米跨度175米可容万人）→银雨树（高17米方解石晶花全球唯一）→霸王盔（巨型石笋）→全程6.6km步行约2-3小时。织金洞被称为溶洞之王，「黄山归来不看岳，织金洞外无洞天」。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>银雨树高17米方解石晶花全球仅此一处;霸王盔巨型石笋形似古代头盔;广寒宫洞内最宏大厅可容万人;洞内恒温16°C冬暖夏凉;灯光自然不花哨不像其他溶洞五颜六色</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>全程6.6km步行台阶多老人体力是考验;洞内虽恒温但湿度大地面湿滑;拍照光线暗需大光圈镜头或脚架;景区出口离入口远需乘摆渡车返回;洞内无卫生间中途无法上厕所</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>洞内恒温16°C带薄外套;穿防滑鞋地面潮湿;老人如体力不支可在游客中心休息区等候（有茶室）或由一位司机陪同先行前往下一站;与黄果树贵阳形成三角线顺路;上午去人少下午团多</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 肠旺面</span></span><span class="fd"><span class="hi">🔥 丝娃娃</span></span><span class="fd">织金发粑</span><span class="fd">织金荞凉粉</span><span class="fd">豆腐圆子</span><span class="fd">花溪牛肉粉</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">南门口肠旺面</span>（贵阳大十字） — 贵阳肠旺面天花板 · 大众点评必吃榜</li>
+    <li>🏠 <span class="sn">丝恋丝娃娃</span>（花果园/喷水池） — 自助包卷体验好 · 大众点评</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">中国酒文化城（4A）</span>（茅台镇内 · 门票60元/人）
+    <div class="alt-desc">国内规模最大的酒文化博物馆。汉唐宋元明清现代七馆5000+酒器文物。核心：茅台馆1915年巴拿马金奖展品、怒掷酒瓶振国威传奇。免费讲解10:00/15:00各一场。游览1.5-2h。老少皆宜，酒文化爱好者必去。</div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">1915广场 + 红军四渡赤水纪念园</span>（茅台镇河滨路 · 免费）
+    <div class="alt-desc">茅台镇核心地标群步行串联：1915广场巨型破碎酒瓶雕塑+每晚水舞声光秀；红军桥铁索桥夜景如金龙；四渡赤水纪念塔俯瞰赤水河S弯全景；纪念园300余件文物。全程1.5-2h免费，红色+酒文化双重体验。</div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">杨柳湾古街</span>（茅台镇内 · 免费）
+    <div class="alt-desc">酒出茅台镇香起杨柳湾——明清石板路和酒坊遗址，茅台酒发源地。可体验酱酒工坊踩曲（50元/人），30元品5款不同年份酱香酒。傍晚红灯笼+赤水河倒影适合拍照。游览约1h。</div>
+  </div>
+  <div class="tip">💡 洞内全程步行6.6km，老人可选择直达贵阳休息。洞内恒温16°C，带薄外套。上午从仁怀出发前可顺路游览茅台镇（1915广场+酒文化城，约1-2h），再驱车去织金洞。织金洞→贵阳约109km/1.5h，贵阳住宿大成精舍已预订✅。</div>
+  <div class="score-row">⭐ 阿西里西大草原 <strong>5.50</strong> · 织金洞 <strong>6.15</strong> — 高山草原+溶洞之王</div>
+  <div class="hotel-line" onclick="focusHotel(5)" title="🗺️ 点击查看地图位置">🏨 贵阳 · 🌟 <span class="badge lux">豪华型</span> · 大成精舍酒店（十里河滩·孔学堂）· 连住2晚（已订✅）</div>
+</div>
+
+<!-- ═══════ D7 ═══════ -->
+<div class="day-card" id="d7" style="border-left-color:#e67e22">
+  <h3 onclick="showDayRoute(6)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 7 — 避暑之都 <span class="pin">📍</span> <span class="dd">7/16 周四</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 0 — 全天城市漫游</span>
+  <div class="route">贵阳（全天停留）</div>
+  <div class="day-weather">🌤 22-28°C · 凉爽舒适 · 夜间可能需薄外套</div>
+  <h4>🏙️ 贵阳 <span class="province">（贵州·省会）</span></h4>
+  <div class="city-desc">贵阳，中国首个"国家森林城市"，夏季均温22-28°C，是全国少有的夏季不需要开空调的省会。这里是明代心学大师<strong>王阳明</strong>"龙场悟道"之地，也是晚清名臣<strong>张之洞</strong>的出生地。城市被群山环抱，南明河穿城而过，甲秀楼矗立河中已400余年。贵阳是一座被严重低估的美食之城——酸辣鲜香的口味体系独树一帜，青云路夜市灯火通明至凌晨，是大快朵颐的好去处。</div>
+  <h4>🟢 贵州省博物馆 <span class="badge reserve">需预约</span></h4>
+  <div class="spot-desc">国家一级博物馆，以古生物化石和民族文物见长。镇馆之宝：<strong>贵州龙化石</strong>——三叠纪海生爬行动物，是研究古海洋生态的重要标本。民族展厅系统展示了苗族、布依族、侗族等18个世居民族的银饰、刺绣、服饰和建筑文化。建筑设计灵感来自贵州喀斯特山峰，本身就是一道风景。免费开放（需预约），游览约2-3小时。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g7_1360958865').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g7_1360958865">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;亲子教育价值高;文化爱好者必去;免费开放成本低</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>序厅→古生物化石厅（贵州龙化石镇馆之宝）→民族文物厅（苗族银饰·布依族刺绣·侗族建筑）→临时展厅→全程约2-3小时。建筑设计灵感来自贵州喀斯特山峰，本身就是一道风景。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>贵州龙化石三叠纪海生爬行动物镇馆之宝;民族展厅18个世居民族银饰刺绣服饰系统展示;建筑本身设计灵感来自喀斯特山峰;免费开放需预约</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>周一闭馆！周一闭馆！;旺季需提前3-5天在公众号预约;展厅较大走完全程需一定体力;讲解器数量有限建议早去;拍照禁止闪光灯</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>周一闭馆务必避开;提前在「贵州省博物馆」公众号预约;建议上午去人少安静;与青岩古镇串联上午省博下午古镇;有免费存包柜轻装游览</div>
+    </div>
+  </div>
+  <h4>🟢 青岩古镇 <span class="badge a5">5A</span> <span class="badge reserve">需预约</span></h4>
+  <div class="spot-desc">始建于明洪武十一年（1378年），距今600余年。古镇依山而建，城墙蜿蜒山脊，城内保存明清石板街道、寺庙、牌坊。核心看点：<strong>定广门</strong>——古城正门；<strong>背街</strong>——青石板古巷，电影《寻枪》取景地；<strong>赵状元府</strong>——贵州第一位状元赵以炯故居。距贵阳市区约40分钟车程。逛完古镇不可错过一碗热气腾腾的卤猪脚。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g7_1018422526').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g7_1018422526">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜（城墙可选爬）;老人可逛主街+吃猪脚;亲子逛逛吃吃轻松愉快</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>定广门（古城正门）→背街（青石板古巷寻枪取景地）→赵状元府（贵州第一位状元赵以炯故居）→古城墙→文昌阁→全程约2-3小时。始建于明洪武十一年（1378年），距今600余年。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>定广门古城正门拍照打卡;背街青石板古巷最有韵味电影寻枪取景地;赵状元府贵州第一位状元故居;古城墙蜿蜒山脊俯瞰古镇全景;卤猪脚不可错过（王万妈和徐家两大家）</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>商业化程度较高主街店铺雷同;周末节假日人挤人建议工作日去;古城墙台阶陡老人慎爬;景区内餐饮价格偏高建议在贵阳吃;不要买景区银饰假货多</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>距贵阳市区约40分钟车程;上午省博下午青岩刚好一天;卤猪脚必吃王万妈和徐家两大家;古镇免费区域也很大不一定买套票;傍晚光线好适合拍照</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 肠旺面</span></span><span class="fd"><span class="hi">🔥 丝娃娃</span></span><span class="fd"><span class="hi">🔥 青岩卤猪脚</span></span><span class="fd">花溪牛肉粉</span><span class="fd">豆腐圆子</span><span class="fd">糕粑稀饭</span><span class="fd">酸汤鱼</span><span class="fd">辣子鸡</span><span class="fd">洋芋粑</span><span class="fd">恋爱豆腐果</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">南门口肠旺面</span>（大十字） — 排队王，营业至凌晨 · 大众点评必吃榜</li>
+    <li>🏠 <span class="sn">雷家豆腐圆子</span>（省府路） — 百年老字号 · 大众点评必吃榜</li>
+    <li>🏠 <span class="sn">青岩王万妈卤猪脚</span>（青岩古镇内） — 软糯入味 · 大众点评必吃榜</li>
+  </ul>
+  <div class="score-row">⭐ 省博 <strong>7.60</strong>（总分榜首）· 青岩古镇 <strong>6.80</strong></div>
+  <div class="hotel-line" onclick="focusHotel(6)" title="🗺️ 点击查看地图位置">🏨 贵阳 · 🌟 <span class="badge lux">豪华型</span> · 大成精舍酒店（十里河滩·孔学堂）· 连住2晚（已订✅）</div>
+</div>
+
+<!-- ═══════ D8 ═══════ -->
+<div class="day-card" id="d8" style="border-left-color:#e91e63">
+  <h3 onclick="showDayRoute(7)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 8 — 驶入侗乡 <span class="pin">📍</span> <span class="dd">7/17 周五</span></h3>
+  <span class="drive-badge">🚗 6.7h · 445km</span>
+  <div class="route">贵阳 → 三江（G76厦蓉高速 + G321都柳江国道）</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>15:40</strong></span></div>
+  <div class="day-weather">🌤 26-32°C · 桂北山区 · 潮湿</div>
+  <h4>🏙️ 三江 <span class="province">（广西·柳州）</span></h4>
+  <div class="city-desc">三江侗族自治县是全国侗族人口最多的县，位于桂北与贵州、湖南交界处。清代<strong>吴金银</strong>曾在此领导侗民起义。这里完整保存侗族三宝——鼓楼、风雨桥、侗族大歌。当天为纯驾驶日，下午到达后可在县城散步、逛鼓楼美食街、看三江风雨桥夜景。程阳八寨安排在D9上午，光线好、时间充裕。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 侗族油茶</span></span><span class="fd">酸鱼</span><span class="fd">酸肉</span><span class="fd">糯米饭</span><span class="fd">腊肉</span><span class="fd">竹筒鸡</span><span class="fd">三江茶叶</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">程阳桥侗家食府</span>（景区内） — 油茶+酸鱼地道 · 大众点评</li>
+    <li>🏠 <span class="sn">三江鼓楼美食街</span>（县城） — 集中侗族特色餐饮 · 高德指南</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g8_91556830').classList.toggle('open')" title="📝 点击展开游玩攻略">龙里油画大草原</span>（黔南龙里，⭐4.0）
+    <div class="alt-desc">高山台地草场，海拔1500-1700m，万亩草甸+白色风车群如宫崎骏画风。缆车、3D玻璃桥、滑草、骑马，亲子友好。贵阳东63km/0.9h，顺路仅绕行+11km，游玩1.5h后全程高速约18:30到三江。</div>
+    <div class="guide-box">
+      <div class="guide-header" onclick="document.getElementById('g8_91556830').classList.toggle('open')">
+        📝 游玩攻略 <span class="guide-toggle">▼</span>
+      </div>
+      <div class="guide-body" id="g8_91556830">
+        <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1.5-2小时</div>
+        <div class="guide-item"><span class="guide-label">👥 适合</span>亲子家庭满分;情侣出片好去处;老人可坐缆车赏景;不适合雨天前往</div>
+        <div class="guide-item"><span class="guide-label">🗺️ 路线</span>游客中心→缆车上山→高山台地草场（万亩草甸+白色风车群）→3D玻璃桥→滑草→骑马→全程约1.5-2小时。海拔1500-1700m，夏季凉爽避暑。</div>
+        <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>万亩草甸+白色风车群如宫崎骏画风;海拔1500-1700m夏季凉爽避暑;缆车俯瞰草原全景;3D玻璃桥惊险有趣;滑草骑马亲子友好;7月草最绿最佳季节</div>
+        <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>缆车和项目需单独购票套票更划算;山上紫外线强注意防晒;风大戴帽子会飞走;旺季周末人多项目排队;餐饮选择少建议自带</div>
+        <div class="guide-item"><span class="guide-label">💡 贴士</span>贵阳东63km/0.9h车程;顺路仅绕行+11km;游玩1.5h后全程高速约18:30到三江;套票比单买省30%;7月草最绿最佳季节</div>
+      </div>
+    </div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">云顶花海（高坡云顶草原）</span>（贵阳花溪，⭐4.5）
+    <div class="alt-desc">7月紫色马鞭草全盛期，800亩花海+风车+日落，"贵阳普罗旺斯"。贵阳南72km/1.4h。后半程G321国道沿都柳江→榕江→从江→三江，侗寨走廊风景绝美。游玩1.5h后约18:40到三江。</div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g8_983860313').classList.toggle('open')" title="📝 点击展开游玩攻略">程阳风雨桥</span>（三江，⭐6.00）
+    <div class="alt-desc">如走高速直达（15:40到），可趁下午光线好先去程阳八寨。建于1912年，与赵州桥、泸定桥并称世界四大历史名桥，全木质榫卯结构。16:00-18:00游览2h足够。如走备选A/B则跳过，D9上午再去。</div>
+    <div class="guide-box">
+      <div class="guide-header" onclick="document.getElementById('g8_983860313').classList.toggle('open')">
+        📝 游玩攻略 <span class="guide-toggle">▼</span>
+      </div>
+      <div class="guide-body" id="g8_983860313">
+        <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-2.5小时</div>
+        <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;文化爱好者;摄影爱好者;体力要求低</div>
+        <div class="guide-item"><span class="guide-label">🗺️ 路线</span>程阳八寨大门→程阳风雨桥（世界四大历史名桥）→马鞍寨鼓楼→岩寨→平寨→全程约2-2.5小时。建于1912年，与赵州桥、泸定桥并称世界四大历史名桥，全木质榫卯结构不用一钉一铆。</div>
+        <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>程阳风雨桥全木质榫卯结构世界建筑奇观;桥上有五座塔式桥亭;八个侗寨各有鼓楼可逛;清晨晨光穿透桥亭木格极适合拍照;侗族表演上午10:30和下午15:00各一场</div>
+        <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>景区商业化日益严重寨内客栈泛滥;部分鼓楼为新修复原度不高;寨内道路多为石板路雨天湿滑;餐饮以侗族家常菜为主选择少;节假日停车困难建议早去</div>
+        <div class="guide-item"><span class="guide-label">💡 贴士</span>8:30开门建议第一批进人少光影好;建议住三江县城第二天上午游览;9:00-11:30光线最佳;门票含程阳八寨全部鼓楼;侗族表演看好时间</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip">💡 程阳风雨桥移到D9上午游览，今天安心赶路。如走备选路线（草原/花海），到达时间约18:30，直接入住休息。</div>
+  <div class="score-row">⭐ 程阳风雨桥 <strong>6.00</strong> — 世界级侗族建筑，回程最佳停靠点</div>
+  <div class="hotel-line" onclick="focusHotel(7)" title="🗺️ 点击查看地图位置">🏨 三江 · <span class="badge comf">舒适型</span> · 三江侗乡国宾馆（已订✅）</div>
+</div>
+
+<!-- ═══════ D9 ═══════ -->
+<div class="day-card" id="d9" style="border-left-color:#00bcd4">
+  <h3 onclick="showDayRoute(8)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 9 — 风雨桥+温泉收官 <span class="pin">📍</span> <span class="dd">7/18 周六</span></h3>
+  <span class="drive-badge">🚗 4.2h · 383km</span>
+  <div class="route">三江 → 程阳风雨桥 → 贺州西溪温泉</div>
+  <div class="timing"><span>🕐 出发 <strong>08:30</strong></span> <span>🕐 到达 <strong>09:00-11:30(程阳) · 16:00(温泉)</strong></span></div>
+  <div class="day-weather">🌤 26-33°C · 温泉区 · 湿热</div>
+  <h4>🏙️ 贺州 <span class="province">（广西·桂东）</span></h4>
+  <div class="city-desc">贺州是广西通往粤港澳大湾区的东大门，拥有"中国温泉之城"和"中国长寿之乡"双重称号。现代文学家<strong>郭沫若</strong>曾游历贺州并留下"贺州山水秀"的赞美。地热资源丰富，西溪温泉水温常年52-60°C，为偏硅酸型医疗热矿泉，对皮肤和关节有养护作用。昭平、钟山等县百岁老人比例居全国前列——一方水土养一方人。</div>
+  <h4>♨️ 西溪温泉 <span class="badge must">必去</span></h4>
+  <div class="spot-desc">西溪温泉度假区拥有室内外泡池60余个，依山而建，泡池掩映于树林与溪流之间，日式园林风格。泉水为偏硅酸型医疗热矿泉，富含多种矿物质。配套温泉酒店、SPA、餐饮等设施，适合全家老少放松休整。连续赶路9天后，泡一池温泉洗去旅途疲惫，是行程最完美的收官。上午到达后可先午餐再办理入住，下午尽情享受温泉。</div>
+  <div class="guide-box">
+    <div class="guide-header" onclick="document.getElementById('g9_1323846424').classList.toggle('open')">
+      📝 游玩攻略 <span class="guide-toggle">▼</span>
+    </div>
+    <div class="guide-body" id="g9_1323846424">
+      <div class="guide-item"><span class="guide-label">⏱️ 时长</span>半天至一天</div>
+      <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;老人泡温泉对关节好;亲子玩水好去处;情侣度假氛围满分</div>
+      <div class="guide-item"><span class="guide-label">🗺️ 路线</span>办理入住→换浴袍→山林泡池区（60余个泡池依山而建）→无边泳池（面朝山谷拍照）→晚餐（度假区内）→夜泡看星空→SPA。全程半天至一天。泉水为偏硅酸型医疗热矿泉，水温常年52-60°C。</div>
+      <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>依山而建日式园林风格泡池掩映树林溪流间;偏硅酸型医疗热矿泉对皮肤关节有养护;无边泳池面朝山谷拍照绝佳;夜泡看星空体验极佳;60余个泡池选择丰富</div>
+      <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>暑期温泉紧俏务必提前1-2周预订;周末人超级多工作日体验好很多;温泉泡太久会头晕每次不超15分钟;园区餐饮价格偏高;部分泡池水温较高小孩需注意</div>
+      <div class="guide-item"><span class="guide-label">💡 贴士</span>提前1-2周预订暑期紧俏;带泳衣+浴袍（房间有提供）;温泉酒店通常含早+无限次泡泉;到达后先办理入住再泡温泉，晚餐在度假区内享用;泡完温泉多喝水补充水分</div>
+    </div>
+  </div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 黄田扣肉</span></span><span class="fd">马蹄</span><span class="fd">香芋</span><span class="fd">红瓜子</span><span class="fd">信都三黄鸡</span><span class="fd">客家酿豆腐</span><span class="fd">钟山油茶</span><span class="fd">昭平茶</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">黄田扣肉店</span>（贺州市区） — 扣肉入口即化 · 大众点评</li>
+    <li>🏠 <span class="sn">西溪温泉度假区餐厅</span>（园内） — 不出园方便省心 · 高德指南</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name spot-clickable" onclick="document.getElementById('g9_983860313').classList.toggle('open')" title="📝 点击展开游玩攻略">程阳风雨桥</span>（三江，距县城30min，⭐6.00）
+    <div class="alt-desc">D8未去则D9上午补上。建于1912年，与赵州桥、泸定桥并称"世界四大历史名桥"，全木质榫卯结构不用一钉一铆。桥上有五座塔式桥亭，程阳八寨还有7座鼓楼可逛。09:00-11:30游览2.5h，晨光穿透桥亭木格极适合拍照。如D8已去，可睡到自然醒直接出发去贺州。</div>
+    <div class="guide-box">
+      <div class="guide-header" onclick="document.getElementById('g9_983860313').classList.toggle('open')">
+        📝 游玩攻略 <span class="guide-toggle">▼</span>
+      </div>
+      <div class="guide-body" id="g9_983860313">
+        <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-2.5小时</div>
+        <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;文化爱好者;摄影爱好者;体力要求低</div>
+        <div class="guide-item"><span class="guide-label">🗺️ 路线</span>程阳八寨大门→程阳风雨桥（世界四大历史名桥）→马鞍寨鼓楼→岩寨→平寨→全程约2-2.5小时。建于1912年，与赵州桥、泸定桥并称世界四大历史名桥，全木质榫卯结构不用一钉一铆。</div>
+        <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>程阳风雨桥全木质榫卯结构世界建筑奇观;桥上有五座塔式桥亭;八个侗寨各有鼓楼可逛;清晨晨光穿透桥亭木格极适合拍照;侗族表演上午10:30和下午15:00各一场</div>
+        <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>景区商业化日益严重寨内客栈泛滥;部分鼓楼为新修复原度不高;寨内道路多为石板路雨天湿滑;餐饮以侗族家常菜为主选择少;节假日停车困难建议早去</div>
+        <div class="guide-item"><span class="guide-label">💡 贴士</span>8:30开门建议第一批进人少光影好;建议住三江县城第二天上午游览;9:00-11:30光线最佳;门票含程阳八寨全部鼓楼;侗族表演看好时间</div>
+      </div>
+    </div>
+  </div>
+  <div class="tip">💡 暑期温泉紧俏，务必提前1-2周预订！温泉酒店通常含早+无限次泡泉。</div>
+  <div class="hotel-line" onclick="focusHotel(8)" title="🗺️ 点击查看地图位置">🏨 贺州 · <span class="badge hot">温泉度假</span> · 西溪森林温泉大酒店·4房别墅（已订✅）</div>
+</div>
+
+<!-- ═══════ D10 ═══════ -->
+<div class="day-card" id="d10" style="border-left-color:#795548">
+  <h3 onclick="showDayRoute(9)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 10 — 归途 <span class="pin">📍</span> <span class="dd">7/19 周日</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 3h · 255km</span>
+  <div class="route">贺州 → 广州荔湾 🏠</div>
+  <div class="timing"><span>🕐 出发 <strong>15:00</strong></span> <span>🕐 到达 <strong>18:00</strong></span></div>
+  <div class="day-weather">🌤 广州 28-35°C · 闷热</div>
+  <div class="tip">💡 出发前在贺州加满油，服务区油价偏高。到家后记得检查车辆（机油、轮胎），长途归来保养不可少。</div>
+</div>
+  </div>
+</div>
+
+<div class="bottom-sections">
+  <div class="bottom-col bottom-left">
+    <div class="food-section" id="toc-food">
+      <h2>🍜 沿途美食总览（8城 · 50+道特色菜）</h2>
+      <div class="food-grid">
+        <div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_0')">
+    <div class="fcity">🍜 永州 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 永州血鸭 · 东安鸡 · 永州喝螺 · 宁远酿豆腐 · 祁阳米粉 · 零陵板鸭</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_0">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>老东安鸡馆</strong>（零陵区） — 东安鸡正宗做法酸辣鲜香 · 大众点评</div>
+      <div class="food-shop-item"><strong>永州血鸭馆</strong>（冷水滩区） — 永州血鸭老字号本地人力荐 · 本地人推荐</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">祁阳七星宿民宿·亲子房×2(507)+大床房×1(414)·已订✅ · <span class="badge comf">经济型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card">
+  <div class="food-card-hdr">
+    <div class="fcity">🍜 梵净山</div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 铜仁锅巴粉 · 江口米豆腐 · 社饭 · 酸扎鱼 · 棉菜粑 · 腊肉</span></span></div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_2')">
+    <div class="fcity">🍜 遵义 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 羊肉粉 · 豆花面 · 鸡蛋糕 · 乌江鱼 · 桐梓方竹笋</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_2">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>刘二妈米皮</strong>（遵义市区） — 遵义名小吃米皮薄韧辣子香浓 · 大众点评必吃榜</div>
+      <div class="food-shop-item"><strong>遵义羊肉粉馆</strong>（捞沙巷） — 羊肉粉汤头浓郁 · 本地人推荐</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">遵义贵州饭店（已订✅）· 2间大床房(1.8m)+2间双床房 · ¥500/间 · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card">
+  <div class="food-card-hdr">
+    <div class="fcity">🍜 赤水</div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 赤水豆花 · 筒筒笋 · 腊肉 · 竹荪 · 赤水河鱼 · 黑竹笋</span></span></div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_4')">
+    <div class="fcity">🍜 织金 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 发粑 · 荞凉粉 · 宫保鸡丁 · 烙锅</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_4">
+    <div class="food-notes">💡 织金是宫保鸡丁的发源地——晚清名臣丁宝桢（宫保是官衔）的家厨创制。织金发粑用本地优质大米发酵蒸制，松软有嚼劲。织金还是中国竹荪之乡，竹荪炖鸡是当地名菜。</div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_5')">
+    <div class="fcity">🍜 贵阳 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 肠旺面 · 🔥 丝娃娃 · 🔥 卤猪脚 · 牛肉粉 · 豆腐圆子 · 酸汤鱼 · 辣子鸡</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_5">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>南门口肠旺面</strong>（贵阳大十字） — 贵阳肠旺面天花板 · 大众点评必吃榜</div>
+      <div class="food-shop-item"><strong>丝恋丝娃娃</strong>（花果园/喷水池） — 自助包卷体验好 · 大众点评</div>
+      <div class="food-shop-item"><strong>南门口肠旺面</strong>（大十字） — 排队王，营业至凌晨 · 大众点评必吃榜</div>
+      <div class="food-shop-item"><strong>雷家豆腐圆子</strong>（省府路） — 百年老字号 · 大众点评必吃榜</div>
+      <div class="food-shop-item"><strong>青岩王万妈卤猪脚</strong>（青岩古镇内） — 软糯入味 · 大众点评必吃榜</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">大成精舍酒店（十里河滩·孔学堂）· 连住2晚（已订✅） · <span class="badge comf">豪华型</span></div>
+    </div>
+    <div class="food-notes">💡 贵阳是一座被严重低估的美食之城——酸辣鲜香的口味体系独树一帜。肠旺面是贵阳早餐灵魂，南门口凌晨还在排队。丝娃娃是贵阳独有的自助式小吃，10多种小菜自己包。青云路夜市和二七路小吃街是美食集中地，晚上灯火通明至凌晨。</div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_6')">
+    <div class="fcity">🍜 三江 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 油茶 · 酸鱼 · 酸肉 · 糯米饭 · 竹筒鸡 · 腊肉</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_6">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>程阳桥侗家食府</strong>（景区内） — 油茶+酸鱼地道 · 大众点评</div>
+      <div class="food-shop-item"><strong>三江鼓楼美食街</strong>（县城） — 集中侗族特色餐饮 · 高德指南</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">三江侗乡国宾馆（已订✅） · <span class="badge comf">舒适型</span></div>
+    </div>
+    <div class="food-notes">💡 三江侗族「三宝」：鼓楼、风雨桥、侗族大歌。侗族美食以「酸」为核心——酸鱼酸肉是待客最高礼仪，生腌发酵3-6个月。打油茶是侗族日常，茶叶用油炒香后加水煮沸，配糯米、花生、葱花，一碗暖胃。糯米饭手抓着吃是侗族传统。</div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_7')">
+    <div class="fcity">🍜 贺州 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 扣肉 · 三宝(马蹄·香芋·红瓜子) · 三黄鸡 · 酿豆腐 · 油茶 · 昭平茶</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_7">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>黄田扣肉店</strong>（贺州市区） — 扣肉入口即化 · 大众点评</div>
+      <div class="food-shop-item"><strong>西溪温泉度假区餐厅</strong>（园内） — 不出园方便省心 · 高德指南</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">西溪森林温泉大酒店·4房别墅（已订✅） · <span class="badge comf">温泉度假</span></div>
+    </div>
+    <div class="food-notes">💡 贺州有「中国温泉之城」和「中国长寿之乡」双重称号。黄田扣肉与梅菜扣肉不同——用芋头夹在五花肉中间蒸制，芋头吸饱肉汁比肉还好吃。贺州三宝是手信首选。昭平茶是广西名茶，温泉泡完喝一杯当地茶最惬意。</div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div class="expense-section" id="toc-expense">
+  <h2>💰 费用统计（按天 · 点击展开明细）</h2>
+  <div class="expense-table-wrap">
+    <table class="expense-table">
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>🏨 住宿</th>
+          <th>🚗 交通</th>
+          <th>🍜 餐饮</th>
+          <th>🎫 景点</th>
+          <th>📊 合计</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d0');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">1 <span class="exp-arrow">▶</span></td>
+          <td>¥1,428</td>
+          <td>¥1,151</td>
+          <td>¥1,000</td>
+          <td>—</td>
+          <td class="et">¥3,579</td>
+          <td class="en"><div class="en-inner">过路费530+油费621 · 半日仅晚餐 · 10人×¥100 · 祁阳七星宿民宿已订✅</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d0">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub">祁阳七星宿民宿·亲子房×2(507)+大床房×1(414)=1428</span></div>
+              <div class="eb-item"><div class="eb-label">🚗 交通</div><span class="eb-sub"><em>车1过路费</em>：265</span><span class="eb-sub"><em>车2过路费</em>：265</span><span class="eb-sub"><em>车1油费(92#·465km)</em>：197</span><span class="eb-sub"><em>车2油费(95#·465km)</em>：329</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">半日(仅晚餐) · 10人×¥100=¥1,000（永州血鸭+东安鸡等）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d1');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">2 <span class="exp-arrow">▶</span></td>
+          <td>¥2,311</td>
+          <td>¥949</td>
+          <td>¥2,000</td>
+          <td>¥175</td>
+          <td class="et">¥5,435</td>
+          <td class="en"><div class="en-inner">过路费458+油费491 · 柳子庙+零陵古城 · 完整日 · 10人×¥200 · 九月秋宿已订✅</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d1">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub">九月秋宿·双床房×3(598)+大床房×1(517)=2311</span></div>
+              <div class="eb-item"><div class="eb-label">🚗 交通</div><span class="eb-sub"><em>车1过路费</em>：229</span><span class="eb-sub"><em>车2过路费</em>：229</span><span class="eb-sub"><em>车1油费(92#·416km)</em>：176</span><span class="eb-sub"><em>车2油费(95#·416km)</em>：294</span></div>
+              <div class="eb-item"><div class="eb-label">🎫 门票</div><span class="eb-sub"><em>柳子庙</em>：成人4×25=100</span><span class="eb-sub">老人3(65+免票)=0</span><span class="eb-sub">儿童全价1×25=25</span><span class="eb-sub">儿童半价2×12.5=25 · 合计150</span><span class="eb-sub"><em>零陵古城</em>：免费</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">完整日 · 10人×¥200=¥2,000（永州午餐+江口晚餐）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d2');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">3 <span class="exp-arrow">▶</span></td>
+          <td>¥2,311</td>
+          <td>—</td>
+          <td>¥2,000</td>
+          <td>¥2,800</td>
+          <td class="et">¥7,111</td>
+          <td class="en"><div class="en-inner">全天梵净山 · 完整日 · 10人×¥200 · 梵净山索道+门票2800 · 九月秋宿已订✅</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d2">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub">九月秋宿·双床房×3(598)+大床房×1(517)=2311</span></div>
+              <div class="eb-item"><div class="eb-label">🎫 门票</div><span class="eb-sub"><em>梵净山（含索道+观光车）</em>：成人4×280=1120</span><span class="eb-sub">老人3(60+半价)×140=420</span><span class="eb-sub">儿童全价1×280=280</span><span class="eb-sub">儿童半价2×140=280 · 合计2100</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">完整日 · 10人×¥200=¥2,000（全天登山·三餐+景区补给）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d3');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">4 <span class="exp-arrow">▶</span></td>
+          <td>¥2,000</td>
+          <td>¥535</td>
+          <td>¥2,000</td>
+          <td>—</td>
+          <td class="et">¥4,535</td>
+          <td class="en"><div class="en-inner">过路费244+油费291 · 会址+红军山免费 · 完整日 · 10人×¥200 · 遵义贵州饭店已订✅</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d3">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub">遵义贵州饭店·大床房×2(500)+双床房×2(500)=2000</span></div>
+              <div class="eb-item"><div class="eb-label">🚗 交通</div><span class="eb-sub"><em>车1过路费</em>：122</span><span class="eb-sub"><em>车2过路费</em>：122</span><span class="eb-sub"><em>车1油费(92#·222km)</em>：94</span><span class="eb-sub"><em>车2油费(95#·222km)</em>：157</span></div>
+              <div class="eb-item"><div class="eb-label">🎫 门票</div><span class="eb-sub"><em>遵义会址</em>：免费</span><span class="eb-sub"><em>红军山</em>：免费</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">完整日 · 10人×¥200=¥2,000（遵义羊肉粉+捞沙巷美食街）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d4');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">5 <span class="exp-arrow">▶</span></td>
+          <td>¥1,200</td>
+          <td>¥543</td>
+          <td>¥2,000</td>
+          <td>¥1,050</td>
+          <td class="et">¥4,793</td>
+          <td class="en"><div class="en-inner">过路费248+油费295 · 娄山关+赤水大瀑布 · 完整日 · 10人×¥200 · 希尔顿欢朋已订✅</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d4">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub">仁怀希尔顿欢朋·双床房×3(300)+大床房×1(300)=1200</span></div>
+              <div class="eb-item"><div class="eb-label">🚗 交通</div><span class="eb-sub"><em>车1过路费</em>：124</span><span class="eb-sub"><em>车2过路费</em>：124</span><span class="eb-sub"><em>车1油费(92#·225km)</em>：95</span><span class="eb-sub"><em>车2油费(95#·225km)</em>：159</span></div>
+              <div class="eb-item"><div class="eb-label">🎫 门票</div><span class="eb-sub"><em>娄山关</em>：10人×50(观光车)=500</span><span class="eb-sub"><em>赤水大瀑布</em>：成人4×100=400</span><span class="eb-sub">老人3(60+半价)×50=150</span><span class="eb-sub">儿童全价1×100=100</span><span class="eb-sub">儿童半价2×50=100 · 合计1250</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">完整日 · 10人×¥200=¥2,000（赤水豆花+筒筒笋晚餐）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d5');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">6 <span class="exp-arrow">▶</span></td>
+          <td>¥2,356</td>
+          <td>¥1,028</td>
+          <td>¥2,000</td>
+          <td>¥1,400</td>
+          <td class="et">¥6,784</td>
+          <td class="en"><div class="en-inner">过路费471+油费557 · 织金洞全团 · 完整日 · 10人×¥200 · 大成精舍已订✅</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d5">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub"><em>大成精舍×2间</em>：1178</span><span class="eb-sub">1178</span></div>
+              <div class="eb-item"><div class="eb-label">🚗 交通</div><span class="eb-sub"><em>车1过路费</em>：235</span><span class="eb-sub"><em>车2过路费</em>：235</span><span class="eb-sub"><em>车1油费(92#·428km)</em>：181</span><span class="eb-sub"><em>车2油费(95#·428km)</em>：302</span></div>
+              <div class="eb-item"><div class="eb-label">🎫 门票</div><span class="eb-sub"><em>织金洞(10人全团)</em>：成人4×140=560</span><span class="eb-sub">老人3(60+半价)×70=210</span><span class="eb-sub">儿童全价1×140=140</span><span class="eb-sub">儿童半价2×70=140 · 合计1050</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">完整日 · 10人×¥200=¥2,000（织金午餐+贵阳肠旺面丝娃娃晚餐）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d6');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">7 <span class="exp-arrow">▶</span></td>
+          <td>¥2,377</td>
+          <td>—</td>
+          <td>¥2,000</td>
+          <td>¥75</td>
+          <td class="et">¥4,452</td>
+          <td class="en"><div class="en-inner">省博免费 · 青岩古镇75 · 完整日 · 10人×¥200 · 大成精舍已订✅</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d6">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub"><em>大成精舍×2间</em>：1189</span><span class="eb-sub">1189</span></div>
+              <div class="eb-item"><div class="eb-label">🎫 门票</div><span class="eb-sub"><em>省博</em>：免费</span><span class="eb-sub"><em>青岩古镇</em>：成人4×10=40</span><span class="eb-sub">老人3(半价)×5=15</span><span class="eb-sub">儿童全价1×10=10</span><span class="eb-sub">儿童半价2×5=10 · 合计75</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">完整日 · 10人×¥200=¥2,000（贵阳美食日·肠旺面+丝娃娃+卤猪脚+夜市）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d7');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">8 <span class="exp-arrow">▶</span></td>
+          <td>¥1,211</td>
+          <td>¥1,194</td>
+          <td>¥2,000</td>
+          <td>—</td>
+          <td class="et">¥4,405</td>
+          <td class="en"><div class="en-inner">过路费692+油费502 · 完整日 · 10人×¥200 · 三江侗乡国宾馆已订</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d7">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub">三江侗乡国宾馆（已订）</span></div>
+              <div class="eb-item"><div class="eb-label">🚗 交通</div><span class="eb-sub"><em>车1过路费</em>：346</span><span class="eb-sub"><em>车2过路费</em>：346</span><span class="eb-sub"><em>车1油费(92#·445km)</em>：188</span><span class="eb-sub"><em>车2油费(95#·445km)</em>：314</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">完整日 · 10人×¥200=¥2,000（高速服务区午餐+三江侗族晚餐）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d8');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">9 <span class="exp-arrow">▶</span></td>
+          <td>¥5,298</td>
+          <td>¥932</td>
+          <td>¥2,000</td>
+          <td>¥495</td>
+          <td class="et">¥8,725</td>
+          <td class="en"><div class="en-inner">过路费500+油费432 · 完整日 · 10人×¥200 · 程阳八寨495 · 西溪温泉已订✅</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d8">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub">西溪森林温泉大酒店·4房别墅</span></div>
+              <div class="eb-item"><div class="eb-label">🚗 交通</div><span class="eb-sub"><em>车1过路费</em>：250</span><span class="eb-sub"><em>车2过路费</em>：250</span><span class="eb-sub"><em>车1油费(92#·383km)</em>：162</span><span class="eb-sub"><em>车2油费(95#·383km)</em>：271</span></div>
+              <div class="eb-item"><div class="eb-label">🎫 门票</div><span class="eb-sub"><em>程阳八寨</em>：成人4×90=360</span><span class="eb-sub">老人3(65+免票)=0</span><span class="eb-sub">儿童3(半价)×45=135 · 合计495</span><span class="eb-sub">温泉含酒店费用</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">完整日 · 10人×¥200=¥2,000（程阳侗寨午餐+温泉度假区晚餐）</span></div>
+            </div>
+          </td>
+        </tr>
+        <tr class="expense-row" onclick="var d=document.getElementById('exp-d9');d.classList.toggle('open');var n=this.querySelector('.en-inner');if(n)n.classList.toggle('expanded')" title="点击展开/收起明细">
+          <td class="ed">10 <span class="exp-arrow">▶</span></td>
+          <td>—</td>
+          <td>¥542</td>
+          <td>¥1,000</td>
+          <td>—</td>
+          <td class="et">¥1,542</td>
+          <td class="en"><div class="en-inner">过路费254+油费288 · 半日仅午餐 · 10人×¥100 · 到家🏠</div></td>
+        </tr>
+        <tr class="expense-detail" id="exp-d9">
+          <td colspan="7">
+            <div class="expense-breakdown">
+              <div class="eb-item"><div class="eb-label">🏨 住宿</div><span class="eb-sub">到家🏠</span></div>
+              <div class="eb-item"><div class="eb-label">🚗 交通</div><span class="eb-sub"><em>车1过路费</em>：127</span><span class="eb-sub"><em>车2过路费</em>：127</span><span class="eb-sub"><em>车1油费(92#·255km)</em>：108</span><span class="eb-sub"><em>车2油费(95#·255km)</em>：180</span></div>
+              <div class="eb-item"><div class="eb-label">🍜 餐饮</div><span class="eb-sub">半日(仅午餐) · 10人×¥100=¥1,000（返程途中午餐）</span></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="expense-total-row">
+          <td><strong>合计</strong></td>
+          <td><strong>¥20,492</strong></td>
+          <td><strong>¥6,874</strong></td>
+          <td><strong>¥18,000</strong></td>
+          <td><strong>¥5,995</strong></td>
+          <td><strong>¥51,361</strong></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="expense-transport-summary">
+    <div class="ets-title">🚗 交通费用明细</div>
+    <div class="ets-grid">
+      <div class="ets-card">
+        <div class="ets-card-title">🚙 车1（6L/100km · 92# 7.05元/L）</div>
+        <div class="ets-items">
+          <span>油费：¥1,110（2,626km）</span>
+          <span>过路费：¥1,552</span>
+          <span class="ets-total">小计：¥2,662</span>
+        </div>
+      </div>
+      <div class="ets-card">
+        <div class="ets-card-title">🚗 车2（9L/100km · 95# 7.85元/L）</div>
+        <div class="ets-items">
+          <span>油费：¥1,855（2,626km）</span>
+          <span>过路费：¥1,552</span>
+          <span class="ets-total">小计：¥3,407</span>
+        </div>
+      </div>
+    </div>
+    <div class="ets-footer">高速过路费合计 ¥3,104 + 油费合计 ¥2,965 = <strong>交通总计 ¥6,069</strong>（2车·全程2,626km）</div>
+  </div>
+</div>
+
+    <div class="reservation-section" id="toc-reservation">
+  <h2>📋 景点预约指南</h2>
+  <div class="reserve-urgent">⚠️ <strong>必约景点：</strong>梵净山、遵义会址、织金洞、贺州西溪温泉 — 暑期热门，建议提前3-7天预约！12人团体出行，漏约一个就可能影响整段行程。</div>
+  <div class="reserve-timeline">
+    <h3>⏰ 预约时间线</h3>
+    <div class="reserve-timeline-strip">
+      <div class="reserve-tl-item"><span class="tl-date">7/11</span><span class="tl-action">预约</span><span class="tl-name">遵义会址</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">7/12</span><span class="tl-action">预约</span><span class="tl-name">娄山关、赤水大瀑布、织金洞、贵州省博物馆</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">7/13</span><span class="tl-action">预约</span><span class="tl-name">青岩古镇、贺州西溪温泉</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">7/5</span><span class="tl-action">预约</span><span class="tl-name">梵净山</span></div>
+    </div>
+  </div>
+  <div class="reserve-cards">
+    <div class="reserve-card must">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_0').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">梵净山</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 280元（含索道+观光车）。1.2m以下免票，1.2-1.5m半价，60岁以上半价</span>
+          <span>📅 提前7天</span>
+          <span>📱 梵净山景区公众号/一码游贵州</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_0">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">梵净山景区公众号/一码游贵州</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→门票预约→选日期（7/12 D3）→选时段（务必选最早7:00-8:00）→填身份信息→在线支付→凭身份证入园。红云金顶需单独预约登顶名额！</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">280元（含索道+观光车）。1.2m以下免票，1.2-1.5m半价，60岁以上半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">7天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">07:00-18:00（索道8:00-17:00），游览5-7h</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60岁以上凭身份证半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 暑期每天限流8000人！务必提前7天抢票。7:30前到景区门口排队。红云金顶登顶需单独预约名额有限。索道排队可能1-2h。带雨衣山上天气变脸极快。老人小孩不建议登红云金顶（垂直攀铁链需手脚并用）</div>
+      </div>
+    </div>
+    <div class="reserve-card must">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_1').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">遵义会址</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 免费（需预约）。讲解员80元/场（推荐请讲解）</span>
+          <span>📅 提前2天</span>
+          <span>📱 遵义会议纪念馆公众号/一码游贵州</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_1">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">遵义会议纪念馆公众号/一码游贵州</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→参观预约→选日期→填身份信息→免费预约→凭身份证入园</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">免费（需预约）。讲解员80元/场（推荐请讲解）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">2天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">09:00-17:00（暑期周一正常开放），游览1.5-2h</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">免费</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">免费</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 暑期周一不休馆！7/13正常开放。建议提前2天预约。游览后步行5分钟到红军山、红军街，傍晚去捞沙巷吃羊肉粉。</div>
+      </div>
+    </div>
+    <div class="reserve-card opt">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_2').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge opt">🟡 选去</span>
+          <span class="reserve-name">娄山关</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 免费（需预约）· 观光车50元/人必坐（山路长坡度大）· 《娄山关大捷》实景演出108-198元可选</span>
+          <span>📅 提前1天</span>
+          <span>📱 一码游贵州小程序</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_2">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">一码游贵州小程序</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">微信搜索一码游贵州→预约黔行→搜索娄山关→选日期（7/14 D5）→实名预约→凭身份证入园。门票免费但必须预约！观光车现场购买。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">免费（需预约）· 观光车50元/人必坐（山路长坡度大）· 《娄山关大捷》实景演出108-198元可选</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:00-18:00（夏季）· 陈列馆周一闭馆· 游览1-1.5h（快速精华版）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">免费</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">免费</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 遵义出发40km/0.5h顺路。快速游览1-1.5h（西风台→诗词碑→纪念碑）。观光车50元必买。山顶风大比山脚低3-5°C带薄外套。如时间充裕可看14:00《娄山关大捷》演出</div>
+      </div>
+    </div>
+    <div class="reserve-card opt">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_3').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge opt">🟡 选去</span>
+          <span class="reserve-name">赤水大瀑布</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 门票80元+观光车20元=100元。1.2m以下免票，1.2-1.5m半价，60岁以上半价</span>
+          <span>📅 提前1天</span>
+          <span>📱 一码游贵州/携程/美团</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_3">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">一码游贵州/携程/美团</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">搜索赤水丹霞大瀑布→选日期（7/14 D5）→填信息→在线支付→凭身份证入园</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">门票80元+观光车20元=100元。1.2m以下免票，1.2-1.5m半价，60岁以上半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:00-17:30· 建议15:00后入园光线好游客少· 游览2-3h</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60岁以上半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 下午光线最好！15:00后入园人少不晒。老人可选电梯上下（单程20元省力）。必带：防滑鞋+雨衣+手机防水袋+替换衣物。4-10月丰水期最佳</div>
+      </div>
+    </div>
+    <div class="reserve-card must">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_4').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">织金洞</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 140元（含观光车）。1.2m以下免票，1.2-1.4m半价，60岁以上半价</span>
+          <span>📅 提前1天</span>
+          <span>📱 一码游贵州/携程</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_4">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">一码游贵州/携程</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">搜索织金洞→选日期（7/15 D6）→填信息→支付→凭身份证入园</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">140元（含观光车）。1.2m以下免票，1.2-1.4m半价，60岁以上半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:30-17:00· 游览2-3h</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60岁以上半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 洞内恒温16°C带薄外套+防滑鞋。全程步行6.6km台阶多，老人如体力不支可在游客中心等候（有茶室）或由一位司机陪同先驾车去贵阳。洞内无卫生间中途无法上厕所</div>
+      </div>
+    </div>
+    <div class="reserve-card opt">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_5').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge opt">🟡 选去</span>
+          <span class="reserve-name">贵州省博物馆</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 免费（需预约）。讲解器租赁20元/台</span>
+          <span>📅 提前2天</span>
+          <span>📱 贵州省博物馆公众号</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_5">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">贵州省博物馆公众号</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→参观预约→选日期（7/16 D7）→填身份信息→免费预约。⚠️ 周一闭馆！</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">免费（需预约）。讲解器租赁20元/台</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">2天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">09:00-17:00（周一闭馆！7/16是周四OK）· 游览2-3h</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">免费</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">免费</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 国家一级博物馆。镇馆之宝：贵州龙化石+民族服饰银饰。建议上午去人少安静。建筑设计灵感来自喀斯特山峰本身就很出片。有免费存包柜轻装游览</div>
+      </div>
+    </div>
+    <div class="reserve-card opt">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_6').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge opt">🟡 选去</span>
+          <span class="reserve-name">青岩古镇</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 基础门票10元· 套票80元含景点。1.2m以下免票，60岁以上半价</span>
+          <span>📅 提前1天</span>
+          <span>📱 一码游贵州/现场</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_6">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">一码游贵州/现场</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">建议线上预约（旺季限流）→选日期（7/16 D7）→也可现场购票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">基础门票10元· 套票80元含景点。1.2m以下免票，60岁以上半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:30-17:30· 游览2-3h</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60岁以上半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 距贵阳市区40分钟车程。D7上午省博下午青岩刚好一天。必吃：青岩王万妈卤猪脚。背街（电影《寻枪》取景地）拍照绝佳。傍晚光线好适合拍照</div>
+      </div>
+    </div>
+    <div class="reserve-card must">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_7').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">贺州西溪温泉</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 温泉票158-178元· 1.2m以下免票· 1.2-1.4m儿童100元· 温泉酒店含早+泡泉最划算</span>
+          <span>📅 提前5天</span>
+          <span>📱 公众号贺州西溪森林温泉/携程</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_7">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">公众号贺州西溪森林温泉/携程</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→在线商城→温泉预订→选日期（7/18 D9）→选票种→支付→凭订单号入园。建议直接订温泉酒店（含早+无限次泡泉）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">温泉票158-178元· 1.2m以下免票· 1.2-1.4m儿童100元· 温泉酒店含早+泡泉最划算</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">5天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:00-23:30· 建议游玩3-5h</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">无特殊优惠</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 暑期周末容易满房！务必提前1-2周预订！温泉酒店含早+无限次泡泉最划算。建议预订4房别墅（10人刚好）。无边泳池日落前拍照最美。泡完温泉多喝水补充水分</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="bottom-col bottom-right">
+    <div class="scoring-section" id="toc-scoring">
+  <h2>⭐ 景点评分体系</h2>
+  <h3>评分维度与权重</h3>
+  <table class="method-table">
+    <thead><tr><th>维度</th><th>权重</th><th>评分标准</th></tr></thead>
+    <tbody>
+      <tr><td>🏅 美誉度</td><td><strong>30%</strong></td><td>官方评级（5A/4A）、携程/大众点评口碑、世界遗产认定</td></tr>
+      <tr><td>🎮 可玩性</td><td><strong>25%</strong></td><td>亲子友好、老人友好（体力要求）、互动参与感、建议游览时长</td></tr>
+      <tr><td>🍜 美食吸引度</td><td><strong>20%</strong></td><td>所在城市特色美食丰富度与口碑</td></tr>
+      <tr><td>👥 人流量</td><td><strong>15%</strong></td><td>暑期拥挤程度——人越少分越高（反向计分）</td></tr>
+      <tr><td>🏨 住宿豪华度</td><td><strong>5%</strong></td><td>所在城市豪华/五星级酒店选择丰富度</td></tr>
+      <tr><td>📍 抵达距离</td><td><strong>5%</strong></td><td>离开主环线的绕路成本——顺路高分</td></tr>
+    </tbody>
+  </table>
+  <h3>20个候选景点完整评分 <span style="font-weight:400;font-size:.78rem;color:var(--muted)">（点击景点名展开攻略）</span></h3>
+  <table class="full-scores" id="candidates-table">
+    <thead>
+      <tr><th>#</th><th>景点</th><th>位置</th><th>等级</th><th>美誉30%</th><th>人流15%</th><th>可玩25%</th><th>住宿5%</th><th>距离5%</th><th>美食20%</th><th>总分</th><th>状态</th></tr>
+    </thead>
+    <tbody>
+      <tr class="sel"><td>1</td><td class="spot-clickable" onclick="document.getElementById('sg_799547731').classList.toggle('open')">贵阳省博 📖</td><td>贵阳</td><td>—</td><td>7</td><td>8</td><td>7</td><td>9</td><td>6</td><td>9</td><td class="sc">7.6</td><td>✅ D7</td></tr>
+      <tr class="score-guide-row" id="sg_799547731">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;亲子教育价值高;文化爱好者必去;免费开放成本低</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>序厅→古生物化石厅（贵州龙化石镇馆之宝）→民族文物厅（苗族银饰·布依族刺绣·侗族建筑）→临时展厅→全程约2-3小时。建筑设计灵感来自贵州喀斯特山峰，本身就是一道风景。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>贵州龙化石三叠纪海生爬行动物镇馆之宝;民族展厅18个世居民族银饰刺绣服饰系统展示;建筑本身设计灵感来自喀斯特山峰;免费开放需预约</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>周一闭馆！周一闭馆！;旺季需提前3-5天在公众号预约;展厅较大走完全程需一定体力;讲解器数量有限建议早去;拍照禁止闪光灯</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>周一闭馆务必避开;提前在「贵州省博物馆」公众号预约;建议上午去人少安静;与青岩古镇串联上午省博下午古镇;有免费存包柜轻装游览</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>2源|高置信2|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>2</td><td class="spot-clickable" onclick="document.getElementById('sg_1661544410').classList.toggle('open')">小七孔 📖</td><td>荔波</td><td>5A</td><td>9</td><td>3</td><td>9</td><td>3</td><td>7</td><td>6</td><td class="sc">7.1</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_1661544410">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>6-8小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>亲子家庭满分（玩水天堂）;老人友好（观光车代步，可选择性下车）;体力要求低（下坡路线）</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>酒店在东门（已预订✅），推荐路线：东门进→坐观光车直达卧龙潭（西门方向最高点）→自上向下游览（鸳鸯湖→翠谷瀑布→水上森林→68级跌水瀑布→小七孔古桥）→步行回酒店，全程下坡最省力。备选：西门进东门出（需先驾车/乘车到西门，但游览完可直接回酒店）。⚠️关键：小七孔古桥是景区最低点，从东门往上走是爬坡，务必先坐车到高处再往下走！</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>卧龙潭蓝绿湖水如翡翠最出片;鸳鸯湖手划船穿行水上森林小孩最爱;68级跌水瀑布群绵延1.6公里世界罕见;翠谷瀑布可踩水玩水;小七孔古桥清晨无人时最美</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>旺季排队久需提前在「一码游贵州」预约;穿防滑运动鞋+备用凉鞋（水上森林会湿脚）;景区补给少自带水和零食;鸳鸯湖划船需额外付费;别从东门往上走到翠谷——那是爬坡马拉松！;西门旅行团集中在9:00-11:00，从东门进可错峰</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>7:30开门就进或11:30后错峰（旅行团用餐时间）;酒店已订在东门附近（步行即达景区入口，非常方便）;门票旺季120元+观光车40元，2天有效;带替换衣物玩水会湿</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>5源|高置信5|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>3</td><td class="spot-clickable" onclick="document.getElementById('sg_606791831').classList.toggle('open')">龙宫 📖</td><td>安顺</td><td>5A</td><td>7</td><td>6</td><td>8</td><td>6</td><td>4</td><td>7</td><td class="sc">6.95</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_606791831">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老人友好（全程乘船为主）;亲子家庭好选择;几乎无体力要求</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>游客中心→一进水溶洞乘船（800米地下暗河）→龙门飞瀑（洞中瀑布高50米）→二进/三进水溶洞（可选）→漩塘（山不转水转奇观）→全程约2-3小时。距黄果树仅35km/0.6h车程，可串联游览。⚠️ 黄果树+龙宫同一天对老人小孩团队偏赶：体力有限建议二选一。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>一进水溶洞乘船穿行地下暗河钟乳石倒映如龙宫幻境;龙门飞瀑国内最大洞中瀑布从洞顶倾泻;漩塘水自转的奇观;乘船游览为主老人小孩友好</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>洞内光线暗拍照需高ISO或脚架;旺季乘船排队可能1小时以上;洞内恒温16°C带薄外套;一进龙宫是精华二三进可选跳过</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>下午去正好避开上午旅行团高峰;与黄果树串联游览一天搞定（体力有限建议黄果树选轻量版3h）;门票含船票无需额外付费;洞内潮湿注意防滑</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>4源|高置信4|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="sel"><td>4</td><td class="spot-clickable" onclick="document.getElementById('sg_1018422526').classList.toggle('open')">青岩古镇 📖</td><td>贵阳</td><td>5A</td><td>7</td><td>5</td><td>6</td><td>9</td><td>8</td><td>8</td><td class="sc">6.8</td><td>✅ D7</td></tr>
+      <tr class="score-guide-row" id="sg_1018422526">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜（城墙可选爬）;老人可逛主街+吃猪脚;亲子逛逛吃吃轻松愉快</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>定广门（古城正门）→背街（青石板古巷寻枪取景地）→赵状元府（贵州第一位状元赵以炯故居）→古城墙→文昌阁→全程约2-3小时。始建于明洪武十一年（1378年），距今600余年。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>定广门古城正门拍照打卡;背街青石板古巷最有韵味电影寻枪取景地;赵状元府贵州第一位状元故居;古城墙蜿蜒山脊俯瞰古镇全景;卤猪脚不可错过（王万妈和徐家两大家）</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>商业化程度较高主街店铺雷同;周末节假日人挤人建议工作日去;古城墙台阶陡老人慎爬;景区内餐饮价格偏高建议在贵阳吃;不要买景区银饰假货多</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>距贵阳市区约40分钟车程;上午省博下午青岩刚好一天;卤猪脚必吃王万妈和徐家两大家;古镇免费区域也很大不一定买套票;傍晚光线好适合拍照</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信2|分歧1|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>5</td><td class="spot-clickable" onclick="document.getElementById('sg_500479667').classList.toggle('open')">黄果树瀑布 📖</td><td>安顺</td><td>5A</td><td>10</td><td>2</td><td>7</td><td>6</td><td>5</td><td>7</td><td class="sc">6.7</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_500479667">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>5-7小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>亲子家庭好选择;老人可选大瀑布+陡坡塘（3h轻量版）;体力好走全程（天星桥下半段+大瀑布+陡坡塘）;大扶梯单程30元/双程50元老人推荐</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>逆人流路线（家庭团推荐8:00左右入园，住迎宾馆步行即达不用太早折腾）：天星桥（只走下半段！2-3h，老人可跳过）→陡坡塘（1h）→午餐→大瀑布（2-3h，老人乘大扶梯省体力）。天星桥下半段隐藏走法：进天星桥大门后直接走左侧通道到下半段入口。上帝视角隐藏路线：陡坡塘出口霞客亭→左转步道→岔路口右前方上坡→俯瞰大瀑布全景。⚠️ 全团体力有限可选轻量版（大瀑布+陡坡塘3h），天星桥和龙宫二选一。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>大瀑布犀牛潭仰拍全景+水帘洞穿越瀑布背后极致体验;天星桥银链坠潭瀑布比主瀑更美;陡坡塘86版西游记取景地;上午9-10点彩虹概率90%;上帝视角俯瞰大瀑布全景比天星桥强太多</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>天星桥只走下半段！上半段数生步无聊精华全在后段;别买景区30元雨衣自带加厚款+手机防水袋;穿防滑溯溪鞋别穿帆布鞋会摔惨;旺季必须提前3-5天预约，水帘洞可能需单独预约;天星桥索道10元/人值得坐，走路下去25分钟</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>住黄果树迎宾馆步行即达景区入口（已预订✅），8:00左右入园虽错过绝对空镜但不折腾老人小孩;门票3天有效，观光车+索道共60元;带现金山里信号差;老人推荐大扶梯单程30元/双程50元;体力有限可只游大瀑布+陡坡塘（3h轻量版）放弃天星桥;夜游黄果树灯光秀200-350元可选</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>6源|高置信6|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>6</td><td class="spot-clickable" onclick="document.getElementById('sg_988901189').classList.toggle('open')">FAST天眼 📖</td><td>平塘</td><td>—</td><td>8</td><td>7</td><td>8</td><td>2</td><td>6</td><td>4</td><td class="sc">6.65</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_988901189">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>4-5小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>亲子教育价值极高（小学生以上最佳）;老人登台阶量力而行可只逛体验馆;不适合婴幼儿（台阶太多）</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>游客中心→摆渡车（约30min）→登山台阶789级（约20min步行/可选20元单程摆渡车）→观景台俯瞰FAST→天文体验馆→南仁东纪念馆→全程约4-5小时。停车省力技巧：先在新食缘餐厅路边停车让老人孩子下车（离安检最近），司机再去天文时空塔旁露天停车场（10元/车次），然后走去买票安检。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>500米口径球面射电望远镜世界最大最灵敏;观景台俯瞰大锅震撼感极强;天文体验馆互动装置小孩可动手操作;南仁东纪念馆感人至深22年奉献故事;登山台阶在林荫中走很舒服10分钟登顶</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>禁止携带任何电子设备！方圆5公里电磁波宁静区;带足现金！寄存柜/摆渡车/拍照/讲解全部收现金;789级台阶约20分钟老人需量力而行，可花20元坐摆渡车上山走下去;观景台风大戴帽子会飞走做好防晒;天文体验馆科普内容一般不必花太多时间</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>提前在公众号预约门票;带现金！带现金！带现金！;带一块机械表管理时间（所有电子产品寄存）;7月贵州日照长全天光线充足;夏天山顶晒做好防晒（有人晒到胳膊又红又痒）</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信3|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>7</td><td class="spot-clickable" onclick="document.getElementById('sg_1828203627').classList.toggle('open')">大七孔 📖</td><td>荔波</td><td>5A</td><td>7</td><td>7</td><td>7</td><td>3</td><td>7</td><td>6</td><td class="sc">6.6</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_1828203627">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老人友好（可全程乘船）;亲子适中;体力要求低</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>东门进→乘船游览天生桥（推荐老人小孩坐船）→步行栈道→恐怖峡→妖风洞→全程约1.5-2小时。作为荔波首站热身，半天时间刚好；建议游船往返，大七孔+小七孔联票更划算。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>天生桥高约60米天然石拱东方凯旋门;恐怖峡两岸绝壁夹峙河水深绿;妖风洞奇观在其他地方没有类似景观;乘船穿行峡谷视角独特;栈道平缓体力要求低</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>景区较小半天足够不要安排一整天;乘船需单独购票20元/人;峡谷内光线暗拍照需调高ISO;妖风洞不一定每次都能看到（看运气）</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>到达荔波→先办理入住+午餐→前往大七孔（紧邻小七孔）→游玩2-3h→傍晚回酒店。乘船建议坐右侧靠窗位置拍照好;大七孔+小七孔联票更划算;与小七孔一刚一柔风格互补</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信3|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>8</td><td class="spot-clickable" onclick="document.getElementById('sg_365598608').classList.toggle('open')">万峰林 📖</td><td>兴义</td><td>5A</td><td>8</td><td>7</td><td>7</td><td>5</td><td>2</td><td>6</td><td class="sc">6.6</td><td>❌ 偏远</td></tr>
+      <tr class="score-guide-row" id="sg_365598608">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>3-5小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜观光车为主;摄影爱好者天堂;骑行爱好者</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>兴义市区→景区大门→观光车→八卦田观景台→万佛寺→纳灰村→全程约3-5小时。中国最美五大峰林之一。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>八卦田天然漏斗状农田奇观;万佛寺建于天然溶洞中;纳灰村布依族古村落;徐霞客曾赞天下山峰何其多唯有此处峰成林;骑行穿梭峰林间最佳体验</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>距主环线绕路较远贵阳到兴义约4.5h;景区内餐饮以农家乐为主;夏季高温注意防晒</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>兴义市区可住一晚万峰林+马岭河可串联2天;油菜花季2-3月最美;布依族八大碗值得尝试</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>2源|高置信2|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>9</td><td class="spot-clickable" onclick="document.getElementById('sg_1709140532').classList.toggle('open')">西江苗寨 📖</td><td>雷山</td><td>5A</td><td>9</td><td>2</td><td>7</td><td>3</td><td>3</td><td>7</td><td class="sc">6.3</td><td>❌ 暑期爆满</td></tr>
+      <tr class="score-guide-row" id="sg_1709140532">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>4-6小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>摄影爱好者（夜景绝佳）;文化体验者;不适合腿脚不便的老人（台阶多）;亲子看孩子体力</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>北门/西门→观景台（俯瞰千户苗寨全景）→芦笙场（苗族歌舞表演）→嘎歌古巷→博物馆→田园观光区→全程约4-6小时。世界最大苗族聚居村寨。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>观景台俯瞰千户苗寨夜景万家灯火;苗族盛装旅拍体验;芦笙场苗族歌舞表演;长桌宴体验苗族待客礼仪;层层叠叠吊脚楼群世界之最</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>暑期人爆满！人挤人体验极差;商业化严重满街银饰店和旅拍;住宿溢价严重旺季一房难求;寨内台阶多拉行李箱痛苦;旅拍价格虚高建议提前谈好价格</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>暑期强烈不推荐（人流量扣分严重）;若去务必非节假日错峰;住寨外凯里市区便宜一半;苗家长桌宴需提前预约;旅拍多问几家比价</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信3|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="sel"><td>10</td><td>遵义会议会址</td><td>遵义</td><td>4A</td><td>8</td><td>6</td><td>5</td><td>6</td><td>4</td><td>6</td><td class="sc">6.25</td><td>✅ D4</td></tr>
+      <tr class="skip"><td>11</td><td class="spot-clickable" onclick="document.getElementById('sg_324130642').classList.toggle('open')">花江大桥 📖</td><td>关岭</td><td>—</td><td>7</td><td>8</td><td>7</td><td>3</td><td>4</td><td>4</td><td class="sc">6.2</td><td>❌ 本线不经</td></tr>
+      <tr class="score-guide-row" id="sg_324130642">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1-2小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>极限运动爱好者;亲子（高空秋千）;不适合恐高者;老人可只去观景台</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>导航坝陵河大桥→桥下观景台（仰拍世界第一高桥）→桥面人行道→高空蹦极（可选）→高空秋千（可选）→全程约1-2小时。桥面距谷底565米，世界第一高桥。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>世界第一高桥桥面距谷底565米;桥下观景台仰拍大桥极具视觉冲击;高空蹦极落差370米极致刺激;高空秋千适合亲子;免费观景台即可感受震撼</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>极限项目需提前预约且小孩需满足年龄身高要求;蹦极和秋千价格较高（蹦极约2000元）;桥上风大注意保暖;附近餐饮配套不足建议自带;往返约2h车程需考虑时间成本</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>可替换龙宫（二选一时间不足以三处全去）;往返约2h车程注意时间规划;极限项目提前预约;桥下观景台免费视角好;关岭县城可解决午餐</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>2源|高置信2|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="must"><td>12</td><td class="spot-clickable" onclick="document.getElementById('sg_211301705').classList.toggle('open')">织金洞 📖</td><td>织金</td><td>5A</td><td>8</td><td>7</td><td>5</td><td>2</td><td>4</td><td>5</td><td class="sc">6.15</td><td>✅ D6必去</td></tr>
+      <tr class="score-guide-row" id="sg_211301705">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>体力好的中青年（台阶较多）;不适合腿脚不便的老人;亲子需看孩子体力;摄影爱好者天堂</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>入口→迎客厅→广寒宫（洞内最大厅高150米跨度175米可容万人）→银雨树（高17米方解石晶花全球唯一）→霸王盔（巨型石笋）→全程6.6km步行约2-3小时。织金洞被称为溶洞之王，「黄山归来不看岳，织金洞外无洞天」。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>银雨树高17米方解石晶花全球仅此一处;霸王盔巨型石笋形似古代头盔;广寒宫洞内最宏大厅可容万人;洞内恒温16°C冬暖夏凉;灯光自然不花哨不像其他溶洞五颜六色</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>全程6.6km步行台阶多老人体力是考验;洞内虽恒温但湿度大地面湿滑;拍照光线暗需大光圈镜头或脚架;景区出口离入口远需乘摆渡车返回;洞内无卫生间中途无法上厕所</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>洞内恒温16°C带薄外套;穿防滑鞋地面潮湿;老人如体力不支可在游客中心休息区等候（有茶室）或由一位司机陪同先行前往下一站;与黄果树贵阳形成三角线顺路;上午去人少下午团多</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>4源|高置信4|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="sel"><td>13</td><td class="spot-clickable" onclick="document.getElementById('sg_357051613').classList.toggle('open')">赤水大瀑布 📖</td><td>赤水</td><td>5A</td><td>8</td><td>7</td><td>6</td><td>3</td><td>2</td><td>5</td><td class="sc">6.1</td><td>✅ D5</td></tr>
+      <tr class="score-guide-row" id="sg_357051613">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老人可选电梯上下（单程20元省力）;亲子友好水帘洞穿越小孩最爱;中青年可全程步行体验完整;不适合穿高跟鞋者</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>赤水市区→景区大门（20min）→观光车（20元/人）→步行或电梯→大瀑布观景台→水帘洞穿越→美人梳瀑布→全程2-3h。推荐下午15:00后入园光线好人少不晒。老人可选电梯上下（单程20元省力神器）。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>高76米宽80米丹霞第一瀑比黄果树主瀑还高8米;水帘洞穿越瀑布背后极致体验水雾扑面;晴天上午10点常见双彩虹;丹霞红岩配白练飞瀑视觉冲击独一无二;人少景美体验远好于黄果树</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>穿防滑鞋丹霞石阶遇水极滑禁穿高跟鞋凉鞋;自带雨衣景区卖30元质量差;手机防水袋必备靠近瀑布必湿;旺季8:30开门就进避开10点后人流高峰;慎买景区野生天麻真品需到正规药材市场</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>门票80元+观光车20元;4-10月丰水期最佳水量最大;下午15:00后光线好游客少;带替换衣物靠近瀑布会湿身;赤水豆花和筒筒笋是当地特色必尝</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>5源|高置信5|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>14</td><td class="spot-clickable" onclick="document.getElementById('sg_237067744').classList.toggle('open')">马岭河 📖</td><td>兴义</td><td>5A</td><td>7</td><td>7</td><td>6</td><td>5</td><td>2</td><td>6</td><td class="sc">6.05</td><td>❌ 偏远</td></tr>
+      <tr class="score-guide-row" id="sg_237067744">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-3小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>体力中等栈道较平缓;摄影爱好者;漂流爱好者夏季;不适合恐高者</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>兴义市区→景区入口→马岭河峡谷栈道→钙华瀑布群→万马奔腾瀑布→观光电梯→全程约2-3小时。被誉为地球上最美丽的伤疤。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>峡谷深切200米两岸绝壁壮丽;钙华瀑布群世界罕见雨季尤为壮观;万马奔腾瀑布倾泻如万马奔腾;观光电梯50秒直达谷底</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>距主环线绕路多贵阳到兴义约4.5h;雨季栈道湿滑注意安全;漂流受天气影响可能关闭;夏季峡谷内湿热蚊虫多</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>与万峰林串联2天最佳;雨季6-8月瀑布最壮观;漂流需提前预约;兴义市区羊肉粉和刷把头是特色</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>2源|高置信2|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>15</td><td>茂兰</td><td>荔波</td><td>—</td><td>7</td><td>9</td><td>5</td><td>2</td><td>7</td><td>5</td><td class="sc">6.05</td><td>❌ 本线不经</td></tr>
+      <tr class="sel"><td>16</td><td class="spot-clickable" onclick="document.getElementById('sg_983860313').classList.toggle('open')">程阳风雨桥 📖</td><td>三江</td><td>4A</td><td>7</td><td>6</td><td>6</td><td>2</td><td>7</td><td>5</td><td class="sc">6</td><td>✅ D8-D9</td></tr>
+      <tr class="score-guide-row" id="sg_983860313">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>2-2.5小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜;文化爱好者;摄影爱好者;体力要求低</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>程阳八寨大门→程阳风雨桥（世界四大历史名桥）→马鞍寨鼓楼→岩寨→平寨→全程约2-2.5小时。建于1912年，与赵州桥、泸定桥并称世界四大历史名桥，全木质榫卯结构不用一钉一铆。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>程阳风雨桥全木质榫卯结构世界建筑奇观;桥上有五座塔式桥亭;八个侗寨各有鼓楼可逛;清晨晨光穿透桥亭木格极适合拍照;侗族表演上午10:30和下午15:00各一场</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>景区商业化日益严重寨内客栈泛滥;部分鼓楼为新修复原度不高;寨内道路多为石板路雨天湿滑;餐饮以侗族家常菜为主选择少;节假日停车困难建议早去</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>8:30开门建议第一批进人少光影好;建议住三江县城第二天上午游览;9:00-11:30光线最佳;门票含程阳八寨全部鼓楼;侗族表演看好时间</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信3|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>17</td><td class="spot-clickable" onclick="document.getElementById('sg_919372807').classList.toggle('open')">肇兴侗寨 📖</td><td>黎平</td><td>4A</td><td>7</td><td>7</td><td>6</td><td>2</td><td>3</td><td>6</td><td class="sc">6</td><td>❌ 绕路</td></tr>
+      <tr class="score-guide-row" id="sg_919372807">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>4-6小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>文化体验者比西江原生态;摄影爱好者;亲子可体验蜡染</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>从江县城→肇兴侗寨大门→鼓楼群五座鼓楼→堂安侗寨→堂安梯田→全程约4-6小时。全国最大侗族村寨。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>五座鼓楼各具特色侗族建筑瑰宝;堂安梯田日落光影绝美;侗族大歌非遗表演;比西江商业化低体验更原生态;侗族蜡染和刺绣可亲手体验</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>距主环线有一定绕路黎平方向;暑期也开始人多但远不及西江;住宿条件一般多为民宿</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>侗寨门票80元含堂安;建议住一晚体验侗族生活;侗族大歌表演晚上8点;从江香猪和糯米酒是当地特色</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>2源|高置信2|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="must"><td>18</td><td class="spot-clickable" onclick="document.getElementById('sg_16306183').classList.toggle('open')">梵净山 📖</td><td>铜仁</td><td>5A</td><td>10</td><td>4</td><td>4</td><td>4</td><td>2</td><td>5</td><td class="sc">6</td><td>✅ D3必去</td></tr>
+      <tr class="score-guide-row" id="sg_16306183">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>5-7小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>体力好的中青年;登山爱好者;不适合老人和小孩;不适合腿脚不便者</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>景区大门→观光车→索道上山→蘑菇石→老金顶（体力挑战）→红云金顶（需预约登顶）→索道下山→全程约5-7小时。世界自然遗产+5A双料王。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>蘑菇石梵净山标志性奇石;红云金顶孤峰耸立云海之上;云海日出如仙境;万米睡佛天然山形奇观</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>门票需提前3-7天抢！每天限流8000人;红云金顶需单独预约登顶名额;索道排队可能1-2小时;山上天气变脸极快早上晴下午雨;体力要求极高不适合老人小孩</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>旺季门票提前3-7天抢;7点前到景区门口排队;红云金顶登顶单独预约;带雨衣山上天气变脸极快;住江口县城比景区门口便宜很多</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信3|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>19</td><td class="spot-clickable" onclick="document.getElementById('sg_1154368807').classList.toggle('open')">双河洞 📖</td><td>遵义</td><td>4A</td><td>7</td><td>8</td><td>6</td><td>3</td><td>3</td><td>4</td><td class="sc">5.85</td><td>❌ 绕路</td></tr>
+      <tr class="score-guide-row" id="sg_1154368807">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>3-4小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>探险爱好者;体力中等部分路段较窄;不适合幽闭恐惧症者;不适合腿脚不便老人</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>绥阳县→双河洞景区→双河谷水洞+旱洞→地下裂缝→全程约3-4小时。亚洲第一长洞已探明238公里。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>亚洲第一长洞已探明238公里;水洞乘船旱洞步行体验丰富;地下裂缝仅容一人侧身通过刺激;比织金洞更多样水陆结合;人少体验好</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>距贵阳约3h车程有一定绕路;洞内温度12-15°C需穿厚外套;部分路段窄且湿滑老人小孩注意</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>比织金洞更原生态但设施稍差;水洞部分需乘船;建议与遵义会址串联;绥阳空心面是当地特产</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>2源|高置信2|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+      <tr class="skip"><td>20</td><td class="spot-clickable" onclick="document.getElementById('sg_323503272').classList.toggle('open')">镇远古镇 📖</td><td>黔东南</td><td>5A</td><td>7</td><td>4</td><td>6</td><td>4</td><td>3</td><td>6</td><td class="sc">5.8</td><td>❌ 绕路</td></tr>
+      <tr class="score-guide-row" id="sg_323503272">
+        <td colspan="12">
+          <div class="guide-box">
+            <div class="guide-item"><span class="guide-label">⏱️ 时长</span>3-5小时</div>
+            <div class="guide-item"><span class="guide-label">👥 适合</span>老少皆宜青龙洞有台阶;夜景爱好者;休闲游</div>
+            <div class="guide-item"><span class="guide-label">🗺️ 路线</span>古镇步行街→青龙洞古建筑群悬空寺庙→石屏山→祝圣桥→舞阳河夜游→全程约3-5小时。国家级历史文化名城。</div>
+            <div class="guide-item"><span class="guide-label">⭐ 必打卡</span>青龙洞悬空于舞阳河崖壁上的古建筑群;舞阳河夜游灯火倒映水面绝美;祝圣桥明代古桥古镇地标;石屏山俯瞰古镇太极图全景</div>
+            <div class="guide-item"><span class="guide-label">⚠️ 避坑</span>商业化严重满街酒吧和旅游纪念品;河边步道窄人挤人;石屏山台阶陡且收费;夏天河边蚊子超级多;停车难且贵建议停城外</div>
+            <div class="guide-item"><span class="guide-label">💡 贴士</span>建议住一晚看夜景;河景房不便宜但值得;青龙洞门票60元;舞阳河夜游船票50元;停车在城外步行进古镇</div>
+            <div class="guide-item"><span class="guide-label">📊 来源</span>3源|高置信3|分歧0|待验证0|时效OK</div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+    <div class="summary" id="toc-summary">
+  <h2>📊 行程总览</h2>
+  <div class="trip-overview-card">
+    <div class="tov-item">🚗 2车自驾 · 总程 3010km · 过路费¥3636 · 油费¥3446</div>
+    <div class="tov-item">🏷️ 梵净山 × 遵义 × 赤水丹霞 × 阿西里西草原 × 织金洞 × 侗乡 × 温泉</div>
+  </div>
+  <div class="sg">
+    <div class="sca"><div class="ico">🎫</div><div class="big">11</div><div class="lbl">景点总数</div><div class="dl"><span><span>5A 级</span><span class="hv">4个</span></span><span><span>4A 级</span><span class="gv">4个</span></span><span><span>特殊/未评级</span><span class="gv">2个</span></span></div></div>
+    <div class="sca"><div class="ico">🚗</div><div class="big">34.4h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">2,839km</span></span><span><span>平均（10天）</span><span class="gv">3.4h/天</span></span><span><span>平均（驾驶日8天）</span><span class="gv">4.3h/天</span></span><span><span>停驶日</span><span class="gv">D3 · D7（2天）</span></span></div></div>
+    <div class="sca"><div class="ico">⚠️</div><div class="big">6.7h</div><div class="lbl">单日最大驾驶</div><div class="dl"><span><span>最长日</span><span class="hv">D8（6.7h）</span></span><span><span>弹性日(&gt;3h)</span><span class="gv">5天（D1/D2/D6/D8/D9）</span></span><span><span>超5h天数</span><span class="hv">3天（D1 5.4h + D6 5.2h + D8 6.7h）</span></span><span><span>最短驾驶日</span><span class="gv">D4（2.5h本地）</span></span></div></div>
+    <div class="sca"><div class="ico">🏨</div><div class="big">7</div><div class="lbl">过夜城市</div><div class="dl"><span><span>🌟 豪华</span><span class="gv" style="color:#8e44ad">2晚（贵阳）</span></span><span><span>🏨 舒适</span><span class="gv">5晚（遵义、赤水、三江、仁怀）</span></span><span><span>🏠 经济</span><span class="gv">2晚（永州、江口）</span></span><span><span>♨️ 温泉</span><span class="gv">1晚（贺州）</span></span></div></div>
+    <div class="sca w2">
+      <div class="ico">📊 逐日驾驶时长（小时）</div>
+      <div class="bars">
+        <div class="b ov" style="height:81%"><span class="bl">D1 5.4h</span></div>
+        <div class="b el" style="height:70%"><span class="bl">D2 4.7h</span></div>
+        <div class="b zz" style="height:5%"><span class="bl">D3 0</span></div>
+        <div class="b nm" style="height:37%"><span class="bl">D4 2.5h</span></div>
+        <div class="b nm" style="height:40%"><span class="bl">D5 2.7h</span></div>
+        <div class="b ov" style="height:78%"><span class="bl">D6 5.2h</span></div>
+        <div class="b zz" style="height:5%"><span class="bl">D7 0</span></div>
+        <div class="b ov" style="height:100%"><span class="bl">D8 6.7h</span></div>
+        <div class="b el" style="height:63%"><span class="bl">D9 4.2h</span></div>
+        <div class="b nm" style="height:45%"><span class="bl">D10 3h</span></div>
+      </div>
+      <div class="bleg"><span><span class="sw" style="background:#e74c3c"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:#f39c12"></span>弹性 &gt;3h</span><span><span class="sw" style="background:#27ae60"></span>正常 ≤3h</span><span><span class="sw" style="background:#ddd"></span>停驶</span></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">高德地图 REST API 实测驾驶数据 · 生成日期 2026-07-07</div>
+  <div class="summary-tips">💡 首末日≤6h · 普通日≤3h · D6弹性日≤7.5h · 🛰️ 高德API实测 · 🧥 贵阳夜间22°C带薄外套 · ⛰️ 梵净山暑期需早起排队 · 🐴 D6高强度·08:30出发·20:38到花溪大成精舍</div>
+</div>
+  </div>
+</div>
+
+<!-- ═══════ 目录浮标 ═══════ -->
+<div class="toc-float" id="tocFloat">
+  <button class="toc-btn" id="tocBtn" onclick="toggleToc()" title="目录导航">☰</button>
+  <div class="toc-panel" id="tocPanel">
+    <div class="toc-title">📑 页面导航</div>
+    <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
+    <a class="toc-item" onclick="toggleWeather();scrollToToc('weatherStrip')"><span class="toc-num">2</span>🌤️ 沿途天气</a>
+    <a class="toc-item" onclick="scrollToToc('toc-days')"><span class="toc-num">3</span>📅 每日行程</a>
+    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 美食总览</a>
+    <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">5</span>💰 费用统计</a>
+    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">6</span>📋 预约指南</a>
+    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">7</span>⭐ 评分体系</a>
+    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">8</span>📊 行程总览</a>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-core.js — 地图初始化、全局变量、标记、InfoWindow、天气/图例交互
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
+const K='9f853e26c1ef1d449260b4ad9a4de5c8';
+var D=[{h:[111.613482,26.419861],hl:"永州·经济型酒店",hi:{"c": "永州", "lv": "经济型", "n": "祁阳七星宿民宿·亲子房×2(507)+大床房×1(414)·已订✅"},s:[],r:[[113.237378, 23.065823], [111.613482, 26.419861]]},{h:[108.843993,27.704883],hl:"九月秋宿民宿(梵净山景区店) · 已订✅",hi:{"c": "江口", "lv": "舒适型", "n": "九月秋宿民宿(梵净山景区店) · 连住2晚（已订✅）"},s:[],r:[[111.613482, 26.419861], [108.843993, 27.704883]]},{h:[108.843993,27.704883],hl:"九月秋宿民宿(梵净山景区店) · 已订✅",hi:{"c": "江口", "lv": "舒适型", "n": "九月秋宿民宿(梵净山景区店) · 连住2晚（已订✅）"},s:[{"p": [108.796181, 27.824432], "l": "梵净山"}],r:[]},{h:[107.031922,27.721931],hl:"遵义·捞沙巷旁",hi:{"c": "遵义", "lv": "舒适型", "n": "遵义贵州饭店（已订✅）· 2间大床房(1.8m)+2间双床房 · ¥500/间"},s:[{"p": [107.031922, 27.721931], "l": "遵义会议会址"}, {"p": [106.925, 27.725], "l": "红军山"}, {"p": [107.45, 27.3], "l": "飞龙湖(候选)"}, {"p": [107.72, 27.96], "l": "凤冈茶海之心(候选)"}, {"p": [106.87, 27.78], "l": "海龙屯(候选)"}],r:[[108.843993, 27.704883], [107.031922, 27.721931]]},{h:[106.395466,27.786165],hl:"仁怀希尔顿欢朋（已订✅）",hi:{"c": "仁怀（茅台镇）", "lv": "舒适型", "n": "仁怀醉美大道希尔顿欢朋酒店（已订✅）· 3间双床房(1.35m)+1间大床房(1.8m) · ¥300/间"},s:[{"p": [106.85, 27.98], "l": "娄山关"}, {"p": [105.749474, 28.343876], "l": "赤水大瀑布"}],r:[[107.031922, 27.721931], [105.697501, 28.590474], [106.395466, 27.786165]]},{h:[106.678035,26.464389],hl:"大成精舍酒店（十里河滩·孔学堂）· 已订✅",hi:{"c": "贵阳", "lv": "豪华型", "n": "大成精舍酒店（十里河滩·孔学堂）· 连住2晚（已订✅）"},s:[{"p": [105.88832, 26.768294], "l": "织金洞"}, {"p": [106.371, 27.857], "l": "茅台镇(备选)"}],r:[[106.395466, 27.786165], [105.88832, 26.768294], [106.678035, 26.464389]]},{h:[106.678035,26.464389],hl:"大成精舍酒店（十里河滩·孔学堂）· 已订✅",hi:{"c": "贵阳", "lv": "豪华型", "n": "大成精舍酒店（十里河滩·孔学堂）· 连住2晚（已订✅）"},s:[{"p": [106.688164, 26.332463], "l": "青岩古镇"}, {"p": [106.678035, 26.464389], "l": "省博"}],r:[]},{h:[109.604735,25.772811],hl:"三江侗乡国宾馆（已订）",hi:{"c": "三江", "lv": "舒适型", "n": "三江侗乡国宾馆（已订✅）"},s:[{"p": [109.648431, 25.901869], "l": "程阳风雨桥"}],r:[[106.678035, 26.464389], [109.648431, 25.901869]]},{h:[111.972947,24.354539],hl:"西溪森林温泉大酒店（已订✅）",hi:{"c": "贺州", "lv": "温泉度假", "n": "西溪森林温泉大酒店·4房别墅（已订✅）"},s:[{"p": [111.972947, 24.354539], "l": "西溪温泉"}],r:[[109.604735, 25.772811], [111.972947, 24.354539]]},{h:[113.237378,23.065823],hl:"D10 到家",hi:{"c": "", "lv": "", "n": ""},s:[],r:[[111.972947, 24.354539], [113.237378, 23.065823]]}];
+
+document.getElementById('weatherStrip').style.display='none';
+
+var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
+var A=[],H=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJklEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0MpAYrWRFHLAAAk+fV0a8Oi94AAAAASUVORK5CYII=',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJklEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0MpAYrWRFHLAAArQnUcQ8iFY0AAAAASUVORK5CYII=',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJklEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRoYSA1WsiKOWAAAbVvnAcxpmdUAAAAASUVORK5CYII=';
+new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
+A.push([113.237378,23.065823]);
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
+new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="var el=document.getElementById(\'d'+(n+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
+function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
+function toggleWeather(){var b=document.getElementById("weatherStrip");if(b.style.display==="none"){b.style.display="flex";document.getElementById("weatherToggle").textContent="🌤️ 收起天气"}else{b.style.display="none";document.getElementById("weatherToggle").textContent="🌤️ 沿途天气"}}
+function dayBounds(n){var d=D[n];if(!d)return null;var pts=[],i;if(d.r)for(i=0;i<d.r.length;i++)pts.push(d.r[i]);if(d.h)pts.push(d.h);(d.s||[]).forEach(function(s){pts.push(s.p)});if(!pts.length)return null;var sw=[pts[0][0],pts[0][1]],ne=[pts[0][0],pts[0][1]];pts.forEach(function(p){if(p[0]<sw[0])sw[0]=p[0];if(p[1]<sw[1])sw[1]=p[1];if(p[0]>ne[0])ne[0]=p[0];if(p[1]>ne[1])ne[1]=p[1]});return new AMap.Bounds([sw[0],sw[1]],[ne[0],ne[1]])}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-routes.js — 路线加载、focusDay、批量导航路线
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+function focusDay(n){
+  if(W){W.close();W=null}
+  Z=0;
+  expandMapIfCollapsed();
+  var b=document.getElementById('navBtn');
+  if(b){
+    b.textContent='🗺️ 加载全部路线';
+    b.className='nav-btn';
+    b.onclick=function(){loadRoutes()}
+  }
+  var mp=document.querySelector('.map-panel');
+  if(mp&&mp.classList.contains('collapsed')){
+    mp.classList.remove('collapsed');
+    var tbtn=document.querySelector('.map-toggle-btn');
+    if(tbtn)tbtn.textContent='▲ 收起';
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
+  }
+  if(n===lastDay&&routeCache[n]){
+    var bd=dayBounds(n);
+    if(bd)map.setBounds(bd,false,[60,60,60,60]);
+    return
+  }
+  clearRoutes();
+  lastDay=n;
+  var d=D[n];
+  if(!d||!d.r||d.r.length<2){
+    var bd2=dayBounds(n);
+    if(bd2)map.setBounds(bd2,false,[60,60,60,60]);
+    return
+  }
+  if(routeCache[n]){
+    routeCache[n].forEach(function(pl){pl.setMap(map);R.push(pl)});
+    var bd3=dayBounds(n);
+    if(bd3)map.setBounds(bd3,false,[60,60,60,60]);
+    return
+  }
+  var c=C[n%C.length];
+  var o=d.r[0][0]+','+d.r[0][1],e=d.r[d.r.length-1][0]+','+d.r[d.r.length-1][1],w='';
+  if(d.r.length>2){var a=[];for(var j=1;j<d.r.length-1;j++)a.push(d.r[j][0]+','+d.r[j][1]);w='&waypoints='+a.join('|')}
+  fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl);routeCache[n]=[pl];var bd4=dayBounds(n);if(bd4)map.setBounds(bd4,false,[60,60,60,60])}})
+}
+
+function showDayRoute(n){focusDay(n)}
+
+function P(){
+  var i=0;
+  function n(){
+    if(i>=D.length){
+      if(!Z&&A.length>0)map.setFitView(null,false,[60,60,60,60]);
+      var b=document.getElementById('navBtn');
+      if(b){b.textContent='✅ 导航已加载';b.className='nav-btn';b.onclick=null}
+      return
+    }
+    var d=D[i],c=C[i%C.length];
+    if(d.r&&d.r.length>=2){
+      var o=d.r[0][0]+','+d.r[0][1],e=d.r[d.r.length-1][0]+','+d.r[d.r.length-1][1],w='';
+      if(d.r.length>2){var a=[];for(var j=1;j<d.r.length-1;j++)a.push(d.r[j][0]+','+d.r[j][1]);w='&waypoints='+a.join('|')}
+      fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl)}i++;setTimeout(n,200)}).catch(function(){i++;setTimeout(n,200)})
+    }else{i++;n()}
+  }
+  n()
+}
+
+function loadRoutes(){
+  clearRoutes();
+  Z=0;
+  var b=document.getElementById('navBtn');
+  if(b){b.textContent='⏳ 加载中...';b.className='nav-btn loading';b.onclick=null}
+  P();
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-resize.js — 桌面端拖拽调整地图大小、完全收起/展开地图
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+(function(){
+  var rh=document.getElementById('resizeHandle');if(!rh)return;
+  var mn=document.querySelector('.main');
+  var mp=document.querySelector('.map-panel');
+  var rs=false;
+  var savedPct=60;
+  function isCollapsed(){return mp.classList.contains('collapsed-desktop')}
+  function setPct(p){
+    mp.style.flex='none';mp.style.width=p+'%';
+    requestAnimationFrame(function(){map.resize()});
+  }
+  // 拖拽结束后适配地图视野
+  function fitAfterResize(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        map.setFitView(null,false,[60,60,60,60]);
+      });
+    });
+  }
+  // 展开后适配（需要等待 display:none → block + 宽度恢复的完整 reflow）
+  function fitAfterExpand(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        map.resize();
+        map.setFitView(null,false,[60,60,60,60]);
+      });
+    });
+  }
+  // 拖拽调整大小（收起状态不响应拖拽）
+  rh.addEventListener('mousedown',function(e){
+    if(isCollapsed()||rh.classList.contains('expanded-handle'))return;
+    rs=true;rh.classList.add('active');
+    document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();
+  });
+  rh.addEventListener('touchstart',function(e){
+    if(isCollapsed()||rh.classList.contains('expanded-handle'))return;
+    rs=true;rh.classList.add('active');
+    document.body.style.userSelect='none';e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!rs)return;
+    var r=mn.getBoundingClientRect();var x=e.clientX-r.left;
+    var p=Math.round(x/r.width*100);
+    if(p<25)p=25;if(p>85)p=85;
+    savedPct=p;setPct(p);
+  });
+  document.addEventListener('touchmove',function(e){
+    if(!rs)return;
+    var r=mn.getBoundingClientRect();var x=e.touches[0].clientX-r.left;
+    var p=Math.round(x/r.width*100);
+    if(p<25)p=25;if(p>85)p=85;
+    savedPct=p;setPct(p);
+  });
+  document.addEventListener('mouseup',function(){
+    if(!rs)return;rs=false;
+    rh.classList.remove('active');document.body.style.cursor='';document.body.style.userSelect='';
+    fitAfterResize();
+  });
+  document.addEventListener('touchend',function(){
+    if(!rs)return;rs=false;
+    rh.classList.remove('active');document.body.style.userSelect='';
+    fitAfterResize();
+  });
+  // 双击手柄切换（收起状态下双击=展开）
+  rh.addEventListener('dblclick',function(){
+    if(isCollapsed()){expandMap();return;}
+    var w=mp.style.width;var p=w?parseFloat(w):60;
+    p=(p<40?60:30);savedPct=p;setPct(p);
+    fitAfterResize();
+  });
+  // 点击展开手柄（收起时点击展开）
+  rh.addEventListener('click',function(e){
+    if(rh.classList.contains('expanded-handle')&&!e.target.closest('.collapse-icon')){
+      expandMap();
+    }
+  });
+  // 收起/展开地图（全局函数）
+  window.toggleMapFullCollapse=function(){
+    if(isCollapsed()){expandMap();}
+    else{collapseMap();}
+  };
+  function collapseMap(){
+    var w=mp.style.width;savedPct=w?parseFloat(w):60;
+    mp.style.flex='';mp.style.width='';
+    mp.classList.add('collapsed-desktop');
+    rh.classList.add('expanded-handle');
+    rh.title='点击展开地图';
+  }
+  function expandMap(){
+    mp.classList.remove('collapsed-desktop');
+    rh.classList.remove('expanded-handle');
+    rh.title='拖动调整地图大小 · 双击切换';
+    setPct(savedPct);
+    fitAfterExpand();
+  }
+  // 外部调用：如果地图收起则展开（供 focusDay 使用）
+  window.expandMapIfCollapsed=function(){
+    if(isCollapsed())expandMap();
+  };
+})();
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   mobile-scroll.js — 移动端地图收起/展开 + 滚动自动折叠/展开
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 美食卡片展开/收起 ── */
+function toggleFoodCard(fid) {
+  var el = document.getElementById(fid);
+  if (!el) return;
+  var card = el.closest('.food-card');
+  if (!card) return;
+  card.classList.toggle('open');
+}
+
+function toggleMapCollapse(){
+  var mp=document.querySelector('.map-panel');
+  var btn=document.querySelector('.map-toggle-btn');
+  mp.classList.toggle('collapsed');
+  if(mp.classList.contains('collapsed')){
+    if(btn)btn.textContent='▼ 展开';
+  }else{
+    if(btn)btn.textContent='▲ 收起';
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
+  }
+}
+
+/* ── Floating TOC (Table of Contents) ── */
+function toggleToc() {
+  document.getElementById('tocPanel').classList.toggle('open');
+}
+
+function scrollToToc(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    setTimeout(function() {
+      document.getElementById('tocPanel').classList.remove('open');
+    }, 350);
+  }
+}
+
+/* Close TOC panel when clicking outside */
+document.addEventListener('click', function(e) {
+  var panel = document.getElementById('tocPanel');
+  var btn = document.getElementById('tocBtn');
+  if (panel && btn && panel.classList.contains('open')) {
+    if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+      panel.classList.remove('open');
+    }
+  }
+});
+
+</script>
+</body>
+</html>
