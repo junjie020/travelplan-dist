@@ -19,6 +19,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 .header .meta{font-size:.95rem;opacity:.9;display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
 
 .tips{padding:16px 32px;background:#fffbf0;border-bottom:1px solid #f0e0a0;font-size:.88rem;color:#856404;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.summary-tips{margin-top:16px;padding:12px 20px;background:#fffbf0;border:1px solid #f0e0a0;border-radius:8px;font-size:.84rem;color:#856404;text-align:center;line-height:1.6}
 .weather-toggle{display:block;margin:0 auto;padding:6px 18px;background:#f0f4f8;border:1px solid #d0d8e0;border-radius:6px;font-size:.82rem;cursor:pointer;color:#0d3b66;transition:background .2s}.weather-toggle:hover{background:#e0e8f0}
 .weather-strip{padding:18px 32px;background:#f0f4f8;display:none;flex-wrap:wrap;gap:10px;justify-content:center}
 .wcard{flex:1;min-width:88px;max-width:115px;text-align:center;padding:8px;background:#fff;border-radius:8px;font-size:.78rem}
@@ -91,6 +92,54 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 .budget-card ul{list-style:none;font-size:.86rem;color:var(--muted);text-align:left;padding:0 8px}
 .budget-card li{padding:3px 0;display:flex;justify-content:space-between}
 
+/* ── 费用统计 ── */
+.expense-section{padding:28px 32px;background:var(--card);border-top:2px solid #e67e22}
+.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.2rem;color:#e67e22}
+.expense-empty{text-align:center;padding:30px 20px;color:var(--muted)}
+.expense-empty p{font-size:.88rem;margin-bottom:8px}
+.expense-hint{font-size:.76rem !important;color:#aaa}
+.expense-table-wrap{overflow-x:auto}
+.expense-table{width:100%;border-collapse:collapse;font-size:.84rem}
+.expense-table th{background:#e67e22;color:#fff;padding:8px 10px;font-weight:600;text-align:center;white-space:nowrap}
+.expense-table td{padding:6px 10px;text-align:center;border-bottom:1px solid #eee}
+.expense-table tbody tr:hover{background:#fef9f0}
+.expense-table td.ed{font-weight:600;color:#0d3b66;white-space:nowrap}
+.expense-table td.et{font-weight:700;color:#e67e22}
+.expense-table td.en{text-align:left;min-width:10em;max-width:18em;font-size:.78rem;color:var(--muted)}
+.en-inner{overflow:hidden;line-height:1.5;max-height:3em;word-wrap:break-word}
+.en-inner.expanded{max-height:none;overflow:visible}
+.en-inner.en-no-trunc{max-height:none;overflow:visible}
+.expense-table tfoot tr.expense-total-row{background:#fdf2e9;border-top:2px solid #e67e22}
+.expense-table tfoot td{font-size:.88rem;padding:10px}
+.expense-table tfoot strong{color:#c0392b}
+
+/* ── 费用行可点击展开 ── */
+.expense-row{cursor:pointer;transition:background .15s;user-select:none}
+.expense-row:hover{background:#fef3e5 !important}
+.expense-row .ed .exp-arrow{font-size:.6rem;color:#ccc;display:inline-block;transition:transform .25s;margin-left:4px}
+.expense-row-no-detail{cursor:default}
+.expense-row-no-detail:hover{background:inherit !important}
+.expense-detail{display:none}
+.expense-detail.open{display:table-row}
+.expense-detail td{padding:0 !important;background:linear-gradient(135deg,#fdf6ee,#fafbfc);border-bottom:2px solid #e67e22}
+.expense-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 16px}
+.eb-item{font-size:.8rem;padding:8px 12px;background:#fff;border-radius:6px;border:1px solid #eee;line-height:1.6}
+.eb-item .eb-label{font-weight:700;color:#0d3b66;font-size:.8rem;margin-bottom:4px;display:block;padding-bottom:4px;border-bottom:1px dotted #e0e0e0}
+.eb-item .eb-sub{display:block;font-size:.76rem;color:#555;padding:2px 0}
+.eb-item .eb-sub em{font-style:normal;font-weight:600;color:#333}
+
+/* ── 交通费用汇总卡片 ── */
+.expense-transport-summary{margin-top:18px;background:#f8fafc;border-radius:10px;padding:16px 20px;border:1px solid #e0e0e0}
+.ets-title{font-weight:700;font-size:.9rem;color:#0d3b66;margin-bottom:12px;text-align:center}
+.ets-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.ets-card{flex:1;min-width:200px;max-width:320px;background:#fff;border-radius:8px;padding:12px 16px;border:1px solid #e0e0e0}
+.ets-card-title{font-weight:700;font-size:.82rem;color:#e67e22;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #f0e0a0}
+.ets-items{display:flex;flex-direction:column;gap:3px}
+.ets-items span{font-size:.8rem;color:#555;display:flex;justify-content:space-between}
+.ets-items .ets-total{font-weight:700;color:#c0392b;border-top:1px dotted #e0e0e0;padding-top:4px;margin-top:2px}
+.ets-footer{text-align:center;font-size:.84rem;color:#555;margin-top:12px;padding-top:10px;border-top:1px solid #e0e0e0}
+.ets-footer strong{color:#c0392b;font-size:.92rem}
+
 .scoring-section{padding:28px 32px;background:var(--card);border-top:2px solid #e0e0e0}
 .scoring-section h2{text-align:center;margin-bottom:8px;font-size:1.3rem}
 .scoring-intro{text-align:center;color:var(--muted);margin-bottom:24px;font-size:.9rem}
@@ -104,6 +153,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 
 .summary{padding:28px 32px;background:var(--card);border-top:2px solid #0d3b66}
 .summary h2{text-align:center;font-size:1.2rem;margin-bottom:18px;color:#0d3b66}
+.trip-overview-card{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-bottom:18px;padding:14px 20px;background:linear-gradient(135deg,#f0f4f8,#e8f0f8);border-radius:10px;border:1px solid #d0dce8;font-size:.88rem;color:#2c3e50}
+.tov-item{display:flex;align-items:center;gap:4px}
 .sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
 .sca{background:#f8fafc;border-radius:10px;padding:16px;border:1px solid #e8e8e8}
 .sca .ico{font-size:1.3rem;margin-bottom:2px}
@@ -195,6 +246,24 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 .ri-label{font-size:.72rem;font-weight:700;color:#666}
 .ri-value{font-size:.82rem;color:#333;line-height:1.5}
 .reserve-tips{font-size:.82rem;color:#666;line-height:1.6;margin-top:10px;padding:8px 12px;background:#f0f7ff;border-radius:6px}
+
+/* ── 目录浮标（Floating TOC）── */
+.toc-float{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.toc-btn{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;border:none;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 16px rgba(13,59,102,.3);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;line-height:1}
+.toc-btn:hover{transform:scale(1.08);box-shadow:0 6px 22px rgba(13,59,102,.45)}
+.toc-panel{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .25s;opacity:0;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);width:210px;display:flex;flex-direction:column}
+.toc-panel.open{max-height:520px;opacity:1;overflow-y:auto}
+.toc-title{padding:12px 16px;font-weight:700;font-size:.88rem;color:#0d3b66;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;border-radius:12px 12px 0 0;z-index:1}
+.toc-item{padding:10px 16px;font-size:.82rem;color:#444;text-decoration:none;border-bottom:1px solid #f8f8f8;transition:background .15s,color .15s,padding-left .2s;display:block;cursor:pointer;line-height:1.5}
+.toc-item:hover{background:#f0f7ff;color:#0d3b66;padding-left:22px}
+.toc-item:last-child{border-bottom:none;border-radius:0 0 12px 12px}
+.toc-item .toc-num{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;background:#f0f4f8;border-radius:4px;font-size:.7rem;margin-right:6px;color:#888}
+/* 移动端 */
+@media(max-width:767px){
+  .toc-float{bottom:16px;right:12px}
+  .toc-btn{width:40px;height:40px;border-radius:10px;font-size:1.1rem}
+  .toc-panel{width:185px}
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    desktop.css — 桌面端布局（左右分栏、resize handle、地图收起）
@@ -322,24 +391,25 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   .reserve-card-hdr{padding:12px}
   .reserve-card-summary{gap:8px;font-size:.78rem}
   .reserve-timeline-strip{flex-direction:column;gap:6px}
+  /* expense mobile */
+  .expense-breakdown{grid-template-columns:1fr}
+  .expense-section{padding:16px 12px}
+  .expense-table td.en{min-width:8em;max-width:14em;font-size:.74rem}
+.en-inner{font-size:.74rem}
+  .ets-grid{flex-direction:column;align-items:center}
+  .ets-card{max-width:100%;width:100%}
 }
 
 </style>
 </head>
 <body>
 
-<div class="header">
+<div class="header" id="toc-top">
   <h1>🌊 河池5日自驾 — 玩水溯溪 × 探洞</h1>
   <div class="meta">
     <span>📅 2026.7.8 — 7.12</span>
     <span>👥 12人（7成人+5儿童·9~12岁）</span>
-    <span>🚗 3车自驾 · 总程 1,625km</span>
-    <span>🏷️ 瀑布玩水 × 天坑探洞 × 峡谷游船 × 温泉</span>
   </div>
-</div>
-
-<div class="tips">
-  💡 首日无限制 · 普通日≤3h · 🛰️ 高德API实测 · 🧥 天坑洞内凉带薄外套 · 📱 3车12人对讲机沟通 · 🩱 玩水日备泳衣+溯溪鞋
 </div>
 
 <button class="weather-toggle" id="weatherToggle" onclick="toggleWeather()">🌤️ 沿途天气</button>
@@ -374,7 +444,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
               <button class="collapse-icon" onclick="toggleMapFullCollapse()" title="收起地图">&#9664;</button>
             </div>
 
-  <div class="table-panel">
+  <div class="table-panel" id="toc-days">
     <!-- ═══════ D1 ═══════ -->
 <div class="day-card" id="d1" style="border-left-color:#e74c3c">
   <h3 onclick="showDayRoute(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 启程入桂 <span class="pin">📍</span> <span class="dd">7/8 周二</span></h3>
@@ -484,7 +554,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 
 <div class="bottom-sections">
   <div class="bottom-col bottom-left">
-    <div class="food-section">
+    <div class="food-section" id="toc-food">
       <h2>🍜 沿途美食总览（4城 · 25+道特色菜）</h2>
       <div class="food-grid">
         <div class="food-card food-has-detail">
@@ -541,28 +611,15 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
       </div>
     </div>
 
-    <div class="budget">
-      <h2>💰 预算参考（12人 · 5间房 · 3辆车）</h2>
-      <div class="budget-grid">
-        <div class="budget-card economic">
-          <h3>🟢 经济</h3>
-          <div class="price">¥20,000</div>
-          <ul><li><span>住宿 4晚</span><span>¥5,000</span></li><li><span>餐饮 5天</span><span>¥6,000</span></li><li><span>油费+高速</span><span>¥4,500</span></li><li><span>门票</span><span>¥4,500</span></li></ul>
-        </div>
-        <div class="budget-card comfort">
-          <h3>🔵 舒适</h3>
-          <div class="price">¥28,000</div>
-          <ul><li><span>住宿 4晚</span><span>¥9,000</span></li><li><span>餐饮 5天</span><span>¥8,000</span></li><li><span>油费+高速</span><span>£4,500</span></li><li><span>门票</span><span>¥6,500</span></li></ul>
-        </div>
-        <div class="budget-card luxury">
-          <h3>🟣 豪华</h3>
-          <div class="price">¥40,000</div>
-          <ul><li><span>住宿 4晚</span><span>¥18,000</span></li><li><span>餐饮 5天</span><span>¥11,000</span></li><li><span>油费+高速</span><span>¥4,500</span></li><li><span>门票</span><span>¥6,500</span></li></ul>
-        </div>
-      </div>
-    </div>
+    <div class="expense-section" id="toc-expense">
+  <h2>💰 费用统计（按天 · 点击展开明细）</h2>
+  <div class="expense-empty">
+    <p>📝 暂无费用数据，待后续补充。</p>
+    <p class="expense-hint">数据来源：TOON 数据文件中的 <code>day_expenses</code> 表</p>
+  </div>
+</div>
 
-    <div class="reservation-section">
+    <div class="reservation-section" id="toc-reservation">
   <h2>📋 景点预约指南</h2>
   <div class="reserve-urgent">⚠️ <strong>必约景点：</strong>环江牛角寨瀑布群、罗城棉花天坑、贺州西溪温泉 — 暑期热门，建议提前3-7天预约！12人团体出行，漏约一个就可能影响整段行程。</div>
   <div class="reserve-timeline">
@@ -688,31 +745,10 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
 </div>
 
-    <div class="summary">
-  <h2>📊 行程总览</h2>
-  <div class="sg">
-    <div class="sca"><div class="ico">🎫</div><div class="big">4</div><div class="lbl">景点总数</div><div class="dl"><span><span>5A 级</span><span class="hv">0个</span></span><span><span>4A 级</span><span class="gv">2个</span></span><span><span>特殊/未评级</span><span class="gv">2个</span></span></div></div>
-    <div class="sca"><div class="ico">🚗</div><div class="big">18.9h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">1625km</span></span><span><span>平均（10天）</span><span class="gv">3.8h/天</span></span><span><span>平均（驾驶日8天）</span><span class="gv">3.8h/天</span></span><span><span>停驶日</span><span class="gv">无</span></span></div></div>
-    <div class="sca"><div class="ico">⚠️</div><div class="big">6.8h</div><div class="lbl">单日最大驾驶</div><div class="dl"><span><span>最长日</span><span class="hv">D1（6.8h）</span></span><span><span>弹性日(&gt;3h)</span><span class="gv">D2（仅0.6h本地驾驶）</span></span><span><span>超5h天数</span><span class="hv">2天（D1+D4）</span></span><span><span>最短驾驶日</span><span class="gv">D2（0.6h本地）</span></span></div></div>
-    <div class="sca"><div class="ico">🏨</div><div class="big">2</div><div class="lbl">过夜城市</div><div class="dl"><span><span>🌟 豪华</span><span class="gv" style="color:#8e44ad">1晚（贺州西溪）</span></span><span><span>🏨 舒适</span><span class="gv">0晚</span></span><span><span>🏠 经济</span><span class="gv">3晚（金城江连续3晚）</span></span><span><span>♨️ 温泉</span><span class="gv"></span></span></div></div>
-    <div class="sca w2">
-      <div class="ico">📊 逐日驾驶时长（小时）</div>
-      <div class="bars">
-        <div class="b ov" style="height:100%"><span class="bl">D1 6.8</span></div>
-        <div class="b lo" style="height:9%"><span class="bl">D2 0.6</span></div>
-        <div class="b nm" style="height:38%"><span class="bl">D3 2.6</span></div>
-        <div class="b el" style="height:87%"><span class="bl">D4 5.9</span></div>
-        <div class="b nm" style="height:44%"><span class="bl">D5 3.0</span></div>
-      </div>
-      <div class="bleg"><span><span class="sw" style="background:#e74c3c"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:#f39c12"></span>弹性 &gt;3h</span><span><span class="sw" style="background:#27ae60"></span>正常 ≤3h</span><span><span class="sw" style="background:#ddd"></span>停驶</span></div>
-    </div>
-  </div>
-  <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">🛰️ 驾驶数据：高德地图 REST API 实测 · 📅 生成日期：2026-07-03 · 👥 12人（7成人+5儿童）· 🚗 3车自驾 · 🌊 玩水溯溪×探洞主题</div>
-</div>
   </div>
 
   <div class="bottom-col bottom-right">
-    <div class="scoring-section">
+    <div class="scoring-section" id="toc-scoring">
   <h2>⭐ 景点评分体系</h2>
   <h3>评分维度与权重</h3>
   <table class="method-table">
@@ -732,8 +768,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
       <tr><th>#</th><th>景点</th><th>位置</th><th>等级</th><th>美誉30%</th><th>人流15%</th><th>可玩25%</th><th>住宿5%</th><th>距离5%</th><th>美食20%</th><th>总分</th><th>状态</th></tr>
     </thead>
     <tbody>
-      <tr class="must"><td>1</td><td class="spot-clickable" onclick="document.getElementById('sg_337511137').classList.toggle('open')">西溪温泉 📖</td><td>贺州</td><td>4A</td><td>7</td><td>7</td><td>8</td><td>9</td><td>8</td><td>6</td><td class="sc">7.2</td><td>✅ D4-D5</td></tr>
-      <tr class="score-guide-row" id="sg_337511137">
+      <tr class="must"><td>1</td><td class="spot-clickable" onclick="document.getElementById('sg_592373959').classList.toggle('open')">西溪温泉 📖</td><td>贺州</td><td>4A</td><td>7</td><td>7</td><td>8</td><td>9</td><td>8</td><td>6</td><td class="sc">7.2</td><td>✅ D4-D5</td></tr>
+      <tr class="score-guide-row" id="sg_592373959">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>半天至一天</div>
@@ -758,6 +794,49 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
     </tbody>
   </table>
 </div>
+
+    <div class="summary" id="toc-summary">
+  <h2>📊 行程总览</h2>
+  <div class="trip-overview-card">
+    <div class="tov-item">🚗 3车自驾 · 总程 1,625km</div>
+    <div class="tov-item">🏷️ 瀑布玩水 × 天坑探洞 × 峡谷游船 × 温泉</div>
+  </div>
+  <div class="sg">
+    <div class="sca"><div class="ico">🎫</div><div class="big">4</div><div class="lbl">景点总数</div><div class="dl"><span><span>5A 级</span><span class="hv">0个</span></span><span><span>4A 级</span><span class="gv">2个</span></span><span><span>特殊/未评级</span><span class="gv">2个</span></span></div></div>
+    <div class="sca"><div class="ico">🚗</div><div class="big">18.9h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">1625km</span></span><span><span>平均（10天）</span><span class="gv">3.8h/天</span></span><span><span>平均（驾驶日8天）</span><span class="gv">3.8h/天</span></span><span><span>停驶日</span><span class="gv">无</span></span></div></div>
+    <div class="sca"><div class="ico">⚠️</div><div class="big">6.8h</div><div class="lbl">单日最大驾驶</div><div class="dl"><span><span>最长日</span><span class="hv">D1（6.8h）</span></span><span><span>弹性日(&gt;3h)</span><span class="gv">D2（仅0.6h本地驾驶）</span></span><span><span>超5h天数</span><span class="hv">2天（D1+D4）</span></span><span><span>最短驾驶日</span><span class="gv">D2（0.6h本地）</span></span></div></div>
+    <div class="sca"><div class="ico">🏨</div><div class="big">2</div><div class="lbl">过夜城市</div><div class="dl"><span><span>🌟 豪华</span><span class="gv" style="color:#8e44ad">1晚（贺州西溪）</span></span><span><span>🏨 舒适</span><span class="gv">0晚</span></span><span><span>🏠 经济</span><span class="gv">3晚（金城江连续3晚）</span></span><span><span>♨️ 温泉</span><span class="gv"></span></span></div></div>
+    <div class="sca w2">
+      <div class="ico">📊 逐日驾驶时长（小时）</div>
+      <div class="bars">
+        <div class="b ov" style="height:100%"><span class="bl">D1 6.8</span></div>
+        <div class="b lo" style="height:9%"><span class="bl">D2 0.6</span></div>
+        <div class="b nm" style="height:38%"><span class="bl">D3 2.6</span></div>
+        <div class="b el" style="height:87%"><span class="bl">D4 5.9</span></div>
+        <div class="b nm" style="height:44%"><span class="bl">D5 3.0</span></div>
+      </div>
+      <div class="bleg"><span><span class="sw" style="background:#e74c3c"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:#f39c12"></span>弹性 &gt;3h</span><span><span class="sw" style="background:#27ae60"></span>正常 ≤3h</span><span><span class="sw" style="background:#ddd"></span>停驶</span></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">🛰️ 驾驶数据：高德地图 REST API 实测 · 📅 生成日期：2026-07-03 · 👥 12人（7成人+5儿童）· 🚗 3车自驾 · 🌊 玩水溯溪×探洞主题</div>
+  <div class="summary-tips">💡 首日无限制 · 普通日≤3h · 🛰️ 高德API实测 · 🧥 天坑洞内凉带薄外套 · 📱 3车12人对讲机沟通 · 🩱 玩水日备泳衣+溯溪鞋</div>
+</div>
+  </div>
+</div>
+
+<!-- ═══════ 目录浮标 ═══════ -->
+<div class="toc-float" id="tocFloat">
+  <button class="toc-btn" id="tocBtn" onclick="toggleToc()" title="目录导航">☰</button>
+  <div class="toc-panel" id="tocPanel">
+    <div class="toc-title">📑 页面导航</div>
+    <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
+    <a class="toc-item" onclick="toggleWeather();scrollToToc('weatherStrip')"><span class="toc-num">2</span>🌤️ 沿途天气</a>
+    <a class="toc-item" onclick="scrollToToc('toc-days')"><span class="toc-num">3</span>📅 每日行程</a>
+    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 美食总览</a>
+    <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">5</span>💰 费用统计</a>
+    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">6</span>📋 预约指南</a>
+    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">7</span>⭐ 评分体系</a>
+    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">8</span>📊 行程总览</a>
   </div>
 </div>
 
@@ -774,10 +853,11 @@ document.getElementById('weatherStrip').style.display='none';
 
 var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
 var A=[],H=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
-new AMap.Marker({position:[113.237378,23.035476],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
+var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJklEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0MpAYrWRFHLAAAk+fV0a8Oi94AAAAASUVORK5CYII=',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJklEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0MpAYrWRFHLAAArQnUcQ8iFY0AAAAASUVORK5CYII=',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJklEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRoYSA1WsiKOWAAAbVvnAcxpmdUAAAAASUVORK5CYII=';
+new AMap.Marker({icon:OI,position:[113.237378,23.035476],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
 A.push([113.237378,23.035476]);
-var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
-new AMap.Marker({position:[113.237378,23.035476],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
+new AMap.Marker({icon:OI,position:[113.237378,23.035476],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
 function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="var el=document.getElementById(\'d'+(n+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
 function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
 function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
@@ -989,6 +1069,32 @@ function toggleMapCollapse(){
     setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
   }
 }
+
+/* ── Floating TOC (Table of Contents) ── */
+function toggleToc() {
+  document.getElementById('tocPanel').classList.toggle('open');
+}
+
+function scrollToToc(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    setTimeout(function() {
+      document.getElementById('tocPanel').classList.remove('open');
+    }, 350);
+  }
+}
+
+/* Close TOC panel when clicking outside */
+document.addEventListener('click', function(e) {
+  var panel = document.getElementById('tocPanel');
+  var btn = document.getElementById('tocBtn');
+  if (panel && btn && panel.classList.contains('open')) {
+    if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+      panel.classList.remove('open');
+    }
+  }
+});
 
 </script>
 </body>
