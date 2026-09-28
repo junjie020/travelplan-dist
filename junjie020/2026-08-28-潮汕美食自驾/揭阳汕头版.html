@@ -61,6 +61,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 .badge.eco{background:var(--eco)}.badge.comf{background:var(--comf)}.badge.lux{background:var(--lux)}.badge.hot{background:var(--hot)}
 .badge.must{background:#e74c3c;font-size:.68rem;padding:1px 6px}
 .badge.a5{background:#f39c12}.badge.a4{background:#2980b9}.badge.wh{background:#8e44ad;font-size:.65rem}
+.badge.reserve{background:#e67e22;font-size:.68rem;padding:1px 6px}
+a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:pointer}
 
 .legend{position:absolute;bottom:24px;right:12px;z-index:1000;text-align:right}
 .legend-toggle{width:30px;height:30px;background:#0d3b66;color:#fff;border:none;border-radius:50%;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
@@ -92,9 +94,9 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 .budget-card ul{list-style:none;font-size:.86rem;color:var(--muted);text-align:left;padding:0 8px}
 .budget-card li{padding:3px 0;display:flex;justify-content:space-between}
 
-/* ── 费用统计 ── */
-.expense-section{padding:28px 32px;background:var(--card);border-top:2px solid #e67e22}
-.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.2rem;color:#e67e22}
+/* ── 费用统计（信息页卡·左列，与 .reservation-section 同为列内页卡）── */
+.expense-section{padding:24px 28px;background:var(--card);border-top:2px solid #e67e22}
+.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.15rem;color:#e67e22}
 .expense-empty{text-align:center;padding:30px 20px;color:var(--muted)}
 .expense-empty p{font-size:.88rem;margin-bottom:8px}
 .expense-hint{font-size:.76rem !important;color:#aaa}
@@ -444,7 +446,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <div class="table-panel" id="toc-days">
     <!-- ═══════ D1 ═══════ -->
 <div class="day-card" id="d1" style="border-left-color:#e74c3c">
-  <h3 onclick="showDayRoute(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 星夜抵揭 <span class="pin">📍</span> <span class="dd">8/28 周五</span></h3>
+  <h3 onclick="TripMap.focusDay(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 星夜抵揭 <span class="pin">📍</span> <span class="dd">8/28 周五</span></h3>
   <span class="drive-badge">🚗 3.9h · 372km</span>
   <div class="route">广州天河客运站 → 揭阳古城</div>
   <div class="timing"><span>🕐 出发 <strong>17:30</strong></span> <span>🕐 到达 <strong>21:20</strong></span></div>
@@ -458,25 +460,25 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
     <li>🏠 <span class="sn">老爷干面</span>（揭阳老城） — 干面劲道，拌猪油香 · 大众点评</li>
   </ul>
   <div class="tip">💡 17:30准点出发，全程高速约3.9h，21:20左右到揭阳。夜宵优先揭阳干面+粿汁，老城夜宵比潮州更本地。</div>
-  <div class="hotel-line" onclick="focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 揭阳 · <span class="badge comf">舒适型</span> · 揭阳榕城区酒店（古城附近）</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 揭阳 · <span class="badge comf">舒适型</span> · 揭阳榕城区酒店（古城附近）</div>
 </div>
 
 <!-- ═══════ D2 ═══════ -->
 <div class="day-card" id="d2" style="border-left-color:#3498db">
-  <h3 onclick="showDayRoute(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 揭阳古城+奔赴汕头 <span class="pin">📍</span> <span class="dd">8/29 周六</span></h3>
+  <h3 onclick="TripMap.focusDay(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 揭阳古城+奔赴汕头 <span class="pin">📍</span> <span class="dd">8/29 周六</span></h3>
   <span class="drive-badge">🚗 1.1h · 55km</span>
   <div class="route">揭阳古城 → 汕头小公园</div>
   <div class="timing"><span>🕐 出发 <strong>15:30</strong></span> <span>🕐 到达 <strong>16:40</strong></span></div>
   <div class="day-weather">🌤 揭阳27-34°C → 汕头26-33°C · 滨海湿热</div>
   <h4>🏙️ 汕头 <span class="province">（广东·粤东）</span></h4>
   <div class="city-desc">汕头是近代开埠的百载商埠，著名侨乡，骑楼老街与西洋建筑诉说着百年通商史。这里走出腾讯创始人<strong>马化腾</strong>（潮阳人）与华侨实业家<strong>陈慈黉</strong>。小公园中山亭周边骑楼环列，是汕头城市原点；傍晚到访，正好赶上龙眼南路美食街的烟火气。</div>
-  <h4>🟢 进贤门 <span class="badge must">必去</span></h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,0)" title="🗺️ 点击查看地图位置">进贤门</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">揭阳古城标志性城楼，始建于明代，取&quot;进贤纳士&quot;之意，楼下门洞可通行，楼上飞檐翘角。登上城楼可俯瞰古城中轴线与熙攘街市，是揭阳必打卡第一站。游览约30分钟。</div>
-  <h4>🟢 揭阳学宫 <span class="badge must">必去</span> <span class="badge a3">3A</span></h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,2)" title="🗺️ 点击查看地图位置">揭阳学宫</span> <span class="badge must">必去</span> <span class="badge a3">3A</span></h4>
   <div class="spot-desc">始建于南宋绍兴十年，是岭南规模最大的孔庙，占地面积约2万平方米。大成殿、明伦堂、棂星门保存完好，飞檐斗拱气势恢宏。免费开放，游览约1小时。清代名臣丁日昌曾在揭阳大力兴学，文脉一脉相承。</div>
-  <h4>🟢 城隍庙 </h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,1)" title="🗺️ 点击查看地图位置">城隍庙</span> </h4>
   <div class="spot-desc">建于明洪武二年，是潮汕地区保存最完好的城隍庙之一。三进院落布局，屋脊嵌瓷精美，香火常年鼎盛，是感受潮汕民间信仰的窗口。游览约40分钟，紧邻学宫可一并参观。</div>
-  <h4>🟢 汕头小公园 <span class="badge must">必去</span></h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,3)" title="🗺️ 点击查看地图位置">汕头小公园</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">汕头城市原点，中山纪念亭为中心，周边呈放射状分布的骑楼建筑群是全国现存规模最大的民国骑楼街区。傍晚华灯初上，复古风情浓郁。步行穿梭于老建筑间，感受&quot;百载商埠&quot;风华，游览1-2小时。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd">隆江猪脚饭</span><span class="fd">蚝烙</span><span class="fd">生腌</span><span class="fd">夜粥</span><span class="fd">牛肉火锅</span></div>
@@ -490,21 +492,21 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
   <div class="tip">💡 上午9:00开始逛揭阳古城（进贤门→学宫→城隍庙），午餐卢记牛肉火锅。15:30出发赴汕头（1.1h），傍晚逛小公园骑楼，夜宵龙眼南路（夜粥+生腌）。</div>
   <div class="score-row">⭐ 揭阳学宫 6.75 · 进贤门 6.45 · 汕头小公园 7.75</div>
-  <div class="hotel-line" onclick="focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 汕头 · <span class="badge comf">舒适型</span> · 汕头小公园附近酒店（龙眼南路觅食近）</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 汕头 · <span class="badge comf">舒适型</span> · 汕头小公园附近酒店（龙眼南路觅食近）</div>
 </div>
 
 <!-- ═══════ D3 ═══════ -->
 <div class="day-card" id="d3" style="border-left-color:#2ecc71">
-  <h3 onclick="showDayRoute(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 汕头骑楼+归途 <span class="pin">📍</span> <span class="dd">8/30 周日</span></h3>
+  <h3 onclick="TripMap.focusDay(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 汕头骑楼+归途 <span class="pin">📍</span> <span class="dd">8/30 周日</span></h3>
   <span class="drive-badge">🚗 4.5h · 429km</span>
   <div class="route">汕头小公园 → 广州华发尚座</div>
   <div class="timing"><span>🕐 出发 <strong>14:00</strong></span> <span>🕐 到达 <strong>18:30</strong></span></div>
   <div class="day-weather">🌤 汕头26-33°C · 滨海湿热</div>
   <h4>🏙️ 汕头 <span class="province">（广东·粤东）</span></h4>
   <div class="city-desc">上午的汕头小公园少了喧嚣，多了几分老城韵味。中山亭放射状骑楼是全国现存规模最大的民国骑楼街区，开埠文化陈列馆讲述百载商埠的来龙去脉。中午吃一顿杏花吴记牛肉火锅，此生无憾。午后14:00准时出发，赶在19:00前回到广州。</div>
-  <h4>🟢 汕头小公园 <span class="badge must">必去</span></h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(2,1)" title="🗺️ 点击查看地图位置">汕头小公园</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">白天的骑楼街更显民国风情，早起趁人少拍照最出片。中山亭、老妈宫、骑楼廊柱都值得细看。周边美食：广场老牌豆花、小公园老牌粽球、爱西干面，一路逛吃。上午再补个开埠文化陈列馆，了解汕头开埠史。</div>
-  <h4>🟢 开埠文化陈列馆 </h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(2,0)" title="🗺️ 点击查看地图位置">开埠文化陈列馆</span> </h4>
   <div class="spot-desc">位于小公园旁，免费开放。通过老照片、文物和场景复原，讲述汕头开埠百年历史——从一个渔村到百载商埠的蜕变。室内参观凉爽，适合上午参观。游览约1小时。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd">杏花吴记牛肉</span><span class="fd">粽球</span><span class="fd">豆花</span><span class="fd">肠粉</span><span class="fd">甘草水果</span></div>
@@ -519,12 +521,56 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
   <div class="tip">💡 ⚠️ 时间约束：14:00前必须从汕头出发返程（约4.5h），18:30到家，赶在19:00前。上午逛小公园+开埠文化陈列馆，午餐杏花吴记牛肉火锅后出发。</div>
   <div class="score-row">⭐ 汕头小公园 7.75 · 开埠文化陈列馆 6.85</div>
-  <div class="hotel-line" onclick="focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 广州 · <span class="badge eco">经济型</span> · 到家 🏠</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 广州 · <span class="badge eco">经济型</span> · 到家 🏠</div>
 </div>
   </div>
 </div>
 
-<div class="expense-section" id="toc-expense">
+<div class="bottom-sections">
+  <div class="bottom-col bottom-left">
+    <div class="food-section" id="toc-food">
+      <h2>🍜 揭阳+汕头美食总览（2城 · 30+道必吃）</h2>
+      <div class="food-grid">
+        <div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_0')">
+    <div class="fcity">🍜 揭阳 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 干面 · 粿汁 · 反沙咸蛋黄 · 猪脚饭 · 炒糕粿 · 蚝烙</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_0">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>广德粿汁</strong>（揭阳榕城区） — 粿汁+卤料，地道早餐 · 小红书</div>
+      <div class="food-shop-item"><strong>老爷干面</strong>（揭阳老城） — 干面劲道，拌猪油香 · 大众点评</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">揭阳榕城区酒店（古城附近） · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_1')">
+    <div class="fcity">🍜 汕头 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 牛肉火锅 · 生腌 · 卤鹅 · 粿条 · 粽球 · 豆花 · 果汁冰</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_1">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>卢记牛肉火锅</strong>（揭阳） — 本地人认可，肉切得厚实 · 大众点评</div>
+      <div class="food-shop-item"><strong>吴记富苑夜粥</strong>（汕头龙眼南路） — 汕头夜粥打冷代表 · 大众点评必吃榜</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">汕头小公园附近酒店（龙眼南路觅食近） · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    
+
+    <div class="expense-section" id="toc-expense">
   <h2>💰 费用统计（按天 · 点击展开明细）</h2>
   <div class="expense-table-wrap">
     <table class="expense-table">
@@ -615,51 +661,6 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
 </div>
 
-<div class="bottom-sections">
-  <div class="bottom-col bottom-left">
-    <div class="food-section" id="toc-food">
-      <h2>🍜 揭阳+汕头美食总览（2城 · 30+道必吃）</h2>
-      <div class="food-grid">
-        <div class="food-card food-has-detail">
-  <div class="food-card-hdr" onclick="toggleFoodCard('fc_0')">
-    <div class="fcity">🍜 揭阳 <span class="food-expand-icon">▼</span></div>
-    <div class="food-dishes"><span class="fd"><span class="hi">🔥 干面 · 粿汁 · 反沙咸蛋黄 · 猪脚饭 · 炒糕粿 · 蚝烙</span></span></div>
-  </div>
-  <div class="food-card-body" id="fc_0">
-    <div class="food-shops">
-      <div class="food-shops-title">🏠 推荐门店</div>
-      <div class="food-shop-item"><strong>广德粿汁</strong>（揭阳榕城区） — 粿汁+卤料，地道早餐 · 小红书</div>
-      <div class="food-shop-item"><strong>老爷干面</strong>（揭阳老城） — 干面劲道，拌猪油香 · 大众点评</div>
-    </div>
-    <div class="food-hotel">
-      <div class="food-hotel-title">🏨 住宿</div>
-      <div class="food-hotel-info">揭阳榕城区酒店（古城附近） · <span class="badge comf">舒适型</span></div>
-    </div>
-  </div>
-</div>
-<div class="food-card food-has-detail">
-  <div class="food-card-hdr" onclick="toggleFoodCard('fc_1')">
-    <div class="fcity">🍜 汕头 <span class="food-expand-icon">▼</span></div>
-    <div class="food-dishes"><span class="fd"><span class="hi">🔥 牛肉火锅 · 生腌 · 卤鹅 · 粿条 · 粽球 · 豆花 · 果汁冰</span></span></div>
-  </div>
-  <div class="food-card-body" id="fc_1">
-    <div class="food-shops">
-      <div class="food-shops-title">🏠 推荐门店</div>
-      <div class="food-shop-item"><strong>卢记牛肉火锅</strong>（揭阳） — 本地人认可，肉切得厚实 · 大众点评</div>
-      <div class="food-shop-item"><strong>吴记富苑夜粥</strong>（汕头龙眼南路） — 汕头夜粥打冷代表 · 大众点评必吃榜</div>
-    </div>
-    <div class="food-hotel">
-      <div class="food-hotel-title">🏨 住宿</div>
-      <div class="food-hotel-info">汕头小公园附近酒店（龙眼南路觅食近） · <span class="badge comf">舒适型</span></div>
-    </div>
-  </div>
-</div>
-      </div>
-    </div>
-
-
-    
-
   </div>
 
   <div class="bottom-col bottom-right">
@@ -708,7 +709,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
   <div class="sg">
     <div class="sca"><div class="ico">🎫</div><div class="big">6</div><div class="lbl">景点总数</div><div class="dl"><span><span>5A 级</span><span class="hv">0个</span></span><span><span>4A 级</span><span class="gv">1个</span></span><span><span>特殊/未评级</span><span class="gv">5个</span></span></div></div>
-    <div class="sca"><div class="ico">🚗</div><div class="big">9.5h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">856km</span></span><span><span>平均（10天）</span><span class="gv">3.2h/天</span></span><span><span>平均（驾驶日8天）</span><span class="gv">3.2h/天</span></span><span><span>停驶日</span><span class="gv">无（三天均有驾驶）</span></span></div></div>
+    <div class="sca"><div class="ico">🚗</div><div class="big">9.5h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">856km</span></span><span><span>平均（3天）</span><span class="gv">3.2h/天</span></span><span><span>平均（驾驶日3天）</span><span class="gv">3.2h/天</span></span><span><span>停驶日</span><span class="gv">无（三天均有驾驶）</span></span></div></div>
     <div class="sca"><div class="ico">⚠️</div><div class="big">4.5h</div><div class="lbl">单日最大驾驶</div><div class="dl"><span><span>最长日</span><span class="hv">D3返程（4.5h）</span></span><span><span>弹性日(&gt;3h)</span><span class="gv">3天</span></span><span><span>超5h天数</span><span class="hv">0天</span></span><span><span>最短驾驶日</span><span class="gv">D2（1.1h）</span></span></div></div>
     <div class="sca"><div class="ico">🏨</div><div class="big">2</div><div class="lbl">过夜城市</div><div class="dl"><span><span>🌟 豪华</span><span class="gv" style="color:#8e44ad">—</span></span><span><span>🏨 舒适</span><span class="gv">2晚（揭阳+汕头）</span></span><span><span>🏠 经济</span><span class="gv">1晚（广州·到家）</span></span><span><span>♨️ 温泉</span><span class="gv">—</span></span></div></div>
     <div class="sca w2">
@@ -732,36 +733,83 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()" title="目录导航">☰</button>
   <div class="toc-panel" id="tocPanel">
     <div class="toc-title">📑 页面导航</div>
-    <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
+        <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
     <a class="toc-item" onclick="toggleWeather();scrollToToc('weatherStrip')"><span class="toc-num">2</span>🌤️ 沿途天气</a>
     <a class="toc-item" onclick="scrollToToc('toc-days')"><span class="toc-num">3</span>📅 每日行程</a>
-    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 美食总览</a>
+    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 揭阳+汕头美食总览（2城 · 30+道必吃）</a>
     <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">5</span>💰 费用统计</a>
-    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">6</span>📋 预约指南</a>
-    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">7</span>⭐ 评分体系</a>
-    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">8</span>📊 行程总览</a>
+    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">6</span>⭐ 评分体系</a>
+    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">7</span>📊 行程总览</a>
   </div>
 </div>
 
 <script>
 /* ═══════════════════════════════════════════════════════════════════════════
    map-core.js — 地图初始化、全局变量、标记、InfoWindow、天气/图例交互
+
+   ═══ 页面 ↔ 地图 交互契约（改动前务必读 .agents/skills/html-trip-page/
+       references/map-interactions.md）═══
+
+   所有「页面元素 → 地图」的跳转统一走 TripMap 命名空间：
+     TripMap.focusDay(n)     聚焦第 n 天（0-based）：展开地图 + 加载当天路线 + setBounds
+     TripMap.focusSpot(n,i)  聚焦第 n 天第 i 个景点标记（i = rspots 索引）
+     TripMap.focusHotel(n)   聚焦第 n 天住宿标记：缩放 + 弹窗 + 弹跳
+     TripMap.scrollToDay(n)  反向：滚动页面到第 n 天日程卡
+     TripMap.ensureVisible() 确保地图面板可见（可能已收起 / 已折叠）
+
+   数据索引约定：
+     H[n]      = 第 n 天住宿 marker
+     SM[n][i] = 第 n 天第 i 个景点 marker（顺序同 d.r 之外的 day_routes.rspots）
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
 const K='9f853e26c1ef1d449260b4ad9a4de5c8';
-var D=[{h:[116.356019,23.537165],hl:"D1 揭阳古城酒店",hi:{"c": "揭阳", "lv": "舒适型", "n": "揭阳榕城区酒店（古城附近）"},s:[],r:[[113.342501, 23.170841], [116.356019, 23.537165]]},{h:[116.671519,23.353395],hl:"D2 汕头小公园酒店",hi:{"c": "汕头", "lv": "舒适型", "n": "汕头小公园附近酒店（龙眼南路觅食近）"},s:[{"p": [116.357822, 23.534918], "l": "进贤门"}, {"p": [116.355051, 23.534571], "l": "城隍庙"}, {"p": [116.356019, 23.537165], "l": "揭阳学宫"}, {"p": [116.671519, 23.353395], "l": "汕头小公园"}],r:[[116.356019, 23.537165], [116.671519, 23.353395]]},{h:[116.671519,23.353395],hl:"D3 汕头小公园",hi:{"c": "广州", "lv": "经济型", "n": "到家 🏠"},s:[{"p": [116.673879, 23.352223], "l": "开埠文化陈列馆"}],r:[[116.671519, 23.353395], [113.237123, 23.06646]]}];
+var D=[{h:[116.356019,23.537165],hl:"D1 揭阳古城酒店",hi:{"c": "揭阳", "lv": "舒适型", "n": "揭阳榕城区酒店（古城附近）"},s:[],r:[[113.342501, 23.170841], [116.356019, 23.537165]]},{h:[116.671519,23.353395],hl:"D2 汕头小公园酒店",hi:{"c": "汕头", "lv": "舒适型", "n": "汕头小公园附近酒店（龙眼南路觅食近）"},s:[{"p": [116.357822, 23.534918], "l": "进贤门"}, {"p": [116.355051, 23.534571], "l": "城隍庙"}, {"p": [116.356019, 23.537165], "l": "揭阳学宫"}, {"p": [116.671519, 23.353395], "l": "汕头小公园"}],r:[[116.356019, 23.537165], [116.671519, 23.353395]]},{h:[116.671519,23.353395],hl:"D3 汕头小公园",hi:{"c": "广州", "lv": "经济型", "n": "到家 🏠"},s:[{"p": [116.673879, 23.352223], "l": "开埠文化陈列馆"}, {"p": [116.671519, 23.353395], "l": "汕头小公园"}],r:[[116.671519, 23.353395], [113.237123, 23.06646]]}];
 
 document.getElementById('weatherStrip').style.display='none';
 
 var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
-var A=[],H=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var A=[],H=[],SM=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var TripMap={};
 var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0kBytZEUcsAACT59XRS5cT+QAAAABJRU5ErkJggg==',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0kBytZEUcsAACtCdRxiKH+RgAAAABJRU5ErkJggg==',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRpIDlayIo5YAABtW+cBLsz+hAAAAABJRU5ErkJggg==';
-new AMap.Marker({icon:OI,position:[113.342501,23.170841],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
+var _sm=new AMap.Marker({icon:OI,position:[113.342501,23.170841],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
 A.push([113.342501,23.170841]);
-var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
-new AMap.Marker({icon:OI,position:[113.342501,23.170841],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
-function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="var el=document.getElementById(\'d'+(n+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
+var _em=new AMap.Marker({icon:OI,position:[113.342501,23.170841],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
+setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
+
+/* ── 页面滚动 / 面板可见性 ── */
+TripMap.scrollToDay=function(n){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})};
+TripMap.ensureVisible=function(){
+  var mp=document.querySelector('.map-panel');
+  if(mp&&mp.classList.contains('collapsed')){
+    mp.classList.remove('collapsed');
+    var tbtn=document.querySelector('.map-toggle-btn');
+    if(tbtn)tbtn.textContent='▲ 收起';
+  }
+  if(window.expandMapIfCollapsed)window.expandMapIfCollapsed();
+};
+
+/* ── 景点聚焦：缩放 + 弹跳 + InfoWindow ── */
+TripMap.focusSpot=function(n,i){
+  var day=SM[n];if(!day)return;
+  var m=day[i];if(!m)return;
+  Z=1;
+  if(W){W.close();W=null}
+  TripMap.ensureVisible();
+  var d=D[n],spot=(d&&d.s)?d.s[i]:null;
+  var label=(spot&&spot.l)?spot.l:'景点';
+  var dayHl=(d&&d.hl)?d.hl:'';
+  map.setZoomAndCenter(15,m.getPosition());
+  m.setAnimation('AMAP_ANIMATION_BOUNCE');
+  setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);
+  var sub=dayHl?'<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">第 '+(n+1)+' 天 · '+dayHl+'</div>':'';
+  W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#27ae60;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #27ae60;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🟢 '+label+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});
+  W.open(map,m.getPosition());
+};
+
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+TripMap.focusHotel=focusHotel;
 function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
 function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
 function toggleWeather(){var b=document.getElementById("weatherStrip");if(b.style.display==="none"){b.style.display="flex";document.getElementById("weatherToggle").textContent="🌤️ 收起天气"}else{b.style.display="none";document.getElementById("weatherToggle").textContent="🌤️ 沿途天气"}}
@@ -774,20 +822,15 @@ function dayBounds(n){var d=D[n];if(!d)return null;var pts=[],i;if(d.r)for(i=0;i
 function focusDay(n){
   if(W){W.close();W=null}
   Z=0;
-  expandMapIfCollapsed();
+  if(TripMap.ensureVisible()){
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
+  }
   var b=document.getElementById('navBtn');
   if(b){
     b.textContent='🗺️ 加载全部路线';
     b.className='nav-btn';
     b.onclick=function(){loadRoutes()}
-  }
-  var mp=document.querySelector('.map-panel');
-  if(mp&&mp.classList.contains('collapsed')){
-    mp.classList.remove('collapsed');
-    var tbtn=document.querySelector('.map-toggle-btn');
-    if(tbtn)tbtn.textContent='▲ 收起';
-    window.scrollTo({top:0,behavior:'smooth'});
-    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
   }
   if(n===lastDay&&routeCache[n]){
     var bd=dayBounds(n);
@@ -814,7 +857,7 @@ function focusDay(n){
   fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl);routeCache[n]=[pl];var bd4=dayBounds(n);if(bd4)map.setBounds(bd4,false,[60,60,60,60])}})
 }
 
-function showDayRoute(n){focusDay(n)}
+TripMap.focusDay=focusDay;
 
 function P(){
   var i=0;

@@ -61,6 +61,8 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 .badge.eco{background:var(--eco)}.badge.comf{background:var(--comf)}.badge.lux{background:var(--lux)}.badge.hot{background:var(--hot)}
 .badge.must{background:#e74c3c;font-size:.68rem;padding:1px 6px}
 .badge.a5{background:#f39c12}.badge.a4{background:#2980b9}.badge.wh{background:#8e44ad;font-size:.65rem}
+.badge.reserve{background:#e67e22;font-size:.68rem;padding:1px 6px}
+a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:pointer}
 
 .legend{position:absolute;bottom:24px;right:12px;z-index:1000;text-align:right}
 .legend-toggle{width:30px;height:30px;background:#0d3b66;color:#fff;border:none;border-radius:50%;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
@@ -92,9 +94,9 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
 .budget-card ul{list-style:none;font-size:.86rem;color:var(--muted);text-align:left;padding:0 8px}
 .budget-card li{padding:3px 0;display:flex;justify-content:space-between}
 
-/* ── 费用统计 ── */
-.expense-section{padding:28px 32px;background:var(--card);border-top:2px solid #e67e22}
-.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.2rem;color:#e67e22}
+/* ── 费用统计（信息页卡·左列，与 .reservation-section 同为列内页卡）── */
+.expense-section{padding:24px 28px;background:var(--card);border-top:2px solid #e67e22}
+.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.15rem;color:#e67e22}
 .expense-empty{text-align:center;padding:30px 20px;color:var(--muted)}
 .expense-empty p{font-size:.88rem;margin-bottom:8px}
 .expense-hint{font-size:.76rem !important;color:#aaa}
@@ -444,14 +446,14 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <div class="table-panel" id="toc-days">
     <!-- ═══════ D1 ═══════ -->
 <div class="day-card" id="d1" style="border-left-color:#e74c3c">
-  <h3 onclick="showDayRoute(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 启程入湘 <span class="pin">📍</span> <span class="dd">8/20 周四</span></h3>
+  <h3 onclick="TripMap.focusDay(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 启程入湘 <span class="pin">📍</span> <span class="dd">8/20 周四</span></h3>
   <span class="drive-badge">🚗 4.7h · 395km</span>
   <div class="route">广州番禺里仁洞 → 郴州市区</div>
   <div class="timing"><span>🕐 出发 <strong>18:00</strong></span> <span>🕐 到达 <strong>22:40</strong></span></div>
   <div class="day-weather">🌦️ 广州26-31°C → 郴州24-34°C · 午后雷阵雨</div>
   <h4>🏙️ 郴州 <span class="province">（湖南·湘南）</span></h4>
   <div class="city-desc">郴州，湖南南大门，毗邻广东韶关，素有粤港澳后花园和林中之城美誉。北宋理学家<strong>周敦颐</strong>生于郴州汝城，写就千古名篇《爱莲说》。栖凤渡鱼粉、临武鸭、烧鸡公是必尝湘味，市区海拔约500米，8月均温较广州低5-8°C，是盛夏避暑胜地。</div>
-  <h4>🏮 裕后街 <span class="badge sel">可选</span></h4>
+  <h4>🏮 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(0,0)" title="🗺️ 点击查看地图位置">裕后街</span> <span class="badge sel">可选</span></h4>
   <div class="spot-desc">郴州版清明上河图，青砖黛瓦的明清古街，夜幕下灯火璀璨、美食云集。烧鸡公、栖凤渡鱼粉、临武鸭、坛子肉在这里一网打尽。22:40抵郴后如精力尚可，可快速夜游40分钟；或留待D2早起前/返程前补逛，街巷不长，逛吃1-2小时足够。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd">烧鸡公</span><span class="fd">栖凤渡鱼粉</span><span class="fd">临武鸭</span><span class="fd">坛子肉</span><span class="fd">桂阳血鸭</span><span class="fd">油茶</span></div>
@@ -461,21 +463,21 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
     <li>🏠 <span class="sn">栖凤渡鱼粉（老店）</span>（市区） — 郴州早餐代表，香辣鲜美 · 大众点评</li>
   </ul>
   <div class="tip">💡 18:00 准时出发，全程高速约4.7h，带娃中途服务区休息2次。抵郴约22:40，直接宿市区，次日再游裕后街。</div>
-  <div class="hotel-line" onclick="focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 郴州市区 · 🌟 <span class="badge lux">豪华型</span> · 市区五星（如温德姆至尊豪廷系）</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 郴州市区 · 🌟 <span class="badge lux">豪华型</span> · 市区五星（如温德姆至尊豪廷系）</div>
 </div>
 
 <!-- ═══════ D2 ═══════ -->
 <div class="day-card" id="d2" style="border-left-color:#3498db">
-  <h3 onclick="showDayRoute(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 雾漫东江 <span class="pin">📍</span> <span class="dd">8/21 周五</span></h3>
+  <h3 onclick="TripMap.focusDay(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 雾漫东江 <span class="pin">📍</span> <span class="dd">8/21 周五</span></h3>
   <span class="drive-badge">🚗 3.2h · 147km</span>
   <div class="route">郴州市区 → 东江湖 → 飞天山 → 白廊</div>
   <div class="timing"><span>🕐 出发 <strong>08:00</strong></span> <span>🕐 到达 <strong>17:30</strong></span></div>
   <div class="day-weather">🌦️ 24-35°C · 午后雷阵雨</div>
   <h4>🏙️ 资兴 <span class="province">（湖南·郴州）</span></h4>
   <div class="city-desc">资兴市因东江湖而闻名，东江湖是湖南最大人工湖、国家5A景区，水质达国家一级标准，被誉为人间天上一湖水。雾漫小东江晨雾奇观蜚声海内外，白廊环湖公路有湖南小洱海之称。湖畔盛产虹鳟三文鱼，一鱼多吃是当地招牌。</div>
-  <h4>⛰️ 东江湖（雾漫小东江） <span class="badge a5">5A</span> <span class="badge must">必去</span></h4>
+  <h4>⛰️ <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,0)" title="🗺️ 点击查看地图位置">东江湖（雾漫小东江）</span> <span class="badge a5">5A</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">雾漫小东江是东江湖最梦幻的打开方式——清晨6:00-8:30江面云雾缭绕，渔翁驾小舟撒网，如行走水墨画中。2号观景台是经典机位，渔夫每隔半小时撒网三次。1.2m以下儿童免票，景区大巴代步，亲子无压力。上午观雾后还可乘船环湖，感受湖光山色。</div>
-  <h4>🏞️ 飞天山 <span class="badge a4">4A</span> <span class="badge must">必去</span></h4>
+  <h4>🏞️ <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,1)" title="🗺️ 点击查看地图位置">飞天山</span> <span class="badge a4">4A</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">丹霞地貌中的亲子首选——观光车直达山顶，几乎零爬山强度，老幼皆宜。赤红山脊如巨龙盘踞，与翠绿江流相映成趣。竹筏泛舟沿江而下，看丹霞倒影，惬意非常。1.2m以下儿童免票，门票含观光车+竹筏。竹筏17:30停止检票，建议午后抵达错峰避暑。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd">东江三文鱼</span><span class="fd">虹鳟一鱼多吃</span><span class="fd">湖鲜</span><span class="fd">白廊农家菜</span><span class="fd">瑶家油茶</span></div>
@@ -493,19 +495,19 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
   <div class="tip">💡 东江湖观雾6:00-8:30，看渔夫撒网每半小时一次。午后雷阵雨，上午优先东江湖，下午飞天山竹筏17:30停检。飞天山1.2m以下免票。</div>
   <div class="score-row">⭐ 东江湖 <strong>7.20</strong> · 飞天山 <strong>7.05</strong></div>
-  <div class="hotel-line" onclick="focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 东江湖白廊 · 🌟 <span class="badge lux">豪华型</span> · 五岛一村华美达湖景房（亲子实测推荐）</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 东江湖白廊 · 🌟 <span class="badge lux">豪华型</span> · 五岛一村华美达湖景房（亲子实测推荐）</div>
 </div>
 
 <!-- ═══════ D3 ═══════ -->
 <div class="day-card" id="d3" style="border-left-color:#2ecc71">
-  <h3 onclick="showDayRoute(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 亲子手作归程 <span class="pin">📍</span> <span class="dd">8/22 周六</span></h3>
+  <h3 onclick="TripMap.focusDay(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 亲子手作归程 <span class="pin">📍</span> <span class="dd">8/22 周六</span></h3>
   <span class="drive-badge">🚗 5.9h · 444km</span>
   <div class="route">白廊码头 → 临武鸭工厂 → 广州番禺里仁洞</div>
   <div class="timing"><span>🕐 出发 <strong>08:30</strong></span> <span>🕐 到达 <strong>18:30</strong></span></div>
   <div class="day-weather">🌧️ 24-33°C · 午后雷阵雨</div>
   <h4>🏙️ 郴州 <span class="province">（湖南·湘南）</span></h4>
   <div class="city-desc">郴州拥有高椅岭、飞天山等丹霞奇观，苏仙岭相传为苏耽升仙之处。舜华临武鸭体验工厂是全国知名的亲子研学基地，把酱板鸭产业链做成孩子最爱的科普乐园。郴州美食以香辣鲜为主，栖凤渡鱼粉曾上央视，是到郴州必吃的早餐。</div>
-  <h4>🦆 舜华临武鸭体验工厂 <span class="badge must">必去</span></h4>
+  <h4>🦆 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(2,1)" title="🗺️ 点击查看地图位置">舜华临武鸭体验工厂</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">孩子此行最爱的一站！20元门票走进临武鸭工业旅游基地：2楼科普研学看鸭子从孵化到加工的全产业链，现场试吃；3楼手作站亲手制作鸭蛋面、手绘彩蛋，成品可带走；1楼4.5米先知鸭和鸭鸭乐园滑梯让娃玩到不想走。距郴州西站约10分钟车程，回程顺路，寓教于乐两小时刚刚好。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd">临武鸭</span><span class="fd">鸭蛋面</span><span class="fd">烧鸡公</span><span class="fd">茶颜悦色</span><span class="fd">桂阳血鸭</span></div>
@@ -522,7 +524,29 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
 </div>
 
-<div class="expense-section" id="toc-expense">
+<div class="bottom-sections">
+  <div class="bottom-col bottom-left">
+    <div class="food-section" id="toc-food">
+      <h2>🍜 郴州美食总览（3城 · 15+ 道特色菜）</h2>
+      <div class="food-grid">
+        <div class="food-card">
+  <div class="food-card-hdr">
+    <div class="fcity">🍜 郴州</div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 栖凤渡鱼粉 · 🔥 临武鸭 · 烧鸡公 · 桂阳血鸭 · 坛子肉 · 嘉禾豆腐 · 茶颜悦色</span></span></div>
+  </div>
+</div>
+<div class="food-card">
+  <div class="food-card-hdr">
+    <div class="fcity">🍜 资兴</div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 东江三文鱼（虹鳟） · 一鱼多吃 · 湖鲜 · 白廊农家菜 · 瑶家油茶</span></span></div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    
+
+    <div class="expense-section" id="toc-expense">
   <h2>💰 费用统计（按天 · 点击展开明细）</h2>
   <div class="expense-table-wrap">
     <table class="expense-table">
@@ -613,29 +637,6 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
 </div>
 
-<div class="bottom-sections">
-  <div class="bottom-col bottom-left">
-    <div class="food-section" id="toc-food">
-      <h2>🍜 郴州美食总览（3城 · 15+ 道特色菜）</h2>
-      <div class="food-grid">
-        <div class="food-card">
-  <div class="food-card-hdr">
-    <div class="fcity">🍜 郴州</div>
-    <div class="food-dishes"><span class="fd"><span class="hi">🔥 栖凤渡鱼粉 · 🔥 临武鸭 · 烧鸡公 · 桂阳血鸭 · 坛子肉 · 嘉禾豆腐 · 茶颜悦色</span></span></div>
-  </div>
-</div>
-<div class="food-card">
-  <div class="food-card-hdr">
-    <div class="fcity">🍜 资兴</div>
-    <div class="food-dishes"><span class="fd"><span class="hi">🔥 东江三文鱼（虹鳟） · 一鱼多吃 · 湖鲜 · 白廊农家菜 · 瑶家油茶</span></span></div>
-  </div>
-</div>
-      </div>
-    </div>
-
-
-    
-
   </div>
 
   <div class="bottom-col bottom-right">
@@ -681,7 +682,7 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   </div>
   <div class="sg">
     <div class="sca"><div class="ico">🎫</div><div class="big">4</div><div class="lbl">景点总数</div><div class="dl"><span><span>5A 级</span><span class="hv">1个</span></span><span><span>4A 级</span><span class="gv">1个</span></span><span><span>特殊/未评级</span><span class="gv">2个</span></span></div></div>
-    <div class="sca"><div class="ico">🚗</div><div class="big">13.8h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">986km</span></span><span><span>平均（10天）</span><span class="gv">4.6h/天</span></span><span><span>平均（驾驶日8天）</span><span class="gv">4.6h/天</span></span><span><span>停驶日</span><span class="gv">无</span></span></div></div>
+    <div class="sca"><div class="ico">🚗</div><div class="big">13.8h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">986km</span></span><span><span>平均（3天）</span><span class="gv">4.6h/天</span></span><span><span>平均（驾驶日3天）</span><span class="gv">4.6h/天</span></span><span><span>停驶日</span><span class="gv">无</span></span></div></div>
     <div class="sca"><div class="ico">⚠️</div><div class="big">4.7h</div><div class="lbl">单日最大驾驶</div><div class="dl"><span><span>最长日</span><span class="hv">D1（4.7h）</span></span><span><span>弹性日(&gt;3h)</span><span class="gv">0天</span></span><span><span>超5h天数</span><span class="hv">0天</span></span><span><span>最短驾驶日</span><span class="gv">D2（3.2h分段）</span></span></div></div>
     <div class="sca"><div class="ico">🏨</div><div class="big">2</div><div class="lbl">过夜城市</div><div class="dl"><span><span>🌟 豪华</span><span class="gv" style="color:#8e44ad">2晚（市区+白廊）</span></span><span><span>🏨 舒适</span><span class="gv">无</span></span><span><span>🏠 经济</span><span class="gv">无</span></span><span><span>♨️ 温泉</span><span class="gv">无</span></span></div></div>
     <div class="sca w2">
@@ -705,37 +706,83 @@ body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;backgr
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()" title="目录导航">☰</button>
   <div class="toc-panel" id="tocPanel">
     <div class="toc-title">📑 页面导航</div>
-    <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
+        <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
     <a class="toc-item" onclick="toggleWeather();scrollToToc('weatherStrip')"><span class="toc-num">2</span>🌤️ 沿途天气</a>
     <a class="toc-item" onclick="scrollToToc('toc-days')"><span class="toc-num">3</span>📅 每日行程</a>
-    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 美食总览</a>
+    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 郴州美食总览（3城 · 15+ 道特色菜）</a>
     <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">5</span>💰 费用统计</a>
-    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">6</span>📋 预约指南</a>
-    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">7</span>⭐ 评分体系</a>
-    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">8</span>📊 行程总览</a>
+    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">6</span>⭐ 评分体系</a>
+    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">7</span>📊 行程总览</a>
   </div>
 </div>
 
 <script>
 /* ═══════════════════════════════════════════════════════════════════════════
    map-core.js — 地图初始化、全局变量、标记、InfoWindow、天气/图例交互
+
+   ═══ 页面 ↔ 地图 交互契约（改动前务必读 .agents/skills/html-trip-page/
+       references/map-interactions.md）═══
+
+   所有「页面元素 → 地图」的跳转统一走 TripMap 命名空间：
+     TripMap.focusDay(n)     聚焦第 n 天（0-based）：展开地图 + 加载当天路线 + setBounds
+     TripMap.focusSpot(n,i)  聚焦第 n 天第 i 个景点标记（i = rspots 索引）
+     TripMap.focusHotel(n)   聚焦第 n 天住宿标记：缩放 + 弹窗 + 弹跳
+     TripMap.scrollToDay(n)  反向：滚动页面到第 n 天日程卡
+     TripMap.ensureVisible() 确保地图面板可见（可能已收起 / 已折叠）
+
+   数据索引约定：
+     H[n]      = 第 n 天住宿 marker
+     SM[n][i] = 第 n 天第 i 个景点 marker（顺序同 d.r 之外的 day_routes.rspots）
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
 const K='9f853e26c1ef1d449260b4ad9a4de5c8';
-var D=[{h:[113.015517,25.770117],hl:"D1 郴州市区",hi:{"c": "郴州市区", "lv": "豪华型", "n": "市区五星（如温德姆至尊豪廷系）"},s:[],r:[[113.348072, 22.990761], [113.015517, 25.770117]]},{h:[113.399074,25.915201],hl:"D2 白廊码头",hi:{"c": "东江湖白廊", "lv": "豪华型", "n": "五岛一村华美达湖景房（亲子实测推荐）"},s:[{"p": [113.427716, 25.921329], "l": "东江湖"}, {"p": [113.152444, 25.835242], "l": "飞天山"}],r:[[113.015517, 25.770117], [113.427716, 25.921329], [113.152444, 25.835242], [113.399074, 25.915201]]},{h:[113.348072,22.990761],hl:"D3 到家",hi:{"c": "", "lv": "", "n": ""},s:[{"p": [112.958944, 25.749143], "l": "临武鸭工厂"}],r:[[113.399074, 25.915201], [112.958944, 25.749143], [113.348072, 22.990761]]}];
+var D=[{h:[113.015517,25.770117],hl:"D1 郴州市区",hi:{"c": "郴州市区", "lv": "豪华型", "n": "市区五星（如温德姆至尊豪廷系）"},s:[{"p": [113.044266, 25.772185], "l": "裕后街"}],r:[[113.348072, 22.990761], [113.015517, 25.770117]]},{h:[113.399074,25.915201],hl:"D2 白廊码头",hi:{"c": "东江湖白廊", "lv": "豪华型", "n": "五岛一村华美达湖景房（亲子实测推荐）"},s:[{"p": [113.427716, 25.921329], "l": "东江湖"}, {"p": [113.152444, 25.835242], "l": "飞天山"}],r:[[113.015517, 25.770117], [113.427716, 25.921329], [113.152444, 25.835242], [113.399074, 25.915201]]},{h:[113.348072,22.990761],hl:"D3 到家",hi:{"c": "", "lv": "", "n": ""},s:[{"p": [112.958944, 25.749143], "l": "临武鸭工厂"}, {"p": [112.958944, 25.749143], "l": "舜华临武鸭体验工厂"}],r:[[113.399074, 25.915201], [112.958944, 25.749143], [113.348072, 22.990761]]}];
 
 document.getElementById('weatherStrip').style.display='none';
 
 var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
-var A=[],H=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var A=[],H=[],SM=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var TripMap={};
 var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0kBytZEUcsAACT59XRS5cT+QAAAABJRU5ErkJggg==',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0kBytZEUcsAACtCdRxiKH+RgAAAABJRU5ErkJggg==',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRpIDlayIo5YAABtW+cBLsz+hAAAAABJRU5ErkJggg==';
-new AMap.Marker({icon:OI,position:[113.348072,22.990761],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
+var _sm=new AMap.Marker({icon:OI,position:[113.348072,22.990761],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
 A.push([113.348072,22.990761]);
-var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
-new AMap.Marker({icon:OI,position:[113.348072,22.990761],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
+var _em=new AMap.Marker({icon:OI,position:[113.348072,22.990761],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
 setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
-function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="var el=document.getElementById(\'d'+(n+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+
+/* ── 页面滚动 / 面板可见性 ── */
+TripMap.scrollToDay=function(n){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})};
+TripMap.ensureVisible=function(){
+  var mp=document.querySelector('.map-panel');
+  if(mp&&mp.classList.contains('collapsed')){
+    mp.classList.remove('collapsed');
+    var tbtn=document.querySelector('.map-toggle-btn');
+    if(tbtn)tbtn.textContent='▲ 收起';
+  }
+  if(window.expandMapIfCollapsed)window.expandMapIfCollapsed();
+};
+
+/* ── 景点聚焦：缩放 + 弹跳 + InfoWindow ── */
+TripMap.focusSpot=function(n,i){
+  var day=SM[n];if(!day)return;
+  var m=day[i];if(!m)return;
+  Z=1;
+  if(W){W.close();W=null}
+  TripMap.ensureVisible();
+  var d=D[n],spot=(d&&d.s)?d.s[i]:null;
+  var label=(spot&&spot.l)?spot.l:'景点';
+  var dayHl=(d&&d.hl)?d.hl:'';
+  map.setZoomAndCenter(15,m.getPosition());
+  m.setAnimation('AMAP_ANIMATION_BOUNCE');
+  setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);
+  var sub=dayHl?'<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">第 '+(n+1)+' 天 · '+dayHl+'</div>':'';
+  W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#27ae60;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #27ae60;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🟢 '+label+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});
+  W.open(map,m.getPosition());
+};
+
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+TripMap.focusHotel=focusHotel;
 function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
 function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
 function toggleWeather(){var b=document.getElementById("weatherStrip");if(b.style.display==="none"){b.style.display="flex";document.getElementById("weatherToggle").textContent="🌤️ 收起天气"}else{b.style.display="none";document.getElementById("weatherToggle").textContent="🌤️ 沿途天气"}}
@@ -748,20 +795,15 @@ function dayBounds(n){var d=D[n];if(!d)return null;var pts=[],i;if(d.r)for(i=0;i
 function focusDay(n){
   if(W){W.close();W=null}
   Z=0;
-  expandMapIfCollapsed();
+  if(TripMap.ensureVisible()){
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
+  }
   var b=document.getElementById('navBtn');
   if(b){
     b.textContent='🗺️ 加载全部路线';
     b.className='nav-btn';
     b.onclick=function(){loadRoutes()}
-  }
-  var mp=document.querySelector('.map-panel');
-  if(mp&&mp.classList.contains('collapsed')){
-    mp.classList.remove('collapsed');
-    var tbtn=document.querySelector('.map-toggle-btn');
-    if(tbtn)tbtn.textContent='▲ 收起';
-    window.scrollTo({top:0,behavior:'smooth'});
-    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
   }
   if(n===lastDay&&routeCache[n]){
     var bd=dayBounds(n);
@@ -788,7 +830,7 @@ function focusDay(n){
   fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl);routeCache[n]=[pl];var bd4=dayBounds(n);if(bd4)map.setBounds(bd4,false,[60,60,60,60])}})
 }
 
-function showDayRoute(n){focusDay(n)}
+TripMap.focusDay=focusDay;
 
 function P(){
   var i=0;

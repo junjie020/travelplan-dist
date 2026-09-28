@@ -94,9 +94,9 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 .budget-card ul{list-style:none;font-size:.86rem;color:var(--muted);text-align:left;padding:0 8px}
 .budget-card li{padding:3px 0;display:flex;justify-content:space-between}
 
-/* ── 费用统计 ── */
-.expense-section{padding:28px 32px;background:var(--card);border-top:2px solid #e67e22}
-.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.2rem;color:#e67e22}
+/* ── 费用统计（信息页卡·左列，与 .reservation-section 同为列内页卡）── */
+.expense-section{padding:24px 28px;background:var(--card);border-top:2px solid #e67e22}
+.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.15rem;color:#e67e22}
 .expense-empty{text-align:center;padding:30px 20px;color:var(--muted)}
 .expense-empty p{font-size:.88rem;margin-bottom:8px}
 .expense-hint{font-size:.76rem !important;color:#aaa}
@@ -447,16 +447,16 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   <div class="table-panel" id="toc-days">
     <!-- ═══════ D1 ═══════ -->
 <div class="day-card" id="d1" style="border-left-color:#e74c3c">
-  <h3 onclick="showDayRoute(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 西江访古 <span class="pin">📍</span> <span class="dd">10/3 周六</span></h3>
+  <h3 onclick="TripMap.focusDay(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 西江访古 <span class="pin">📍</span> <span class="dd">10/3 周六</span></h3>
   <span class="drive-badge">🚗 2.4h · 189km</span>
   <div class="route">广州荔湾 → 郁南连滩</div>
   <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>11:24</strong></span></div>
   <div class="day-weather">🌤 23-31°C · 西江流域</div>
   <h4>🏙️ 郁南 <span class="province">（广东·云浮）</span></h4>
   <div class="city-desc">郁南县位于广东省云浮市西部，西江中游南岸，是南江文化的发源地。南江古水道全长28.5公里，为海上丝绸之路的重要连接通道。连滩镇兰寨村是千年古村，清代粤西唯一状元<strong>林召棠</strong>曾在此求学，村中现存明清古建筑30余座，2016年入选中国传统村落名录。大湾镇古建筑群保存47座明清大屋，其中14座为全国重点文物保护单位，灰塑艺术堪称粤西一绝。兰寨村后观景台可俯瞰南江流域梯田，十月稻熟时似金色海浪，是一处商业化极低的岭南秘境。</div>
-  <h4>🟢 兰寨古村 <span class="badge must">必去</span></h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(0,0)" title="🗺️ 点击查看地图位置">兰寨古村</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">兰寨村位于郁南县连滩镇，两千多年前即有古百越人聚居，明万历年间林氏始祖从福建迁入，因广植兰花且崇尚其高洁而得名。这里自古崇文尚学——清道光三年（1823年），在此求学的林召棠高中状元，成为粤西历史上唯一一名状元，村中至今留有状元树、状元匾、状元碑。现存祠堂、庙宇、学校、当铺、民居等明清古建筑30余座，其中林氏宗祠保存着光绪、道光年间的科举功名牌匾。2016年入选第四批中国传统村落名录，2019年兰寨古建筑群被列为广东省文物保护单位。村中多台阶石板路，建议穿防滑鞋慢逛，清晨或傍晚光线最适合摄影。</div>
-  <h4>🟡 光二大屋 </h4>
+  <h4>🟡 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(0,1)" title="🗺️ 点击查看地图位置">光二大屋</span> </h4>
   <div class="spot-desc">光二大屋建于清嘉庆年间，距今约180余年，占地6667平方米（约10亩），共有135间房，鼎盛时曾住700多人，被称为广东第一大屋、乱世中的诺亚方舟。整座建筑集防火、防水、防盗于一体：围墙设16个枪眼，内置储粮可供应全屋人吃三个月，外部以围墙封闭、内部以纵横巷道相连。行走其间如入迷宫，9岁孩子会很喜欢这种探索感。门票10元，由村民自营，建议备好现金。距兰寨古村仅约1公里，参观约半小时，是古村之旅的轻松补充。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd"><span class="hi">🔥 连滩酿豆腐</span></span><span class="fd"><span class="hi">🔥 连滩鸡仔粉</span></span><span class="fd">大糠糍</span><span class="fd">印糍</span><span class="fd">竹篙粉</span><span class="fd">南江河虾</span><span class="fd">簕鼓鸡</span></div>
@@ -470,23 +470,23 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </div>
   <div class="tip">💡 🚗 国庆第三天出发，已过 10/1-10/2 最堵的两天，出城车流明显缓解。走广昆高速（G80）经肇庆往西，全程约189km，建议在服务区午餐或直接到连滩再吃。上午先入住寄存行李，下午慢逛兰寨古村（2h）+ 光二大屋（0.5h），两处相距仅1km。连滩镇住宿条件一般（镇级），但只睡一晚，把预算留给明晚的禅泉。</div>
   <div class="score-row">⭐ 兰寨古村 7.35</div>
-  <div class="hotel-line" onclick="focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 连滩 · <span class="badge eco">经济型</span> · 镇级住宿 · 只睡一晚 · 最高分约4.2（合利/福盈门/印象汇）</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 连滩 · <span class="badge eco">经济型</span> · 镇级住宿 · 只睡一晚 · 最高分约4.2（合利/福盈门/印象汇）</div>
 </div>
 
 <!-- ═══════ D2 ═══════ -->
 <div class="day-card" id="d2" style="border-left-color:#3498db">
-  <h3 onclick="showDayRoute(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 禅泉沐心 <span class="pin">📍</span> <span class="dd">10/4 周日</span></h3>
+  <h3 onclick="TripMap.focusDay(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 禅泉沐心 <span class="pin">📍</span> <span class="dd">10/4 周日</span></h3>
   <span class="drive-badge">🚗 2.8h · 152km</span>
   <div class="route">连滩 → 大湾古建筑群 → 云浮蟠龙洞 → 新兴禅泉</div>
   <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>16:45</strong></span></div>
   <div class="day-weather">🌤 23-30°C · 山区气候</div>
   <h4>🏙️ 云浮 <span class="province">（广东·云浮）</span></h4>
   <div class="city-desc">云浮市位于广东省中西部，西江中游以南，是广东最年轻的地级市之一。云浮素有石都之称，石材加工产业全国闻名。市区云城依山而建，蟠龙洞是世界三大石花洞之一，洞内<strong>宝石花</strong>约35万年前开始形成，至今仍在缓慢生长，被誉为世界石花之冠。这里也是革命家<strong>邓发</strong>的故乡——这位中国共产党早期领导人、中国工人运动先驱就生于云城。云浮下辖新兴、郁南、罗定等地，是六祖禅宗文化、南江古村落文化与石艺文化交汇之地。</div>
-  <h4>🟢 大湾古建筑群 <span class="badge must">必去</span></h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,0)" title="🗺️ 点击查看地图位置">大湾古建筑群</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">大湾古建筑群位于郁南县大湾镇五星村，始建于清咸丰元年（1851年）至民国初年，现存保存完好的古建筑47座——其中古民居大屋27座、祠堂19座、庙宇1座，最具代表性的是<strong>峻峰李公祠</strong>和<strong>祺波大屋</strong>。2013年，其14座古建筑被国务院公布为第七批全国重点文物保护单位。建筑具浓郁粤西特色，灰塑艺术最为有名，壁画、木雕、石雕精美，2007年获评2A级景区。村落至今仍有原住民生活，商业化程度极低，参观约2小时，免费开放。十月稻田金黄，与灰瓦青砖相映成趣，是摄影爱好者的天堂。</div>
-  <h4>🟢 蟠龙洞 </h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,1)" title="🗺️ 点击查看地图位置">蟠龙洞</span> </h4>
   <div class="spot-desc">蟠龙洞位于云浮市区狮子山，形成于约1.7亿年前，1983年被发现，1993年获评省级风景名胜区。它与美国卡尔斯巴德洞穴、土耳其卡林洞并称世界三大石花洞，洞内的卷曲石花被誉为世界石花之冠——这些<strong>宝石花</strong>约35万年前开始形成，至今仍在缓慢生长（约每百年长1厘米），不受重力约束、向四面节节开花，因此被称为永不凋谢的花。洞内游程528米，分三层，有58处拟态景观，恒温18-21℃，是十月里难得的清凉地。⚠️ 由讲解员带队分批入洞，游程仅15-40分钟，节奏偏快，建议放平预期、当作顺路打卡。</div>
-  <h4>🔵 国恩寺 <span class="badge must">必去</span></h4>
+  <h4>🔵 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,2)" title="🗺️ 点击查看地图位置">国恩寺</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">国恩寺始建于唐弘道元年（683年），是禅宗六祖惠能开山创建并圆寂之地，与广州光孝寺、韶关南华寺并称禅宗三大祖庭，被誉为岭南第一圣域。寺内保存着惠能亲手种植的荔枝树，树龄约1300年，至今仍枝繁叶茂。沿青石阶而上，可依次经过放生池、藏经阁与后山的报恩塔（七层）。寺内墙上的砖雕刻着《六祖坛经》的句子，斋堂门口匾额写着吃茶去，禅意藏在细节里。门票免费，停车场可停百辆车，车位充足。⚠️ 开放时间各平台说法不一，部分来源显示中午闭殿，建议出发前电话 0766-2692758 确认。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd"><span class="hi">🔥 石都鱼生</span></span><span class="fd"><span class="hi">🔥 腰古烧猪肉</span></span><span class="fd">云浮肠粉</span><span class="fd">茶油鸡</span><span class="fd">罗定鱼腐</span><span class="fd">河口肠粉</span></div>
@@ -504,19 +504,19 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </div>
   <div class="tip">💡 ⚠️ 今天的移动日：连滩→大湾（0.4h）→云浮市区蟠龙洞（1.2h）→新兴禅泉（1.2h）。上午先逛大湾古建筑群（约2h，免费，灰塑是精华），中午到大湾镇或云浮市区午餐。蟠龙洞游程只有15-40分钟，别安排太多时间。16:15 左右抵达禅泉，办好入住后步行去国恩寺（距酒店仅0.4km，2分钟），傍晚泡温泉解乏。⚠️ 出发前电话 0766-2692758 确认国恩寺当日开放时段。</div>
   <div class="score-row">⭐ 蟠龙洞 7.35 · 大湾古建筑群 7.15</div>
-  <div class="hotel-line" onclick="focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 新兴 · 🌟 <span class="badge lux">豪华型</span> · 禅泉度假酒店 · 毗邻国恩寺步行2分钟 · 含温泉+泳池+禅修</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 新兴 · 🌟 <span class="badge lux">豪华型</span> · 禅泉度假酒店 · 毗邻国恩寺步行2分钟 · 含温泉+泳池+禅修</div>
 </div>
 
 <!-- ═══════ D3 ═══════ -->
 <div class="day-card" id="d3" style="border-left-color:#2ecc71">
-  <h3 onclick="showDayRoute(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 云端漫步 <span class="pin">📍</span> <span class="dd">10/5 周一</span></h3>
+  <h3 onclick="TripMap.focusDay(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 云端漫步 <span class="pin">📍</span> <span class="dd">10/5 周一</span></h3>
   <span style="font-size:.84rem;color:var(--muted)">🚗 2.9h · 176km</span>
   <div class="route">新兴 → 天露山 → 广州荔湾</div>
   <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>16:00</strong></span></div>
   <div class="day-weather">🌤 22-30°C · 秋高气爽</div>
   <h4>🏙️ 新兴 <span class="province">（广东·云浮）</span></h4>
   <div class="city-desc">新兴县位于广东省云浮市，是禅宗六祖惠能的故乡，素有中国禅都之称。唐贞观十二年（638年）惠能生于新兴，后赴湖北黄梅得法，成为禅宗第六代祖师，其菩提本无树、明镜亦非台的偈语流传千年。国恩寺始建于唐弘道元年（683年），是惠能开山创建并圆寂之地，与广州光孝寺、韶关南华寺并称禅宗三大祖庭。新兴还是中国温泉之乡，龙山温泉的硫氢化物泉被誉为神仙水。六祖斋、黄鳝羹、新兴米粉远近闻名，是一座适合慢下来的禅意小城。</div>
-  <h4>🟠 天露山 <span class="badge must">必去</span></h4>
+  <h4>🟠 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(2,0)" title="🗺️ 点击查看地图位置">天露山</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">天露山海拔1251米，为粤中南部最高峰，是国家4A级景区。核心体验是跨度188米、悬于海拔约600米峭壁之上的<strong>云端玻璃桥</strong>——晴天可俯瞰群山，胆小者可走桥面两侧的磨砂带。亲子必打卡的是环山蒸汽小火车，1.8公里、约25分钟，穿越花海梯田，靠左窗拍照视野最好。此外还有梅溪古镇、七彩梯田花谷、佛手拈花观景台，以及2.5公里的无忧谷森林栈道（夏季约25℃，适合避暑溯溪）。大门票成人48元、儿童38元，1.2米以下免票；玻璃桥需另购套票。⚠️ 山路弯多，节假日停车位紧张，建议9:00开园即到。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd"><span class="hi">🔥 六祖斋</span></span><span class="fd"><span class="hi">🔥 黄鳝羹</span></span><span class="fd">新兴炒田螺</span><span class="fd">榄角炒米粉</span><span class="fd">天堂清水扣肉</span><span class="fd">新兴米粉</span></div>
@@ -531,99 +531,8 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </div>
   <div class="tip">💡 🌄 上午天露山（距酒店0.5h），9:00 开园即到可避开停车高峰。玻璃桥+环山小火车是亲子核心，孩子走玻璃桥建议走两侧磨砂带。山上餐饮偏贵，可自备干粮，或下山到里洞镇吃（人均约50元）。13:30 左右出发返程，走天露山→广州约157km/2.4h，预计16:00 到家。⚠️ 10/5 返程，避开 10/6 高峰，午后路况通常好于傍晚。</div>
   <div class="score-row">⭐ 天露山 7.25</div>
-  <div class="hotel-line" onclick="focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 广州 · <span class="badge eco">经济型</span> · 到家 🏠</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 广州 · <span class="badge eco">经济型</span> · 到家 🏠</div>
 </div>
-  </div>
-</div>
-
-<div class="expense-section" id="toc-expense">
-  <h2>💰 费用统计（按天 · 点击展开明细）</h2>
-  <div class="expense-table-wrap">
-    <table class="expense-table">
-      <thead>
-        <tr>
-          <th>日期</th>
-          <th>🏨 住宿</th>
-          <th>🚗 交通</th>
-          <th>🚗 交通(车1)</th>
-          <th>🍜 餐饮</th>
-          <th>🎫 景点</th>
-          <th>📊 合计</th>
-          <th>合计(住+餐+景)</th>
-          <th>备注</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="expense-row expense-row-no-detail">
-          <td class="ed">D1</td>
-          <td>¥180</td>
-          <td>¥320</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td class="et">¥830</td>
-          <td class="et">¥180</td>
-          <td class="en"><div class="en-inner">连滩经济型 · 油费约¥320（国庆高速免费）· 光二大屋¥10×3</div></td>
-        </tr>
-        <tr class="expense-row expense-row-no-detail">
-          <td class="ed">D2</td>
-          <td>¥1,050</td>
-          <td>¥180</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td class="et">¥1,600</td>
-          <td class="et">¥1,050</td>
-          <td class="en"><div class="en-inner en-no-trunc">禅泉度假酒店豪华房套票 · 蟠龙洞¥35×2</div></td>
-        </tr>
-        <tr class="expense-row expense-row-no-detail">
-          <td class="ed">D3</td>
-          <td>—</td>
-          <td>¥160</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td class="et">¥594</td>
-          <td class="et">—</td>
-          <td class="en"><div class="en-inner en-no-trunc">返程油费约¥160 · 天露山门票¥48×2+儿童¥38</div></td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr class="expense-total-row">
-          <td><strong>合计</strong></td>
-          <td><strong>¥1,230</strong></td>
-          <td><strong>¥660</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>¥1,890</strong></td>
-          <td><strong>¥1,230</strong></td>
-          <td></td>
-        </tr>
-      </tfoot>
-    </table>
-  </div>
-  <div class="expense-transport-summary">
-    <div class="ets-title">🚗 交通费用明细</div>
-    <div class="ets-grid">
-      <div class="ets-card">
-        <div class="ets-card-title">🚙 车1（6L/100km · 92# 7.05元/L）</div>
-        <div class="ets-items">
-          <span>油费：¥1,110（2,626km）</span>
-          <span>过路费：¥1,552</span>
-          <span class="ets-total">小计：¥2,662</span>
-        </div>
-      </div>
-      <div class="ets-card">
-        <div class="ets-card-title">🚗 车2（9L/100km · 95# 7.85元/L）</div>
-        <div class="ets-items">
-          <span>油费：¥1,855（2,626km）</span>
-          <span>过路费：¥1,552</span>
-          <span class="ets-total">小计：¥3,407</span>
-        </div>
-      </div>
-    </div>
-    <div class="ets-footer">高速过路费合计 ¥3,104 + 油费合计 ¥2,965 = <strong>交通总计 ¥6,069</strong>（2车·全程2,626km）</div>
   </div>
 </div>
 
@@ -663,7 +572,6 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 </div>
       </div>
     </div>
-
 
     <div class="reservation-section" id="toc-reservation">
   <h2>📋 景点预约指南</h2>
@@ -819,6 +727,97 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </div>
 </div>
 
+    <div class="expense-section" id="toc-expense">
+  <h2>💰 费用统计（按天 · 点击展开明细）</h2>
+  <div class="expense-table-wrap">
+    <table class="expense-table">
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>🏨 住宿</th>
+          <th>🚗 交通</th>
+          <th>🚗 交通(车1)</th>
+          <th>🍜 餐饮</th>
+          <th>🎫 景点</th>
+          <th>📊 合计</th>
+          <th>合计(住+餐+景)</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">D1</td>
+          <td>¥180</td>
+          <td>¥320</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="et">¥830</td>
+          <td class="et">¥180</td>
+          <td class="en"><div class="en-inner">连滩经济型 · 油费约¥320（国庆高速免费）· 光二大屋¥10×3</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">D2</td>
+          <td>¥1,050</td>
+          <td>¥180</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="et">¥1,600</td>
+          <td class="et">¥1,050</td>
+          <td class="en"><div class="en-inner en-no-trunc">禅泉度假酒店豪华房套票 · 蟠龙洞¥35×2</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">D3</td>
+          <td>—</td>
+          <td>¥160</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="et">¥594</td>
+          <td class="et">—</td>
+          <td class="en"><div class="en-inner en-no-trunc">返程油费约¥160 · 天露山门票¥48×2+儿童¥38</div></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="expense-total-row">
+          <td><strong>合计</strong></td>
+          <td><strong>¥1,230</strong></td>
+          <td><strong>¥660</strong></td>
+          <td><strong>—</strong></td>
+          <td><strong>—</strong></td>
+          <td><strong>—</strong></td>
+          <td><strong>¥1,890</strong></td>
+          <td><strong>¥1,230</strong></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div class="expense-transport-summary">
+    <div class="ets-title">🚗 交通费用明细</div>
+    <div class="ets-grid">
+      <div class="ets-card">
+        <div class="ets-card-title">🚙 车1（6L/100km · 92# 7.05元/L）</div>
+        <div class="ets-items">
+          <span>油费：¥1,110（2,626km）</span>
+          <span>过路费：¥1,552</span>
+          <span class="ets-total">小计：¥2,662</span>
+        </div>
+      </div>
+      <div class="ets-card">
+        <div class="ets-card-title">🚗 车2（9L/100km · 95# 7.85元/L）</div>
+        <div class="ets-items">
+          <span>油费：¥1,855（2,626km）</span>
+          <span>过路费：¥1,552</span>
+          <span class="ets-total">小计：¥3,407</span>
+        </div>
+      </div>
+    </div>
+    <div class="ets-footer">高速过路费合计 ¥3,104 + 油费合计 ¥2,965 = <strong>交通总计 ¥6,069</strong>（2车·全程2,626km）</div>
+  </div>
+</div>
+
   </div>
 
   <div class="bottom-col bottom-right">
@@ -898,12 +897,12 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()" title="目录导航">☰</button>
   <div class="toc-panel" id="tocPanel">
     <div class="toc-title">📑 页面导航</div>
-    <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
+        <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
     <a class="toc-item" onclick="toggleWeather();scrollToToc('weatherStrip')"><span class="toc-num">2</span>🌤️ 沿途天气</a>
     <a class="toc-item" onclick="scrollToToc('toc-days')"><span class="toc-num">3</span>📅 每日行程</a>
-    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 美食总览</a>
-    <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">5</span>💰 费用统计</a>
-    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">6</span>📋 预约指南</a>
+    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 沿途美食总览（3城 · 28道特色菜）</a>
+    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">5</span>📋 预约指南</a>
+    <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">6</span>💰 费用统计</a>
     <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">7</span>⭐ 评分体系</a>
     <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">8</span>📊 行程总览</a>
   </div>
@@ -912,23 +911,70 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 <script>
 /* ═══════════════════════════════════════════════════════════════════════════
    map-core.js — 地图初始化、全局变量、标记、InfoWindow、天气/图例交互
+
+   ═══ 页面 ↔ 地图 交互契约（改动前务必读 .agents/skills/html-trip-page/
+       references/map-interactions.md）═══
+
+   所有「页面元素 → 地图」的跳转统一走 TripMap 命名空间：
+     TripMap.focusDay(n)     聚焦第 n 天（0-based）：展开地图 + 加载当天路线 + setBounds
+     TripMap.focusSpot(n,i)  聚焦第 n 天第 i 个景点标记（i = rspots 索引）
+     TripMap.focusHotel(n)   聚焦第 n 天住宿标记：缩放 + 弹窗 + 弹跳
+     TripMap.scrollToDay(n)  反向：滚动页面到第 n 天日程卡
+     TripMap.ensureVisible() 确保地图面板可见（可能已收起 / 已折叠）
+
+   数据索引约定：
+     H[n]      = 第 n 天住宿 marker
+     SM[n][i] = 第 n 天第 i 个景点 marker（顺序同 d.r 之外的 day_routes.rspots）
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
 const K='9f853e26c1ef1d449260b4ad9a4de5c8';
-var D=[{h:[111.72723,22.93303],hl:"D1 连滩酒店",hi:{"c": "连滩", "lv": "经济型", "n": "镇级住宿 · 只睡一晚 · 最高分约4.2（合利/福盈门/印象汇）"},s:[{"p": [111.761183, 22.962267], "l": "兰寨古村"}],r:[[113.237378, 23.065823], [111.761183, 22.962267], [111.72723, 22.93303]]},{h:[112.224417,22.591123],hl:"D2 禅泉酒店",hi:{"c": "新兴", "lv": "豪华型", "n": "禅泉度假酒店 · 毗邻国恩寺步行2分钟 · 含温泉+泳池+禅修"},s:[{"p": [111.646914, 22.838838], "l": "大湾古建筑群"}, {"p": [112.049445, 22.942462], "l": "蟠龙洞"}],r:[[111.72723, 22.93303], [111.646914, 22.838838], [112.049445, 22.942462], [112.224417, 22.591123]]},{h:[113.237378,23.065823],hl:"D3 广州到家",hi:{"c": "广州", "lv": "经济型", "n": "到家 🏠"},s:[{"p": [112.222658, 22.48911], "l": "天露山"}],r:[[112.224417, 22.591123], [112.222658, 22.48911], [113.237378, 23.065823]]}];
+var D=[{h:[111.72723,22.93303],hl:"D1 连滩酒店",hi:{"c": "连滩", "lv": "经济型", "n": "镇级住宿 · 只睡一晚 · 最高分约4.2（合利/福盈门/印象汇）"},s:[{"p": [111.761183, 22.962267], "l": "兰寨古村"}, {"p": [111.752482, 22.956532], "l": "光二大屋"}],r:[[113.237378, 23.065823], [111.761183, 22.962267], [111.72723, 22.93303]]},{h:[112.224417,22.591123],hl:"D2 禅泉酒店",hi:{"c": "新兴", "lv": "豪华型", "n": "禅泉度假酒店 · 毗邻国恩寺步行2分钟 · 含温泉+泳池+禅修"},s:[{"p": [111.646914, 22.838838], "l": "大湾古建筑群"}, {"p": [112.049445, 22.942462], "l": "蟠龙洞"}, {"p": [112.228064, 22.589612], "l": "国恩寺"}],r:[[111.72723, 22.93303], [111.646914, 22.838838], [112.049445, 22.942462], [112.224417, 22.591123]]},{h:[113.237378,23.065823],hl:"D3 广州到家",hi:{"c": "广州", "lv": "经济型", "n": "到家 🏠"},s:[{"p": [112.222658, 22.48911], "l": "天露山"}],r:[[112.224417, 22.591123], [112.222658, 22.48911], [113.237378, 23.065823]]}];
 
 document.getElementById('weatherStrip').style.display='none';
 
 var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
-var A=[],H=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var A=[],H=[],SM=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var TripMap={};
 var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0kBytZEUcsAACT59XRS5cT+QAAAABJRU5ErkJggg==',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0kBytZEUcsAACtCdRxiKH+RgAAAABJRU5ErkJggg==',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRpIDlayIo5YAABtW+cBLsz+hAAAAABJRU5ErkJggg==';
-new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
+var _sm=new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
 A.push([113.237378,23.065823]);
-var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
-new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
+var _em=new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
 setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
-function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="var el=document.getElementById(\'d'+(n+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+
+/* ── 页面滚动 / 面板可见性 ── */
+TripMap.scrollToDay=function(n){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})};
+TripMap.ensureVisible=function(){
+  var mp=document.querySelector('.map-panel');
+  if(mp&&mp.classList.contains('collapsed')){
+    mp.classList.remove('collapsed');
+    var tbtn=document.querySelector('.map-toggle-btn');
+    if(tbtn)tbtn.textContent='▲ 收起';
+  }
+  if(window.expandMapIfCollapsed)window.expandMapIfCollapsed();
+};
+
+/* ── 景点聚焦：缩放 + 弹跳 + InfoWindow ── */
+TripMap.focusSpot=function(n,i){
+  var day=SM[n];if(!day)return;
+  var m=day[i];if(!m)return;
+  Z=1;
+  if(W){W.close();W=null}
+  TripMap.ensureVisible();
+  var d=D[n],spot=(d&&d.s)?d.s[i]:null;
+  var label=(spot&&spot.l)?spot.l:'景点';
+  var dayHl=(d&&d.hl)?d.hl:'';
+  map.setZoomAndCenter(15,m.getPosition());
+  m.setAnimation('AMAP_ANIMATION_BOUNCE');
+  setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);
+  var sub=dayHl?'<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">第 '+(n+1)+' 天 · '+dayHl+'</div>':'';
+  W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#27ae60;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #27ae60;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🟢 '+label+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});
+  W.open(map,m.getPosition());
+};
+
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+TripMap.focusHotel=focusHotel;
 function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
 function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
 function toggleWeather(){var b=document.getElementById("weatherStrip");if(b.style.display==="none"){b.style.display="flex";document.getElementById("weatherToggle").textContent="🌤️ 收起天气"}else{b.style.display="none";document.getElementById("weatherToggle").textContent="🌤️ 沿途天气"}}
@@ -941,20 +987,15 @@ function dayBounds(n){var d=D[n];if(!d)return null;var pts=[],i;if(d.r)for(i=0;i
 function focusDay(n){
   if(W){W.close();W=null}
   Z=0;
-  expandMapIfCollapsed();
+  if(TripMap.ensureVisible()){
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
+  }
   var b=document.getElementById('navBtn');
   if(b){
     b.textContent='🗺️ 加载全部路线';
     b.className='nav-btn';
     b.onclick=function(){loadRoutes()}
-  }
-  var mp=document.querySelector('.map-panel');
-  if(mp&&mp.classList.contains('collapsed')){
-    mp.classList.remove('collapsed');
-    var tbtn=document.querySelector('.map-toggle-btn');
-    if(tbtn)tbtn.textContent='▲ 收起';
-    window.scrollTo({top:0,behavior:'smooth'});
-    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
   }
   if(n===lastDay&&routeCache[n]){
     var bd=dayBounds(n);
@@ -981,7 +1022,7 @@ function focusDay(n){
   fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl);routeCache[n]=[pl];var bd4=dayBounds(n);if(bd4)map.setBounds(bd4,false,[60,60,60,60])}})
 }
 
-function showDayRoute(n){focusDay(n)}
+TripMap.focusDay=focusDay;
 
 function P(){
   var i=0;

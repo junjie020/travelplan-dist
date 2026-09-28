@@ -94,9 +94,9 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 .budget-card ul{list-style:none;font-size:.86rem;color:var(--muted);text-align:left;padding:0 8px}
 .budget-card li{padding:3px 0;display:flex;justify-content:space-between}
 
-/* ── 费用统计 ── */
-.expense-section{padding:28px 32px;background:var(--card);border-top:2px solid #e67e22}
-.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.2rem;color:#e67e22}
+/* ── 费用统计（信息页卡·左列，与 .reservation-section 同为列内页卡）── */
+.expense-section{padding:24px 28px;background:var(--card);border-top:2px solid #e67e22}
+.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.15rem;color:#e67e22}
 .expense-empty{text-align:center;padding:30px 20px;color:var(--muted)}
 .expense-empty p{font-size:.88rem;margin-bottom:8px}
 .expense-hint{font-size:.76rem !important;color:#aaa}
@@ -448,7 +448,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   <div class="table-panel" id="toc-days">
     <!-- ═══════ D1 ═══════ -->
 <div class="day-card" id="d1" style="border-left-color:#e74c3c">
-  <h3 onclick="showDayRoute(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 启程入桂 <span class="pin">📍</span> <span class="dd">10/2 周五</span></h3>
+  <h3 onclick="TripMap.focusDay(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 启程入桂 <span class="pin">📍</span> <span class="dd">10/2 周五</span></h3>
   <span class="drive-badge">🚗 6.9h · 671km</span>
   <div class="route">广州荔湾 → 河池金城江</div>
   <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>16:30</strong></span></div>
@@ -462,21 +462,21 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
     <li>🏠 <span class="sn">金城夜市</span>（金城江市区） — 酸汤牛杂锅+各类小吃 · 夜市越夜越热闹 · 本地人推荐</li>
   </ul>
   <div class="tip">💡 全程高速671km（广昆高速+G75兰海高速），建议在梧州/贵港段服务区午餐。⚠️ 国庆车流大，预留1.5h缓冲，预计16:30-18:00到金城江。到店后直接办入住+龙江边晚餐，养精蓄锐。若严重拥堵可改住宜州（616km/6.3h），次日补0.8h。</div>
-  <div class="hotel-line" onclick="focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 金城江 · <span class="badge comf">舒适型</span> · 河池市区·连住2晚（赶路+游玩混合）</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 金城江 · <span class="badge comf">舒适型</span> · 河池市区·连住2晚（赶路+游玩混合）</div>
 </div>
 
 <!-- ═══════ D2 ═══════ -->
 <div class="day-card" id="d2" style="border-left-color:#3498db">
-  <h3 onclick="showDayRoute(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 峡湾泛舟 <span class="pin">📍</span> <span class="dd">10/3 周六</span></h3>
+  <h3 onclick="TripMap.focusDay(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 峡湾泛舟 <span class="pin">📍</span> <span class="dd">10/3 周六</span></h3>
   <span style="font-size:.84rem;color:var(--muted)">🚗 1.2h · 44km</span>
   <div class="route">金城江 → 六甲小三峡 → 金城江</div>
   <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>16:30</strong></span></div>
   <div class="day-weather">🌤 20-29°C · 早晚微凉</div>
   <h4>🏙️ 六甲小三峡 <span class="province">（广西·河池金城江）</span></h4>
   <div class="city-desc">六甲小三峡位于金城江区六甲镇，距市区仅23公里，由天门峡、凉风峡、龙门峡组成，全长约12公里。龙江在此切开石灰岩山体，造就绝壁夹峙、江水如碧的壮丽景观，被誉为"南国第一峡"。乘船穿行其间，两岸峰丛倒映水中，颇有长江三峡的秀美婉约。景区每天9:00营业，首班游船9:40发船，全程约1.5小时并有讲解员随船。下船后可沿悬崖栈道步行返回，俯瞰峡谷全景。金城江本地的六甲河鱼肉质鲜嫩，是游船归来后的必点菜。</div>
-  <h4>🟢 六甲小三峡 <a class="badge reserve" href="玩水探洞版-预约指南.html#六甲小三峡" title="查看预约方式">📋 需预约</a></h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,0)" title="🗺️ 点击查看地图位置">六甲小三峡</span> <a class="badge reserve" href="玩水探洞版-预约指南.html#六甲小三峡" title="查看预约方式">📋 需预约</a></h4>
   <div class="spot-desc">六甲小三峡由天门峡、凉风峡、龙门峡组成，全长约12公里，被誉为"南国第一峡"。景区9:00营业，首班游船9:40发船，全程约1.5小时，船上有讲解员介绍沿途地质景观；实测笔记称"不用担心没船坐"，散客拼船即可出发，国庆期间9:40船次也没坐满。下船后沿步行栈道走约10分钟到接驳车点，乘车返回景区大门。游船强度极低，全程坐船为主，9岁孩子完全轻松。虽是坐船不下水，但两岸绝壁夹江的震撼感不输三峡，是玩水之旅的温柔开场。</div>
-  <h4>🟡 六甲桨板基地 </h4>
+  <h4>🟡 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,1)" title="🗺️ 点击查看地图位置">六甲桨板基地</span> </h4>
   <div class="spot-desc">位于小三峡与龙江第一湾之间，2025年国庆开业的水上运动点。桨板88元/3小时、皮划艇168元/3小时，含救生衣，浅滩区水势平缓，非常适合9岁孩子第一次上板。现场管理偏粗放——买好票自己穿救生衣、看到桨板回来就上，建议避开下午高峰早点去。这里还养着蓝刀鱼（梧州天峨一带的特色鱼种），喂食5元3个馒头但鱼还小不太看得到，可以略过。作为小三峡之后的下午项目，既能玩水又不必下水游泳，十月水温偏凉时尤其合适。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd"><span class="hi">🔥 六甲河鱼</span></span><span class="fd"><span class="hi">🔥 酸汤牛杂锅</span></span><span class="fd">金城米粉</span><span class="fd">龙江小河虾</span><span class="fd">夜宵烧烤</span><span class="fd">糯米血肠</span></div>
@@ -486,19 +486,19 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </div>
   <div class="tip">💡 上午睡到自然醒，9:00出发赶9:40首班游船。景区9:00营业，实测"不用担心没船坐"，散客拼船即可。下船走栈道10分钟到接驳车点。下午去六甲桨板基地（桨板88元/3h），浅滩区适合孩子第一次上板；或顺路登龙江第一湾看日落。轻松日，养精蓄锐迎接明天瀑布玩水。</div>
   <div class="score-row">⭐ 六甲小三峡 6.20</div>
-  <div class="hotel-line" onclick="focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 金城江 · <span class="badge comf">舒适型</span> · 同D1酒店·连住</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 金城江 · <span class="badge comf">舒适型</span> · 同D1酒店·连住</div>
 </div>
 
 <!-- ═══════ D3 ═══════ -->
 <div class="day-card" id="d3" style="border-left-color:#2ecc71">
-  <h3 onclick="showDayRoute(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 瀑布玩水 <span class="pin">📍</span> <span class="dd">10/4 周日</span></h3>
+  <h3 onclick="TripMap.focusDay(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 瀑布玩水 <span class="pin">📍</span> <span class="dd">10/4 周日</span></h3>
   <span class="drive-badge">🚗 3.6h · 188km</span>
   <div class="route">金城江 → 环江牛角寨 → 罗城</div>
   <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>16:50</strong></span></div>
   <div class="day-weather">🌤 19-28°C · 山区凉爽</div>
   <h4>🏙️ 环江 <span class="province">（广西·河池）</span></h4>
   <div class="city-desc">环江毛南族自治县是中国唯一的毛南族聚居县，人口仅约10万。毛南族的传统节日<strong>分龙节</strong>是国家级非物质文化遗产，以傩戏、傩舞祈求风调雨顺。这里也是中国菜牛之乡，环江香牛是地理标志产品。牛角寨瀑布群藏在环江的喀斯特峰丛深处——7级瀑布沿峡谷层层跌落，总落差超过200米，潭潭碧绿可下水，是桂西北最被低估的玩水秘境。十月已入枯水期，水量不如盛夏，但正因人少清净，反而更适合带孩子慢慢玩。环江县城干净整洁，毛南族美食独树一帜。</div>
-  <h4>🔵 环江牛角寨瀑布群 <span class="badge must">必去</span> <a class="badge reserve" href="玩水探洞版-预约指南.html#环江牛角寨瀑布群" title="查看预约方式">📋 需预约</a></h4>
+  <h4>🔵 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(2,0)" title="🗺️ 点击查看地图位置">环江牛角寨瀑布群</span> <span class="badge must">必去</span> <a class="badge reserve" href="玩水探洞版-预约指南.html#环江牛角寨瀑布群" title="查看预约方式">📋 需预约</a></h4>
   <div class="spot-desc">环江牛角寨瀑布群位于环江县明伦镇，是桂西北最壮观的瀑布群——7级瀑布沿喀斯特峡谷层层跌落，总落差超过200米。核心是<strong>通灵瀑布</strong>与<strong>双龙瀑布</strong>，每级瀑布下方都有碧绿深潭，潭边浅滩区适合孩子嬉水，深潭区可下水游泳。景区修有栈道与观景台，门票42元含进出游览车。⚠️ 全程80%是台阶，3公里V字型上下山，体力消耗不小，给孩子务必备防滑鞋；2026年7月曾因出口维修导致游客半途被拦回，出发前务必电话确认出口开放。山区蚊虫多，带足花露水。十月水量不如盛夏，但人少清净，一路常只遇到不到十位游客。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd"><span class="hi">🔥 环江香牛</span></span><span class="fd"><span class="hi">🔥 毛南族烟熏腊肉</span></span><span class="fd">五色糯米饭</span><span class="fd">竹筒鸡</span><span class="fd">毛南酸鱼</span><span class="fd">环江香猪</span></div>
@@ -508,19 +508,19 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </ul>
   <div class="tip">💡 💧 今天核心玩水日！9:00出发10:20到牛角寨。⚠️ 出发前务必电话确认出口是否开放——2026年7月曾因出口维修导致瀑布群无法到达、白跑一趟。带好装备：泳衣+溯溪鞋+防水袋+防晒+每人一套替换衣物。80%是台阶（3km V字型），孩子备防滑鞋；山区蚊虫多，花露水必带。16:00收队，17:00到罗城吃仫佬族晚餐。</div>
   <div class="score-row">⭐ 环江牛角寨 6.40</div>
-  <div class="hotel-line" onclick="focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 罗城 · <span class="badge comf">舒适型</span> · 罗城县城·离棉花天坑近（约30分钟）</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 罗城 · <span class="badge comf">舒适型</span> · 罗城县城·离棉花天坑近（约30分钟）</div>
 </div>
 
 <!-- ═══════ D4 ═══════ -->
 <div class="day-card" id="d4" style="border-left-color:#f39c12">
-  <h3 onclick="showDayRoute(3)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 4 — 天坑探洞 <span class="pin">📍</span> <span class="dd">10/5 周一</span></h3>
+  <h3 onclick="TripMap.focusDay(3)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 4 — 天坑探洞 <span class="pin">📍</span> <span class="dd">10/5 周一</span></h3>
   <span class="drive-badge">🚗 4.9h · 389km</span>
   <div class="route">罗城 → 棉花天坑 → 梧州</div>
   <div class="timing"><span>🕐 出发 <strong>08:00</strong></span> <span>🕐 到达 <strong>17:50</strong></span></div>
   <div class="day-weather">🌤 20-30°C · 河谷转岭南</div>
   <h4>🏙️ 罗城 <span class="province">（广西·河池）</span></h4>
   <div class="city-desc">罗城仫佬族自治县是中国唯一的仫佬族聚居县，也是千古名臣<strong>于成龙</strong>（1617-1684）初仕之地。于成龙45岁才出任罗城知县，在任七年廉洁奉公、政绩卓著，被康熙帝亲赐"清官第一"匾额，央视电视剧《于成龙》曾在此取景。棉花天坑深326米、直径305米，坑底有原始森林与地下河，是桂中地区最壮观的喀斯特天坑。罗城美食以仫佬族风味见长——烟熏腊肉、竹筒鸡、五色糯米饭是当地招牌，清晨一碗罗城滤粉则是本地人的日常。</div>
-  <h4>🟠 罗城棉花天坑 <span class="badge must">必去</span> <a class="badge reserve" href="玩水探洞版-预约指南.html#罗城棉花天坑" title="查看预约方式">📋 需预约</a></h4>
+  <h4>🟠 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(3,0)" title="🗺️ 点击查看地图位置">罗城棉花天坑</span> <span class="badge must">必去</span> <a class="badge reserve" href="玩水探洞版-预约指南.html#罗城棉花天坑" title="查看预约方式">📋 需预约</a></h4>
   <div class="spot-desc">棉花天坑深326米、直径305米，是桂中地区最壮观的喀斯特天坑。核心体验为三段：乘坐<strong>悬崖小火车</strong>（15分钟）至长生洞入口 → 步行参观<strong>长生洞</strong>溶洞（约30分钟）→ 下行至<strong>悬崖书店</strong>。坑底有原始森林与地下河，天坑内常年18-20°C，是天然空调房。⚠️ 景区各项目单独收费（单轨滑车40元/次、飞天魔毯10元/人），且"很废腿"——悬崖书店下去容易上来难，需爬大量台阶，膝盖不好者慎入。2026年4月有游客反映施工粉尘与人造项目遮挡景观，建议放平预期，把重点放在地质奇观本身。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd"><span class="hi">🔥 仫佬族腊肉</span></span><span class="fd"><span class="hi">🔥 竹筒鸡</span></span><span class="fd">五色糯米饭</span><span class="fd">罗城滤粉</span><span class="fd">仫佬族酸鱼</span><span class="fd">罗城米粉</span></div>
@@ -533,21 +533,21 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </div>
   <div class="tip">💡 ⚠️ 移动日：8:00出发，08:35到棉花天坑，精玩约4h。洞内18-20°C带薄外套+防滑鞋；悬崖书店下去需爬大量台阶，量力而行。各项目单独收费，按需选择。12:30午餐后13:30出发东移，约17:50到梧州，晚上可逛骑楼城、吃龟苓膏。</div>
   <div class="score-row">⭐ 棉花天坑 6.05</div>
-  <div class="hotel-line" onclick="focusHotel(3)" title="🗺️ 点击查看地图位置">🏨 梧州 · <span class="badge comf">舒适型</span> · 骑楼城/河东一带·夜逛老城方便</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(3)" title="🗺️ 点击查看地图位置">🏨 梧州 · <span class="badge comf">舒适型</span> · 骑楼城/河东一带·夜逛老城方便</div>
 </div>
 
 <!-- ═══════ D5 ═══════ -->
 <div class="day-card" id="d5" style="border-left-color:#9b59b6">
-  <h3 onclick="showDayRoute(4)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 5 — 老城归程 <span class="pin">📍</span> <span class="dd">10/6 周二</span></h3>
+  <h3 onclick="TripMap.focusDay(4)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 5 — 老城归程 <span class="pin">📍</span> <span class="dd">10/6 周二</span></h3>
   <span style="font-size:.84rem;color:var(--muted)">🚗 3.1h · 264km</span>
   <div class="route">梧州骑楼城 → 广州荔湾</div>
   <div class="timing"><span>🕐 出发 <strong>12:30</strong></span> <span>🕐 到达 <strong>15:40</strong></span></div>
   <div class="day-weather">🌤 22-31°C · 秋高气爽</div>
   <h4>🏙️ 梧州 <span class="province">（广西·岭南）</span></h4>
   <div class="city-desc">梧州位于广西东部，浔江与桂江在此汇成西江，语言与饮食深受岭南广府文化影响，被视作粤语发源地之一。1876年梧州被辟为通商口岸，是近代中国最早对外开埠的城市之一，城中保存着岭南规模最大的骑楼建筑群。这里是明末抗清名将<strong>袁崇焕</strong>的故乡（藤县），也是爱国将领<strong>李济深</strong>（苍梧人）的出生地。西江水运孕育了独特的龙母信俗，龙母太庙至今香火不绝。梧州人的一天从一碗冰泉豆浆开始，这座城市物价亲民，一家三口百元就能吃得心满意足。</div>
-  <h4>🟢 梧州骑楼城 <span class="badge must">必去</span></h4>
+  <h4>🟢 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(4,0)" title="🗺️ 点击查看地图位置">梧州骑楼城</span> <span class="badge must">必去</span></h4>
   <div class="spot-desc">梧州骑楼城位于老城区中心，是岭南地区规模最大、保存最完整的骑楼建筑群之一。1876年梧州被辟为通商口岸，中西合璧的卷拱与雕花立面记录了那段商埠岁月。与想象中熙攘的步行街不同，这里多了一份悠闲自在——廊下店铺与居民日常交织，漫步其间每个转角都有小惊喜。骑楼城免费开放，周边步行可达<strong>东正路</strong>（彩虹楼梯、涂鸦墙、"我爱梧州"打卡点）与<strong>三总府</strong>博览区。梧州物价感人，一家三口一天100元就能吃到饱，纸包鸡、龟苓膏、冰泉豆浆都在这片老城里。</div>
-  <h4>🟡 梧州市博物馆 </h4>
+  <h4>🟡 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(4,1)" title="🗺️ 点击查看地图位置">梧州市博物馆</span> </h4>
   <div class="spot-desc">坐落于珠山之上的免费博物馆（逢周一闭馆、节假日除外），无需预约。馆藏从苍梧古国、岭南交通到地方工艺逐层展开，为骑楼老城的漫游补足时间轴。博物馆对面的河滨公园里有<strong>英领事署旧址</strong>——通体明黄的拱形回廊建筑，与一旁红柱青瓦的中式楼阁形成红黄对比，是梧州最出片的机位之一。旁边的<strong>鹤岗楼</strong>同样免费，登楼可俯瞰桂江、西江、浔江三江交汇的城市格局。山路较窄，建议把车停在骑楼城附近后步行或骑共享电驴前往。作为返程日上午的轻松一站，既有知识量又不费腿。</div>
   <h4>🍜 美食</h4>
   <div class="food-list"><span class="fd"><span class="hi">🔥 梧州纸包鸡</span></span><span class="fd"><span class="hi">🔥 龟苓膏</span></span><span class="fd"><span class="hi">🔥 冰泉豆浆</span></span><span class="fd">六堡茶</span><span class="fd">葱油鱼</span><span class="fd">牛肠酸</span><span class="fd">老伯田螺</span></div>
@@ -562,12 +562,174 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </div>
   <div class="tip">💡 上午梧州收尾：8:00冰泉豆浆馆早茶 → 骑楼城漫步 → 梧州市博物馆（免费，周一闭馆）。11:30午餐吃纸包鸡，12:30出发，约15:40到家。⚠️ 选10/6返程正是为避开10/7的最高峰，午后路况通常好于傍晚。</div>
   <div class="score-row">⭐ 梧州骑楼城 7.00</div>
-  <div class="hotel-line" onclick="focusHotel(4)" title="🗺️ 点击查看地图位置">🏨 广州 · <span class="badge eco">经济型</span> · 到家 🏠</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(4)" title="🗺️ 点击查看地图位置">🏨 广州 · <span class="badge eco">经济型</span> · 到家 🏠</div>
 </div>
   </div>
 </div>
 
-<div class="expense-section" id="toc-expense">
+<div class="bottom-sections">
+  <div class="bottom-col bottom-left">
+    <div class="food-section" id="toc-food">
+      <h2>🍜 沿途美食总览（4城 · 30+道特色菜）</h2>
+      <div class="food-grid">
+        <div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_0')">
+    <div class="fcity">🍜 金城江 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 六甲河鱼 · 酸汤牛杂锅 · 金城米粉 · 龙江小河虾 · 酿豆腐 · 糯米血肠</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_0">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>六甲镇河鲜馆</strong>（金城江六甲镇小三峡入口） — 地道六甲河鱼现捞现做 · 本地人推荐 · 高德指南</div>
+      <div class="food-shop-item"><strong>金城夜市</strong>（金城江市区） — 酸汤牛杂锅+各类小吃 · 夜市越夜越热闹 · 本地人推荐</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">同D1酒店·连住 · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card">
+  <div class="food-card-hdr">
+    <div class="fcity">🍜 环江</div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 环江香牛 · 🔥 毛南族烟熏腊肉 · 五色糯米饭 · 竹筒鸡 · 毛南酸鱼 · 香猪</span></span></div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_2')">
+    <div class="fcity">🍜 罗城 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 仫佬族腊肉 · 🔥 竹筒鸡 · 五色糯米饭 · 罗城滤粉 · 仫佬族酸鱼</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_2">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>环江香牛馆</strong>（环江县城） — 环江香牛火锅一绝 · 本地人带路 · 本地人推荐</div>
+      <div class="food-shop-item"><strong>毛南风情餐厅</strong>（环江县城） — 毛南族特色菜 · 烟熏腊肉+五色糯米饭地道 · 小红书</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">罗城县城·离棉花天坑近（约30分钟） · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_3')">
+    <div class="fcity">🍜 梧州 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 纸包鸡 · 🔥 龟苓膏 · 🔥 冰泉豆浆 · 六堡茶 · 葱油鱼 · 牛肠酸 · 老伯田螺</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_3">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>仫佬族风味馆</strong>（罗城县城） — 仫佬族腊肉+竹筒鸡招牌 · 早餐可试罗城滤粉 · 小红书</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">骑楼城/河东一带·夜逛老城方便 · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div class="reservation-section" id="toc-reservation">
+  <h2>📋 景点预约指南</h2>
+  <div class="reserve-urgent">⚠️ <strong>必约景点：</strong>六甲小三峡、环江牛角寨瀑布群、罗城棉花天坑 — 旺季热门，建议提前 3-7 天预约；漏约一个就可能影响整段行程。</div>
+  <div class="reserve-timeline">
+    <h3>⏰ 预约时间线</h3>
+    <div class="reserve-timeline-strip">
+      <div class="reserve-tl-item"><span class="tl-date">出行前1-2天（务必电话确认）</span><span class="tl-action">预约</span><span class="tl-name">环江牛角寨瀑布群</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">出行前1天</span><span class="tl-action">预约</span><span class="tl-name">六甲小三峡、罗城棉花天坑</span></div>
+    </div>
+  </div>
+  <div class="reserve-cards">
+    <div class="reserve-card must" id="六甲小三峡">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_0').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">六甲小三峡</span>
+          <span class="reserve-confidence">✅ 高置信（2026-09实测笔记）</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 约80-90元/人（含游船），1.2m以下免票</span>
+          <span>📅 提前1天</span>
+          <span>📱 线上（携程/美团）/现场</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_0">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">线上（携程/美团）/现场</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">景区9:00营业 → 线上购票后到自助机换纸质船票 → 乘接驳车数分钟到码头 → 乘游船（约1.5h，有讲解员）→ 下船沿栈道步行约10分钟到接驳车点</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">约80-90元/人（含游船），1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">09:00-16:00，首班游船09:40，约1小时一班</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下儿童免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60岁以上半价（约40元）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信（2026-09实测笔记）</span></div>
+        </div>
+        <div class="reserve-tips">💡 实测"不用担心没船坐"，散客拼船即可发船，国庆期间9:40船次也未坐满。上午顺光拍照更出片。可电话 13977899909 确认班次</div>
+      </div>
+    </div>
+    <div class="reserve-card must" id="环江牛角寨瀑布群">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_1').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">环江牛角寨瀑布群</span>
+          <span class="reserve-confidence">⚠️ 价格来自2026-09实测，建议出行前复核</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 42元/人（含游览车），1.2m以下免票</span>
+          <span>📅 提前0天</span>
+          <span>📱 现场购票</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_1">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">现场购票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">景区售票处直接购买（门票含进出游览车）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">42元/人（含游览车），1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">0天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:00-18:00，建议游玩3-4h</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">无特殊优惠</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 价格来自2026-09实测，建议出行前复核</span></div>
+        </div>
+        <div class="reserve-tips">💡 ⚠️ 务必电话确认出口是否开放——2026年7月曾因出口维修导致游客走到1/3被拦回、瀑布群无法到达。全程80%台阶（3km V字型），备防滑鞋；山区蚊虫多带花露水</div>
+      </div>
+    </div>
+    <div class="reserve-card must" id="罗城棉花天坑">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_2').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">罗城棉花天坑</span>
+          <span class="reserve-confidence">⚠️ 部分信息待验证</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 98元/人套票（含小火车+长生洞+悬崖书店）；单轨滑车40元/次、飞天魔毯10元/人、高空溜索40元另收</span>
+          <span>📅 提前1天</span>
+          <span>📱 美团/携程/现场</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_2">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">美团/携程/现场</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">搜索"棉花天坑"→选套票（含悬崖小火车+长生洞+悬崖书店）→选日期→在线支付→凭码入园；套票比单买划算</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">98元/人套票（含小火车+长生洞+悬崖书店）；单轨滑车40元/次、飞天魔毯10元/人、高空溜索40元另收</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:30-17:30，建议游玩2-4h；亮灯仪式约19:00</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60岁以上半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 部分信息待验证</span></div>
+        </div>
+        <div class="reserve-tips">💡 ⚠️ 景区内各项目单独收费（游客反映"哪哪都是钱"）。坑内恒温18-20°C带薄外套；悬崖书店下去需爬大量台阶，膝盖不好者慎入。2026年4月有施工粉尘反馈</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="expense-section" id="toc-expense">
   <h2>💰 费用统计（按天 · 点击展开明细）</h2>
   <div class="expense-table-wrap">
     <table class="expense-table">
@@ -680,169 +842,6 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   </div>
 </div>
 
-<div class="bottom-sections">
-  <div class="bottom-col bottom-left">
-    <div class="food-section" id="toc-food">
-      <h2>🍜 沿途美食总览（4城 · 30+道特色菜）</h2>
-      <div class="food-grid">
-        <div class="food-card food-has-detail">
-  <div class="food-card-hdr" onclick="toggleFoodCard('fc_0')">
-    <div class="fcity">🍜 金城江 <span class="food-expand-icon">▼</span></div>
-    <div class="food-dishes"><span class="fd"><span class="hi">🔥 六甲河鱼 · 酸汤牛杂锅 · 金城米粉 · 龙江小河虾 · 酿豆腐 · 糯米血肠</span></span></div>
-  </div>
-  <div class="food-card-body" id="fc_0">
-    <div class="food-shops">
-      <div class="food-shops-title">🏠 推荐门店</div>
-      <div class="food-shop-item"><strong>六甲镇河鲜馆</strong>（金城江六甲镇小三峡入口） — 地道六甲河鱼现捞现做 · 本地人推荐 · 高德指南</div>
-      <div class="food-shop-item"><strong>金城夜市</strong>（金城江市区） — 酸汤牛杂锅+各类小吃 · 夜市越夜越热闹 · 本地人推荐</div>
-    </div>
-    <div class="food-hotel">
-      <div class="food-hotel-title">🏨 住宿</div>
-      <div class="food-hotel-info">同D1酒店·连住 · <span class="badge comf">舒适型</span></div>
-    </div>
-  </div>
-</div>
-<div class="food-card">
-  <div class="food-card-hdr">
-    <div class="fcity">🍜 环江</div>
-    <div class="food-dishes"><span class="fd"><span class="hi">🔥 环江香牛 · 🔥 毛南族烟熏腊肉 · 五色糯米饭 · 竹筒鸡 · 毛南酸鱼 · 香猪</span></span></div>
-  </div>
-</div>
-<div class="food-card food-has-detail">
-  <div class="food-card-hdr" onclick="toggleFoodCard('fc_2')">
-    <div class="fcity">🍜 罗城 <span class="food-expand-icon">▼</span></div>
-    <div class="food-dishes"><span class="fd"><span class="hi">🔥 仫佬族腊肉 · 🔥 竹筒鸡 · 五色糯米饭 · 罗城滤粉 · 仫佬族酸鱼</span></span></div>
-  </div>
-  <div class="food-card-body" id="fc_2">
-    <div class="food-shops">
-      <div class="food-shops-title">🏠 推荐门店</div>
-      <div class="food-shop-item"><strong>环江香牛馆</strong>（环江县城） — 环江香牛火锅一绝 · 本地人带路 · 本地人推荐</div>
-      <div class="food-shop-item"><strong>毛南风情餐厅</strong>（环江县城） — 毛南族特色菜 · 烟熏腊肉+五色糯米饭地道 · 小红书</div>
-    </div>
-    <div class="food-hotel">
-      <div class="food-hotel-title">🏨 住宿</div>
-      <div class="food-hotel-info">罗城县城·离棉花天坑近（约30分钟） · <span class="badge comf">舒适型</span></div>
-    </div>
-  </div>
-</div>
-<div class="food-card food-has-detail">
-  <div class="food-card-hdr" onclick="toggleFoodCard('fc_3')">
-    <div class="fcity">🍜 梧州 <span class="food-expand-icon">▼</span></div>
-    <div class="food-dishes"><span class="fd"><span class="hi">🔥 纸包鸡 · 🔥 龟苓膏 · 🔥 冰泉豆浆 · 六堡茶 · 葱油鱼 · 牛肠酸 · 老伯田螺</span></span></div>
-  </div>
-  <div class="food-card-body" id="fc_3">
-    <div class="food-shops">
-      <div class="food-shops-title">🏠 推荐门店</div>
-      <div class="food-shop-item"><strong>仫佬族风味馆</strong>（罗城县城） — 仫佬族腊肉+竹筒鸡招牌 · 早餐可试罗城滤粉 · 小红书</div>
-    </div>
-    <div class="food-hotel">
-      <div class="food-hotel-title">🏨 住宿</div>
-      <div class="food-hotel-info">骑楼城/河东一带·夜逛老城方便 · <span class="badge comf">舒适型</span></div>
-    </div>
-  </div>
-</div>
-      </div>
-    </div>
-
-
-    <div class="reservation-section" id="toc-reservation">
-  <h2>📋 景点预约指南</h2>
-  <div class="reserve-urgent">⚠️ <strong>必约景点：</strong>六甲小三峡、环江牛角寨瀑布群、罗城棉花天坑 — 旺季热门，建议提前 3-7 天预约；漏约一个就可能影响整段行程。</div>
-  <div class="reserve-timeline">
-    <h3>⏰ 预约时间线</h3>
-    <div class="reserve-timeline-strip">
-      <div class="reserve-tl-item"><span class="tl-date">出行前1-2天（务必电话确认）</span><span class="tl-action">预约</span><span class="tl-name">环江牛角寨瀑布群</span></div>
-      <div class="reserve-tl-item"><span class="tl-date">出行前1天</span><span class="tl-action">预约</span><span class="tl-name">六甲小三峡、罗城棉花天坑</span></div>
-    </div>
-  </div>
-  <div class="reserve-cards">
-    <div class="reserve-card must" id="六甲小三峡">
-      <div class="reserve-card-hdr" onclick="document.getElementById('rv_0').classList.toggle('open')">
-        <div class="reserve-card-title">
-          <span class="reserve-badge must">🔴 必去</span>
-          <span class="reserve-name">六甲小三峡</span>
-          <span class="reserve-confidence">✅ 高置信（2026-09实测笔记）</span>
-        </div>
-        <div class="reserve-card-summary">
-          <span>🎫 约80-90元/人（含游船），1.2m以下免票</span>
-          <span>📅 提前1天</span>
-          <span>📱 线上（携程/美团）/现场</span>
-          <span class="reserve-toggle">▼</span>
-        </div>
-      </div>
-      <div class="reserve-card-body" id="rv_0">
-        <div class="reserve-info-grid">
-          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">线上（携程/美团）/现场</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">景区9:00营业 → 线上购票后到自助机换纸质船票 → 乘接驳车数分钟到码头 → 乘游船（约1.5h，有讲解员）→ 下船沿栈道步行约10分钟到接驳车点</span></div>
-          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">约80-90元/人（含游船），1.2m以下免票</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
-          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">09:00-16:00，首班游船09:40，约1小时一班</span></div>
-          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下儿童免票</span></div>
-          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60岁以上半价（约40元）</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信（2026-09实测笔记）</span></div>
-        </div>
-        <div class="reserve-tips">💡 实测"不用担心没船坐"，散客拼船即可发船，国庆期间9:40船次也未坐满。上午顺光拍照更出片。可电话 13977899909 确认班次</div>
-      </div>
-    </div>
-    <div class="reserve-card must" id="环江牛角寨瀑布群">
-      <div class="reserve-card-hdr" onclick="document.getElementById('rv_1').classList.toggle('open')">
-        <div class="reserve-card-title">
-          <span class="reserve-badge must">🔴 必去</span>
-          <span class="reserve-name">环江牛角寨瀑布群</span>
-          <span class="reserve-confidence">⚠️ 价格来自2026-09实测，建议出行前复核</span>
-        </div>
-        <div class="reserve-card-summary">
-          <span>🎫 42元/人（含游览车），1.2m以下免票</span>
-          <span>📅 提前0天</span>
-          <span>📱 现场购票</span>
-          <span class="reserve-toggle">▼</span>
-        </div>
-      </div>
-      <div class="reserve-card-body" id="rv_1">
-        <div class="reserve-info-grid">
-          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">现场购票</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">景区售票处直接购买（门票含进出游览车）</span></div>
-          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">42元/人（含游览车），1.2m以下免票</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">0天</span></div>
-          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:00-18:00，建议游玩3-4h</span></div>
-          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
-          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">无特殊优惠</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 价格来自2026-09实测，建议出行前复核</span></div>
-        </div>
-        <div class="reserve-tips">💡 ⚠️ 务必电话确认出口是否开放——2026年7月曾因出口维修导致游客走到1/3被拦回、瀑布群无法到达。全程80%台阶（3km V字型），备防滑鞋；山区蚊虫多带花露水</div>
-      </div>
-    </div>
-    <div class="reserve-card must" id="罗城棉花天坑">
-      <div class="reserve-card-hdr" onclick="document.getElementById('rv_2').classList.toggle('open')">
-        <div class="reserve-card-title">
-          <span class="reserve-badge must">🔴 必去</span>
-          <span class="reserve-name">罗城棉花天坑</span>
-          <span class="reserve-confidence">⚠️ 部分信息待验证</span>
-        </div>
-        <div class="reserve-card-summary">
-          <span>🎫 98元/人套票（含小火车+长生洞+悬崖书店）；单轨滑车40元/次、飞天魔毯10元/人、高空溜索40元另收</span>
-          <span>📅 提前1天</span>
-          <span>📱 美团/携程/现场</span>
-          <span class="reserve-toggle">▼</span>
-        </div>
-      </div>
-      <div class="reserve-card-body" id="rv_2">
-        <div class="reserve-info-grid">
-          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">美团/携程/现场</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">搜索"棉花天坑"→选套票（含悬崖小火车+长生洞+悬崖书店）→选日期→在线支付→凭码入园；套票比单买划算</span></div>
-          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">98元/人套票（含小火车+长生洞+悬崖书店）；单轨滑车40元/次、飞天魔毯10元/人、高空溜索40元另收</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
-          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">08:30-17:30，建议游玩2-4h；亮灯仪式约19:00</span></div>
-          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">1.2m以下免票</span></div>
-          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60岁以上半价</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 部分信息待验证</span></div>
-        </div>
-        <div class="reserve-tips">💡 ⚠️ 景区内各项目单独收费（游客反映"哪哪都是钱"）。坑内恒温18-20°C带薄外套；悬崖书店下去需爬大量台阶，膝盖不好者慎入。2026年4月有施工粉尘反馈</div>
-      </div>
-    </div>
-  </div>
-</div>
-
   </div>
 
   <div class="bottom-col bottom-right">
@@ -877,8 +876,8 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
       <tr class="skip"><td>9</td><td>凤山三门海</td><td>凤山</td><td>4A</td><td>8</td><td>6</td><td>8</td><td>2</td><td>2</td><td>4</td><td class="sc">6.30</td><td>❌ 距主环线太远</td></tr>
       <tr class="sel"><td>10</td><td>六甲小三峡</td><td>金城江</td><td>—</td><td>6</td><td>7</td><td>7</td><td>3</td><td>9</td><td>5</td><td class="sc">6.20</td><td>✅ D2</td></tr>
       <tr class="must"><td>11</td><td>罗城棉花天坑</td><td>罗城</td><td>4A</td><td>6</td><td>7</td><td>7</td><td>2</td><td>7</td><td>5</td><td class="sc">6.05</td><td>✅ D4</td></tr>
-      <tr class="skip"><td>12</td><td class="spot-clickable" onclick="document.getElementById('sg_1924437928').classList.toggle('open')">柳州窑埠古镇 📖</td><td>柳州</td><td>—</td><td>6</td><td>5</td><td>5</td><td>6</td><td>6</td><td>8</td><td class="sc">6.00</td><td>❌ 返程未选</td></tr>
-      <tr class="score-guide-row" id="sg_1924437928">
+      <tr class="skip"><td>12</td><td class="spot-clickable" onclick="document.getElementById('sg_1987339239').classList.toggle('open')">柳州窑埠古镇 📖</td><td>柳州</td><td>—</td><td>6</td><td>5</td><td>5</td><td>6</td><td>6</td><td>8</td><td class="sc">6.00</td><td>❌ 返程未选</td></tr>
+      <tr class="score-guide-row" id="sg_1987339239">
         <td colspan="12">
           <div class="guide-box">
             <div class="guide-item"><span class="guide-label">⏱️ 时长</span>1.5-2小时</div>
@@ -935,12 +934,12 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
   <button class="toc-btn" id="tocBtn" onclick="toggleToc()" title="目录导航">☰</button>
   <div class="toc-panel" id="tocPanel">
     <div class="toc-title">📑 页面导航</div>
-    <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
+        <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
     <a class="toc-item" onclick="toggleWeather();scrollToToc('weatherStrip')"><span class="toc-num">2</span>🌤️ 沿途天气</a>
     <a class="toc-item" onclick="scrollToToc('toc-days')"><span class="toc-num">3</span>📅 每日行程</a>
-    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 美食总览</a>
-    <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">5</span>💰 费用统计</a>
-    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">6</span>📋 预约指南</a>
+    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 沿途美食总览（4城 · 30+道特色菜）</a>
+    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">5</span>📋 预约指南</a>
+    <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">6</span>💰 费用统计</a>
     <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">7</span>⭐ 评分体系</a>
     <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">8</span>📊 行程总览</a>
   </div>
@@ -949,23 +948,70 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 <script>
 /* ═══════════════════════════════════════════════════════════════════════════
    map-core.js — 地图初始化、全局变量、标记、InfoWindow、天气/图例交互
+
+   ═══ 页面 ↔ 地图 交互契约（改动前务必读 .agents/skills/html-trip-page/
+       references/map-interactions.md）═══
+
+   所有「页面元素 → 地图」的跳转统一走 TripMap 命名空间：
+     TripMap.focusDay(n)     聚焦第 n 天（0-based）：展开地图 + 加载当天路线 + setBounds
+     TripMap.focusSpot(n,i)  聚焦第 n 天第 i 个景点标记（i = rspots 索引）
+     TripMap.focusHotel(n)   聚焦第 n 天住宿标记：缩放 + 弹窗 + 弹跳
+     TripMap.scrollToDay(n)  反向：滚动页面到第 n 天日程卡
+     TripMap.ensureVisible() 确保地图面板可见（可能已收起 / 已折叠）
+
+   数据索引约定：
+     H[n]      = 第 n 天住宿 marker
+     SM[n][i] = 第 n 天第 i 个景点 marker（顺序同 d.r 之外的 day_routes.rspots）
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
 const K='9f853e26c1ef1d449260b4ad9a4de5c8';
-var D=[{h:[108.085166,24.692865],hl:"D1 金城江酒店",hi:{"c": "金城江", "lv": "舒适型", "n": "河池市区·连住2晚（赶路+游玩混合）"},s:[],r:[[113.237378, 23.065823], [108.085166, 24.692865]]},{h:[108.085166,24.692865],hl:"D2 金城江酒店",hi:{"c": "金城江", "lv": "舒适型", "n": "同D1酒店·连住"},s:[{"p": [107.922668, 24.745926], "l": "六甲小三峡"}],r:[[108.085166, 24.692865], [107.922668, 24.745926], [108.085166, 24.692865]]},{h:[108.904613,24.777501],hl:"D3 罗城酒店",hi:{"c": "罗城", "lv": "舒适型", "n": "罗城县城·离棉花天坑近（约30分钟）"},s:[{"p": [108.391319, 25.071855], "l": "环江牛角寨"}],r:[[108.085166, 24.692865], [108.391319, 25.071855], [108.904613, 24.777501]]},{h:[111.279022,23.476733],hl:"D4 梧州酒店",hi:{"c": "梧州", "lv": "舒适型", "n": "骑楼城/河东一带·夜逛老城方便"},s:[{"p": [108.797565, 24.8046], "l": "罗城棉花天坑"}],r:[[108.904613, 24.777501], [108.797565, 24.8046], [111.279022, 23.476733]]},{h:[113.237378,23.065823],hl:"D5 广州到家",hi:{"c": "广州", "lv": "经济型", "n": "到家 🏠"},s:[{"p": [111.313298, 23.469761], "l": "梧州骑楼城"}],r:[[111.313298, 23.469761], [113.237378, 23.065823]]}];
+var D=[{h:[108.085166,24.692865],hl:"D1 金城江酒店",hi:{"c": "金城江", "lv": "舒适型", "n": "河池市区·连住2晚（赶路+游玩混合）"},s:[],r:[[113.237378, 23.065823], [108.085166, 24.692865]]},{h:[108.085166,24.692865],hl:"D2 金城江酒店",hi:{"c": "金城江", "lv": "舒适型", "n": "同D1酒店·连住"},s:[{"p": [107.922668, 24.745926], "l": "六甲小三峡"}, {"p": [107.912246, 24.743932], "l": "六甲桨板基地"}],r:[[108.085166, 24.692865], [107.922668, 24.745926], [108.085166, 24.692865]]},{h:[108.904613,24.777501],hl:"D3 罗城酒店",hi:{"c": "罗城", "lv": "舒适型", "n": "罗城县城·离棉花天坑近（约30分钟）"},s:[{"p": [108.391319, 25.071855], "l": "环江牛角寨"}],r:[[108.085166, 24.692865], [108.391319, 25.071855], [108.904613, 24.777501]]},{h:[111.279022,23.476733],hl:"D4 梧州酒店",hi:{"c": "梧州", "lv": "舒适型", "n": "骑楼城/河东一带·夜逛老城方便"},s:[{"p": [108.797565, 24.8046], "l": "罗城棉花天坑"}],r:[[108.904613, 24.777501], [108.797565, 24.8046], [111.279022, 23.476733]]},{h:[113.237378,23.065823],hl:"D5 广州到家",hi:{"c": "广州", "lv": "经济型", "n": "到家 🏠"},s:[{"p": [111.313298, 23.469761], "l": "梧州骑楼城"}, {"p": [111.307511, 23.473065], "l": "梧州市博物馆"}],r:[[111.313298, 23.469761], [113.237378, 23.065823]]}];
 
 document.getElementById('weatherStrip').style.display='none';
 
 var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
-var A=[],H=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var A=[],H=[],SM=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var TripMap={};
 var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0kBytZEUcsAACT59XRS5cT+QAAAABJRU5ErkJggg==',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0kBytZEUcsAACtCdRxiKH+RgAAAABJRU5ErkJggg==',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRpIDlayIo5YAABtW+cBLsz+hAAAAABJRU5ErkJggg==';
-new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});
+var _sm=new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
 A.push([113.237378,23.065823]);
-var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){showDayRoute(n);var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})}}());A.push(s.p)});});
-new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
+var _em=new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
 setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
-function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="var el=document.getElementById(\'d'+(n+1)+'\');if(el)el.scrollIntoView({behavior:\'smooth\',block:\'center\'})" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+
+/* ── 页面滚动 / 面板可见性 ── */
+TripMap.scrollToDay=function(n){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})};
+TripMap.ensureVisible=function(){
+  var mp=document.querySelector('.map-panel');
+  if(mp&&mp.classList.contains('collapsed')){
+    mp.classList.remove('collapsed');
+    var tbtn=document.querySelector('.map-toggle-btn');
+    if(tbtn)tbtn.textContent='▲ 收起';
+  }
+  if(window.expandMapIfCollapsed)window.expandMapIfCollapsed();
+};
+
+/* ── 景点聚焦：缩放 + 弹跳 + InfoWindow ── */
+TripMap.focusSpot=function(n,i){
+  var day=SM[n];if(!day)return;
+  var m=day[i];if(!m)return;
+  Z=1;
+  if(W){W.close();W=null}
+  TripMap.ensureVisible();
+  var d=D[n],spot=(d&&d.s)?d.s[i]:null;
+  var label=(spot&&spot.l)?spot.l:'景点';
+  var dayHl=(d&&d.hl)?d.hl:'';
+  map.setZoomAndCenter(15,m.getPosition());
+  m.setAnimation('AMAP_ANIMATION_BOUNCE');
+  setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);
+  var sub=dayHl?'<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">第 '+(n+1)+' 天 · '+dayHl+'</div>':'';
+  W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#27ae60;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #27ae60;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🟢 '+label+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});
+  W.open(map,m.getPosition());
+};
+
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+TripMap.focusHotel=focusHotel;
 function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
 function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
 function toggleWeather(){var b=document.getElementById("weatherStrip");if(b.style.display==="none"){b.style.display="flex";document.getElementById("weatherToggle").textContent="🌤️ 收起天气"}else{b.style.display="none";document.getElementById("weatherToggle").textContent="🌤️ 沿途天气"}}
@@ -978,20 +1024,15 @@ function dayBounds(n){var d=D[n];if(!d)return null;var pts=[],i;if(d.r)for(i=0;i
 function focusDay(n){
   if(W){W.close();W=null}
   Z=0;
-  expandMapIfCollapsed();
+  if(TripMap.ensureVisible()){
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
+  }
   var b=document.getElementById('navBtn');
   if(b){
     b.textContent='🗺️ 加载全部路线';
     b.className='nav-btn';
     b.onclick=function(){loadRoutes()}
-  }
-  var mp=document.querySelector('.map-panel');
-  if(mp&&mp.classList.contains('collapsed')){
-    mp.classList.remove('collapsed');
-    var tbtn=document.querySelector('.map-toggle-btn');
-    if(tbtn)tbtn.textContent='▲ 收起';
-    window.scrollTo({top:0,behavior:'smooth'});
-    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
   }
   if(n===lastDay&&routeCache[n]){
     var bd=dayBounds(n);
@@ -1018,7 +1059,7 @@ function focusDay(n){
   fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl);routeCache[n]=[pl];var bd4=dayBounds(n);if(bd4)map.setBounds(bd4,false,[60,60,60,60])}})
 }
 
-function showDayRoute(n){focusDay(n)}
+TripMap.focusDay=focusDay;
 
 function P(){
   var i=0;
