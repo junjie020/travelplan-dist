@@ -10,7 +10,9 @@
    base.css — 基础样式（变量、重置、全局、组件样式）
    ═══════════════════════════════════════════════════════════════════════════ */
 
-:root{--d1:#e74c3c;--d2:#3498db;--d3:#2ecc71;--d4:#f39c12;--d5:#9b59b6;--d6:#1abc9c;--d7:#e67e22;--d8:#e91e63;--d9:#00bcd4;--d10:#795548;--eco:#27ae60;--comf:#2980b9;--lux:#8e44ad;--hot:#e67e22;--bg:#f5f6fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d}
+:root{
+/* 调色板与语义色统一来自 config.toon，由 generate.py 注入 —— 勿在此手改颜色 */
+--d1:#e74c3c;--d2:#3498db;--d3:#2ecc71;--d4:#f39c12;--d5:#9b59b6;--d6:#1abc9c;--d7:#e67e22;--d8:#e91e63;--d9:#00bcd4;--d10:#795548;--eco:#27ae60;--comf:#2980b9;--lux:#8e44ad;--hot:#e67e22;--mk-hotel:#e74c3c;--mk-spot:#2ecc71;--mk-start_end:#f39c12;--bar-ov:#e74c3c;--bar-el:#f39c12;--bar-nm:#27ae60;--bar-zz:#ddd;--bg:#f5f6fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
 
@@ -169,7 +171,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 .bars{display:flex;gap:3px;align-items:flex-end;height:44px;margin-top:6px}
 .bars .b{flex:1;border-radius:2px 2px 0 0;min-width:8px;position:relative}
 .bars .b .bl{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--muted);white-space:nowrap}
-.bars .b.ov{background:#e74c3c}.bars .b.el{background:#f39c12}.bars .b.nm{background:#27ae60}.bars .b.zz{background:#ddd}
+.bars .b.ov{background:var(--bar-ov)}.bars .b.el{background:var(--bar-el)}.bars .b.nm{background:var(--bar-nm)}.bars .b.zz{background:var(--bar-zz)}
 .bleg{display:flex;gap:14px;font-size:.68rem;color:var(--muted);margin-top:8px}
 .bleg span{display:flex;align-items:center;gap:3px}
 .bleg .sw{width:8px;height:8px;border-radius:2px;display:inline-block}
@@ -446,7 +448,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 
   <div class="table-panel" id="toc-days">
     <!-- ═══════ D1 ═══════ -->
-<div class="day-card" id="d1" style="border-left-color:#e74c3c">
+<div class="day-card" id="d1" style="border-left-color:var(--d1)">
   <h3 onclick="TripMap.focusDay(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 侨乡影画 <span class="pin">📍</span> <span class="dd">10/3 周六</span></h3>
   <span class="drive-badge">🚗 4.0h · 301km</span>
   <div class="route">广州荔湾 → 台山梅家大院 → 阳春春城</div>
@@ -477,7 +479,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 </div>
 
 <!-- ═══════ D2 ═══════ -->
-<div class="day-card" id="d2" style="border-left-color:#3498db">
+<div class="day-card" id="d2" style="border-left-color:var(--d2)">
   <h3 onclick="TripMap.focusDay(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 洞天寻幽 <span class="pin">📍</span> <span class="dd">10/4 周日</span></h3>
   <span class="drive-badge">🚗 2.1h · 146km</span>
   <div class="route">阳春春城 → 凌霄岩 → 新兴禅泉</div>
@@ -506,7 +508,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 </div>
 
 <!-- ═══════ D3 ═══════ -->
-<div class="day-card" id="d3" style="border-left-color:#2ecc71">
+<div class="day-card" id="d3" style="border-left-color:var(--d3)">
   <h3 onclick="TripMap.focusDay(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 云端收官 <span class="pin">📍</span> <span class="dd">10/5 周一</span></h3>
   <span style="font-size:.84rem;color:var(--muted)">🚗 3.2h · 161km</span>
   <div class="route">禅泉 → 天露山 → 禅泉 → 广州荔湾</div>
@@ -558,7 +560,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
     </div>
     <div class="food-hotel">
       <div class="food-hotel-title">🏨 住宿</div>
-      <div class="food-hotel-info">春城市区商务酒店 · 只睡一晚 · 海悦湾/自由港精品/恒生假日等 · <span class="badge comf">经济型</span></div>
+      <div class="food-hotel-info">春城市区商务酒店 · 只睡一晚 · 海悦湾/自由港精品/恒生假日等 · <span class="badge eco">经济型</span></div>
     </div>
   </div>
 </div>
@@ -576,7 +578,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
     </div>
     <div class="food-hotel">
       <div class="food-hotel-title">🏨 住宿</div>
-      <div class="food-hotel-info">禅泉度假酒店 · 毗邻国恩寺步行2分钟 · 含温泉+泳池+禅修 · <span class="badge comf">豪华型</span></div>
+      <div class="food-hotel-info">禅泉度假酒店 · 毗邻国恩寺步行2分钟 · 含温泉+泳池+禅修 · <span class="badge lux">豪华型</span></div>
     </div>
   </div>
 </div>
@@ -585,7 +587,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 
     <div class="reservation-section" id="toc-reservation">
   <h2>📋 景点预约指南</h2>
-  <div class="reserve-urgent">⚠️ <strong>必约景点：</strong>梅家大院、凌霄岩、国恩寺、天露山、禅泉度假酒店 — 旺季热门，建议提前 3-7 天预约；漏约一个就可能影响整段行程。</div>
+  <div class="reserve-urgent">⚠️ <strong>必约景点：</strong>梅家大院、凌霄岩、国恩寺、天露山、禅泉度假酒店 — 旺季热门，建议提前 0-7天预约；漏约一个就可能影响整段行程。</div>
   <div class="reserve-timeline">
     <h3>⏰ 预约时间线</h3>
     <div class="reserve-timeline-strip">
@@ -717,7 +719,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
         </div>
         <div class="reserve-card-summary">
           <span>🎫 豪华房约1000-1500元/晚（含温泉）</span>
-          <span>📅 提前建议提前7天以上天</span>
+          <span>📅 提前7天</span>
           <span>📱 电话/OTA预订</span>
           <span class="reserve-toggle">▼</span>
         </div>
@@ -727,7 +729,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
           <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">电话/OTA预订</span></div>
           <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">致电酒店或通过携程/美团预订；国庆单房千元以上仍预订可观，建议尽早锁定</span></div>
           <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">豪华房约1000-1500元/晚（含温泉）</span></div>
-          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">建议提前7天以上天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">7天</span></div>
           <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">入住15:00后 / 退房12:00前</span></div>
           <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">儿童可加床，具体咨询酒店</span></div>
           <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">—</span></div>
@@ -748,11 +750,9 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
           <th>日期</th>
           <th>🏨 住宿</th>
           <th>🚗 交通</th>
-          <th>🚗 交通(车1)</th>
           <th>🍜 餐饮</th>
           <th>🎫 景点</th>
           <th>📊 合计</th>
-          <th>合计(住+餐+景)</th>
           <th>备注</th>
         </tr>
       </thead>
@@ -761,33 +761,27 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
           <td class="ed">D1</td>
           <td>¥220</td>
           <td>¥300</td>
-          <td>—</td>
-          <td>—</td>
+          <td>¥300</td>
           <td>—</td>
           <td class="et">¥820</td>
-          <td class="et">¥220</td>
           <td class="en"><div class="en-inner">阳春经济型 · 油费约¥300（国庆高速免费）· 梅家大院免费</div></td>
         </tr>
         <tr class="expense-row expense-row-no-detail">
           <td class="ed">D2</td>
           <td>¥1,050</td>
           <td>¥150</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
+          <td>¥300</td>
+          <td>¥160</td>
           <td class="et">¥1,660</td>
-          <td class="et">¥1,050</td>
           <td class="en"><div class="en-inner en-no-trunc">禅泉度假酒店豪华房 · 凌霄岩约¥51×2+儿童半价</div></td>
         </tr>
         <tr class="expense-row expense-row-no-detail">
           <td class="ed">D3</td>
           <td>—</td>
           <td>¥160</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
+          <td>¥300</td>
+          <td>¥134</td>
           <td class="et">¥594</td>
-          <td class="et">—</td>
           <td class="en"><div class="en-inner en-no-trunc">返程油费约¥160 · 天露山¥48×2+儿童¥38</div></td>
         </tr>
       </tbody>
@@ -796,37 +790,13 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
           <td><strong>合计</strong></td>
           <td><strong>¥1,270</strong></td>
           <td><strong>¥610</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>¥1,880</strong></td>
-          <td><strong>¥1,270</strong></td>
+          <td><strong>¥900</strong></td>
+          <td><strong>¥294</strong></td>
+          <td><strong>¥3,074</strong></td>
           <td></td>
         </tr>
       </tfoot>
     </table>
-  </div>
-  <div class="expense-transport-summary">
-    <div class="ets-title">🚗 交通费用明细</div>
-    <div class="ets-grid">
-      <div class="ets-card">
-        <div class="ets-card-title">🚙 车1（6L/100km · 92# 7.05元/L）</div>
-        <div class="ets-items">
-          <span>油费：¥1,110（2,626km）</span>
-          <span>过路费：¥1,552</span>
-          <span class="ets-total">小计：¥2,662</span>
-        </div>
-      </div>
-      <div class="ets-card">
-        <div class="ets-card-title">🚗 车2（9L/100km · 95# 7.85元/L）</div>
-        <div class="ets-items">
-          <span>油费：¥1,855（2,626km）</span>
-          <span>过路费：¥1,552</span>
-          <span class="ets-total">小计：¥3,407</span>
-        </div>
-      </div>
-    </div>
-    <div class="ets-footer">高速过路费合计 ¥3,104 + 油费合计 ¥2,965 = <strong>交通总计 ¥6,069</strong>（2车·全程2,626km）</div>
   </div>
 </div>
 
@@ -895,7 +865,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
         <div class="b nm" style="height:53%"><span class="bl">D2 2.1</span></div>
         <div class="b nm" style="height:80%"><span class="bl">D3 3.2</span></div>
       </div>
-      <div class="bleg"><span><span class="sw" style="background:#e74c3c"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:#f39c12"></span>弹性 &gt;3h</span><span><span class="sw" style="background:#27ae60"></span>正常 ≤3h</span><span><span class="sw" style="background:#ddd"></span>停驶</span></div>
+      <div class="bleg"><span><span class="sw" style="background:var(--bar-ov)"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:var(--bar-el)"></span>弹性 &gt;3h</span><span><span class="sw" style="background:var(--bar-nm)"></span>正常 ≤3h</span><span><span class="sw" style="background:var(--bar-zz)"></span>停驶</span></div>
     </div>
   </div>
   <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">🛰️ 驾驶数据：高德地图 REST API 实测 · 👥 3人（2大1小）· 🚗 1车自驾 · 🏛️ 侨乡 × 洞天 × 温泉 × 云端<br>📅 生成日期：2026-09-28</div>
@@ -939,20 +909,22 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
      SM[n][i] = 第 n 天第 i 个景点 marker（顺序同 d.r 之外的 day_routes.rspots）
    ═══════════════════════════════════════════════════════════════════════════ */
 
-const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
+/* 逐日折线配色 —— 由 generate.py 从 config.toon 注入（与 CSS --d1..--dN 同源）。
+   折线颜色是 AMap.Polyline 的参数，取不到 CSS 变量，故必须在此注入真实色值。 */
+const C=["#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#e91e63", "#00bcd4", "#795548"];
 const K='9f853e26c1ef1d449260b4ad9a4de5c8';
-var D=[{h:[111.791998,22.171274],hl:"D1 阳春酒店",hi:{"c": "阳春", "lv": "经济型", "n": "春城市区商务酒店 · 只睡一晚 · 海悦湾/自由港精品/恒生假日等"},s:[{"p": [112.747211, 22.041529], "l": "梅家大院"}],r:[[113.237378, 23.065823], [112.747211, 22.041529], [111.791998, 22.171274]]},{h:[112.224417,22.591123],hl:"D2 禅泉酒店",hi:{"c": "新兴", "lv": "豪华型", "n": "禅泉度假酒店 · 毗邻国恩寺步行2分钟 · 含温泉+泳池+禅修"},s:[{"p": [111.831738, 22.59074], "l": "凌霄岩"}, {"p": [112.228064, 22.589612], "l": "国恩寺"}],r:[[111.791998, 22.171274], [111.831738, 22.59074], [112.224417, 22.591123]]},{h:[113.237378,23.065823],hl:"D3 广州到家",hi:{"c": "广州", "lv": "经济型", "n": "到家 🏠"},s:[{"p": [112.243553, 22.481854], "l": "天露山"}],r:[[112.224417, 22.591123], [112.243553, 22.481854], [112.224417, 22.591123], [113.237378, 23.065823]]}];
+var D=[{h:[111.791998,22.171274],hl:"D1 阳春酒店",hi:{"c": "阳春", "lv": "经济型", "bc": "eco", "n": "春城市区商务酒店 · 只睡一晚 · 海悦湾/自由港精品/恒生假日等"},s:[{"p": [112.747211, 22.041529], "l": "梅家大院"}],r:[[113.237378, 23.065823], [112.747211, 22.041529], [111.791998, 22.171274]]},{h:[112.224417,22.591123],hl:"D2 禅泉酒店",hi:{"c": "新兴", "lv": "豪华型", "bc": "lux", "n": "禅泉度假酒店 · 毗邻国恩寺步行2分钟 · 含温泉+泳池+禅修"},s:[{"p": [111.831738, 22.59074], "l": "凌霄岩"}, {"p": [112.228064, 22.589612], "l": "国恩寺"}],r:[[111.791998, 22.171274], [111.831738, 22.59074], [112.224417, 22.591123]]},{h:[113.237378,23.065823],hl:"D3 广州到家",hi:{"c": "广州", "lv": "经济型", "bc": "eco", "n": "到家 🏠"},s:[{"p": [112.243553, 22.481854], "l": "天露山"}],r:[[112.224417, 22.591123], [112.243553, 22.481854], [112.224417, 22.591123], [113.237378, 23.065823]]}];
 
 document.getElementById('weatherStrip').style.display='none';
 
-var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
+var map=new AMap.Map('map',{zoom:7,center:[107.5,25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
 var A=[],H=[],SM=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
 var TripMap={};
 var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0kBytZEUcsAACT59XRS5cT+QAAAABJRU5ErkJggg==',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0kBytZEUcsAACtCdRxiKH+RgAAAABJRU5ErkJggg==',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRpIDlayIo5YAABtW+cBLsz+hAAAAABJRU5ErkJggg==';
-var _sm=new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
+var _sm=new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'起点',label:{content:'<div style="background:var(--mk-start_end);color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
 A.push([113.237378,23.065823]);
-var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
-var _em=new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:var(--mk-hotel);color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:var(--mk-spot);color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
+var _em=new AMap.Marker({icon:OI,position:[113.237378,23.065823],map:map,title:'终点',label:{content:'<div style="background:var(--mk-start_end);color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
 setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
 
 /* ── 页面滚动 / 面板可见性 ── */
@@ -985,7 +957,7 @@ TripMap.focusSpot=function(n,i){
   W.open(map,m.getPosition());
 };
 
-function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:var(--'+(hi.bc||'comf')+');margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
 TripMap.focusHotel=focusHotel;
 function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
 function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}

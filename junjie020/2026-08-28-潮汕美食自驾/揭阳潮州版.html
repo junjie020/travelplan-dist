@@ -10,7 +10,9 @@
    base.css — 基础样式（变量、重置、全局、组件样式）
    ═══════════════════════════════════════════════════════════════════════════ */
 
-:root{--d1:#e74c3c;--d2:#3498db;--d3:#2ecc71;--d4:#f39c12;--d5:#9b59b6;--d6:#1abc9c;--d7:#e67e22;--d8:#e91e63;--d9:#00bcd4;--d10:#795548;--eco:#27ae60;--comf:#2980b9;--lux:#8e44ad;--hot:#e67e22;--bg:#f5f6fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d}
+:root{
+/* 调色板与语义色统一来自 config.toon，由 generate.py 注入 —— 勿在此手改颜色 */
+--d1:#e74c3c;--d2:#3498db;--d3:#2ecc71;--d4:#f39c12;--d5:#9b59b6;--d6:#1abc9c;--d7:#e67e22;--d8:#e91e63;--d9:#00bcd4;--d10:#795548;--eco:#27ae60;--comf:#2980b9;--lux:#8e44ad;--hot:#e67e22;--mk-hotel:#e74c3c;--mk-spot:#2ecc71;--mk-start_end:#f39c12;--bar-ov:#e74c3c;--bar-el:#f39c12;--bar-nm:#27ae60;--bar-zz:#ddd;--bg:#f5f6fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
 
@@ -169,7 +171,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 .bars{display:flex;gap:3px;align-items:flex-end;height:44px;margin-top:6px}
 .bars .b{flex:1;border-radius:2px 2px 0 0;min-width:8px;position:relative}
 .bars .b .bl{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--muted);white-space:nowrap}
-.bars .b.ov{background:#e74c3c}.bars .b.el{background:#f39c12}.bars .b.nm{background:#27ae60}.bars .b.zz{background:#ddd}
+.bars .b.ov{background:var(--bar-ov)}.bars .b.el{background:var(--bar-el)}.bars .b.nm{background:var(--bar-nm)}.bars .b.zz{background:var(--bar-zz)}
 .bleg{display:flex;gap:14px;font-size:.68rem;color:var(--muted);margin-top:8px}
 .bleg span{display:flex;align-items:center;gap:3px}
 .bleg .sw{width:8px;height:8px;border-radius:2px;display:inline-block}
@@ -445,7 +447,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 
   <div class="table-panel" id="toc-days">
     <!-- ═══════ D1 ═══════ -->
-<div class="day-card" id="d1" style="border-left-color:#e74c3c">
+<div class="day-card" id="d1" style="border-left-color:var(--d1)">
   <h3 onclick="TripMap.focusDay(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 星夜抵揭 <span class="pin">📍</span> <span class="dd">8/28 周五</span></h3>
   <span class="drive-badge">🚗 3.9h · 372km</span>
   <div class="route">广州天河客运站 → 揭阳古城</div>
@@ -464,7 +466,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 </div>
 
 <!-- ═══════ D2 ═══════ -->
-<div class="day-card" id="d2" style="border-left-color:#3498db">
+<div class="day-card" id="d2" style="border-left-color:var(--d2)">
   <h3 onclick="TripMap.focusDay(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 揭阳古城+奔赴潮州 <span class="pin">📍</span> <span class="dd">8/29 周六</span></h3>
   <span class="drive-badge">🚗 1.4h · 36km</span>
   <div class="route">揭阳古城 → 潮州古城</div>
@@ -501,7 +503,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
 </div>
 
 <!-- ═══════ D3 ═══════ -->
-<div class="day-card" id="d3" style="border-left-color:#2ecc71">
+<div class="day-card" id="d3" style="border-left-color:var(--d3)">
   <h3 onclick="TripMap.focusDay(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 潮州晨光+归途 <span class="pin">📍</span> <span class="dd">8/30 周日</span></h3>
   <span class="drive-badge">🚗 4.2h · 404km</span>
   <div class="route">潮州古城 → 广州华发尚座</div>
@@ -582,11 +584,9 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
           <th>日期</th>
           <th>🏨 住宿</th>
           <th>🚗 交通</th>
-          <th>🚗 交通(车1)</th>
           <th>🍜 餐饮</th>
           <th>🎫 景点</th>
           <th>📊 合计</th>
-          <th>合计(住+餐+景)</th>
           <th>备注</th>
         </tr>
       </thead>
@@ -595,33 +595,27 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
           <td class="ed">D1</td>
           <td>¥600</td>
           <td>¥480</td>
-          <td>—</td>
-          <td>—</td>
+          <td>¥300</td>
           <td>—</td>
           <td class="et">¥1,380</td>
-          <td class="et">¥600</td>
           <td class="en"><div class="en-inner en-no-trunc">半日(夜宵) · 3人×¥100=¥300 · 油费+高速</div></td>
         </tr>
         <tr class="expense-row expense-row-no-detail">
           <td class="ed">D2</td>
           <td>¥600</td>
           <td>¥60</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
+          <td>¥600</td>
+          <td>¥30</td>
           <td class="et">¥1,290</td>
-          <td class="et">¥600</td>
           <td class="en"><div class="en-inner">完整日 · 3人×¥200=¥600 · 揭阳学宫免票·城隍庙免票·广济桥20+开元寺10</div></td>
         </tr>
         <tr class="expense-row expense-row-no-detail">
           <td class="ed">D3</td>
           <td>—</td>
           <td>¥500</td>
-          <td>—</td>
-          <td>—</td>
+          <td>¥450</td>
           <td>—</td>
           <td class="et">¥950</td>
-          <td class="et">—</td>
           <td class="en"><div class="en-inner en-no-trunc">午餐+返程 · 3人×¥150=¥450 · 油费+高速</div></td>
         </tr>
       </tbody>
@@ -630,37 +624,13 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
           <td><strong>合计</strong></td>
           <td><strong>¥1,200</strong></td>
           <td><strong>¥1,040</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>—</strong></td>
-          <td><strong>¥2,240</strong></td>
-          <td><strong>¥1,200</strong></td>
+          <td><strong>¥1,350</strong></td>
+          <td><strong>¥30</strong></td>
+          <td><strong>¥3,620</strong></td>
           <td></td>
         </tr>
       </tfoot>
     </table>
-  </div>
-  <div class="expense-transport-summary">
-    <div class="ets-title">🚗 交通费用明细</div>
-    <div class="ets-grid">
-      <div class="ets-card">
-        <div class="ets-card-title">🚙 车1（6L/100km · 92# 7.05元/L）</div>
-        <div class="ets-items">
-          <span>油费：¥1,110（2,626km）</span>
-          <span>过路费：¥1,552</span>
-          <span class="ets-total">小计：¥2,662</span>
-        </div>
-      </div>
-      <div class="ets-card">
-        <div class="ets-card-title">🚗 车2（9L/100km · 95# 7.85元/L）</div>
-        <div class="ets-items">
-          <span>油费：¥1,855（2,626km）</span>
-          <span>过路费：¥1,552</span>
-          <span class="ets-total">小计：¥3,407</span>
-        </div>
-      </div>
-    </div>
-    <div class="ets-footer">高速过路费合计 ¥3,104 + 油费合计 ¥2,965 = <strong>交通总计 ¥6,069</strong>（2车·全程2,626km）</div>
   </div>
 </div>
 
@@ -722,7 +692,7 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
         <div class="b el" style="height:33%"><span class="bl">D2 1.4</span></div>
         <div class="b ov" style="height:100%"><span class="bl">D3 4.2</span></div>
       </div>
-      <div class="bleg"><span><span class="sw" style="background:#e74c3c"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:#f39c12"></span>弹性 &gt;3h</span><span><span class="sw" style="background:#27ae60"></span>正常 ≤3h</span><span><span class="sw" style="background:#ddd"></span>停驶</span></div>
+      <div class="bleg"><span><span class="sw" style="background:var(--bar-ov)"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:var(--bar-el)"></span>弹性 &gt;3h</span><span><span class="sw" style="background:var(--bar-nm)"></span>正常 ≤3h</span><span><span class="sw" style="background:var(--bar-zz)"></span>停驶</span></div>
     </div>
   </div>
   <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">🛰️ 驾驶数据：高德地图 REST API 实测<br>📅 生成日期：2026-08-20</div>
@@ -765,20 +735,22 @@ a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:poi
      SM[n][i] = 第 n 天第 i 个景点 marker（顺序同 d.r 之外的 day_routes.rspots）
    ═══════════════════════════════════════════════════════════════════════════ */
 
-const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
+/* 逐日折线配色 —— 由 generate.py 从 config.toon 注入（与 CSS --d1..--dN 同源）。
+   折线颜色是 AMap.Polyline 的参数，取不到 CSS 变量，故必须在此注入真实色值。 */
+const C=["#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#9b59b6", "#1abc9c", "#e67e22", "#e91e63", "#00bcd4", "#795548"];
 const K='9f853e26c1ef1d449260b4ad9a4de5c8';
-var D=[{h:[116.356019,23.537165],hl:"D1 揭阳古城酒店",hi:{"c": "揭阳", "lv": "舒适型", "n": "揭阳榕城区酒店（古城附近）"},s:[],r:[[113.342501, 23.170841], [116.356019, 23.537165]]},{h:[116.643213,23.664183],hl:"D2 潮州古城酒店",hi:{"c": "潮州", "lv": "舒适型", "n": "潮州古城周边酒店（牌坊街附近）"},s:[{"p": [116.357822, 23.534918], "l": "进贤门"}, {"p": [116.355051, 23.534571], "l": "城隍庙"}, {"p": [116.356019, 23.537165], "l": "揭阳学宫"}, {"p": [116.649772, 23.661581], "l": "牌坊街"}, {"p": [116.652732, 23.662858], "l": "广济桥"}, {"p": [116.648963, 23.663056], "l": "开元寺"}],r:[[116.356019, 23.537165], [116.643213, 23.664183]]},{h:[116.643213,23.664183],hl:"D3 潮州古城",hi:{"c": "广州", "lv": "经济型", "n": "到家 🏠"},s:[{"p": [116.65904, 23.663533], "l": "韩文公祠"}],r:[[116.643213, 23.664183], [113.237123, 23.06646]]}];
+var D=[{h:[116.356019,23.537165],hl:"D1 揭阳古城酒店",hi:{"c": "揭阳", "lv": "舒适型", "bc": "comf", "n": "揭阳榕城区酒店（古城附近）"},s:[],r:[[113.342501, 23.170841], [116.356019, 23.537165]]},{h:[116.643213,23.664183],hl:"D2 潮州古城酒店",hi:{"c": "潮州", "lv": "舒适型", "bc": "comf", "n": "潮州古城周边酒店（牌坊街附近）"},s:[{"p": [116.357822, 23.534918], "l": "进贤门"}, {"p": [116.355051, 23.534571], "l": "城隍庙"}, {"p": [116.356019, 23.537165], "l": "揭阳学宫"}, {"p": [116.649772, 23.661581], "l": "牌坊街"}, {"p": [116.652732, 23.662858], "l": "广济桥"}, {"p": [116.648963, 23.663056], "l": "开元寺"}],r:[[116.356019, 23.537165], [116.643213, 23.664183]]},{h:[116.643213,23.664183],hl:"D3 潮州古城",hi:{"c": "广州", "lv": "经济型", "bc": "eco", "n": "到家 🏠"},s:[{"p": [116.65904, 23.663533], "l": "韩文公祠"}],r:[[116.643213, 23.664183], [113.237123, 23.06646]]}];
 
 document.getElementById('weatherStrip').style.display='none';
 
-var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
+var map=new AMap.Map('map',{zoom:7,center:[107.5,25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
 var A=[],H=[],SM=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
 var TripMap={};
 var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0kBytZEUcsAACT59XRS5cT+QAAAABJRU5ErkJggg==',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0kBytZEUcsAACtCdRxiKH+RgAAAABJRU5ErkJggg==',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRpIDlayIo5YAABtW+cBLsz+hAAAAABJRU5ErkJggg==';
-var _sm=new AMap.Marker({icon:OI,position:[113.342501,23.170841],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
+var _sm=new AMap.Marker({icon:OI,position:[113.342501,23.170841],map:map,title:'起点',label:{content:'<div style="background:var(--mk-start_end);color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
 A.push([113.342501,23.170841]);
-var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
-var _em=new AMap.Marker({icon:OI,position:[113.342501,23.170841],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:var(--mk-hotel);color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:var(--mk-spot);color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
+var _em=new AMap.Marker({icon:OI,position:[113.237123,23.06646],map:map,title:'终点',label:{content:'<div style="background:var(--mk-start_end);color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
 setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
 
 /* ── 页面滚动 / 面板可见性 ── */
@@ -811,7 +783,7 @@ TripMap.focusSpot=function(n,i){
   W.open(map,m.getPosition());
 };
 
-function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:var(--'+(hi.bc||'comf')+');margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
 TripMap.focusHotel=focusHotel;
 function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
 function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
