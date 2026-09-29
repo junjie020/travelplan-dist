@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏔️ 粤陕11日自驾 — 西安大环线版 - TravelAssist</title>
+<script src="https://webapi.amap.com/maps?v=2.0&key=1de2dd2347beaacdce43e934dab38015&plugin=AMap.Driving"></script>
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   base.css — 基础样式（变量、重置、全局、组件样式）
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root{--d1:#e74c3c;--d2:#3498db;--d3:#2ecc71;--d4:#f39c12;--d5:#9b59b6;--d6:#1abc9c;--d7:#e67e22;--d8:#e91e63;--d9:#00bcd4;--d10:#795548;--eco:#27ae60;--comf:#2980b9;--lux:#8e44ad;--hot:#e67e22;--bg:#f5f6fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Microsoft YaHei","PingFang SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+
+.header{background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;padding:32px;text-align:center}
+.header h1{font-size:2rem;margin-bottom:8px;letter-spacing:2px}
+.header .meta{font-size:.95rem;opacity:.9;display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+
+.tips{padding:16px 32px;background:#fffbf0;border-bottom:1px solid #f0e0a0;font-size:.88rem;color:#856404;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.summary-tips{margin-top:16px;padding:12px 20px;background:#fffbf0;border:1px solid #f0e0a0;border-radius:8px;font-size:.84rem;color:#856404;text-align:center;line-height:1.6}
+.weather-toggle{display:block;margin:0 auto;padding:6px 18px;background:#f0f4f8;border:1px solid #d0d8e0;border-radius:6px;font-size:.82rem;cursor:pointer;color:#0d3b66;transition:background .2s}.weather-toggle:hover{background:#e0e8f0}
+.weather-strip{padding:18px 32px;background:#f0f4f8;display:none;flex-wrap:wrap;gap:10px;justify-content:center}
+.wcard{flex:1;min-width:88px;max-width:115px;text-align:center;padding:8px;background:#fff;border-radius:8px;font-size:.78rem}
+.wcard .wc{font-weight:700}.wcard .wt{font-size:1rem;color:#e67e22;margin:2px 0}.wcard .wd{font-size:.7rem;color:var(--muted)}
+
+.day-card{border:1px solid #e8e8e8;border-radius:12px;padding:20px;margin-bottom:18px;border-left:5px solid #ccc;background:#fafbfc}
+.day-card:hover{box-shadow:0 3px 12px rgba(0,0,0,.06)}
+.day-card h3{font-size:1.1rem;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:color .15s;user-select:none}
+.day-card h3:hover{color:#0d3b66}
+.day-card h3 .dd{font-size:.82rem;color:var(--muted);font-weight:400}
+.day-card h3 .pin{font-size:.85rem;opacity:.5;transition:opacity .15s}
+.day-card h3:hover .pin{opacity:1}
+.day-card .drive-badge{font-size:.82rem;color:#e67e22;font-weight:600;background:#fff3e0;padding:2px 10px;border-radius:4px;white-space:nowrap}
+.day-card .route{font-size:.84rem;color:var(--muted);margin:6px 0;padding:4px 10px;background:#eee;border-radius:4px;display:inline-block}
+.day-card .timing{display:flex;gap:24px;font-size:.84rem;color:var(--muted);margin:4px 0}
+.day-card .timing strong{color:var(--text)}
+.day-card .day-weather{font-size:.82rem;color:#856404;margin:4px 0;padding:3px 10px;background:#fef9e7;border-radius:4px;display:inline-block}
+.day-card h4{font-size:.92rem;color:#0d3b66;margin:12px 0 4px;border-bottom:1px solid #e0e0e0;padding-bottom:4px}
+.day-card .province{font-size:.75rem;color:var(--muted);font-weight:400}
+.day-card .city-desc,.day-card .spot-desc{font-size:.87rem;color:var(--text);margin:6px 0}
+.day-card .city-photo,.day-card .spot-photo{width:100%;border-radius:8px;margin:8px 0 6px;object-fit:cover;display:block;background:#f0f2f5;aspect-ratio:16/9;max-height:200px}
+.day-card .food-list{font-size:.85rem;margin:4px 0;display:flex;flex-wrap:wrap;gap:4px 8px}
+.day-card .food-list .fd{background:#fffbf0;padding:2px 8px;border-radius:4px}
+.day-card .food-list .hi{color:#e74c3c;font-weight:700}
+.day-card .shop-list{font-size:.82rem;color:#555;margin:4px 0;list-style:none;padding-left:0}
+.day-card .shop-list li{margin:2px 0}
+.day-card .shop-list .sn{font-weight:600;color:var(--text)}
+.day-card .score-row{margin-top:10px;padding:5px 12px;background:#fef9e7;border-radius:6px;font-size:.84rem;color:#856404}
+.day-card .score-row strong{color:#f39c12;font-size:.95rem}
+.day-card .hotel-line{font-size:.82rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px dotted #e0e0e0;cursor:pointer;transition:color .15s}
+.day-card .hotel-line:hover{color:#0d3b66}
+.day-card .tip{font-size:.82rem;color:#856404;background:#fffbf0;padding:4px 10px;border-radius:4px;margin-top:8px}
+.alt-spot{margin-top:8px;padding:8px 12px;background:#f0f4ff;border-radius:6px;border:1px dashed #90b4e0;font-size:.82rem}
+.alt-spot .alt-tag{display:inline-block;background:#5b9bd5;color:#fff;padding:1px 8px;border-radius:3px;font-size:.7rem;font-weight:600;margin-right:6px}
+.alt-spot .alt-name{font-weight:600;color:#0d3b66}
+.alt-spot .alt-desc{color:var(--muted);font-size:.8rem;margin-top:2px}
+
+.badge{display:inline-block;padding:2px 10px;border-radius:4px;font-size:.72rem;font-weight:600;color:#fff;vertical-align:middle}
+.badge.eco{background:var(--eco)}.badge.comf{background:var(--comf)}.badge.lux{background:var(--lux)}.badge.hot{background:var(--hot)}
+.badge.must{background:#e74c3c;font-size:.68rem;padding:1px 6px}
+.badge.a5{background:#f39c12}.badge.a4{background:#2980b9}.badge.wh{background:#8e44ad;font-size:.65rem}
+.badge.reserve{background:#e67e22;font-size:.68rem;padding:1px 6px}
+a.badge,a.badge:visited,a.badge:hover{text-decoration:none;color:#fff;cursor:pointer}
+
+.legend{position:absolute;bottom:24px;right:12px;z-index:1000;text-align:right}
+.legend-toggle{width:30px;height:30px;background:#0d3b66;color:#fff;border:none;border-radius:50%;font-size:12px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:transform .3s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.legend-toggle.open{transform:rotate(90deg)}
+.legend-body{max-height:0;overflow:hidden;transition:max-height .35s ease;background:rgba(255,255,255,.94);border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.12);margin-top:6px}
+.legend-body.open{max-height:300px;padding:10px 14px}
+.legend .item{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:.8rem}
+.legend .dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+.legend .line{width:18px;height:2px;display:inline-block;flex-shrink:0}
+.nav-btn{display:block;width:100%;margin-top:10px;padding:8px 12px;background:#0d3b66;color:#fff;border:none;border-radius:6px;font-size:.78rem;cursor:pointer;text-align:center;transition:background .2s}
+.nav-btn:hover{background:#1a5276}
+.nav-btn.loading{background:#999;cursor:default}
+
+.food-section{padding:24px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.food-section h2{text-align:center;margin-bottom:16px;font-size:1.2rem}
+.food-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.food-card{flex:1;min-width:170px;max-width:230px;padding:14px;background:#fafbfc;border-radius:8px;border:1px solid #eee}
+.food-card .fcity{font-weight:700;margin-bottom:6px;color:#0d3b66;font-size:.92rem}
+.food-card .fdish{font-size:.83rem}.food-card .fdish .hi{color:#e74c3c;font-weight:600}
+
+.budget{padding:28px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.budget h2{text-align:center;margin-bottom:20px;font-size:1.3rem}
+.budget-grid{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.budget-card{flex:1;min-width:170px;max-width:250px;border-radius:12px;padding:20px 16px;text-align:center;border:2px solid #e8e8e8;background:#fafbfc}
+.budget-card h3{margin-bottom:12px}.budget-card .price{font-size:1.5rem;font-weight:700;margin-bottom:14px}
+.budget-card.economic{border-color:var(--eco)}.budget-card.economic .price{color:var(--eco)}
+.budget-card.comfort{border-color:var(--comf)}.budget-card.comfort .price{color:var(--comf)}
+.budget-card.luxury{border-color:var(--lux)}.budget-card.luxury .price{color:var(--lux)}
+.budget-card ul{list-style:none;font-size:.86rem;color:var(--muted);text-align:left;padding:0 8px}
+.budget-card li{padding:3px 0;display:flex;justify-content:space-between}
+
+/* ── 费用统计（信息页卡·左列，与 .reservation-section 同为列内页卡）── */
+.expense-section{padding:24px 28px;background:var(--card);border-top:2px solid #e67e22}
+.expense-section h2{text-align:center;margin-bottom:18px;font-size:1.15rem;color:#e67e22}
+.expense-empty{text-align:center;padding:30px 20px;color:var(--muted)}
+.expense-empty p{font-size:.88rem;margin-bottom:8px}
+.expense-hint{font-size:.76rem !important;color:#aaa}
+.expense-table-wrap{overflow-x:auto}
+.expense-table{width:100%;border-collapse:collapse;font-size:.84rem}
+.expense-table th{background:#e67e22;color:#fff;padding:8px 10px;font-weight:600;text-align:center;white-space:nowrap}
+.expense-table td{padding:6px 10px;text-align:center;border-bottom:1px solid #eee}
+.expense-table tbody tr:hover{background:#fef9f0}
+.expense-table td.ed{font-weight:600;color:#0d3b66;white-space:nowrap}
+.expense-table td.et{font-weight:700;color:#e67e22}
+.expense-table td.en{text-align:left;min-width:10em;max-width:18em;font-size:.78rem;color:var(--muted)}
+.en-inner{overflow:hidden;line-height:1.5;max-height:3em;word-wrap:break-word}
+.en-inner.expanded{max-height:none;overflow:visible}
+.en-inner.en-no-trunc{max-height:none;overflow:visible}
+.expense-table tfoot tr.expense-total-row{background:#fdf2e9;border-top:2px solid #e67e22}
+.expense-table tfoot td{font-size:.88rem;padding:10px}
+.expense-table tfoot strong{color:#c0392b}
+
+/* ── 费用行可点击展开 ── */
+.expense-row{cursor:pointer;transition:background .15s;user-select:none}
+.expense-row:hover{background:#fef3e5 !important}
+.expense-row .ed .exp-arrow{font-size:.6rem;color:#ccc;display:inline-block;transition:transform .25s;margin-left:4px}
+.expense-row-no-detail{cursor:default}
+.expense-row-no-detail:hover{background:inherit !important}
+.expense-detail{display:none}
+.expense-detail.open{display:table-row}
+.expense-detail td{padding:0 !important;background:linear-gradient(135deg,#fdf6ee,#fafbfc);border-bottom:2px solid #e67e22}
+.expense-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 16px}
+.eb-item{font-size:.8rem;padding:8px 12px;background:#fff;border-radius:6px;border:1px solid #eee;line-height:1.6}
+.eb-item .eb-label{font-weight:700;color:#0d3b66;font-size:.8rem;margin-bottom:4px;display:block;padding-bottom:4px;border-bottom:1px dotted #e0e0e0}
+.eb-item .eb-sub{display:block;font-size:.76rem;color:#555;padding:2px 0}
+.eb-item .eb-sub em{font-style:normal;font-weight:600;color:#333}
+
+/* ── 交通费用汇总卡片 ── */
+.expense-transport-summary{margin-top:18px;background:#f8fafc;border-radius:10px;padding:16px 20px;border:1px solid #e0e0e0}
+.ets-title{font-weight:700;font-size:.9rem;color:#0d3b66;margin-bottom:12px;text-align:center}
+.ets-grid{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.ets-card{flex:1;min-width:200px;max-width:320px;background:#fff;border-radius:8px;padding:12px 16px;border:1px solid #e0e0e0}
+.ets-card-title{font-weight:700;font-size:.82rem;color:#e67e22;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #f0e0a0}
+.ets-items{display:flex;flex-direction:column;gap:3px}
+.ets-items span{font-size:.8rem;color:#555;display:flex;justify-content:space-between}
+.ets-items .ets-total{font-weight:700;color:#c0392b;border-top:1px dotted #e0e0e0;padding-top:4px;margin-top:2px}
+.ets-footer{text-align:center;font-size:.84rem;color:#555;margin-top:12px;padding-top:10px;border-top:1px solid #e0e0e0}
+.ets-footer strong{color:#c0392b;font-size:.92rem}
+
+.scoring-section{padding:28px 32px;background:var(--card);border-top:2px solid #e0e0e0}
+.scoring-section h2{text-align:center;margin-bottom:8px;font-size:1.3rem}
+.scoring-intro{text-align:center;color:var(--muted);margin-bottom:24px;font-size:.9rem}
+.scoring-section h3{font-size:1.05rem;margin:24px 0 10px}
+.method-table,.full-scores{width:100%;border-collapse:collapse;font-size:.82rem;margin-bottom:20px}
+.method-table th,.full-scores th{background:#0d3b66;color:#fff;padding:8px 6px;font-weight:600;text-align:center}
+.method-table td,.full-scores td{padding:5px 4px;text-align:center;border-bottom:1px solid #eee}
+.full-scores tbody tr:hover{background:#f5f6fa}
+.full-scores .sc{font-weight:700;color:#f39c12;font-size:.88rem}
+.full-scores tr.must{background:#fff3cd}.full-scores tr.sel{background:#e8f8f0}.full-scores tr.skip{opacity:.5}
+
+.summary{padding:28px 32px;background:var(--card);border-top:2px solid #0d3b66}
+.summary h2{text-align:center;font-size:1.2rem;margin-bottom:18px;color:#0d3b66}
+.trip-overview-card{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:center;margin-bottom:18px;padding:14px 20px;background:linear-gradient(135deg,#f0f4f8,#e8f0f8);border-radius:10px;border:1px solid #d0dce8;font-size:.88rem;color:#2c3e50}
+.tov-item{display:flex;align-items:center;gap:4px}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.sca{background:#f8fafc;border-radius:10px;padding:16px;border:1px solid #e8e8e8}
+.sca .ico{font-size:1.3rem;margin-bottom:2px}
+.sca .big{font-size:1.7rem;font-weight:800;color:#0d3b66}
+.sca .lbl{font-size:.78rem;color:var(--muted);margin-top:4px}
+.sca.w2{grid-column:span 2}
+.sca .dl{font-size:.82rem;margin-top:6px}
+.sca .dl span{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #e8e8e8}
+.sca .dl .hv{font-weight:600;color:#e74c3c}.sca .dl .gv{font-weight:600}
+.bars{display:flex;gap:3px;align-items:flex-end;height:44px;margin-top:6px}
+.bars .b{flex:1;border-radius:2px 2px 0 0;min-width:8px;position:relative}
+.bars .b .bl{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--muted);white-space:nowrap}
+.bars .b.ov{background:#e74c3c}.bars .b.el{background:#f39c12}.bars .b.nm{background:#27ae60}.bars .b.zz{background:#ddd}
+.bleg{display:flex;gap:14px;font-size:.68rem;color:var(--muted);margin-top:8px}
+.bleg span{display:flex;align-items:center;gap:3px}
+.bleg .sw{width:8px;height:8px;border-radius:2px;display:inline-block}
+
+/* ── 攻略卡片 ── */
+.guide-box{margin:8px 0;border:1px solid #e0e0e0;border-radius:6px;overflow:hidden}
+.guide-header{cursor:pointer;padding:8px 12px;background:#f0f7ff;font-size:.82rem;font-weight:600;color:#2980b9;display:flex;justify-content:space-between;align-items:center;user-select:none}
+.guide-header:hover{background:#e3f0fc}
+.guide-toggle{font-size:.7rem;transition:transform .2s}
+.guide-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.guide-body.open{max-height:2000px}
+.guide-body.open+.guide-header .guide-toggle,
+.guide-header:has(+.guide-body.open) .guide-toggle{transform:rotate(180deg)}
+.guide-item{padding:6px 12px;font-size:.78rem;line-height:1.55;border-bottom:1px dotted #eee;color:#555}
+.guide-item:last-child{border-bottom:none}
+
+/* ── 评分表可点击景点 + 展开攻略行 ── */
+.spot-clickable{cursor:pointer;color:#2980b9;font-weight:600;transition:color .15s}
+.spot-clickable:hover{color:#e74c3c;text-decoration:underline}
+.score-guide-row{display:none}.score-guide-row.open{display:table-row}
+.score-guide-row td{padding:0 !important;text-align:left !important;background:#f8fafe;border-bottom:2px solid #cde}
+.score-guide-row .guide-box{margin:4px 8px;border-left:3px solid #2980b9}
+
+/* ── 美食卡片（可折叠）── */
+.food-card{flex:1;min-width:200px;max-width:280px;background:#fafbfc;border-radius:8px;border:1px solid #eee;display:flex;flex-direction:column;overflow:hidden}
+.food-card-hdr{padding:12px 14px;cursor:default;transition:background .15s}
+.food-card.food-has-detail .food-card-hdr{cursor:pointer;user-select:none}
+.food-card.food-has-detail .food-card-hdr:hover{background:#f0f7ff}
+.food-card .fcity{font-weight:700;color:#0d3b66;font-size:.92rem;display:flex;justify-content:space-between;align-items:center}
+.food-expand-icon{font-size:.65rem;color:#999;transition:transform .2s}
+.food-card.open .food-expand-icon{transform:rotate(180deg)}
+.food-card .food-dishes{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:6px}
+.food-card .fd{font-size:.76rem;background:#fff;padding:2px 7px;border-radius:3px;border:1px solid #e8e8e8}
+.food-card .fd .hi{color:#e74c3c;font-weight:600}
+.food-card-body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 14px}
+.food-card.open .food-card-body{max-height:600px;padding:0 14px 12px}
+.food-shops,.food-hotel,.food-notes{margin-top:6px}
+.food-shops-title,.food-hotel-title{font-size:.74rem;font-weight:700;color:#555;margin-bottom:3px}
+.food-shop-item{font-size:.7rem;color:#666;line-height:1.5;padding:2px 0;border-bottom:1px dotted #f0f0f0}
+.food-shop-item strong{color:#333}
+.food-hotel-info{font-size:.74rem;color:#555}
+.food-notes{font-size:.7rem;color:#888;line-height:1.45;font-style:italic}
+.guide-label{display:inline-block;min-width:72px;font-weight:600;color:#333;margin-right:4px}
+
+/* ── reservation section ── */
+.reservation-section{padding:24px 28px;background:var(--card);border-top:2px solid #e74c3c}
+.reservation-section h2{text-align:center;margin-bottom:8px;font-size:1.15rem;color:#c0392b}
+.reservation-section h3{font-size:1.05rem;margin:20px 0 10px}
+.reserve-urgent{background:#fff3cd;border:1px solid #ffc107;border-radius:8px;padding:12px 16px;margin:12px 0 18px;font-size:.88rem;color:#856404;line-height:1.6}
+.reserve-timeline{margin:16px 0 20px}
+.reserve-timeline-strip{display:flex;flex-wrap:wrap;gap:10px}
+.reserve-tl-item{display:flex;align-items:center;gap:8px;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:6px;padding:8px 14px;font-size:.82rem}
+.reserve-tl-item .tl-date{font-weight:700;color:#e74c3c;white-space:nowrap}
+.reserve-tl-item .tl-action{background:#e74c3c;color:#fff;padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:600}
+.reserve-tl-item .tl-name{color:#333}
+.reserve-cards{display:flex;flex-direction:column;gap:12px}
+.reserve-card{border-radius:10px;border:2px solid #e0e0e0;overflow:hidden;transition:border-color .2s}
+.reserve-card.must{border-color:#e74c3c}
+.reserve-card.opt{border-color:#f39c12}
+.reserve-card-hdr{cursor:pointer;padding:14px 18px;background:#fafbfc;transition:background .15s;user-select:none}
+.reserve-card-hdr:hover{background:#f0f7ff}
+.reserve-card.must .reserve-card-hdr{background:#fef5f5}
+.reserve-card.opt .reserve-card-hdr{background:#fffdf5}
+.reserve-card-title{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.reserve-badge{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.reserve-badge.must{background:#e74c3c;color:#fff}
+.reserve-badge.opt{background:#f39c12;color:#fff}
+.reserve-name{font-size:1rem;font-weight:700;color:#0d3b66}
+.reserve-confidence{font-size:.72rem;padding:2px 8px;border-radius:4px;background:#e8f5e9;color:#2e7d32;margin-left:auto}
+.reserve-card-summary{display:flex;align-items:center;gap:14px;font-size:.82rem;color:#555;flex-wrap:wrap}
+.reserve-toggle{font-size:.65rem;color:#999;margin-left:auto;transition:transform .2s}
+.reserve-card-body{max-height:0;overflow:hidden;transition:max-height .35s ease;padding:0 18px;background:#fff}
+.reserve-card-body.open{max-height:800px;padding:12px 18px}
+.reserve-info-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.reserve-info-item{display:flex;flex-direction:column;gap:2px;padding:8px 12px;background:#f8f9fa;border-radius:6px}
+.ri-label{font-size:.72rem;font-weight:700;color:#666}
+.ri-value{font-size:.82rem;color:#333;line-height:1.5}
+.reserve-tips{font-size:.82rem;color:#666;line-height:1.6;margin-top:10px;padding:8px 12px;background:#f0f7ff;border-radius:6px}
+
+/* ── 目录浮标（Floating TOC）── */
+.toc-float{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.toc-btn{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;border:none;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 16px rgba(13,59,102,.3);transition:transform .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;line-height:1}
+.toc-btn:hover{transform:scale(1.08);box-shadow:0 6px 22px rgba(13,59,102,.45)}
+.toc-panel{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .25s;opacity:0;background:#fff;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);width:210px;display:flex;flex-direction:column}
+.toc-panel.open{max-height:520px;opacity:1;overflow-y:auto}
+.toc-title{padding:12px 16px;font-weight:700;font-size:.88rem;color:#0d3b66;border-bottom:1px solid #eee;position:sticky;top:0;background:#fff;border-radius:12px 12px 0 0;z-index:1}
+.toc-item{padding:10px 16px;font-size:.82rem;color:#444;text-decoration:none;border-bottom:1px solid #f8f8f8;transition:background .15s,color .15s,padding-left .2s;display:block;cursor:pointer;line-height:1.5}
+.toc-item:hover{background:#f0f7ff;color:#0d3b66;padding-left:22px}
+.toc-item:last-child{border-bottom:none;border-radius:0 0 12px 12px}
+.toc-item .toc-num{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;background:#f0f4f8;border-radius:4px;font-size:.7rem;margin-right:6px;color:#888}
+/* 移动端 */
+@media(max-width:767px){
+  .toc-float{bottom:16px;right:12px}
+  .toc-btn{width:40px;height:40px;border-radius:10px;font-size:1.1rem}
+  .toc-panel{width:185px}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   desktop.css — 桌面端布局（左右分栏、resize handle、地图收起）
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.main{display:flex;height:calc(100vh - 195px);justify-content:center}
+.map-panel{flex:2 1 400px;min-width:400px;position:relative;height:100%;border:3px solid #0d3b66;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.1)}
+#map{width:100%;height:100%}
+.resize-handle{width:8px;min-width:8px;background:#e8e8e8;cursor:col-resize;transition:background .2s;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;z-index:100}
+.resize-handle:hover,.resize-handle.active{background:#0d3b66}
+.resize-handle::after{content:'';width:2px;height:40px;background:#bbb;border-radius:1px;transition:background .2s}
+.resize-handle:hover::after,.resize-handle.active::after{background:#fff}
+.table-panel{flex:1 1 480px;min-width:280px;max-width:1024px;height:100%;overflow-y:auto;padding:20px;background:var(--card);border-left:1px solid #e0e0e0}
+.map-collapse-bar{display:none;height:56px;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d3b66,#1a5276);color:#fff;font-size:.88rem;cursor:pointer;gap:8px;letter-spacing:1px}
+.map-toggle-btn{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);z-index:1002;background:rgba(13,59,102,.85);color:#fff;border:none;border-radius:20px;padding:5px 18px;font-size:.78rem;cursor:pointer;display:none;letter-spacing:1px;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:background .2s}
+.map-toggle-btn:hover{background:rgba(13,59,102,1)}
+
+/* 桌面端地图完全收起 */
+.map-panel.collapsed-desktop{width:0!important;min-width:0!important;flex:none!important;border:none!important;border-radius:0!important;overflow:hidden;box-shadow:none!important}
+.map-panel.collapsed-desktop #map{display:none}
+.map-panel.collapsed-desktop .legend{display:none}
+.map-panel.collapsed-desktop .map-toggle-btn{display:none}
+/* 收起时 resize handle 变宽，作为展开按钮 */
+.resize-handle.expanded-handle{width:36px;min-width:36px;cursor:pointer;background:linear-gradient(135deg,#0d3b66,#1a5276);border-radius:8px 0 0 8px;flex-direction:column;gap:4px}
+.resize-handle.expanded-handle::after{width:0;height:0}
+.resize-handle.expanded-handle:hover{background:linear-gradient(135deg,#1a5276,#2980b9)}
+.resize-handle .expand-icon{display:none;color:#fff;font-size:.75rem;font-weight:700;letter-spacing:1px;white-space:nowrap;writing-mode:vertical-rl;text-orientation:mixed;user-select:none}
+.resize-handle .collapse-icon{display:none;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:.7rem;cursor:pointer;background:rgba(13,59,102,.65);border:none;border-radius:50%;width:20px;height:20px;line-height:20px;text-align:center;padding:0;transition:background .2s;z-index:102}
+.resize-handle:hover .collapse-icon,.resize-handle.active .collapse-icon{display:block}
+.resize-handle .collapse-icon:hover{background:rgba(13,59,102,1)}
+.resize-handle.expanded-handle .collapse-icon{display:none!important}
+.resize-handle.expanded-handle .expand-icon{display:block}
+
+/* ── Bottom two-column layout ── */
+.bottom-sections{display:flex;gap:0;padding:0;max-width:1400px;margin:0 auto}
+.bottom-col{flex:1;min-width:0}
+.bottom-left{border-right:1px solid #e0e0e0}
+.bottom-col .food-section,
+.bottom-col .budget,
+.bottom-col .scoring-section,
+.bottom-col .summary{padding:24px 28px;border-top:none}
+.bottom-col .food-section{border-top:2px solid #e0e0e0}
+.bottom-col .scoring-section{border-top:2px solid #e0e0e0}
+.bottom-col .food-section h2,
+.bottom-col .budget h2,
+.bottom-col .scoring-section h2{font-size:1.15rem}
+/* Summary inside column: shrink grid to fit narrower space */
+.bottom-col .summary .sg{grid-template-columns:repeat(2,1fr)}
+.bottom-col .summary .sca.w2{grid-column:span 2}
+.bottom-col .summary .sca .big{font-size:1.3rem}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   tablet.css — 平板适配 + 横屏手机适配
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Tablet / iPad ── */
+@media(max-width:1024px){
+  .main{height:calc(100vh - 180px)}
+  .table-panel{flex-basis:380px;min-width:300px;max-width:1024px}
+  .map-panel{flex:2 1 300px;min-width:300px}
+  .header{padding:24px 16px}.header h1{font-size:1.5rem}
+  .bottom-col .food-section,.bottom-col .budget,.bottom-col .scoring-section{padding:18px 16px}
+  .bottom-col .budget-grid{flex-direction:column;align-items:center}
+  .bottom-col .budget-card{max-width:100%;width:100%}
+}
+
+/* ── 横屏手机: 左右分栏 (类似PC) ── */
+@media(max-width:900px) and (orientation:landscape){
+  .main{height:calc(100vh - 140px)}
+  .table-panel{flex-basis:300px;min-width:260px;max-width:1024px;padding:14px 12px}
+  .map-panel{border-radius:8px;border-width:3px;min-width:250px}
+  .header{padding:12px 14px}.header h1{font-size:1.2rem}.header .meta{gap:8px;font-size:.78rem}
+  .tips{padding:8px 14px;font-size:.76rem}
+  .day-card .city-photo,.day-card .spot-photo{max-height:150px;aspect-ratio:16/9}
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   mobile.css — 竖屏手机 + 小屏手机适配
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 竖屏手机: 单列 + sticky 地图 ── */
+@media(max-width:767px) and (orientation:portrait){
+  .resize-handle{display:none}
+  .sg{grid-template-columns:repeat(2,1fr)}.sca.w2{grid-column:span 2}
+  /* 行程总览：手机竖屏改为单列 */
+  .bottom-col .summary .sg{grid-template-columns:1fr}
+  .bottom-col .summary .sca.w2{grid-column:span 1}
+  .main{display:block;height:auto}
+  .map-panel{position:sticky;top:0;z-index:100;height:42vh;max-height:380px;width:100%;border-radius:0;border-width:0 0 3px 0;box-shadow:0 4px 20px rgba(0,0,0,.15);transition:height .3s ease,max-height .3s ease}
+  .map-panel.collapsed{height:56px!important;max-height:56px!important}
+  .map-panel.collapsed #map{display:none}
+  .map-panel.collapsed .map-collapse-bar{display:flex}
+  .map-panel.collapsed .map-toggle-btn{display:none}
+  .map-panel.collapsed .legend{display:none}
+  .map-toggle-btn{display:block}
+  #map{height:100%;min-height:250px}
+  .table-panel{width:100%;height:auto;max-height:none;border-left:none;border-top:1px solid #e0e0e0;padding:16px 10px}
+  .header{padding:16px 12px}.header h1{font-size:1.2rem}.header .meta{gap:10px;font-size:.8rem}
+  .tips{padding:12px 14px;font-size:.8rem}
+  .weather-strip{padding:12px 14px;gap:6px}
+  .budget,.scoring-section,.summary,.food-section{padding:16px 12px}.budget-card{min-width:140px;padding:14px 10px}
+  .bottom-sections{flex-direction:column}
+  .bottom-left{border-right:none;border-bottom:1px solid #e0e0e0}
+  .bottom-col .food-section,.bottom-col .budget,.bottom-col .scoring-section{padding:16px 12px}
+  .full-scores{font-size:.68rem;overflow-x:auto;display:block}.full-scores th,.full-scores td{padding:3px 2px}
+  .day-card .city-photo,.day-card .spot-photo{max-height:160px;aspect-ratio:4/3}
+}
+
+/* ── 小屏手机竖屏 ── */
+@media(max-width:480px) and (orientation:portrait){
+  .sg{grid-template-columns:1fr}.sca.w2{grid-column:span 1}
+  .bottom-col .summary .sg{grid-template-columns:1fr}
+  .bottom-col .summary .sca.w2{grid-column:span 1}
+  .map-panel{height:38vh;max-height:300px}
+  .budget-grid{flex-direction:column;align-items:center}.budget-card{max-width:100%;width:100%}
+  .table-panel{padding:12px 6px}
+  .day-card .city-photo,.day-card .spot-photo{max-height:130px}
+}
+
+/* ── reservation section mobile ── */
+@media(max-width:767px){
+  .reservation-section{padding:16px 12px}
+  .reservation-section h2{font-size:1.1rem}
+  .reserve-info-grid{grid-template-columns:1fr}
+  .reserve-card-hdr{padding:12px}
+  .reserve-card-summary{gap:8px;font-size:.78rem}
+  .reserve-timeline-strip{flex-direction:column;gap:6px}
+  /* expense mobile */
+  .expense-breakdown{grid-template-columns:1fr}
+  .expense-section{padding:16px 12px}
+  .expense-table td.en{min-width:8em;max-width:14em;font-size:.74rem}
+.en-inner{font-size:.74rem}
+  .ets-grid{flex-direction:column;align-items:center}
+  .ets-card{max-width:100%;width:100%}
+}
+
+</style>
+</head>
+<body>
+
+<div class="header" id="toc-top">
+  <h1>🏔️ 粤陕11日自驾 — 西安大环线版</h1>
+  <div class="meta">
+    <span>📅 2026.10.11 — 10.21</span>
+    <span>👥 小家庭3人（2大 + 9岁儿子）</span>
+  </div>
+</div>
+
+<button class="weather-toggle" id="weatherToggle" onclick="toggleWeather()">🌤️ 沿途天气</button>
+<div class="weather-strip" id="weatherStrip">
+  <div class="wcard"><div class="wc">广州</div><div class="wt">22-28°C</div><div class="wd">秋高气爽</div></div>
+<div class="wcard"><div class="wc">常德</div><div class="wt">16-23°C</div><div class="wd">秋凉·多云</div></div>
+<div class="wcard"><div class="wc">襄阳</div><div class="wt">14-21°C</div><div class="wd">微凉干燥</div></div>
+<div class="wcard"><div class="wc">武当山</div><div class="wt">12-19°C</div><div class="wd">山区偏凉·多雾</div></div>
+<div class="wcard"><div class="wc">西安</div><div class="wt">10-20°C</div><div class="wd">秋高气爽·昼夜温差大</div></div>
+<div class="wcard"><div class="wc">延安</div><div class="wt">5-16°C</div><div class="wd">陕北·早晚凉</div></div>
+<div class="wcard"><div class="wc">壶口</div><div class="wt">6-17°C</div><div class="wd">河谷风大·带外套</div></div>
+<div class="wcard"><div class="wc">华山</div><div class="wt">3-14°C</div><div class="wd">山顶0-8°C·必带厚衣</div></div>
+<div class="wcard"><div class="wc">洛阳</div><div class="wt">11-20°C</div><div class="wd">秋凉舒适</div></div>
+<div class="wcard"><div class="wc">长沙</div><div class="wt">16-24°C</div><div class="wd">舒适·微潮</div></div>
+</div>
+
+<div class="main">
+  <div class="map-panel">
+    <div id="map"></div>
+    <button class="map-toggle-btn" onclick="toggleMapCollapse()" title="收起地图">▲ 收起</button>
+    <div class="map-collapse-bar" onclick="toggleMapCollapse()">📍 点击展开地图 · 行程路线总览</div>
+    <div class="legend">
+      <button class="legend-toggle" id="legendToggle" onclick="toggleLegend()">▶</button>
+      <div class="legend-body" id="legendBody">
+        <div class="item"><span class="dot" style="background:#e74c3c"></span>住宿</div>
+        <div class="item"><span class="dot" style="background:#2ecc71"></span>景点</div>
+        <div class="item"><span class="dot" style="background:#f39c12"></span>起终点</div>
+        <div class="item"><span class="line" style="background:#aaa;height:2.5px;opacity:.6"></span>路线</div>
+        <button class="nav-btn" id="navBtn" onclick="loadRoutes()">🗺️ 加载导航路线</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="resize-handle" id="resizeHandle" title="拖动调整地图大小 · 双击切换">
+              <span class="expand-icon">&#9654; 展开地图</span>
+              <button class="collapse-icon" onclick="toggleMapFullCollapse()" title="收起地图">&#9664;</button>
+            </div>
+
+  <div class="table-panel" id="toc-days">
+    <!-- ═══════ D1 ═══════ -->
+<div class="day-card" id="d1" style="border-left-color:#e74c3c">
+  <h3 onclick="TripMap.focusDay(0)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 1 — 启程北上 <span class="pin">📍</span> <span class="dd">10/11 周日</span></h3>
+  <span class="drive-badge">🚗 8.3h · 827km</span>
+  <div class="route">广钢新城 → 常德</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>19:00</strong></span></div>
+  <div class="day-weather">🌤️ 22-28°C · 秋高气爽</div>
+  <h4>🏙️ 常德 <span class="province">（湖南·湘北）</span></h4>
+  <div class="city-desc">常德，湖南北部重镇，古称武陵、朗州，沅江穿城而过注入洞庭湖。这里是<strong>陶渊明</strong>《桃花源记》的原型地——桃花源景区距市区仅30公里，“芳草鲜美，落英缤纷”的意境延续千年。常德也是辛亥革命元勋<strong>宋教仁</strong>（桃源人）和现代作家<strong>丁玲</strong>（临澧人）的故乡。城市干净宜居，柳叶湖是比杭州西湖还大的城中湖。作为湘北门户，常德是自驾穿越湖南的必经驿站。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 常德牛肉粉</span></span><span class="fd"><span class="hi">🔥 酱板鸭</span></span><span class="fd">常德钵子菜</span><span class="fd">石门肥肠</span><span class="fd">桃源擂茶</span><span class="fd">蒿子粑粑</span><span class="fd">津市牛肉粉</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">刘聋子粉馆</span>（常德市区） — 常德牛肉粉代表，汤浓味厚，本地人早餐首选 · 本地知识</li>
+    <li>🏠 <span class="sn">金丹酱板鸭</span>（常德市区） — 老字号酱板鸭，可打包带走当伴手礼 · 本地知识</li>
+  </ul>
+  <div class="tip">💡 全程最长驾驶日（827km/8.3h）。建议在韶关、衡阳各停一次服务区，每次15-20分钟活动。孩子靠平板+音频书度过，提前下载好内容。19:00到常德，晚餐就近解决。<strong>出发前给孩子带好户口本/身份证</strong>——兵马俑0元票、陕历博、龙门石窟的儿童票核验都要用。</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(0)" title="🗺️ 点击查看地图位置">🏨 常德 · <span class="badge eco">经济型</span> · 常德市区经济型（高速口附近）· 双床/家庭房 · 纯赶路，干净即可 【待预订】</div>
+</div>
+
+<!-- ═══════ D2 ═══════ -->
+<div class="day-card" id="d2" style="border-left-color:#3498db">
+  <h3 onclick="TripMap.focusDay(1)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 2 — 问道武当 <span class="pin">📍</span> <span class="dd">10/12 周一</span></h3>
+  <span class="drive-badge">🚗 5.8h · 501km</span>
+  <div class="route">常德 → 襄阳 → 武当山</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>15:00</strong></span></div>
+  <div class="day-weather">🌤️ 12-19°C · 山区偏凉</div>
+  <h4>🏙️ 武当山 <span class="province">（湖北·十堰）</span></h4>
+  <div class="city-desc">武当山，中国道教第一名山，1994年列入世界文化遗产。明成祖朱棣动用30万军民、历时12年修建九宫九观，形成“北修故宫，南修武当”的盛况。主峰天柱峰海拔1612米，金顶金殿全部铜铸鎏金，历经600年风雨仍金光灿灿。<strong>张三丰</strong>在此创立武当派与太极拳，山间常有道士习武的身影。索道2026年7月起大幅下调至双程85元，普通家庭也能轻松登顶。</div>
+  <h4>🏛️ <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(1,1)" title="🗺️ 点击查看地图位置">玉虚宫</span> </h4>
+  <div class="spot-desc">武当山九宫之一，全称“玄天玉虚宫”，明代鼎盛时有房舍2200间，是武当山最大的宫观。<strong>张三丰</strong>曾在此修炼。宫内保存着明代御碑亭，重达百吨的赑屃驮御碑是武当山现存最大的石碑。虽经战火大部损毁，复建后的玉虚宫仍气势恢宏，且游客稀少、无需门票，是抵达当日下午消磨时光的好去处。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 道家斋菜</span></span><span class="fd"><span class="hi">🔥 郧阳三合汤</span></span><span class="fd">丹江口翘嘴鲌</span><span class="fd">竹溪蒸盆</span><span class="fd">房县黄酒</span><span class="fd">神仙叶凉粉</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">武当山道家养生菜馆</span>（武当山景区山下） — 道家斋菜清淡，适合爬山前后调理肠胃 · 本地知识</li>
+    <li>🏠 <span class="sn">十堰三合汤老店</span>（十堰市区） — 郧阳三合汤，牛肉+饺子+红薯粉一碗齐活 · 本地知识</li>
+  </ul>
+  <div class="tip">💡 武当山景区换乘巴士约1小时到琼台，<strong>索道16:30停运</strong>。今天15:00才到山下，来不及上金顶，只游山下玉虚宫（免费），明早再上山。观光车90元必买，景点分散无步行替代。</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(1)" title="🗺️ 点击查看地图位置">🏨 武当山 · <span class="badge comf">舒适型</span> · 武当山景区门口/老营镇舒适型 · 双床/家庭房 · 次日一早进山 【待预订】</div>
+</div>
+
+<!-- ═══════ D3 ═══════ -->
+<div class="day-card" id="d3" style="border-left-color:#2ecc71">
+  <h3 onclick="TripMap.focusDay(2)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 3 — 金顶入长安 <span class="pin">📍</span> <span class="dd">10/13 周二</span></h3>
+  <span class="drive-badge">🚗 4.7h · 405km</span>
+  <div class="route">武当山金顶 → 西安</div>
+  <div class="timing"><span>🕐 出发 <strong>14:00</strong></span> <span>🕐 到达 <strong>18:45</strong></span></div>
+  <div class="day-weather">🌤️ 10-20°C · 秋爽</div>
+  <h4>🏙️ 西安 <span class="province">（陕西·关中）</span></h4>
+  <div class="city-desc">西安，古称长安，十三朝古都。自西周至唐，1100余年间有73位帝王在此执政，是丝绸之路的东方起点。<strong>张骞</strong>从这里出发凿空西域，<strong>玄奘</strong>从这里西行取经、在大雁塔译经，<strong>李白</strong>曾供奉翰林于此。明代城墙是中国现存规模最大的古城墙，回民街的烟火气与大雁塔的肃穆、大唐不夜城的璀璨，共同构成这座城市的古今两面。</div>
+  <h4>⛰️ <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(2,0)" title="🗺️ 点击查看地图位置">武当山金顶</span> <span class="badge a5">5A</span> <a class="badge reserve" href="#武当山金顶" title="查看预约方式">📋 需预约</a> <span class="badge must">必去</span></h4>
+  <div class="spot-desc">武当山最高峰天柱峰顶，海拔1612米。核心看点是<strong>金殿</strong>——中国现存最大的铜铸鎏金大殿，明永乐十四年（1416年）在北京铸造后运至山顶，全殿用铜300吨、黄金数千两，600年来历经雷击风雨仍金光如新。下索道后还需徒步15-25分钟石阶，台阶陡窄，带孩子需牵手慢行。金顶往返（含换乘）约3-4小时，<strong>索道16:30停运</strong>，务必上午上山。</div>
+  <h4>🏰 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(2,1)" title="🗺️ 点击查看地图位置">西安城墙</span> <span class="badge a5">5A</span> <span class="badge must">必去</span> <a class="badge reserve" href="#西安城墙" title="查看预约方式">📋 建议预约</a></h4>
+  <div class="spot-desc">中国现存规模最大、保存最完整的古代城垣，明洪武年间在唐代皇城基础上扩建，周长13.74公里、墙高12米。最佳打开方式是<strong>租自行车环城骑行</strong>——单人车45元/2小时、双人车90元，骑完一圈约100-120分钟，9岁孩子可骑儿童车或坐双人车后座。<strong>永宁门（南门）</strong>是主门，有开城仪式；傍晚在城墙上看落日余晖洒满古城，是西安最难忘的画面之一。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 肉夹馍</span></span><span class="fd"><span class="hi">🔥 羊肉泡馍</span></span><span class="fd"><span class="hi">🔥 凉皮</span></span><span class="fd">biangbiang面</span><span class="fd">葫芦头泡馍</span><span class="fd">甑糕</span><span class="fd">水盆羊肉</span><span class="fd">油泼面</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">老孙家饭庄</span>（东大街） — 百年老字号，羊肉泡馍代表，适合家庭体验手工掰馍 · 本地知识</li>
+    <li>🏠 <span class="sn">子午路张记肉夹馍</span>（子午路） — 西安人心中的肉夹馍天花板，腊汁肉肥瘦相间 · 本地知识</li>
+    <li>🏠 <span class="sn">魏家凉皮</span>（连锁多店） — 连锁品质稳定，凉皮+肉夹馍套餐方便快捷 · 本地知识</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">回民街</span>（西安钟楼西侧）
+    <div class="alt-desc">西安最著名小吃街，烤肉泡馍柿子饼集中，晚间最热闹。城墙骑行后若有余力可去。</div>
+  </div>
+  <div class="tip">💡 关键日。8:30从酒店出发，9:00到游客中心，金顶往返3-4h，13:00下山午餐，14:00出发去西安。武当山→西安走G70福银高速，<strong>山区两车道、弯多、限速80</strong>，实际常跑4.5-5h。建议在郧西或天竺山服务区加油休整。</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(2)" title="🗺️ 点击查看地图位置">🏨 西安 · <span class="badge comf">舒适型</span> · 西安钟楼/大雁塔附近舒适型 500-800/间 · 双床/家庭房 · 连住3晚 【待预订】</div>
+</div>
+
+<!-- ═══════ D4 ═══════ -->
+<div class="day-card" id="d4" style="border-left-color:#f39c12">
+  <h3 onclick="TripMap.focusDay(3)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 4 — 长安十三朝 <span class="pin">📍</span> <span class="dd">10/14 周三</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 本地 · 0km</span>
+  <div class="route">西安市区</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span></div>
+  <div class="day-weather">🌤️ 10-20°C · 秋爽</div>
+  <h4>🏛️ <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(3,0)" title="🗺️ 点击查看地图位置">陕西历史博物馆</span> <span class="badge must">必去</span> <a class="badge reserve" href="#陕西历史博物馆" title="查看预约方式">📋 需预约</a></h4>
+  <div class="spot-desc">中国第一座大型现代化国家级博物馆，馆藏文物171万件，被誉为“给我一天，还你万年”。核心看点：<strong>镶金兽首玛瑙杯</strong>（唐代，禁止出境展览文物）、<strong>皇后之玺</strong>、<strong>鸳鸯莲瓣纹金碗</strong>。展厅按周秦汉唐顺序铺开，正好对应孩子课本上的历史脉络。免费不免票，<strong>需提前5天、每日17:00在官方公众号抢票</strong>，是全行程最难约的一站。游览约3-4小时。</div>
+  <h4>🗼 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(3,1)" title="🗺️ 点击查看地图位置">大雁塔·大慈恩寺</span> <span class="badge a5">5A</span> <a class="badge reserve" href="#大雁塔·大慈恩寺" title="查看预约方式">📋 建议预约</a></h4>
+  <div class="spot-desc">大雁塔是<strong>玄奘</strong>为保存从印度带回的经卷佛像而建，始建于唐永徽三年（652年），现存七层、高64.5米，是西安的地标。大慈恩寺是唐代皇家寺院，玄奘在此主持译经十余年。登塔可俯瞰西安城南全景，但塔内楼梯陡窄，带孩子需注意。傍晚北广场有亚洲最大的音乐喷泉表演，免费观看，是孩子最期待的环节。</div>
+  <h4>🌃 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(3,2)" title="🗺️ 点击查看地图位置">大唐不夜城</span> <span class="badge must">必去</span></h4>
+  <div class="spot-desc">位于大雁塔脚下、全长1500米的步行街，以盛唐文化为主题，是国内夜游的天花板。街上有“不倒翁小姐姐”、盛唐密盒、花车巡游等互动表演，两侧雕塑群再现唐代市井百态。灯光演出18:30-22:30，19:00亮灯最为璀璨。街区<strong>免费开放、无需预约</strong>，但人流量极大，务必牵好孩子的手，提前约定走散后的集合点。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 油泼面</span></span><span class="fd"><span class="hi">🔥 肉丸胡辣汤</span></span><span class="fd">回民街小吃</span><span class="fd">柿子饼</span><span class="fd">镜糕</span><span class="fd">冰峰汽水</span><span class="fd">烤羊肉串</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">回民街（北院门）</span>（钟楼西侧） — 西安最著名的小吃街，烤肉、泡馍、柿子饼集中，晚间最热闹 · 本地知识</li>
+    <li>🏠 <span class="sn">永兴坊陕西非遗美食街区</span>（中山门内） — 集中陕西各地非遗小吃，有摔碗酒体验，孩子喜欢 · 本地知识</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">西安博物院（小雁塔）</span>（西安市友谊西路）
+    <div class="alt-desc">陕历博抢不到票时的最佳替代，同样免费需预约，人少清静，小雁塔可登。</div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">永兴坊</span>（西安中山门内）
+    <div class="alt-desc">陕西非遗美食街区，集中各地小吃，有摔碗酒体验，孩子会喜欢。</div>
+  </div>
+  <div class="tip">💡 <strong>全程唯一需要定闹钟的一天</strong>——陕历博提前5天、每日17:00放票，即10/9（周五）17:00抢10/14的票。抢不到改去西安博物院（小雁塔）。城墙骑行建议16:00后上，正好看落日。</div>
+  <div class="score-row">⭐ 城墙 8.75 · 陕历博 8.10 · 大雁塔 8.10</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(3)" title="🗺️ 点击查看地图位置">🏨 西安 · <span class="badge comf">舒适型</span> · 同上（连住第2晚）</div>
+</div>
+
+<!-- ═══════ D5 ═══════ -->
+<div class="day-card" id="d5" style="border-left-color:#9b59b6">
+  <h3 onclick="TripMap.focusDay(4)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 5 — 秦俑帝国 <span class="pin">📍</span> <span class="dd">10/15 周四</span></h3>
+  <span style="font-size:.84rem;color:var(--muted)">🚗 0.8h · 69km往返</span>
+  <div class="route">西安 ⇄ 临潼</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span></div>
+  <div class="day-weather">🌤️ 10-20°C · 秋爽</div>
+  <h4>🏙️ 临潼 <span class="province">（陕西·西安东郊）</span></h4>
+  <div class="city-desc">临潼，西安东郊的历史重镇，一片土地上叠着两个王朝的印记。东有<strong>秦始皇</strong>陵与兵马俑——1974年农民打井时意外唤醒的“世界第八大奇迹”；西有华清宫，唐玄宗与杨贵妃的温泉行宫，“春寒赐浴华清池”的典故诞生于此。骊山脚下温泉流淌数千年，如今是西安最集中的文化遗产区，也是亲子历史启蒙的最佳课堂。</div>
+  <h4>🗿 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(4,0)" title="🗺️ 点击查看地图位置">秦始皇陵兵马俑</span> <span class="badge a5">5A</span> <span class="badge must">必去</span> <a class="badge reserve" href="#秦始皇陵兵马俑" title="查看预约方式">📋 需预约</a></h4>
+  <div class="spot-desc">1974年农民打井时意外发现，被誉为“世界第八大奇迹”，1987年列入世界文化遗产。已发掘三个俑坑：<strong>一号坑</strong>规模最大，6000余尊陶俑列阵；<strong>二号坑</strong>是精华，将军俑、跪射俑集中于此。<strong>三号坑</strong>为指挥部。每尊陶俑面容各异、无一雷同。建议请讲解或租语音导览——没有讲解的兵马俑只是“三个大坑”。游览含丽山园约3-6小时，<strong>16周岁以下免票但需预约0元票</strong>。</div>
+  <h4>♨️ <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(4,1)" title="🗺️ 点击查看地图位置">华清宫</span> <span class="badge a5">5A</span></h4>
+  <div class="spot-desc">唐代皇家温泉行宫，唐玄宗与杨贵妃的故事在此上演1400年。“<strong>春寒赐浴华清池</strong>”的典故出自白居易《长恨歌》，贵妃池遗址至今可见。这里也是1936年西安事变的发生地，五间厅墙壁上仍留着兵谏时的弹孔。夜间大型实景演出<strong>《长恨歌》</strong>以骊山为幕，是国内顶级演出，但需提前9-10天抢票且票价199元起。游览约2-3小时。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 水盆羊肉</span></span><span class="fd"><span class="hi">🔥 临潼火晶柿子</span></span><span class="fd">潼关肉夹馍</span><span class="fd">石子馍</span><span class="fd">甑糕</span><span class="fd">葫芦头泡馍</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">老孙家饭庄</span>（东大街） — 兵马俑回城后就餐，泡馍+凉菜适合家庭 · 本地知识</li>
+    <li>🏠 <span class="sn">魏家凉皮</span>（连锁多店） — 临潼返程路上解决午餐，出餐快不耽误时间 · 本地知识</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">骊山</span>（临潼华清宫旁）
+    <div class="alt-desc">华清宫后山，兵谏亭与捉蒋亭所在，索道往返约2小时。时间充裕可加。</div>
+  </div>
+  <div class="tip">💡 兵马俑<strong>16周岁以下免票但必须预约0元票</strong>，预约页要填孩子身份信息；若页面无“携带儿童数量”栏，说明该时段儿童免票名额已满，需换时段。没有讲解的兵马俑只是三个大坑，务必请讲解或租语音导览。</div>
+  <div class="score-row">⭐ 兵马俑 8.25 · 华清宫 7.30</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(4)" title="🗺️ 点击查看地图位置">🏨 西安 · <span class="badge comf">舒适型</span> · 同上（连住第3晚）</div>
+</div>
+
+<!-- ═══════ D6 ═══════ -->
+<div class="day-card" id="d6" style="border-left-color:#1abc9c">
+  <h3 onclick="TripMap.focusDay(5)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 6 — 黄陵祭祖 <span class="pin">📍</span> <span class="dd">10/16 周五</span></h3>
+  <span class="drive-badge">🚗 3.8h · 323km</span>
+  <div class="route">西安 → 黄帝陵 → 延安</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>15:54</strong></span></div>
+  <div class="day-weather">🌤️ 5-16°C · 早晚凉</div>
+  <h4>🏙️ 延安 <span class="province">（陕西·陕北）</span></h4>
+  <div class="city-desc">延安，陕北黄土高原上的革命圣地。1935至1948年中共中央在此驻扎13年，被称为“中国革命的心脏”。<strong>毛泽东</strong>在杨家岭的窑洞里写下《论持久战》《为人民服务》，作家<strong>路遥</strong>从延川的土窑走出、写出《平凡的世界》。宝塔山是延安的标志，延河水绕塔而流。这里也是人文初祖黄帝的陵寝所在。</div>
+  <h4>🌳 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(5,0)" title="🗺️ 点击查看地图位置">黄帝陵</span> <span class="badge a5">5A</span> <span class="badge must">必去</span> <a class="badge reserve" href="#黄帝陵" title="查看预约方式">📋 建议预约</a></h4>
+  <div class="spot-desc">中华民族人文初祖<strong>轩辕黄帝</strong>的陵寝，被称为“天下第一陵”，是历代帝王祭祀黄帝的场所。景区分两部分：山下<strong>轩辕庙</strong>内有相传黄帝亲手所植的“黄帝手植柏”，树龄5000余年，被誉为“世界柏树之父”；山上<strong>黄帝陵</strong>有汉武帝祭仙台遗迹。1961年列为全国重点文物保护单位。带孩子来这里，是最好的一堂“我们从哪里来”的历史课。</div>
+  <h4>🚩 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(5,1)" title="🗺️ 点击查看地图位置">杨家岭革命旧址</span> <span class="badge a5">5A</span> <span class="badge must">必去</span> <a class="badge reserve" href="#杨家岭革命旧址" title="查看预约方式">📋 需预约</a></h4>
+  <div class="spot-desc">1938至1947年中共中央机关所在地，毛泽东、周恩来、朱德等在此居住。<strong>毛泽东</strong>在杨家岭的窑洞里写下《论持久战》《为人民服务》《新民主主义论》等著作，中央大礼堂是中共七大召开地。窑洞、石桌、油灯，课本上的历史在这里变得可触摸。免费开放但需<strong>分时段实名预约</strong>（每段限2999人），是延安红色教育最核心的一站。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 延安羊肉面</span></span><span class="fd"><span class="hi">🔥 洋芋擦擦</span></span><span class="fd">荞面饸饹</span><span class="fd">油糕</span><span class="fd">黄米馍馍</span><span class="fd">羊杂碎</span><span class="fd">子长煎饼</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">延安老马家羊肉面</span>（延安市区） — 陕北羊肉面代表，汤鲜肉烂，暖身抗寒 · 本地知识</li>
+    <li>🏠 <span class="sn">延安1938美食街</span>（延安市区） — 集中陕北小吃，洋芋擦擦、油糕、荞面饸饹一站式体验 · 本地知识</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">枣园革命旧址</span>（延安市区西北）
+    <div class="alt-desc">与杨家岭齐名的革命旧址，免费需预约，两地相距约6km，可一并参观。</div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">宝塔山</span>（延安市区）
+    <div class="alt-desc">延安地标，登塔可俯瞰延安全城。票价有分歧（免费或60元），出发前确认。</div>
+  </div>
+  <div class="tip">💡 黄帝陵正好在西安→延安的必经路上，零绕路。延安杨家岭需在“延安杨家岭革命旧址”公众号预约，分4个时段各限2999人。陕北10月早晚可低至5°C，给孩子带厚外套。</div>
+  <div class="score-row">⭐ 黄帝陵 7.10 · 延安旧址 7.45</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(5)" title="🗺️ 点击查看地图位置">🏨 延安 · <span class="badge comf">舒适型</span> · 延安市区舒适型 · 双床/家庭房 · 近杨家岭或市中心 【待预订】</div>
+</div>
+
+<!-- ═══════ D7 ═══════ -->
+<div class="day-card" id="d7" style="border-left-color:#e67e22">
+  <h3 onclick="TripMap.focusDay(6)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 7 — 黄河怒吼 <span class="pin">📍</span> <span class="dd">10/17 周六</span></h3>
+  <span class="drive-badge">🚗 4.2h · 253km</span>
+  <div class="route">延安 → 壶口瀑布 → 韩城</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>16:40</strong></span></div>
+  <div class="day-weather">🌤️ 6-17°C · 河谷风大</div>
+  <h4>🏙️ 韩城 <span class="province">（陕西·关中东北）</span></h4>
+  <div class="city-desc">韩城，黄河之滨的国家历史文化名城，被誉为“文史之乡”。这里是<strong>司马迁</strong>的故里——他在芝川镇忍辱负重完成“史家之绝唱”的《史记》，司马迁祠墓至今矗立在芝川塬上。韩城古城保存着完好的明清街巷，城外的党家村有700年历史的明清四合院群，被列入世界文化遗产预备名录，被称为“东方人类传统民居活化石”。</div>
+  <h4>🌊 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(6,0)" title="🗺️ 点击查看地图位置">壶口瀑布</span> <span class="badge a5">5A</span> <span class="badge must">必去</span> <a class="badge reserve" href="#壶口瀑布" title="查看预约方式">📋 需预约</a></h4>
+  <div class="spot-desc">中国第二大瀑布、世界最大的黄色瀑布。黄河河床在此从300余米骤然收窄至二三十米，河水跌入30米深的石槽，形成“<strong>千里黄河一壶收</strong>”的奇观。10月正值秋汛，水量最盛，洪波怒吼、声震数里，水雾腾空数十米，晴天常见彩虹横跨。岸边的黄河大合唱雕塑纪念1938年<strong>光未然</strong>在此写下《黄河大合唱》歌词。门票80元、2日内有效，一票可通秦晋两岸。游览约2.5小时。</div>
+  <h4>🏘️ <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(6,1)" title="🗺️ 点击查看地图位置">韩城古城·党家村</span> <a class="badge reserve" href="#韩城古城·党家村" title="查看预约方式">📋 建议预约</a></h4>
+  <div class="spot-desc">韩城古城保存着完整的明清街巷格局，文庙、城隍庙、状元府连成一片，是国内保存最完整的明清县城之一，且游客稀少。城外9公里处的<strong>党家村</strong>更为珍贵——700年历史的明清四合院群，123座院落、11座祠堂，被列入世界文化遗产预备名录，被称为“东方人类传统民居活化石”。村里有民俗表演和农家饭，孩子可体验推磨、织布等传统劳作。古城免费，党家村门票约60元。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 韩城羊肉饸饹</span></span><span class="fd"><span class="hi">🔥 韩城馄饨</span></span><span class="fd"><span class="hi">🔥 黄河大鲤鱼</span></span><span class="fd">花椒芽菜</span><span class="fd">油酥角</span><span class="fd">芝川踅面</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">韩城古城美食街</span>（韩城古城内） — 集中羊肉饸饹、臊子馄饨等韩城小吃，夜游古城顺路 · 本地知识</li>
+    <li>🏠 <span class="sn">壶口景区黄河鲤鱼馆</span>（壶口景区内） — 景区内餐厅，主打黄河大鲤鱼，游览后就餐方便 · 本地知识</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">司马迁祠</span>（韩城芝川镇）
+    <div class="alt-desc">距韩城古城12km，史圣司马迁祠墓，塬上可俯瞰黄河，人极少。</div>
+  </div>
+  <div class="tip">💡 壶口10/8起转淡季，开放时间约8:00-17:00。10月是秋汛水量最盛期，观景台会被水雾打湿，<strong>带防水外套和手机防水袋</strong>。门票80元2日有效、一票通秦晋两岸。壶口→韩城走沿黄公路，风景好但弯多。</div>
+  <div class="score-row">⭐ 壶口瀑布 7.85 · 韩城古城 7.60</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(6)" title="🗺️ 点击查看地图位置">🏨 韩城 · <span class="badge comf">舒适型</span> · 韩城古城附近舒适型 · 双床/家庭房 · 可夜游古城 【待预订】</div>
+</div>
+
+<!-- ═══════ D8 ═══════ -->
+<div class="day-card" id="d8" style="border-left-color:#e91e63">
+  <h3 onclick="TripMap.focusDay(7)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 8 — 华山论剑 <span class="pin">📍</span> <span class="dd">10/18 周日</span></h3>
+  <span class="drive-badge">🚗 1.9h · 161km</span>
+  <div class="route">韩城 → 华山</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>10:54</strong></span></div>
+  <div class="day-weather">🌤️ 3-14°C · 山顶更冷</div>
+  <h4>🏙️ 华山 <span class="province">（陕西·渭南）</span></h4>
+  <div class="city-desc">华山，五岳之西岳，以“奇险天下第一山”闻名。南峰海拔2154.9米，为五岳最高峰，<strong>韩愈</strong>登苍龙岭时曾投书求救，留下“韩退之投书处”的遗迹。华山是道教全真派圣地，<strong>陈抟</strong>老祖曾在此修炼。自古华山一条路，千尺幢、百尺峡、长空栈道闻名遐迩。如今西峰索道20分钟直抵2000米高空，普通家庭也能轻松登顶。</div>
+  <h4>⛰️ <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(7,0)" title="🗺️ 点击查看地图位置">华山</span> <span class="badge a5">5A</span> <span class="badge must">必去</span> <a class="badge reserve" href="#华山" title="查看预约方式">📋 需预约</a></h4>
+  <div class="spot-desc">五岳之西岳，以“奇险天下第一山”闻名。南峰海拔2154.9米为五岳最高，西峰形如莲花。本次走<strong>西峰索道往返</strong>：索道斜长4211米、高差894米，20分钟从山脚直达2000米高空。西峰到南峰约1.5小时石阶路，两侧即悬崖，需牵好孩子。<strong>长空栈道</strong>和<strong>鹞子翻身</strong>等极限项目不推荐带孩子尝试。山顶气温比山下低10°C以上，务必带厚外套。注意：10/18已过半价惠民期，人均成本约520元。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 华阴大刀面</span></span><span class="fd"><span class="hi">🔥 踅面</span></span><span class="fd">潼关肉夹馍</span><span class="fd">水盆羊肉</span><span class="fd">华阴凉粉</span><span class="fd">孝义柿子</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">华阴老碗面</span>（华阴市区） — 华阴大刀面，面宽如刀，配蒜汁油泼最地道 · 本地知识</li>
+    <li>🏠 <span class="sn">华山脚下农家菜</span>（华山北站周边） — 下山后就餐首选，主打踅面、水盆羊肉 · 本地知识</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">华山北峰索道</span>（华阴）
+    <div class="alt-desc">备选方案：北峰索道往返160元，苍龙岭台阶陡峭，带9岁孩子需谨慎评估。</div>
+  </div>
+  <div class="tip">💡 华山10/18<strong>已过半价惠民期</strong>（原优惠至10/10），门票回到160元。人均成本约520元：门票160+西峰索道往返280+进山车往返80。山顶比山下低10°C以上，带羽绒服。西峰索道有排队风险，尽早进山。</div>
+  <div class="score-row">⭐ 华山 7.50</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(7)" title="🗺️ 点击查看地图位置">🏨 华阴 · <span class="badge comf">舒适型</span> · 华山北站/华阴市区舒适型 · 双床/家庭房 · 下山即住 【待预订】</div>
+</div>
+
+<!-- ═══════ D9 ═══════ -->
+<div class="day-card" id="d9" style="border-left-color:#00bcd4">
+  <h3 onclick="TripMap.focusDay(8)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 9 — 龙门石窟 <span class="pin">📍</span> <span class="dd">10/19 周一</span></h3>
+  <span class="drive-badge">🚗 3.1h · 258km</span>
+  <div class="route">华阴 → 洛阳</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>12:06</strong></span></div>
+  <div class="day-weather">🌤️ 11-20°C · 秋凉</div>
+  <h4>🏙️ 洛阳 <span class="province">（河南·豫西）</span></h4>
+  <div class="city-desc">洛阳，中国四大古都之一，有1500年建都史，先后有13个王朝在此定鼎。这里是河洛文化的发源地，<strong>武则天</strong>定都洛阳称“神都”，龙门石窟的卢舍那大佛据传依她的面容雕凿。<strong>玄奘</strong>是洛阳偃师人，<strong>白居易</strong>晚年隐居香山18年、长眠于此。白马寺是佛教东传后官办的第一座寺院，被称为“中国第一古刹”。</div>
+  <h4>🗿 <span class="spot-name spot-clickable" onclick="TripMap.focusSpot(8,0)" title="🗺️ 点击查看地图位置">龙门石窟</span> <span class="badge a5">5A</span> <span class="badge must">必去</span> <a class="badge reserve" href="#龙门石窟" title="查看预约方式">📋 需预约</a></h4>
+  <div class="spot-desc">中国三大石窟之一，2000年列入世界文化遗产。开凿于北魏孝文帝迁都洛阳前后，历经400余年、7个朝代营造，现存窟龛2345个、造像10万余尊。核心看点是<strong>奉先寺卢舍那大佛</strong>——高17.14米，面容丰腴慈祥，据传依<strong>武则天</strong>面容雕凿。西山石窟是精华，东山看全景最佳。10月31日前开放<strong>夜游</strong>（18:00-20:00），伊河两岸灯光映照、佛像在夜色中庄严静穆，是白天看不到的震撼。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 洛阳水席</span></span><span class="fd"><span class="hi">🔥 不翻汤</span></span><span class="fd"><span class="hi">🔥 浆面条</span></span><span class="fd">胡辣汤</span><span class="fd">洛阳锅贴</span><span class="fd">牡丹燕菜</span><span class="fd">新安烫面角</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">真不同饭店</span>（老城区） — 洛阳水席代表老字号，24道菜全席体验，家庭聚餐合适 · 本地知识</li>
+    <li>🏠 <span class="sn">老洛阳面馆</span>（洛阳市区连锁） — 浆面条、锅贴等洛阳家常味，连锁多店品质稳定 · 本地知识</li>
+    <li>🏠 <span class="sn">老城十字街夜市</span>（老城区） — 不翻汤、胡辣汤等小吃集中地，夜游洛阳首选 · 本地知识</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">白马寺</span>（洛阳市东12km）
+    <div class="alt-desc">中国第一古刹，门票35元。需提前7天预约且无现场散票，时间不够易白跑。</div>
+  </div>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">洛阳博物馆</span>（洛阳市区）
+    <div class="alt-desc">免费但需提前3天7:00抢票，周一闭馆。抢不到可去天子驾六博物馆30元。</div>
+  </div>
+  <div class="tip">💡 龙门石窟需提前1-7天在公众号预约，日限流3万。8:00开园即入可避开旅行团，10:00前逛完西山。10/31前有夜游（18:00-20:00），<strong>夜游票90元与日场票不通用</strong>，若要看夜游等于当日双份门票。</div>
+  <div class="score-row">⭐ 龙门石窟 8.55</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(8)" title="🗺️ 点击查看地图位置">🏨 洛阳 · <span class="badge comf">舒适型</span> · 洛阳老城区舒适型 · 双床/家庭房 · 近老街夜市 【待预订】</div>
+</div>
+
+<!-- ═══════ D10 ═══════ -->
+<div class="day-card" id="d10" style="border-left-color:#795548">
+  <h3 onclick="TripMap.focusDay(9)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 10 — 南下返粤 <span class="pin">📍</span> <span class="dd">10/20 周二</span></h3>
+  <span class="drive-badge">🚗 8.7h · 811km</span>
+  <div class="route">洛阳 → 长沙</div>
+  <div class="timing"><span>🕐 出发 <strong>08:30</strong></span> <span>🕐 到达 <strong>18:30</strong></span></div>
+  <div class="day-weather">🌤️ 16-24°C · 舒适</div>
+  <h4>🏙️ 长沙 <span class="province">（湖南·省会）</span></h4>
+  <div class="city-desc">长沙，湖南省会，湘江穿城而过，3000年城址未变、2000年未曾改名。马王堆汉墓出土的辛追夫人和素纱襌衣震惊世界，岳麓书院千年弦歌不绝。<strong>毛泽东</strong>青年时在此求学，于橘子洲头写下《沁园春·长沙》。长沙也是全国夜生活最丰富的城市之一，五一广场、坡子街凌晨两点仍热闹非凡。</div>
+  <h4>🍜 美食</h4>
+  <div class="food-list"><span class="fd"><span class="hi">🔥 臭豆腐</span></span><span class="fd"><span class="hi">🔥 口味虾</span></span><span class="fd"><span class="hi">🔥 糖油粑粑</span></span><span class="fd">剁椒鱼头</span><span class="fd">长沙米粉</span><span class="fd">杨裕兴面</span><span class="fd">德园包子</span></div>
+  <ul class="shop-list">
+    <li>🏠 <span class="sn">火宫殿</span>（坡子街） — 长沙小吃名片，臭豆腐、糖油粑粑一站吃齐 · 本地知识</li>
+    <li>🏠 <span class="sn">超级文和友</span>（海信广场） — 复古市井风主题，口味虾代表，适合家庭体验 · 本地知识</li>
+    <li>🏠 <span class="sn">黑色经典臭豆腐</span>（连锁多店） — 长沙臭豆腐连锁标杆，外焦里嫩 · 本地知识</li>
+  </ul>
+  <div class="alt-spot">
+    <span class="alt-tag">🔷 备选</span><span class="alt-name">黄鹤楼</span>（武汉）
+    <div class="alt-desc">若洛阳早出发可在武汉停2小时，门票70元，但会把到长沙时间推到21:00后。</div>
+  </div>
+  <div class="tip">💡 第二个长途日（811km/8.7h）。8:30出发，17:00前在武汉或岳阳服务区午餐，18:30到长沙。晚餐定在坡子街，火宫殿和文和友都在附近。</div>
+  <div class="hotel-line" onclick="TripMap.focusHotel(9)" title="🗺️ 点击查看地图位置">🏨 长沙 · <span class="badge eco">经济型</span> · 长沙市区经济型（坡子街附近）· 双床/家庭房 · 纯过夜 【待预订】</div>
+</div>
+
+<!-- ═══════ D11 ═══════ -->
+<div class="day-card" id="d11" style="border-left-color:#e74c3c">
+  <h3 onclick="TripMap.focusDay(10)" title="🗺️ 点击查看地图路线" style="cursor:pointer">Day 11 — 归家 <span class="pin">📍</span> <span class="dd">10/21 周三</span></h3>
+  <span class="drive-badge">🚗 7.1h · 685km</span>
+  <div class="route">长沙 → 广钢新城</div>
+  <div class="timing"><span>🕐 出发 <strong>09:00</strong></span> <span>🕐 到达 <strong>17:30</strong></span></div>
+  <div class="day-weather">🌤️ 16-24°C · 舒适</div>
+  <div class="tip">💡 最后一段685km/7.1h。9:00出发，长沙→广州全程高速，17:30到家。湖南段午后易有阵雨，注意车速和跟车距离。</div>
+</div>
+  </div>
+</div>
+
+<div class="bottom-sections">
+  <div class="bottom-col bottom-left">
+    <div class="food-section" id="toc-food">
+      <h2>🍜 沿途美食总览（8城 · 60+道特色菜）</h2>
+      <div class="food-grid">
+        <div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_0')">
+    <div class="fcity">🍜 常德 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 常德牛肉粉 · 🔥 酱板鸭 · 🔥 钵子菜 · 石门肥肠 · 桃源擂茶 · 蒿子粑粑</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_0">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>刘聋子粉馆</strong>（常德市区） — 常德牛肉粉代表，汤浓味厚，本地人早餐首选 · 本地知识</div>
+      <div class="food-shop-item"><strong>金丹酱板鸭</strong>（常德市区） — 老字号酱板鸭，可打包带走当伴手礼 · 本地知识</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">常德市区经济型（高速口附近）· 双床/家庭房 · 纯赶路，干净即可 【待预订】 · <span class="badge comf">经济型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_1')">
+    <div class="fcity">🍜 武当山 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 道家斋菜 · 🔥 郧阳三合汤 · 丹江口翘嘴鲌 · 竹溪蒸盆 · 房县黄酒 · 神仙叶凉粉</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_1">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>武当山道家养生菜馆</strong>（武当山景区山下） — 道家斋菜清淡，适合爬山前后调理肠胃 · 本地知识</div>
+      <div class="food-shop-item"><strong>十堰三合汤老店</strong>（十堰市区） — 郧阳三合汤，牛肉+饺子+红薯粉一碗齐活 · 本地知识</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">武当山景区门口/老营镇舒适型 · 双床/家庭房 · 次日一早进山 【待预订】 · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_2')">
+    <div class="fcity">🍜 西安 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 肉夹馍 · 🔥 羊肉泡馍 · 🔥 凉皮 · biangbiang面 · 葫芦头泡馍 · 水盆羊肉 · 油泼面 · 甑糕 · 肉丸胡辣汤 · 柿子饼 · 镜糕 · 冰峰汽水</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_2">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>老孙家饭庄</strong>（东大街） — 百年老字号，羊肉泡馍代表，适合家庭体验手工掰馍 · 本地知识</div>
+      <div class="food-shop-item"><strong>子午路张记肉夹馍</strong>（子午路） — 西安人心中的肉夹馍天花板，腊汁肉肥瘦相间 · 本地知识</div>
+      <div class="food-shop-item"><strong>魏家凉皮</strong>（连锁多店） — 连锁品质稳定，凉皮+肉夹馍套餐方便快捷 · 本地知识</div>
+      <div class="food-shop-item"><strong>回民街（北院门）</strong>（钟楼西侧） — 西安最著名的小吃街，烤肉、泡馍、柿子饼集中，晚间最热闹 · 本地知识</div>
+      <div class="food-shop-item"><strong>永兴坊陕西非遗美食街区</strong>（中山门内） — 集中陕西各地非遗小吃，有摔碗酒体验，孩子喜欢 · 本地知识</div>
+      <div class="food-shop-item"><strong>老孙家饭庄</strong>（东大街） — 兵马俑回城后就餐，泡馍+凉菜适合家庭 · 本地知识</div>
+      <div class="food-shop-item"><strong>魏家凉皮</strong>（连锁多店） — 临潼返程路上解决午餐，出餐快不耽误时间 · 本地知识</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">同上（连住第3晚） · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_3')">
+    <div class="fcity">🍜 延安 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 延安羊肉面 · 🔥 洋芋擦擦 · 🔥 油糕 · 荞面饸饹 · 黄米馍馍 · 羊杂碎 · 子长煎饼</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_3">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>延安老马家羊肉面</strong>（延安市区） — 陕北羊肉面代表，汤鲜肉烂，暖身抗寒 · 本地知识</div>
+      <div class="food-shop-item"><strong>延安1938美食街</strong>（延安市区） — 集中陕北小吃，洋芋擦擦、油糕、荞面饸饹一站式体验 · 本地知识</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">延安市区舒适型 · 双床/家庭房 · 近杨家岭或市中心 【待预订】 · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card">
+  <div class="food-card-hdr">
+    <div class="fcity">🍜 壶口</div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 黄河大鲤鱼 · 🔥 宜川苹果 · 壶口酥梨 · 陕北油糕 · 羊肉剁荞面</span></span></div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_5')">
+    <div class="fcity">🍜 韩城 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 韩城羊肉饸饹 · 🔥 韩城馄饨 · 🔥 花椒芽菜 · 韩城十三花 · 红甜面 · 油酥角 · 芝川踅面</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_5">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>韩城古城美食街</strong>（韩城古城内） — 集中羊肉饸饹、臊子馄饨等韩城小吃，夜游古城顺路 · 本地知识</div>
+      <div class="food-shop-item"><strong>壶口景区黄河鲤鱼馆</strong>（壶口景区内） — 景区内餐厅，主打黄河大鲤鱼，游览后就餐方便 · 本地知识</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">韩城古城附近舒适型 · 双床/家庭房 · 可夜游古城 【待预订】 · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card">
+  <div class="food-card-hdr">
+    <div class="fcity">🍜 华山</div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 华阴大刀面 · 🔥 踅面 · 🔥 潼关肉夹馍 · 水盆羊肉 · 华阴凉粉 · 孝义柿子</span></span></div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_7')">
+    <div class="fcity">🍜 洛阳 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 洛阳水席 · 🔥 不翻汤 · 🔥 浆面条 · 胡辣汤 · 洛阳锅贴 · 牡丹燕菜 · 新安烫面角</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_7">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>真不同饭店</strong>（老城区） — 洛阳水席代表老字号，24道菜全席体验，家庭聚餐合适 · 本地知识</div>
+      <div class="food-shop-item"><strong>老洛阳面馆</strong>（洛阳市区连锁） — 浆面条、锅贴等洛阳家常味，连锁多店品质稳定 · 本地知识</div>
+      <div class="food-shop-item"><strong>老城十字街夜市</strong>（老城区） — 不翻汤、胡辣汤等小吃集中地，夜游洛阳首选 · 本地知识</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">洛阳老城区舒适型 · 双床/家庭房 · 近老街夜市 【待预订】 · <span class="badge comf">舒适型</span></div>
+    </div>
+  </div>
+</div>
+<div class="food-card food-has-detail">
+  <div class="food-card-hdr" onclick="toggleFoodCard('fc_8')">
+    <div class="fcity">🍜 长沙 <span class="food-expand-icon">▼</span></div>
+    <div class="food-dishes"><span class="fd"><span class="hi">🔥 臭豆腐 · 🔥 口味虾 · 🔥 糖油粑粑 · 剁椒鱼头 · 长沙米粉 · 杨裕兴面 · 德园包子</span></span></div>
+  </div>
+  <div class="food-card-body" id="fc_8">
+    <div class="food-shops">
+      <div class="food-shops-title">🏠 推荐门店</div>
+      <div class="food-shop-item"><strong>火宫殿</strong>（坡子街） — 长沙小吃名片，臭豆腐、糖油粑粑一站吃齐 · 本地知识</div>
+      <div class="food-shop-item"><strong>超级文和友</strong>（海信广场） — 复古市井风主题，口味虾代表，适合家庭体验 · 本地知识</div>
+      <div class="food-shop-item"><strong>黑色经典臭豆腐</strong>（连锁多店） — 长沙臭豆腐连锁标杆，外焦里嫩 · 本地知识</div>
+    </div>
+    <div class="food-hotel">
+      <div class="food-hotel-title">🏨 住宿</div>
+      <div class="food-hotel-info">长沙市区经济型（坡子街附近）· 双床/家庭房 · 纯过夜 【待预订】 · <span class="badge comf">经济型</span></div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div class="reservation-section" id="toc-reservation">
+  <h2>📋 景点预约指南</h2>
+  <div class="reserve-urgent">⚠️ <strong>必约景点：</strong>陕西历史博物馆、秦始皇陵兵马俑、华山、龙门石窟、壶口瀑布、杨家岭革命旧址、武当山金顶 — 旺季热门，建议提前 3-7 天预约；漏约一个就可能影响整段行程。</div>
+  <div class="reserve-timeline">
+    <h3>⏰ 预约时间线</h3>
+    <div class="reserve-timeline-strip">
+      <div class="reserve-tl-item"><span class="tl-date">⚠️ 10/9（周五）17:00 整点抢 10/14 的票</span><span class="tl-action">预约</span><span class="tl-name">陕西历史博物馆</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">可现场购票，建议提前1天在平台订更便宜</span><span class="tl-action">预约</span><span class="tl-name">韩城古城·党家村</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">可约7日内，建议10/12前预约 10/14 的票</span><span class="tl-action">预约</span><span class="tl-name">西安城墙</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">建议10/10前预约 10/13 的票</span><span class="tl-action">预约</span><span class="tl-name">武当山金顶</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">建议10/10前预约 10/16 的票</span><span class="tl-action">预约</span><span class="tl-name">杨家岭革命旧址</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">建议10/12前预约 10/14 的票（旺季建议提前1-3天）</span><span class="tl-action">预约</span><span class="tl-name">大雁塔·大慈恩寺</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">建议10/13前预约 10/16 的票</span><span class="tl-action">预约</span><span class="tl-name">黄帝陵</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">建议10/8前预约 10/15 的票</span><span class="tl-action">预约</span><span class="tl-name">秦始皇陵兵马俑</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">提前1-7天，建议10/11前预约 10/17 的票</span><span class="tl-action">预约</span><span class="tl-name">壶口瀑布</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">提前1-7天，建议10/13前预约 10/19 的票</span><span class="tl-action">预约</span><span class="tl-name">龙门石窟</span></div>
+      <div class="reserve-tl-item"><span class="tl-date">每日16时放第10日票，建议10/9前订 10/18 的票</span><span class="tl-action">预约</span><span class="tl-name">华山</span></div>
+    </div>
+  </div>
+  <div class="reserve-cards">
+    <div class="reserve-card must" id="陕西历史博物馆">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_0').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">陕西历史博物馆</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 免费（不免票，全员预约）</span>
+          <span>📅 提前5天</span>
+          <span>📱 仅官微「陕西历史博物馆」</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_0">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">仅官微「陕西历史博物馆」</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→门票预约→选择日期时段→填写游客信息→提交。唯一官方渠道，未授权任何第三方。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">免费（不免票，全员预约）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">5天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">2026.3.15-11.14 延时开放 8:30-19:00（18:00停检）；10月取消周一闭馆</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">免费但9岁儿童需占预约名额（仅6周岁以下或1.4米以下免预约随行）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65岁以上可走绿色通道，需核验证件</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 2026年因设备改造日接待量由12000降至4000-6000，抢票极难。抢不到改去西安博物院（小雁塔）或秦汉馆（免预约）。</div>
+      </div>
+    </div>
+    <div class="reserve-card must" id="秦始皇陵兵马俑">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_1').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">秦始皇陵兵马俑</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 120元（全年一口价）</span>
+          <span>📅 提前7天</span>
+          <span>📱 官网 bmy.com.cn / 官微「秦始皇帝陵博物院」</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_1">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">官网 bmy.com.cn / 官微「秦始皇帝陵博物院」</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">官网或官微搜索“秦始皇帝陵博物院”→选择日期时段→填写游客信息→在线支付→凭身份证入园。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">120元（全年一口价）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">7天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">旺季(3.16-11.15) 8:30-18:30，17:00停检</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">16周岁以下免票，&lt;strong&gt;但必须预约0元票&lt;/strong&gt;并填孩子身份信息</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65周岁以上免票（需预约0元票）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 若预约页无“携带儿童数量”栏，说明该时段儿童免票名额已满，需换时段。建议请讲解或租语音导览。</div>
+      </div>
+    </div>
+    <div class="reserve-card must" id="华山">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_2').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">华山</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 门票旺季160元；西峰索道往返280元；西峰进山车往返80元</span>
+          <span>📅 提前10天</span>
+          <span>📱 「华山旅游服务平台」公众号/小程序 · 支付宝「华山旅游官方平台」</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_2">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">「华山旅游服务平台」公众号/小程序 · 支付宝「华山旅游官方平台」</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→门票预订→选择日期→勾选西峰索道往返+西峰进山车→支付。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">门票旺季160元；西峰索道往返280元；西峰进山车往返80元</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">10天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">索道旺季 7:00-19:00</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">6-18岁门票半价80元；1.2米以下免门票（&lt;strong&gt;索道和进山车照收&lt;/strong&gt;）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65岁以上免门票（索道照收）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 &lt;strong&gt;10/10后半价惠民期结束&lt;/strong&gt;，10/18已是全价。索道和进山车从不参与任何优惠。门票自首次检票起48小时有效。</div>
+      </div>
+    </div>
+    <div class="reserve-card must" id="龙门石窟">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_3').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">龙门石窟</span>
+          <span class="reserve-confidence">⚠️ 儿童免票口径有分歧（12周岁 vs 1.4米）</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 90元一票通（西山+东山+香山寺+白园）；夜游票90元另购不通用</span>
+          <span>📅 提前7天</span>
+          <span>📱 微信「龙门石窟」公众号</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_3">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">微信「龙门石窟」公众号</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→门票预约→实名分时预约→选择日期时段→支付。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">90元一票通（西山+东山+香山寺+白园）；夜游票90元另购不通用</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">7天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">旺季3.1-10.31 8:00-18:00（17:30停止检票）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">12周岁以下或1.4米以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">60-69岁半价，70岁以上免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 儿童免票口径有分歧（12周岁 vs 1.4米）</span></div>
+        </div>
+        <div class="reserve-tips">💡 日限流3万。8:00开园即入可避开旅行团，10:00前逛完西山。10/31前有夜游（18:00-20:00）。</div>
+      </div>
+    </div>
+    <div class="reserve-card must" id="壶口瀑布">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_4').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">壶口瀑布</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 80元（2日有效，一票通秦晋两岸）；观光车16元</span>
+          <span>📅 提前7天</span>
+          <span>📱 官微「黄河壶口瀑布旅游区」</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_4">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">官微「黄河壶口瀑布旅游区」</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→门票预订→选择日期→支付。也可现场购票。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">80元（2日有效，一票通秦晋两岸）；观光车16元</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">7天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">10/8起转淡季，约 8:00-17:00</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">6周岁以下或1.2米以下免票；学生半价40元</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65岁以上免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 &lt;strong&gt;10月是秋汛水量最盛期&lt;/strong&gt;，观景台会被水雾打湿，带防水外套和手机防水袋。</div>
+      </div>
+    </div>
+    <div class="reserve-card must" id="杨家岭革命旧址">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_5').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">杨家岭革命旧址</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 免费</span>
+          <span>📅 提前7天</span>
+          <span>📱 官微「延安杨家岭革命旧址」</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_5">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">官微「延安杨家岭革命旧址」</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→实名预约→选择时段（分4段）→提交。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">免费</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">7天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">8:00-18:00，分4个预约时段，&lt;strong&gt;每段限2999人&lt;/strong&gt;</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">儿童需实名预约</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">70岁以上免预约</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 每时段限2999人，红色旅游旺季名额较紧张。枣园旧址同样免费需预约，可一并约。</div>
+      </div>
+    </div>
+    <div class="reserve-card opt" id="黄帝陵">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_6').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge opt">🟡 选去</span>
+          <span class="reserve-name">黄帝陵</span>
+          <span class="reserve-confidence">⚠️ 票价有分歧，出发前确认</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 75元（&lt;strong&gt;票价有分歧&lt;/strong&gt;：另有旺季75/淡季50、旺季90等说法）；观光车往返20元</span>
+          <span>📅 提前3天</span>
+          <span>📱 官微「民族圣地黄帝陵」→畅游景区→门票预订</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_6">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">官微「民族圣地黄帝陵」→畅游景区→门票预订</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注公众号→畅游景区→门票预订→选择日期→支付。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">75元（&lt;strong&gt;票价有分歧&lt;/strong&gt;：另有旺季75/淡季50、旺季90等说法）；观光车往返20元</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">3天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">约 7:30-18:30（17:30停入）；淡季 7:50-17:00</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">未成年人半价37.5元；1.2米以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65岁以上免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 票价有分歧，出发前确认</span></div>
+        </div>
+        <div class="reserve-tips">💡 票价说法较多，以官方公众号实时公示为准。观光车往返20元建议购买，园区较大。</div>
+      </div>
+    </div>
+    <div class="reserve-card opt" id="西安城墙">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_7').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge opt">🟡 选去</span>
+          <span class="reserve-name">西安城墙</span>
+          <span class="reserve-confidence">✅ 高置信</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 54元；自行车租赁 单人45元/2小时、双人90元/2小时（另计）</span>
+          <span>📅 提前7天</span>
+          <span>📱 小程序「遇见城墙百宝箱」</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_7">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">小程序「遇见城墙百宝箱」</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">微信搜索小程序→选择门票→选择日期→支付。自行车租赁在城墙上单独办理。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">54元；自行车租赁 单人45元/2小时、双人90元/2小时（另计）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">7天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">永宁门 8:00-22:00；其他门 8:00-20:00</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">6-18岁半价27元；6周岁及以下或1.2米以下免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65岁以上免票（非本地市民无免费日）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">✅ 高置信</span></div>
+        </div>
+        <div class="reserve-tips">💡 骑行建议16:00后上城墙，正好看落日。全程13.74km，骑行100-120分钟。</div>
+      </div>
+    </div>
+    <div class="reserve-card must" id="武当山金顶">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_8').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge must">🔴 必去</span>
+          <span class="reserve-name">武当山金顶</span>
+          <span class="reserve-confidence">⚠️ 儿童票口径有分歧</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 通票164元（进山126+景点38）；观光车90元；金顶索道双程85元（2026.7起降价）</span>
+          <span>📅 提前1天</span>
+          <span>📱 官方小程序「武当山智慧旅游」或「一部手机游武当」（携程/美团亦可）</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_8">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">官方小程序「武当山智慧旅游」或「一部手机游武当」（携程/美团亦可）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">搜索小程序→实名预约购票→选择日期时段→支付→凭身份证入园。金顶需分时段预约。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">通票164元（进山126+景点38）；观光车90元；金顶索道双程85元（2026.7起降价）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">景区约 7:00-17:30；索道 16:30 停运</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">6周岁以下或1.2米以下免票；1.2-1.5米门票半价约82元、儿童索道往返约75元</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65岁以上免门票（以官方小程序公示为准）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 儿童票口径有分歧</span></div>
+        </div>
+        <div class="reserve-tips">💡 金顶分时段预约，日限流3万。索道16:30停运，金顶往返3-4h，务必上午上山。</div>
+      </div>
+    </div>
+    <div class="reserve-card opt" id="大雁塔·大慈恩寺">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_9').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge opt">🟡 选去</span>
+          <span class="reserve-name">大雁塔·大慈恩寺</span>
+          <span class="reserve-confidence">⚠️ 票价有分歧</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 入寺40元（⚠️分歧：另有10-50元说法）；登塔25元另购</span>
+          <span>📅 提前1天</span>
+          <span>📱 微信小程序/公众号「大慈恩寺」</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_9">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">微信小程序/公众号「大慈恩寺」</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">关注→实名预约→选择日期→支付→凭身份证或入园码核验。一人一票当日单次有效。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">入寺40元（⚠️分歧：另有10-50元说法）；登塔25元另购</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">大慈恩寺约 8:30-17:30；登塔约 8:30-17:00</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">6周岁以下或1.2米以下免票；6-18周岁半价约20元</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65岁以上免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 票价有分歧</span></div>
+        </div>
+        <div class="reserve-tips">💡 登塔楼梯陡窄，带9岁孩子需牵手慢行。北广场音乐喷泉免费，是孩子最期待的环节。</div>
+      </div>
+    </div>
+    <div class="reserve-card opt" id="韩城古城·党家村">
+      <div class="reserve-card-hdr" onclick="document.getElementById('rv_10').classList.toggle('open')">
+        <div class="reserve-card-title">
+          <span class="reserve-badge opt">🟡 选去</span>
+          <span class="reserve-name">韩城古城·党家村</span>
+          <span class="reserve-confidence">⚠️ 票价有分歧</span>
+        </div>
+        <div class="reserve-card-summary">
+          <span>🎫 党家村约50-60元（⚠️分歧：同程60/现场50/优惠45）；古城免费</span>
+          <span>📅 提前1天</span>
+          <span>📱 无官方公众号，走第三方平台（同程/美团）或现场购票</span>
+          <span class="reserve-toggle">▼</span>
+        </div>
+      </div>
+      <div class="reserve-card-body" id="rv_10">
+        <div class="reserve-info-grid">
+          <div class="reserve-info-item"><span class="ri-label">📱 预约平台</span><span class="ri-value">无官方公众号，走第三方平台（同程/美团）或现场购票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📝 预约步骤</span><span class="ri-value">平台购票→凭短信验证码到景区售票处换票。韩城古城免费无需预约。</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🎫 门票价格</span><span class="ri-value">党家村约50-60元（⚠️分歧：同程60/现场50/优惠45）；古城免费</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📅 提前天数</span><span class="ri-value">1天</span></div>
+          <div class="reserve-info-item"><span class="ri-label">🕐 开放时间</span><span class="ri-value">4/1-10/31 8:00-18:00（17:30停止入园）</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👶 儿童政策</span><span class="ri-value">6周岁以下或1.2米以下免票；6-18周岁半价；学生凭证半价</span></div>
+          <div class="reserve-info-item"><span class="ri-label">👴 老人政策</span><span class="ri-value">65岁以上免票</span></div>
+          <div class="reserve-info-item"><span class="ri-label">📊 信息置信度</span><span class="ri-value">⚠️ 票价有分歧</span></div>
+        </div>
+        <div class="reserve-tips">💡 党家村距韩城古城9km，村里有民俗表演和农家饭，孩子可体验推磨、织布。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="expense-section" id="toc-expense">
+  <h2>💰 费用统计（按天 · 点击展开明细）</h2>
+  <div class="expense-table-wrap">
+    <table class="expense-table">
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>🏨 住宿</th>
+          <th>🚗 交通</th>
+          <th>🍜 餐饮</th>
+          <th>🎫 景点</th>
+          <th>📊 合计</th>
+          <th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">1</td>
+          <td>¥200</td>
+          <td>¥868</td>
+          <td>¥300</td>
+          <td>—</td>
+          <td class="et">¥1,368</td>
+          <td class="en"><div class="en-inner en-no-trunc">过路费372+油费496（827km）· 3人×¥100</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">2</td>
+          <td>¥500</td>
+          <td>¥526</td>
+          <td>¥360</td>
+          <td>—</td>
+          <td class="et">¥1,386</td>
+          <td class="en"><div class="en-inner en-no-trunc">过路费225+油费301（501km）· 玉虚宫免费</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">3</td>
+          <td>¥650</td>
+          <td>¥425</td>
+          <td>¥450</td>
+          <td>¥880</td>
+          <td class="et">¥2,405</td>
+          <td class="en"><div class="en-inner">武当山通票164+观光车90+索道85（成人678）· 儿童门票半价82+车45+索道75（按1.2-1.5米估，现场为准）</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">4</td>
+          <td>¥650</td>
+          <td>¥100</td>
+          <td>¥450</td>
+          <td>¥310</td>
+          <td class="et">¥1,510</td>
+          <td class="en"><div class="en-inner">市内交通+停车 · 城墙54+陕历博免费+大雁塔40+登塔25</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">5</td>
+          <td>¥650</td>
+          <td>¥61</td>
+          <td>¥450</td>
+          <td>¥540</td>
+          <td class="et">¥1,701</td>
+          <td class="en"><div class="en-inner">兵马俑120（儿童免）+华清宫120/半价60 · 临潼往返69km</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">6</td>
+          <td>¥450</td>
+          <td>¥339</td>
+          <td>¥360</td>
+          <td>¥248</td>
+          <td class="et">¥1,397</td>
+          <td class="en"><div class="en-inner">过路费145+油费194（323km）· 黄帝陵75+观光车20</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">7</td>
+          <td>¥400</td>
+          <td>¥266</td>
+          <td>¥360</td>
+          <td>¥368</td>
+          <td class="et">¥1,394</td>
+          <td class="en"><div class="en-inner">过路费114+油费152（253km）· 壶口80+观光车16+党家村60</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">8</td>
+          <td>¥400</td>
+          <td>¥169</td>
+          <td>¥360</td>
+          <td>¥1,480</td>
+          <td class="et">¥2,409</td>
+          <td class="en"><div class="en-inner">华山门票160（儿童半价80）+西峰索道280+进山车80（索道/进山车儿童照收）· 全趟最贵一天</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">9</td>
+          <td>¥500</td>
+          <td>¥271</td>
+          <td>¥450</td>
+          <td>¥210</td>
+          <td class="et">¥1,431</td>
+          <td class="en"><div class="en-inner">过路费116+油费155（258km）· 龙门石窟90（儿童12岁以下免）+电瓶车10</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">10</td>
+          <td>¥250</td>
+          <td>¥852</td>
+          <td>¥450</td>
+          <td>—</td>
+          <td class="et">¥1,552</td>
+          <td class="en"><div class="en-inner en-no-trunc">过路费365+油费487（811km）· 纯赶路</div></td>
+        </tr>
+        <tr class="expense-row expense-row-no-detail">
+          <td class="ed">11</td>
+          <td>—</td>
+          <td>¥719</td>
+          <td>¥450</td>
+          <td>—</td>
+          <td class="et">¥1,169</td>
+          <td class="en"><div class="en-inner en-no-trunc">过路费308+油费411（685km）· 到家</div></td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="expense-total-row">
+          <td><strong>合计</strong></td>
+          <td><strong>¥4,650</strong></td>
+          <td><strong>¥4,596</strong></td>
+          <td><strong>¥4,440</strong></td>
+          <td><strong>¥4,036</strong></td>
+          <td><strong>¥17,722</strong></td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+  </div>
+
+  <div class="bottom-col bottom-right">
+    <div class="scoring-section" id="toc-scoring">
+  <h2>⭐ 景点评分体系</h2>
+  <h3>评分维度与权重</h3>
+  <table class="method-table">
+    <thead><tr><th>维度</th><th>权重</th><th>评分标准</th></tr></thead>
+    <tbody>
+      <tr><td>🏅 美誉度</td><td><strong>30%</strong></td><td>官方评级（5A/4A）、世界遗产认定、博物馆等级、历史地位</td></tr>
+      <tr><td>🎮 可玩性</td><td><strong>25%</strong></td><td>亲子友好、互动参与感、9岁儿童适配度、建议游览时长</td></tr>
+      <tr><td>🍜 美食吸引度</td><td><strong>20%</strong></td><td>所在城市特色美食丰富度与口碑</td></tr>
+      <tr><td>👥 人流量</td><td><strong>15%</strong></td><td>10月中旬拥挤程度——人越少分越高（反向计分）</td></tr>
+      <tr><td>🏨 住宿豪华度</td><td><strong>5%</strong></td><td>所在城市豪华/舒适型酒店选择丰富度</td></tr>
+      <tr><td>📍 抵达距离</td><td><strong>5%</strong></td><td>离开主环线的绕路成本——越顺路分越高（反向计分）</td></tr>
+    </tbody>
+  </table>
+  <h3>17个候选景点完整评分 <span style="font-weight:400;font-size:.78rem;color:var(--muted)">（点击景点名展开攻略）</span></h3>
+  <table class="full-scores" id="candidates-table">
+    <thead>
+      <tr><th>#</th><th>景点</th><th>位置</th><th>等级</th><th>美誉30%</th><th>人流15%</th><th>可玩25%</th><th>住宿5%</th><th>距离5%</th><th>美食20%</th><th>总分</th><th>状态</th></tr>
+    </thead>
+    <tbody>
+      <tr class="sel"><td>1</td><td>西安城墙</td><td>西安</td><td>5A</td><td>9</td><td>7</td><td>9</td><td>9</td><td>10</td><td>9</td><td class="sc">8.75</td><td>✅ D3</td></tr>
+      <tr class="sel"><td>2</td><td>龙门石窟</td><td>洛阳</td><td>5A</td><td>10</td><td>6</td><td>8</td><td>8</td><td>9</td><td>9</td><td class="sc">8.55</td><td>✅ D9</td></tr>
+      <tr class="sel"><td>3</td><td>秦始皇陵兵马俑</td><td>西安</td><td>5A</td><td>10</td><td>5</td><td>8</td><td>9</td><td>9</td><td>8</td><td class="sc">8.25</td><td>✅ D5</td></tr>
+      <tr class="sel"><td>4</td><td>大唐不夜城</td><td>西安</td><td>—</td><td>8</td><td>5</td><td>9</td><td>9</td><td>10</td><td>9</td><td class="sc">8.15</td><td>✅ D4</td></tr>
+      <tr class="sel"><td>5</td><td>陕西历史博物馆</td><td>西安</td><td>一级</td><td>10</td><td>4</td><td>7</td><td>9</td><td>10</td><td>9</td><td class="sc">8.10</td><td>✅ D4</td></tr>
+      <tr class="sel"><td>5</td><td>大雁塔·大慈恩寺</td><td>西安</td><td>5A</td><td>9</td><td>6</td><td>7</td><td>9</td><td>10</td><td>9</td><td class="sc">8.10</td><td>✅ D4</td></tr>
+      <tr class="skip"><td>7</td><td>白马寺</td><td>洛阳</td><td>5A</td><td>9</td><td>7</td><td>7</td><td>8</td><td>7</td><td>9</td><td class="sc">8.05</td><td>时间不足</td></tr>
+      <tr class="sel"><td>8</td><td>壶口瀑布</td><td>宜川</td><td>5A</td><td>10</td><td>7</td><td>9</td><td>5</td><td>6</td><td>5</td><td class="sc">7.85</td><td>✅ D7</td></tr>
+      <tr class="sel"><td>9</td><td>回民街</td><td>西安</td><td>—</td><td>7</td><td>5</td><td>8</td><td>9</td><td>10</td><td>10</td><td class="sc">7.80</td><td>✅ D3</td></tr>
+      <tr class="skip"><td>10</td><td>少林寺</td><td>登封</td><td>5A</td><td>10</td><td>5</td><td>8</td><td>7</td><td>4</td><td>7</td><td class="sc">7.70</td><td>时间不足</td></tr>
+      <tr class="sel"><td>11</td><td>韩城古城·党家村</td><td>韩城</td><td>—</td><td>8</td><td>9</td><td>7</td><td>6</td><td>8</td><td>7</td><td class="sc">7.60</td><td>✅ D7</td></tr>
+      <tr class="sel"><td>12</td><td>华山</td><td>华阴</td><td>5A</td><td>10</td><td>6</td><td>7</td><td>6</td><td>7</td><td>6</td><td class="sc">7.50</td><td>✅ D8</td></tr>
+      <tr class="sel"><td>13</td><td>武当山</td><td>十堰</td><td>5A</td><td>9</td><td>7</td><td>7</td><td>7</td><td>8</td><td>6</td><td class="sc">7.45</td><td>✅ D2-D3</td></tr>
+      <tr class="sel"><td>13</td><td>延安革命旧址</td><td>延安</td><td>5A</td><td>9</td><td>8</td><td>7</td><td>6</td><td>6</td><td>6</td><td class="sc">7.45</td><td>✅ D6</td></tr>
+      <tr class="skip"><td>15</td><td>司马迁祠</td><td>韩城</td><td>4A</td><td>8</td><td>9</td><td>6</td><td>6</td><td>8</td><td>7</td><td class="sc">7.35</td><td>备选</td></tr>
+      <tr class="sel"><td>16</td><td>华清宫</td><td>西安</td><td>5A</td><td>8</td><td>6</td><td>6</td><td>9</td><td>9</td><td>8</td><td class="sc">7.30</td><td>✅ D5</td></tr>
+      <tr class="sel"><td>17</td><td>黄帝陵</td><td>黄陵</td><td>5A</td><td>9</td><td>8</td><td>6</td><td>5</td><td>9</td><td>5</td><td class="sc">7.10</td><td>✅ D6</td></tr>
+    </tbody>
+  </table>
+</div>
+
+    <div class="summary" id="toc-summary">
+  <h2>📊 行程总览</h2>
+  <div class="trip-overview-card">
+    <div class="tov-item">🚗 1车自驾 · 总程 4,292km · 11天10晚</div>
+    <div class="tov-item">🏷️ 武当问道 × 长安十三朝 × 黄河壶口 × 华山论剑</div>
+  </div>
+  <div class="sg">
+    <div class="sca"><div class="ico">🎫</div><div class="big">14</div><div class="lbl">景点总数</div><div class="dl"><span><span>5A 级</span><span class="hv">10个</span></span><span><span>4A 级</span><span class="gv">0个</span></span><span><span>特殊/未评级</span><span class="gv">4个</span></span></div></div>
+    <div class="sca"><div class="ico">🚗</div><div class="big">48.4h</div><div class="lbl">总驾驶时间</div><div class="dl"><span><span>总距离</span><span class="gv">4,292km</span></span><span><span>平均（11天）</span><span class="gv">4.4h/天</span></span><span><span>平均（驾驶日10天）</span><span class="gv">4.8h/天</span></span><span><span>停驶日</span><span class="gv">D4（1天）</span></span></div></div>
+    <div class="sca"><div class="ico">⚠️</div><div class="big">8.7h</div><div class="lbl">单日最大驾驶</div><div class="dl"><span><span>最长日</span><span class="hv">D10（8.7h）</span></span><span><span>弹性日(&gt;3h)</span><span class="gv">3天</span></span><span><span>超5h天数</span><span class="hv">4天（D1+D2+D10+D11）</span></span><span><span>最短驾驶日</span><span class="gv">D4（停驶）</span></span></div></div>
+    <div class="sca"><div class="ico">🏨</div><div class="big">8</div><div class="lbl">过夜城市</div><div class="dl"><span><span>🌟 豪华</span><span class="gv" style="color:#8e44ad">—</span></span><span><span>🏨 舒适</span><span class="gv">8晚（武当山+西安×3+延安+韩城+华阴+洛阳）</span></span><span><span>🏠 经济</span><span class="gv">2晚（常德+长沙）</span></span><span><span>♨️ 温泉</span><span class="gv">—</span></span></div></div>
+    <div class="sca w2">
+      <div class="ico">📊 逐日驾驶时长（小时）</div>
+      <div class="bars">
+        <div class="b ov" style="height:95%"><span class="bl">D1 8.3</span></div>
+        <div class="b ov" style="height:67%"><span class="bl">D2 5.8</span></div>
+        <div class="b nm" style="height:54%"><span class="bl">D3 4.7</span></div>
+        <div class="b zz" style="height:5%"><span class="bl">D4 0</span></div>
+        <div class="b nm" style="height:9%"><span class="bl">D5 0.8</span></div>
+        <div class="b nm" style="height:44%"><span class="bl">D6 3.8</span></div>
+        <div class="b nm" style="height:48%"><span class="bl">D7 4.2</span></div>
+        <div class="b nm" style="height:22%"><span class="bl">D8 1.9</span></div>
+        <div class="b nm" style="height:36%"><span class="bl">D9 3.1</span></div>
+        <div class="b ov" style="height:100%"><span class="bl">D10 8.7</span></div>
+        <div class="b ov" style="height:82%"><span class="bl">D11 7.1</span></div>
+      </div>
+      <div class="bleg"><span><span class="sw" style="background:#e74c3c"></span>豁免(首末)&gt;5h</span><span><span class="sw" style="background:#f39c12"></span>弹性 &gt;3h</span><span><span class="sw" style="background:#27ae60"></span>正常 ≤3h</span><span><span class="sw" style="background:#ddd"></span>停驶</span></div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)">高德地图 REST API 实测驾驶数据 · 总程 4,292km / 48.4h · 生成 2026-09-27 · 修订 2026-09-29（小家庭3人校对）</div>
+  <div class="summary-tips">💡 默认9:00出发 · 长途日D1(8.3h)/D10(8.7h) · 🛰️ 高德API实测 · 🎫 陕历博需10/9 17:00抢票 · 🏔️ 华山10/18已过半价期</div>
+</div>
+  </div>
+</div>
+
+<!-- ═══════ 目录浮标 ═══════ -->
+<div class="toc-float" id="tocFloat">
+  <button class="toc-btn" id="tocBtn" onclick="toggleToc()" title="目录导航">☰</button>
+  <div class="toc-panel" id="tocPanel">
+    <div class="toc-title">📑 页面导航</div>
+        <a class="toc-item" onclick="scrollToToc('toc-top')"><span class="toc-num">1</span>🏠 页面顶部</a>
+    <a class="toc-item" onclick="toggleWeather();scrollToToc('weatherStrip')"><span class="toc-num">2</span>🌤️ 沿途天气</a>
+    <a class="toc-item" onclick="scrollToToc('toc-days')"><span class="toc-num">3</span>📅 每日行程</a>
+    <a class="toc-item" onclick="scrollToToc('toc-food')"><span class="toc-num">4</span>🍜 沿途美食总览（8城 · 60+道特色菜）</a>
+    <a class="toc-item" onclick="scrollToToc('toc-reservation')"><span class="toc-num">5</span>📋 预约指南</a>
+    <a class="toc-item" onclick="scrollToToc('toc-expense')"><span class="toc-num">6</span>💰 费用统计</a>
+    <a class="toc-item" onclick="scrollToToc('toc-scoring')"><span class="toc-num">7</span>⭐ 评分体系</a>
+    <a class="toc-item" onclick="scrollToToc('toc-summary')"><span class="toc-num">8</span>📊 行程总览</a>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-core.js — 地图初始化、全局变量、标记、InfoWindow、天气/图例交互
+
+   ═══ 页面 ↔ 地图 交互契约（改动前务必读 .agents/skills/html-trip-page/
+       references/map-interactions.md）═══
+
+   所有「页面元素 → 地图」的跳转统一走 TripMap 命名空间：
+     TripMap.focusDay(n)     聚焦第 n 天（0-based）：展开地图 + 加载当天路线 + setBounds
+     TripMap.focusSpot(n,i)  聚焦第 n 天第 i 个景点标记（i = rspots 索引）
+     TripMap.focusHotel(n)   聚焦第 n 天住宿标记：缩放 + 弹窗 + 弹跳
+     TripMap.scrollToDay(n)  反向：滚动页面到第 n 天日程卡
+     TripMap.ensureVisible() 确保地图面板可见（可能已收起 / 已折叠）
+
+   数据索引约定：
+     H[n]      = 第 n 天住宿 marker
+     SM[n][i] = 第 n 天第 i 个景点 marker（顺序同 d.r 之外的 day_routes.rspots）
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const C=['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6','#1abc9c','#e67e22','#e91e63','#00bcd4','#795548'];
+const K='9f853e26c1ef1d449260b4ad9a4de5c8';
+var D=[{h:[111.69905,29.031446],hl:"D1 常德",hi:{"c": "常德", "lv": "经济型", "n": "常德市区经济型（高速口附近）· 双床/家庭房 · 纯赶路，干净即可 【待预订】"},s:[],r:[[113.236075, 23.06814], [111.69905, 29.031446]]},{h:[111.143074,32.504468],hl:"D2 武当山",hi:{"c": "武当山", "lv": "舒适型", "n": "武当山景区门口/老营镇舒适型 · 双床/家庭房 · 次日一早进山 【待预订】"},s:[{"p": [112.121743, 32.010161], "l": "襄阳古隆中"}, {"p": [111.083825, 32.506035], "l": "玉虚宫"}],r:[[111.69905, 29.031446], [112.121743, 32.010161], [111.143074, 32.504468]]},{h:[108.939645,34.343207],hl:"D3-5 西安",hi:{"c": "西安", "lv": "舒适型", "n": "西安钟楼/大雁塔附近舒适型 500-800/间 · 双床/家庭房 · 连住3晚 【待预订】"},s:[{"p": [111.009834, 32.398507], "l": "武当山金顶"}, {"p": [108.946952, 34.248186], "l": "西安城墙"}],r:[[111.143074, 32.504468], [108.939645, 34.343207]]},{h:[108.939645,34.343207],hl:"D3-5 西安",hi:{"c": "西安", "lv": "舒适型", "n": "同上（连住第2晚）"},s:[{"p": [108.957496, 34.222886], "l": "陕西历史博物馆"}, {"p": [108.964176, 34.218229], "l": "大雁塔"}, {"p": [108.964046, 34.213866], "l": "大唐不夜城"}],r:[]},{h:[108.939645,34.343207],hl:"D3-5 西安",hi:{"c": "西安", "lv": "舒适型", "n": "同上（连住第3晚）"},s:[{"p": [109.214249, 34.367181], "l": "秦始皇陵兵马俑"}, {"p": [109.215759, 34.356728], "l": "华清宫"}],r:[[108.939645, 34.343207], [109.214249, 34.367181]]},{h:[109.49468,36.650109],hl:"D6 延安",hi:{"c": "延安", "lv": "舒适型", "n": "延安市区舒适型 · 双床/家庭房 · 近杨家岭或市中心 【待预订】"},s:[{"p": [109.262919, 35.579421], "l": "黄帝陵"}, {"p": [109.470211, 36.620318], "l": "杨家岭"}],r:[[108.939645, 34.343207], [109.262919, 35.579421], [109.49468, 36.650109]]},{h:[110.437138,35.461995],hl:"D7 韩城",hi:{"c": "韩城", "lv": "舒适型", "n": "韩城古城附近舒适型 · 双床/家庭房 · 可夜游古城 【待预订】"},s:[{"p": [110.168963, 36.050178], "l": "壶口瀑布"}, {"p": [110.476373, 35.529145], "l": "韩城古城·党家村"}],r:[[109.49468, 36.650109], [110.168963, 36.050178], [110.437138, 35.461995]]},{h:[110.092286,34.566552],hl:"D8 华阴",hi:{"c": "华阴", "lv": "舒适型", "n": "华山北站/华阴市区舒适型 · 双床/家庭房 · 下山即住 【待预订】"},s:[{"p": [110.081267, 34.49531], "l": "华山峪"}],r:[[110.437138, 35.461995], [110.081267, 34.49531]]},{h:[112.453895,34.619702],hl:"D9 洛阳",hi:{"c": "洛阳", "lv": "舒适型", "n": "洛阳老城区舒适型 · 双床/家庭房 · 近老街夜市 【待预订】"},s:[{"p": [112.477855, 34.560903], "l": "龙门石窟"}],r:[[110.092286, 34.566552], [112.453895, 34.619702]]},{h:[112.938882,28.228304],hl:"D10 长沙",hi:{"c": "长沙", "lv": "经济型", "n": "长沙市区经济型（坡子街附近）· 双床/家庭房 · 纯过夜 【待预订】"},s:[],r:[[112.453895, 34.619702], [112.938882, 28.228304]]},{h:[113.236075,23.06814],hl:"🏠 到家",hi:{"c": "", "lv": "", "n": ""},s:[],r:[[112.938882, 28.228304], [113.236075, 23.06814]]}];
+
+document.getElementById('weatherStrip').style.display='none';
+
+var map=new AMap.Map('map',{zoom:7,center:[107.5, 25.2],resizeEnable:true,mapStyle:'amap://styles/normal'});
+var A=[],H=[],SM=[],Z=0,W=null,R=[],lastDay=-1,routeCache={};
+var TripMap={};
+var HI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAQ897H5jw2TpBirJkKKMTSNSA0kBytZEUcsAACT59XRS5cT+QAAAABJRU5ErkJggg==',SI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoATonSn8jw2TpBirJkKKMTSNSA0kBytZEUcsAACtCdRxiKH+RgAAAABJRU5ErkJggg==',OI='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAJUlEQVR4nGNgoAR8niP0HxsmSTFWTYQUY2gakRpIDlayIo5YAABtW+cBLsz+hAAAAABJRU5ErkJggg==';
+var _sm=new AMap.Marker({icon:OI,position:[113.236075,23.06814],map:map,title:'起点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🚩 出发</div>',offset:new AMap.Pixel(0,-20)}});_sm.on('click',function(){TripMap.focusDay(0);TripMap.scrollToDay(0)});
+A.push([113.236075,23.06814]);
+var posIdx={},DIRS=[{x:0,y:-22,a:'▼'},{x:28,y:2,a:'◄'},{x:-28,y:2,a:'►'},{x:0,y:20,a:'▲'}];function labelPos(lng,lat){var k=lng.toFixed(4)+','+lat.toFixed(4);posIdx[k]=(posIdx[k]||0)+1;return DIRS[(posIdx[k]-1)%4]}D.forEach(function(d,i){if(!d)return;if(!SM[i])SM[i]=[];if(d.h){var o=labelPos(d.h[0],d.h[1]);var mk=new AMap.Marker({icon:HI,position:d.h,map:map,title:'D'+(i+1),label:{content:'<div style="background:#e74c3c;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+d.hl+'</div>',offset:new AMap.Pixel(o.x,o.y)}});mk.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());H[i]=mk;A.push(d.h)}(d.s||[]).forEach(function(s,k){var o=labelPos(s.p[0],s.p[1]);var sm=new AMap.Marker({icon:SI,position:s.p,map:map,title:s.l,label:{content:'<div style="background:#2ecc71;color:#fff;padding:2px 6px;border-radius:4px;font-size:11px;white-space:nowrap">'+o.a+s.l+'</div>',offset:new AMap.Pixel(o.x,o.y)}});sm.on('click',function(){var n=i;return function(){TripMap.focusDay(n);TripMap.scrollToDay(n)}}());SM[i][k]=sm;A.push(s.p)});});
+var _em=new AMap.Marker({icon:OI,position:[113.236075,23.06814],map:map,title:'终点',label:{content:'<div style="background:#f39c12;color:#fff;padding:2px 8px;border-radius:4px;font-size:13px">🏁 到家</div>',offset:new AMap.Pixel(0,-20)}});_em.on('click',function(){var n=D.length-1;TripMap.focusDay(n);TripMap.scrollToDay(n)});
+setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
+
+/* ── 页面滚动 / 面板可见性 ── */
+TripMap.scrollToDay=function(n){var el=document.getElementById('d'+(n+1));if(el)el.scrollIntoView({behavior:'smooth',block:'center'})};
+TripMap.ensureVisible=function(){
+  var mp=document.querySelector('.map-panel');
+  if(mp&&mp.classList.contains('collapsed')){
+    mp.classList.remove('collapsed');
+    var tbtn=document.querySelector('.map-toggle-btn');
+    if(tbtn)tbtn.textContent='▲ 收起';
+  }
+  if(window.expandMapIfCollapsed)window.expandMapIfCollapsed();
+};
+
+/* ── 景点聚焦：缩放 + 弹跳 + InfoWindow ── */
+TripMap.focusSpot=function(n,i){
+  var day=SM[n];if(!day)return;
+  var m=day[i];if(!m)return;
+  Z=1;
+  if(W){W.close();W=null}
+  TripMap.ensureVisible();
+  var d=D[n],spot=(d&&d.s)?d.s[i]:null;
+  var label=(spot&&spot.l)?spot.l:'景点';
+  var dayHl=(d&&d.hl)?d.hl:'';
+  map.setZoomAndCenter(15,m.getPosition());
+  m.setAnimation('AMAP_ANIMATION_BOUNCE');
+  setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);
+  var sub=dayHl?'<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">第 '+(n+1)+' 天 · '+dayHl+'</div>':'';
+  W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#27ae60;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #27ae60;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🟢 '+label+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});
+  W.open(map,m.getPosition());
+};
+
+function focusHotel(n){var m=H[n];if(m){Z=1;if(W){W.close();W=null}map.setZoomAndCenter(15,m.getPosition());m.setAnimation('AMAP_ANIMATION_BOUNCE');setTimeout(function(){m.setAnimation('AMAP_ANIMATION_NONE')},2500);var d=D[n];var l=d?d.hl:'';var hi=d?d.hi:null;var title=l,sub='';if(hi){title=hi.c||l;if(hi.lv)sub+='<span style="display:inline-block;padding:1px 8px;border-radius:3px;font-size:.75rem;font-weight:600;color:#fff;background:'+(hi.lv==='豪华型'?'#8e44ad':hi.lv==='舒适型'?'#2980b9':hi.lv==='温泉度假'?'#e67e22':'#27ae60')+';margin-left:6px">'+hi.lv+'</span>';if(hi.n)sub+='<div style="font-size:.78rem;color:#7f8c8d;margin-top:4px;font-weight:400">'+hi.n+'</div>'}W=new AMap.InfoWindow({content:'<div onclick="TripMap.scrollToDay('+n+')" style="padding:10px 16px;font-size:15px;font-weight:700;color:#e74c3c;background:#fff;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.25);border-left:4px solid #e74c3c;cursor:pointer;max-width:280px" title="点击跳转到日程卡"><div>🏨 '+title+sub+'</div></div>',offset:new AMap.Pixel(0,-45)});W.open(map,m.getPosition())}}
+TripMap.focusHotel=focusHotel;
+function clearRoutes(){R.forEach(function(p){p.setMap(null)});R=[]}
+function toggleLegend(){var t=document.getElementById("legendToggle");var b=document.getElementById("legendBody");if(b.classList.contains("open")){b.classList.remove("open");t.classList.remove("open");t.textContent="▶"}else{b.classList.add("open");t.classList.add("open");t.textContent="▼"}}
+function toggleWeather(){var b=document.getElementById("weatherStrip");if(b.style.display==="none"){b.style.display="flex";document.getElementById("weatherToggle").textContent="🌤️ 收起天气"}else{b.style.display="none";document.getElementById("weatherToggle").textContent="🌤️ 沿途天气"}}
+function dayBounds(n){var d=D[n];if(!d)return null;var pts=[],i;if(d.r)for(i=0;i<d.r.length;i++)pts.push(d.r[i]);if(d.h)pts.push(d.h);(d.s||[]).forEach(function(s){pts.push(s.p)});if(!pts.length)return null;var sw=[pts[0][0],pts[0][1]],ne=[pts[0][0],pts[0][1]];pts.forEach(function(p){if(p[0]<sw[0])sw[0]=p[0];if(p[1]<sw[1])sw[1]=p[1];if(p[0]>ne[0])ne[0]=p[0];if(p[1]>ne[1])ne[1]=p[1]});return new AMap.Bounds([sw[0],sw[1]],[ne[0],ne[1]])}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-routes.js — 路线加载、focusDay、批量导航路线
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+function focusDay(n){
+  if(W){W.close();W=null}
+  Z=0;
+  if(TripMap.ensureVisible()){
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},400)
+  }
+  var b=document.getElementById('navBtn');
+  if(b){
+    b.textContent='🗺️ 加载全部路线';
+    b.className='nav-btn';
+    b.onclick=function(){loadRoutes()}
+  }
+  if(n===lastDay&&routeCache[n]){
+    var bd=dayBounds(n);
+    if(bd)map.setBounds(bd,false,[60,60,60,60]);
+    return
+  }
+  clearRoutes();
+  lastDay=n;
+  var d=D[n];
+  if(!d||!d.r||d.r.length<2){
+    var bd2=dayBounds(n);
+    if(bd2)map.setBounds(bd2,false,[60,60,60,60]);
+    return
+  }
+  if(routeCache[n]){
+    routeCache[n].forEach(function(pl){pl.setMap(map);R.push(pl)});
+    var bd3=dayBounds(n);
+    if(bd3)map.setBounds(bd3,false,[60,60,60,60]);
+    return
+  }
+  var c=C[n%C.length];
+  var o=d.r[0][0]+','+d.r[0][1],e=d.r[d.r.length-1][0]+','+d.r[d.r.length-1][1],w='';
+  if(d.r.length>2){var a=[];for(var j=1;j<d.r.length-1;j++)a.push(d.r[j][0]+','+d.r[j][1]);w='&waypoints='+a.join('|')}
+  fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl);routeCache[n]=[pl];var bd4=dayBounds(n);if(bd4)map.setBounds(bd4,false,[60,60,60,60])}})
+}
+
+TripMap.focusDay=focusDay;
+
+function P(){
+  var i=0;
+  function n(){
+    if(i>=D.length){
+      if(!Z&&A.length>0)map.setFitView(null,false,[60,60,60,60]);
+      var b=document.getElementById('navBtn');
+      if(b){b.textContent='✅ 导航已加载';b.className='nav-btn';b.onclick=null}
+      return
+    }
+    var d=D[i],c=C[i%C.length];
+    if(d.r&&d.r.length>=2){
+      var o=d.r[0][0]+','+d.r[0][1],e=d.r[d.r.length-1][0]+','+d.r[d.r.length-1][1],w='';
+      if(d.r.length>2){var a=[];for(var j=1;j<d.r.length-1;j++)a.push(d.r[j][0]+','+d.r[j][1]);w='&waypoints='+a.join('|')}
+      fetch('https://restapi.amap.com/v3/direction/driving?origin='+o+'&destination='+e+w+'&key='+K+'&extensions=all').then(function(r){return r.json()}).then(function(dd){if(dd.status==='1'&&dd.route&&dd.route.paths&&dd.route.paths.length>0){var cs=[];dd.route.paths[0].steps.forEach(function(s){s.polyline.split(';').forEach(function(c2){var p2=c2.split(',');cs.push([parseFloat(p2[0]),parseFloat(p2[1])])})});var pl=new AMap.Polyline({path:cs,strokeColor:c,strokeWeight:5,strokeOpacity:.7,lineJoin:'round',lineCap:'round'});pl.setMap(map);R.push(pl)}i++;setTimeout(n,200)}).catch(function(){i++;setTimeout(n,200)})
+    }else{i++;n()}
+  }
+  n()
+}
+
+function loadRoutes(){
+  clearRoutes();
+  Z=0;
+  var b=document.getElementById('navBtn');
+  if(b){b.textContent='⏳ 加载中...';b.className='nav-btn loading';b.onclick=null}
+  P();
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   map-resize.js — 桌面端拖拽调整地图大小、完全收起/展开地图
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+(function(){
+  var rh=document.getElementById('resizeHandle');if(!rh)return;
+  var mn=document.querySelector('.main');
+  var mp=document.querySelector('.map-panel');
+  var rs=false;
+  var savedPct=60;
+  function isCollapsed(){return mp.classList.contains('collapsed-desktop')}
+  function setPct(p){
+    mp.style.flex='none';mp.style.width=p+'%';
+    requestAnimationFrame(function(){map.resize()});
+  }
+  // 拖拽结束后适配地图视野
+  function fitAfterResize(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        map.setFitView(null,false,[60,60,60,60]);
+      });
+    });
+  }
+  // 展开后适配（需要等待 display:none → block + 宽度恢复的完整 reflow）
+  function fitAfterExpand(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        map.resize();
+        map.setFitView(null,false,[60,60,60,60]);
+      });
+    });
+  }
+  // 拖拽调整大小（收起状态不响应拖拽）
+  rh.addEventListener('mousedown',function(e){
+    if(isCollapsed()||rh.classList.contains('expanded-handle'))return;
+    rs=true;rh.classList.add('active');
+    document.body.style.cursor='col-resize';document.body.style.userSelect='none';e.preventDefault();
+  });
+  rh.addEventListener('touchstart',function(e){
+    if(isCollapsed()||rh.classList.contains('expanded-handle'))return;
+    rs=true;rh.classList.add('active');
+    document.body.style.userSelect='none';e.preventDefault();
+  });
+  document.addEventListener('mousemove',function(e){
+    if(!rs)return;
+    var r=mn.getBoundingClientRect();var x=e.clientX-r.left;
+    var p=Math.round(x/r.width*100);
+    if(p<25)p=25;if(p>85)p=85;
+    savedPct=p;setPct(p);
+  });
+  document.addEventListener('touchmove',function(e){
+    if(!rs)return;
+    var r=mn.getBoundingClientRect();var x=e.touches[0].clientX-r.left;
+    var p=Math.round(x/r.width*100);
+    if(p<25)p=25;if(p>85)p=85;
+    savedPct=p;setPct(p);
+  });
+  document.addEventListener('mouseup',function(){
+    if(!rs)return;rs=false;
+    rh.classList.remove('active');document.body.style.cursor='';document.body.style.userSelect='';
+    fitAfterResize();
+  });
+  document.addEventListener('touchend',function(){
+    if(!rs)return;rs=false;
+    rh.classList.remove('active');document.body.style.userSelect='';
+    fitAfterResize();
+  });
+  // 双击手柄切换（收起状态下双击=展开）
+  rh.addEventListener('dblclick',function(){
+    if(isCollapsed()){expandMap();return;}
+    var w=mp.style.width;var p=w?parseFloat(w):60;
+    p=(p<40?60:30);savedPct=p;setPct(p);
+    fitAfterResize();
+  });
+  // 点击展开手柄（收起时点击展开）
+  rh.addEventListener('click',function(e){
+    if(rh.classList.contains('expanded-handle')&&!e.target.closest('.collapse-icon')){
+      expandMap();
+    }
+  });
+  // 收起/展开地图（全局函数）
+  window.toggleMapFullCollapse=function(){
+    if(isCollapsed()){expandMap();}
+    else{collapseMap();}
+  };
+  function collapseMap(){
+    var w=mp.style.width;savedPct=w?parseFloat(w):60;
+    mp.style.flex='';mp.style.width='';
+    mp.classList.add('collapsed-desktop');
+    rh.classList.add('expanded-handle');
+    rh.title='点击展开地图';
+  }
+  function expandMap(){
+    mp.classList.remove('collapsed-desktop');
+    rh.classList.remove('expanded-handle');
+    rh.title='拖动调整地图大小 · 双击切换';
+    setPct(savedPct);
+    fitAfterExpand();
+  }
+  // 外部调用：如果地图收起则展开（供 focusDay 使用）
+  window.expandMapIfCollapsed=function(){
+    if(isCollapsed())expandMap();
+  };
+})();
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   mobile-scroll.js — 移动端地图收起/展开 + 滚动自动折叠/展开
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 美食卡片展开/收起 ── */
+function toggleFoodCard(fid) {
+  var el = document.getElementById(fid);
+  if (!el) return;
+  var card = el.closest('.food-card');
+  if (!card) return;
+  card.classList.toggle('open');
+}
+
+function toggleMapCollapse(){
+  var mp=document.querySelector('.map-panel');
+  var btn=document.querySelector('.map-toggle-btn');
+  mp.classList.toggle('collapsed');
+  if(mp.classList.contains('collapsed')){
+    if(btn)btn.textContent='▼ 展开';
+  }else{
+    if(btn)btn.textContent='▲ 收起';
+    setTimeout(function(){map.setFitView(null,false,[60,60,60,60])},350);
+  }
+}
+
+/* ── Floating TOC (Table of Contents) ── */
+function toggleToc() {
+  document.getElementById('tocPanel').classList.toggle('open');
+}
+
+function scrollToToc(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({behavior: 'smooth', block: 'start'});
+    setTimeout(function() {
+      document.getElementById('tocPanel').classList.remove('open');
+    }, 350);
+  }
+}
+
+/* Close TOC panel when clicking outside */
+document.addEventListener('click', function(e) {
+  var panel = document.getElementById('tocPanel');
+  var btn = document.getElementById('tocBtn');
+  if (panel && btn && panel.classList.contains('open')) {
+    if (!panel.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+      panel.classList.remove('open');
+    }
+  }
+});
+
+</script>
+</body>
+</html>
